@@ -1,0 +1,21 @@
+# build output
+build/
+dist/
+*.rsp
+
+# temporary files produced by tests and releases
+sonuc.txt
+selftest.txt
+notes.md
+
+# settings/log folder the app creates while running
+data/
+veri/
+veri.old*/
+
+# editor / operating system
+.vs/
+.vscode/
+*.user
+Thumbs.db
+desktop.ini

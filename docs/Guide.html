@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en" class="nojs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NSF Shield Guide · NSF Shield Rehberi</title>
+<style>
+  :root { --bg:#f3f5f9; --card:#fff; --text:#141c2d; --muted:#5f6b80; --border:#e1e6ef; --accent:#2563eb; --soft:#e8effd;
+          --green:#15803d; --amber:#b45309; --red:#c42b1c; --code:#f4f6fa; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#17191e; --card:#21242b; --text:#e8ebf1; --muted:#a2aab8; --border:#323742; --accent:#60a5fa; --soft:#1f2a3d;
+            --green:#4ade80; --amber:#fbbf24; --red:#f87171; --code:#1b1e24; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 "Segoe UI", system-ui, sans-serif; }
+  .wrap { max-width:920px; margin:0 auto; padding:0 16px 64px; }
+  .langbar { position:sticky; top:0; z-index:2; background:var(--bg); border-bottom:1px solid var(--border); padding:10px 0; text-align:right; font-size:14px; }
+  .langbar a { color:var(--accent); text-decoration:none; padding:4px 10px; border-radius:8px; }
+  html[data-lang="en"] .langbar a[hreflang="en"], html[data-lang="tr"] .langbar a[hreflang="tr"] { background:var(--soft); font-weight:600; }
+  .lang { display:none; }
+  html.nojs .lang, html[data-lang="en"] #en, html[data-lang="tr"] #tr { display:block; }
+  html.nojs #tr { border-top:3px solid var(--border); margin-top:32px; }
+  header { display:flex; align-items:center; gap:16px; margin:20px 0 8px; }
+  header svg { width:56px; height:56px; flex:none; }
+  h1 { margin:0; font-size:28px; }
+  .sub { color:var(--muted); margin:0; }
+  nav { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px 18px; margin:20px 0; }
+  nav a { color:var(--accent); text-decoration:none; margin-right:14px; white-space:nowrap; line-height:2; }
+  section { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:6px 24px 18px; margin:18px 0; }
+  h2 { font-size:21px; margin:18px 0 8px; }
+  h3 { font-size:16px; margin:20px 0 6px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  .tip { background:var(--soft); border-radius:10px; padding:10px 14px; margin:12px 0; }
+  .tip.warn { border-left:4px solid var(--amber); }
+  ol li, ul li { margin:4px 0; }
+  code { background:var(--code); border:1px solid var(--border); border-radius:5px; padding:1px 5px; font:13px Consolas, monospace; word-break:break-all; }
+  kbd { border:1px solid var(--border); border-bottom-width:2px; border-radius:4px; padding:0 5px; font-size:13px; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { text-align:left; padding:8px; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; }
+  tr.nodns td { color:var(--muted); }
+  .tier { display:inline-block; font-size:11px; font-weight:600; border-radius:6px; padding:0 6px; margin-left:6px; background:var(--soft); color:var(--accent); }
+  details.code { border:1px solid var(--border); border-radius:10px; padding:4px 14px; margin:8px 0; }
+  details.code[open] { padding-bottom:10px; }
+  details.code summary { cursor:pointer; font-weight:600; padding:6px 0; }
+  .badge { display:inline-block; min-width:64px; text-align:center; border-radius:6px; padding:0 6px; margin-right:6px; font:600 12px Consolas, monospace; }
+  .err .badge { background:color-mix(in srgb, var(--red) 18%, transparent); color:var(--red); }
+  .warn .badge { background:color-mix(in srgb, var(--amber) 18%, transparent); color:var(--amber); }
+  .info .badge { background:color-mix(in srgb, var(--accent) 18%, transparent); color:var(--accent); }
+  details.code.warn { border-left:1px solid var(--border); }
+  .lbl { margin:8px 0 0; font-size:12px; font-weight:600; color:var(--muted); text-transform:uppercase; }
+  .fix { color:var(--green); margin:8px 0 0; }
+  .colors span { display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+  .foot { color:var(--muted); }
+  @media (max-width:600px) { section { padding:4px 14px 14px; } th:nth-child(1), td:nth-child(1) { display:none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="langbar" role="navigation" aria-label="Language / Dil"><a href="#en" hreflang="en" lang="en">English</a> <a href="#tr" hreflang="tr" lang="tr">Türkçe</a></div>
+
+<!-- ============================================================================================== ENGLISH -->
+<main class="lang" id="en" lang="en">
+<header>
+  <svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="en-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient></defs>
+  <path d="M50 3C63 11 78 15 93 16C94 56 79 82 50 98C21 82 6 56 7 16C22 15 37 11 50 3Z" fill="url(#en-g)"/>
+  <path d="M31 50L45 64L70 37" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div><h1>NSF Shield Guide</h1><p class="sub">NSF Shield — by Nightshift · Version <!--VERSION--> · an easy interface for three DPI bypass engines: GoodbyeDPI, Zapret (winws) and ByeDPI (ciadpi)</p></div>
+</header>
+
+<nav>
+  <a href="#en-install">Installation</a><a href="#en-start">First use</a><a href="#en-levels">Interface levels</a><a href="#en-engines">Engines</a>
+  <a href="#en-methods">Methods</a><a href="#en-sites">Site lists</a><a href="#en-scan">Smart scanner</a><a href="#en-dns">DNS</a>
+  <a href="#en-diag">Diagnostics</a><a href="#en-network">Network changes</a><a href="#en-share">Sharing</a><a href="#en-tray">Tray</a><a href="#en-proxy">Proxy</a>
+  <a href="#en-trouble">Troubleshooting</a><a href="#en-codes">Error codes</a><a href="#en-scripts">Backup scripts</a><a href="#en-uninstall">Uninstall</a>
+</nav>
+
+<div class="tip" id="en-disclaimer"><b>Disclaimer.</b> This software is provided 'as is' under the MIT License; it changes network driver, DNS and system proxy settings. It is not guaranteed to work with any particular ISP, game or anti-cheat system; you use it at your own responsibility.</div>
+
+<section id="en-install">
+  <h2>1. Installation</h2>
+  <ul>
+    <li><b>Setup package (recommended for new installations):</b> run <code>NSF-Shield-x.y.z-Setup.exe</code>. It installs to <code>C:\Program Files\NSF Shield</code> (a folder only administrators can change) and adds Start menu entries. The <b>background service</b> and <b>start with Windows</b> are only available in this protected installation.</li>
+    <li><b>Portable ZIP:</b> extract the whole ZIP (right-click → <b>Extract All</b>; do not run it from inside the ZIP, see <a href="#en-NSF-103">NSF-103</a>) and run <code>NSFShield.exe</code>. Protection runs in app mode while the app stays open (also in the tray).</li>
+  </ul>
+  <div class="tip"><b>Administrator rights and "portable" are separate things.</b> The program always asks for administrator rights (its manifest says <code>requireAdministrator</code>), installed or portable, because the WinDivert driver and the Windows DNS/proxy settings need them. "Installed" vs "portable" is only about the folder: the service and the startup task run files without asking, so they are allowed only from the protected Program Files folder (see <a href="#en-NSF-705">NSF-705</a>).</div>
+  <div class="tip"><b>Updates.</b> An installed copy updates itself only with a verified <code>Setup.exe</code> of the new version; a portable copy updates itself in place with the new ZIP and can move to the installed version with <b>Settings → Switch to the setup package</b> (settings are kept). Every download is checked against its SHA-256 before anything is replaced.</div>
+  <div class="tip warn"><b>Antivirus warnings:</b> the WinDivert driver used by GoodbyeDPI and Zapret may be shown as "HackTool" or "RiskTool". The engine files are the unmodified official releases; the app checks them with embedded SHA-256 values before every start (see <a href="#en-NSF-105">NSF-105</a>). If a file is blocked, report it to the antivirus vendor as a false positive first; use an exception only as a last resort (see <a href="#en-NSF-204">NSF-204</a>).</div>
+</section>
+
+<section id="en-start">
+  <h2>2. First use</h2>
+  <ol>
+    <li>Press <b>Start Protection</b>. A <b>green</b> shield means protection runs.</li>
+    <li>Press <b>Test Discord</b>. "Reachable" and "DNS answer: correct" should appear.</li>
+    <li>If Discord was open before protection started, press <b>Restart Discord</b> so it connects again.</li>
+    <li>If it still does not open, press <b>Find and Connect</b> (Simple level). The app tries the recommended methods of every available engine, stops at the first one that fully works in two rounds and switches to it.</li>
+  </ol>
+</section>
+
+<section id="en-levels">
+  <h2>3. Interface levels</h2>
+  <p>Choose the level in <b>Settings</b> or on the <b>Appearance</b> page; both switches behave the same and never start, stop or select anything.</p>
+  <ul>
+    <li><b>Simple</b> (default): Start/stop protection, <b>Find and Connect</b>, a plain profile list with the recommended profiles of all engines (a selected or running expert profile is shown once but is not added to the scan), Troubleshooting, Appearance, Settings.</li>
+    <li><b>Standard</b>: engine tabs, "Show expert profiles", site list templates, DNS/DoH, the network pages, the scan scope and mode, and optional candidate selection.</li>
+    <li><b>Advanced</b>: expert profiles with technical tags, the editors of the three engines with a validated command preview, the candidate matrix, scan targets and the per-layer results, and the log.</li>
+  </ul>
+  <p><b>Copy command</b> copies the full local command only when you press it, and only for a valid profile; the preview and the log show short names, never your user folder.</p>
+</section>
+
+<section id="en-engines">
+  <h2>4. The three engines</h2>
+  <table>
+    <thead><tr><th>Engine</th><th>How it works</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><b>GoodbyeDPI</b> 0.2.3rc3</td><td>Changes outgoing packets with the WinDivert 2.2 driver; can also redirect DNS to a secure server on a non-standard port.</td><td>32 and 64-bit Windows. App and service mode. The only engine with DNS redirection.</td></tr>
+      <tr><td><b>Zapret</b> (winws v72.13)</td><td>Fake packets, splitting and reordering with its own WinDivert 2.2.2 driver; separate rules for TCP, QUIC and Discord voice (UDP 50000–50100).</td><td>64-bit only (<a href="#en-NSF-107">NSF-107</a>). App and service mode. Uses the system DNS.</td></tr>
+      <tr><td><b>ByeDPI</b> (ciadpi 0.17.3)</td><td><b>No driver:</b> a local SOCKS proxy on <code>127.0.0.1</code> changes the connections that go through it. The app can point the Windows proxy at its local bridge while it runs and restores it afterwards – also after a crash, and after a power loss at the next sign-in (a small helper of the app, without administrator rights). Values you changed yourself meanwhile are kept.</td><td>64-bit only. App mode only. Only programs that use the proxy are affected; Discord voice (UDP) does not go through it.</td></tr>
+    </tbody>
+  </table>
+  <p>Two WinDivert engines (GoodbyeDPI and Zapret) never run at the same time; switching stops the other engine's driver with "sc stop" only (it is never deleted, and a driver another program still uses is left alone).</p>
+</section>
+
+<section id="en-methods">
+  <h2>5. Methods (profiles)</h2>
+  <p>There are <!--PROFILE_COUNT--> built-in methods. <b>Recommended</b> profiles come first in a fixed order; the others are <b>expert</b> profiles. Tags such as "Try on Turk Telekom" or "Try on mobile networks" are only suggestions of what to try first: they promise no success, speed, Discord voice or anti-cheat safety. The command column shows the validated command with short names (it is not a command to run).</p>
+  <!--PROFILES:en-->
+</section>
+
+<section id="en-sites">
+  <h2>6. Site lists (Include / Exclude)</h2>
+  <ul>
+    <li><b>Include</b> (targeted mode): the bypass is applied only to the listed sites. All three engines support it (GoodbyeDPI <code>--blacklist</code>, Zapret <code>--hostlist</code>, ByeDPI <code>--hosts</code>). Every Zapret rule and every ByeDPI group gets the list; a Zapret rule that cannot know a site name (for example Discord voice) is left out in targeted mode instead of working for all traffic, and protection does not start if no rule would be left.</li>
+    <li><b>Exclude</b>: these sites are never touched. Zapret and ByeDPI support it; <b>GoodbyeDPI 0.2.3rc3 has no exclude list</b>, so with GoodbyeDPI the exclude list is ignored and a warning is shown.</li>
+    <li>Entries are host names only (ASCII or punycode, at most 5000 per list): no addresses, ports, paths or wildcards. The lists are written to <code>data\lists\include.txt</code> and <code>exclude.txt</code> and kept write-locked while an engine reads them.</li>
+  </ul>
+</section>
+
+<section id="en-scan">
+  <h2>7. The smart scanner</h2>
+  <p><b>Scopes:</b> Recommended, Active engine, All engines, Driverless only. <b>Modes:</b></p>
+  <ul>
+    <li><b>Stop at first match</b>: candidates run in a stable order (recommended first). It stops only at a full success and, if you asked for it, applies that profile.</li>
+    <li><b>Compare all</b>: every candidate is tried once and ranked; nothing is applied automatically. The original state comes back first; then you can press <b>Apply</b>.</li>
+  </ul>
+  <p>Each candidate runs isolated: its own process, port and temporary list files, its files locked after the SHA-256 check. Your settings and site lists are never changed by a candidate. Another program's DPI tool, driver or service is never closed; WinDivert candidates are then skipped with the reason. Cancel, errors and results that are not applied all go through one restore path; protection that was off stays off.</p>
+  <h3>What the results mean</h3>
+  <ul>
+    <li><b>Score</b>: the share of the required targets that passed in <b>both</b> rounds. <b>Latency</b> only counts successful HTTPS measurements; "—" means nothing was measured (never "0 ms").</li>
+    <li><b>HTTPS targets</b>: every connection goes to a checked public address with a full certificate check for the original name. "The server answered" is not "the target works": 407, 451, 5xx and a redirect to another site are not a success. A redirect counts only when its <code>Location</code>, read against the real request, stays on an allowed HTTPS address.</li>
+    <li><b>Gateway connection</b> (<code>gateway.discord.gg</code>): a short WebSocket opening to Discord's Gateway. Only "101 Switching Protocols" with valid <code>Upgrade</code>/<code>Connection</code> headers and the right <code>Sec-WebSocket-Accept</code> for that request is a success; no token or login is ever sent and the connection is closed right away. It says nothing about a Discord session, voice or games.</li>
+    <li><b>UDP/STUN</b>: an optional STUN Binding (RFC 8489) to <code>stun.cloudflare.com:3478</code>. It never changes the score; for ByeDPI it is "N/A" (TCP proxy only). A STUN answer does not prove that QUIC, WebRTC or Discord voice works.</li>
+    <li><b>DNS</b>: the system DNS answer is compared with DNS over HTTPS (JSON, dns.google with cloudflare-dns.com as backup). Different public CDN addresses are normal; NXDOMAIN, an empty or private answer from the system side points at interference.</li>
+  </ul>
+</section>
+
+<section id="en-dns">
+  <h2>8. DNS and encrypted DNS</h2>
+  <ul>
+    <li><b>DNS redirection</b> (GoodbyeDPI profiles): DNS queries go to a secure server on a non-standard port (Yandex 1253, AdGuard 5353, Quad9 9953, OpenDNS 5353).</li>
+    <li><b>DNS page</b> (Standard/Advanced): sets the Windows DNS server (Cloudflare, Google, Quad9, AdGuard, OpenDNS) and, on Windows 11, encrypted DNS (DoH). The previous settings are saved and can be restored.</li>
+    <li>The <b>DNS chip</b> on the home page shows the setting of the adapter that carries the internet route. "DoH" appears only when encrypted DNS is really registered for that server; the tooltip says "not supported", "registered", "not registered" or "unknown". "Mixed" means several adapters with different settings and no readable route. Automatic (DHCP) DNS is a valid choice and is not marked as a problem.</li>
+  </ul>
+</section>
+
+<section id="en-diag">
+  <h2>9. Find Problems and the conflict diagnosis</h2>
+  <p><b>Troubleshooting → Start the full check</b> checks the installation, the engine files, BFE, conflicts, VPN/proxy, antivirus, internet, clock, hosts file, DNS, protection and the Discord servers. The conflict part is <b>read only</b> and is the same result the home page uses:</p>
+  <ul>
+    <li><b>DPI processes</b> are told apart as this app's engine, a candidate of the running scan, another copy or program, or "owner unknown". A name or a folder is never proof: the exact file and the process id the app started are. During a scan the check waits until the scan has finished.</li>
+    <li><b>WinDivert driver entries</b>: every entry found is listed with its type, state and file (this installation or another folder). "Access denied", "not found" and "stopped" are different results.</li>
+    <li><b>Anti-cheat</b>: Riot Vanguard (<code>vgk</code>), FACEIT, EasyAntiCheat / EasyAntiCheat_EOS and BattlEye (<code>BEDaisy</code>). Only an entry that Windows reports as a kernel driver <b>and</b> running counts as an active driver; a user-mode service only says the product is installed. If an entry cannot be read, it is shown as "could not be checked", never as "not found". When an active anti-cheat driver and a WinDivert engine run together, an information card explains the driverless ByeDPI engine (or why it is not offered on this computer). The card opens the profile page at most; nothing is selected, started or closed. No anti-cheat compatibility or ban safety is promised.</li>
+    <li><b>VPN / WARP</b>: an "Up" virtual adapter, a running product service (e.g. Cloudflare WARP) and the internet route actually going through the VPN are three separate findings.</li>
+  </ul>
+</section>
+
+<section id="en-network">
+  <h2>10. Network changes</h2>
+  <p>When the network changes (Wi-Fi, Ethernet, hotspot, connection lost), the app waits until things have been quiet for 2.5 seconds, reads the new state in the background and updates the DNS chip and the adapter summary; if notifications are on, a short note appears. The first picture after start is silent and the same state is never reported twice. During a scan one refresh is kept for afterwards. A network change never flushes DNS, tests the internet, restarts an engine, starts a scan or writes DNS/proxy settings. The <b>connection watchdog</b> (periodic test, if you turned it on) and the scans and repairs you start yourself work as before.</p>
+</section>
+
+<section id="en-share">
+  <h2>11. Sharing profiles (NSF1)</h2>
+  <p>Profiles → <b>Share</b> → "Copy the profile code" gives a code that starts with <code>NSF1:</code>. Your friend copies it (also inside a share message) and chooses Profiles → Share → "Add profile from code".</p>
+  <ul>
+    <li>A code contains only the method: the engine, the name, the description and that engine's method fields. Never your settings, selected profile, lists or their content, paths, ports, proxy passwords or the real command line.</li>
+    <li>Before anything is shown, the code is size-checked (pasted text up to 128 Ki characters, packed and unpacked data up to 64 KiB each), parsed without DTDs and checked against the engine's allow list.</li>
+    <li>Importing only adds a new custom profile after you confirm; "No" changes nothing. It never starts protection, selects the profile or writes files.</li>
+  </ul>
+</section>
+
+<section id="en-tray">
+  <h2>12. Tray icon</h2>
+  <p>Closing or minimizing hides the app to the tray. The icon color shows the state:</p>
+  <p class="colors"><span style="background:#22c55e"></span>on &nbsp; <span style="background:#94a3b8"></span>off &nbsp; <span style="background:#f59e0b"></span>starting &nbsp; <span style="background:#ef4444"></span>error</p>
+  <p>The tray menu offers start/stop, the recommended profiles (and the selected one), Test Discord, Find best method and Restart Discord. <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd> toggles protection if enabled in Settings.</p>
+</section>
+
+<section id="en-proxy">
+  <h2>13. Proxy</h2>
+  <p>If no method works (Site Analysis says "IP block"), traffic can go through a proxy you provide (the app provides none). The Proxy page (Standard/Advanced) tests a proxy, opens Discord or chosen programs with it, or sets it as the Windows proxy (the old setting is saved). Proxy passwords are stored encrypted by Windows. Discord voice (UDP) does not go through a proxy.</p>
+</section>
+
+<section id="en-trouble">
+  <h2>14. Troubleshooting</h2>
+  <ul>
+    <li><b>Shield red, "driver blocked"</b>: the antivirus blocks WinDivert → <a href="#en-NSF-204">NSF-204</a>; or use the driverless ByeDPI engine.</li>
+    <li><b>Shield green but Discord stays at "Connecting…"</b>: restart Discord → <a href="#en-NSF-901">NSF-901</a>.</li>
+    <li><b>"DNS answer: WRONG"</b>: the profile does not redirect DNS → <a href="#en-NSF-403">NSF-403</a>.</li>
+    <li><b>Nothing works</b>: run Site Analysis; an "IP block" needs a VPN or proxy → <a href="#en-NSF-503">NSF-503</a>.</li>
+  </ul>
+  <p>The <b>support package</b> (Troubleshooting) saves logs, history and a settings summary (switches and counts only: no proxy addresses, names or passwords, no program paths, no site lists) to one ZIP, with IP addresses, user names and e-mail addresses hidden. In every text file your saved proxies (address, host name, name, user name) appear as "Proxy #1", "Proxy #2"… and per-program rules as "App #1"….</p>
+</section>
+
+<section id="en-codes">
+  <h2>15. Error codes (<!--ERROR_COUNT-->)</h2>
+  <p>Click a code for causes and solution steps.</p>
+  <!--ERROR_CODES:en-->
+</section>
+
+<section id="en-scripts">
+  <h2>16. Backup scripts</h2>
+  <p>The <code>.cmd</code> files in the <code>scripts</code> folder run GoodbyeDPI directly, without the app (one per built-in GoodbyeDPI method). Zapret and ByeDPI are started by the app only. Quit NSF Shield first and run one script at a time; <code>stop.cmd</code> closes GoodbyeDPI, <code>reset.cmd</code> removes the services and the driver entry.</p>
+</section>
+
+<section id="en-uninstall">
+  <h2>17. Clean uninstall</h2>
+  <p>Everything NSF Shield changed in Windows (service, startup task, WinDivert driver entries of this folder, Windows proxy, DNS servers and encrypted DNS entries) is put back as it was before:</p>
+  <ul>
+    <li><b>Installed:</b> Settings → Apps → NSF Shield → <b>Uninstall</b> (you are asked whether to delete the settings too).</li>
+    <li><b>Portable:</b> <b>Settings → Clean uninstall</b> in the app, then delete the folder.</li>
+    <li><b>Command line:</b> <code>NSFShield.exe --uninstall</code> (quiet: <code>--uninstall --quiet</code>).</li>
+  </ul>
+  <p class="foot">GoodbyeDPI © ValdikSS (Apache 2.0) · WinDivert © basil00 (LGPLv3) · zapret © bol-van (MIT) · ByeDPI © hufrea (MIT). The license texts are in the <code>licenses</code> folder. NSF Shield: MIT License, Copyright (c) 2026 Nightshift (Osman Barış MEDİNE). NSF Shield is not a VPN: it does not encrypt your traffic or change your IP address. Project page and source code: <a href="https://github.com/Mr-Leywin/nsf-shield">github.com/Mr-Leywin/nsf-shield</a></p>
+</section>
+</main>
+
+<!-- ============================================================================================== TÜRKÇE -->
+<main class="lang" id="tr" lang="tr">
+<header>
+  <svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="tr-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient></defs>
+  <path d="M50 3C63 11 78 15 93 16C94 56 79 82 50 98C21 82 6 56 7 16C22 15 37 11 50 3Z" fill="url(#tr-g)"/>
+  <path d="M31 50L45 64L70 37" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div><h1>NSF Shield Rehberi</h1><p class="sub">NSF Shield — by Nightshift · Sürüm <!--VERSION--> · üç DPI aşma motoru için kolay arayüz: GoodbyeDPI, Zapret (winws) ve ByeDPI (ciadpi)</p></div>
+</header>
+
+<nav>
+  <a href="#tr-install">Kurulum</a><a href="#tr-start">İlk kullanım</a><a href="#tr-levels">Arayüz düzeyleri</a><a href="#tr-engines">Motorlar</a>
+  <a href="#tr-methods">Yöntemler</a><a href="#tr-sites">Site listeleri</a><a href="#tr-scan">Akıllı tarayıcı</a><a href="#tr-dns">DNS</a>
+  <a href="#tr-diag">Teşhis</a><a href="#tr-network">Ağ değişimi</a><a href="#tr-share">Paylaşım</a><a href="#tr-tray">Tepsi</a><a href="#tr-proxy">Proxy</a>
+  <a href="#tr-trouble">Sorun giderme</a><a href="#tr-codes">Hata kodları</a><a href="#tr-scripts">Yedek betikler</a><a href="#tr-uninstall">Kaldırma</a>
+</nav>
+
+<div class="tip" id="tr-disclaimer"><b>Sorumluluk reddi.</b> Bu yazılım MIT lisansı ile 'olduğu gibi' (AS IS) sunulur; ağ sürücüsü, DNS ve sistem proxy ayarlarında değişiklik yapar. Belirli bir İSS'de, oyunda veya hile koruma sisteminde çalışma garantisi vermez; kullanım sorumluluğu kullanıcıya aittir.</div>
+
+<section id="tr-install">
+  <h2>1. Kurulum</h2>
+  <ul>
+    <li><b>Kurulum paketi (yeni kurulumlar için önerilen):</b> <code>NSF-Shield-x.y.z-Setup.exe</code>'yi çalıştırın. Yalnızca yöneticilerin değiştirebildiği <code>C:\Program Files\NSF Shield</code> klasörüne kurulur ve Başlat menüsüne eklenir. <b>Arka plan hizmeti</b> ve <b>Windows açılışında başlat</b> yalnızca bu korumalı kurulumda kullanılabilir.</li>
+    <li><b>Taşınabilir ZIP:</b> ZIP'in tamamını ayıklayın (sağ tık → <b>Tümünü ayıkla</b>; ZIP'in içinden çalıştırmayın, bkz. <a href="#tr-NSF-103">NSF-103</a>) ve <code>NSFShield.exe</code>'yi çalıştırın. Koruma, uygulama açık (tepside de olabilir) kaldığı sürece uygulama modunda çalışır.</li>
+  </ul>
+  <div class="tip"><b>Yönetici izni ile "taşınabilir" ayrı kavramlardır.</b> Program kurulumlu da taşınabilir de olsa her açılışta yönetici izni ister (manifestinde <code>requireAdministrator</code> vardır); WinDivert sürücüsü ve Windows DNS/proxy ayarları bunu gerektirir. "Kurulumlu" ile "taşınabilir" arasındaki fark yalnızca klasördür: hizmet ve açılış görevi dosyaları izin sormadan çalıştırdığı için yalnızca korumalı Program Files klasöründen açılır (bkz. <a href="#tr-NSF-705">NSF-705</a>).</div>
+  <div class="tip"><b>Güncellemeler.</b> Kurulu kopya kendini yalnızca yeni sürümün doğrulanmış <code>Setup.exe</code> dosyasıyla günceller; taşınabilir kopya yeni ZIP ile yerinde güncellenir ve <b>Ayarlar → Kurulum paketine geç</b> ile ayarlarını koruyarak kurulumlu sürüme geçebilir. Her indirme, bir şey değiştirilmeden önce SHA-256 özetiyle doğrulanır.</div>
+  <div class="tip warn"><b>Antivirüs uyarıları:</b> GoodbyeDPI ve Zapret'in kullandığı WinDivert sürücüsü "HackTool" ya da "RiskTool" olarak görünebilir. Motor dosyaları resmi sürümlerden değiştirilmeden alınmıştır; uygulama her başlatmadan önce gömülü SHA-256 değerleriyle denetler (bkz. <a href="#tr-NSF-105">NSF-105</a>). Bir dosya engellenirse önce antivirüs üreticisine yanlış pozitif olarak bildirin; istisnayı yalnızca son çare olarak kullanın (bkz. <a href="#tr-NSF-204">NSF-204</a>).</div>
+</section>
+
+<section id="tr-start">
+  <h2>2. İlk kullanım</h2>
+  <ol>
+    <li><b>Korumayı Başlat</b>'a basın. Durum simgesi <b>yeşil</b> olursa koruma çalışıyordur.</li>
+    <li><b>Discord'u Test Et</b>'e basın. "Erişilebilir" ve "DNS yanıtı: doğru" yazmalı.</li>
+    <li>Discord korumadan önce açıksa yeniden bağlanması için <b>Discord'u yeniden başlat</b>'a basın.</li>
+    <li>Yine açılmıyorsa <b>Çalışan Yöntemi Bul ve Bağlan</b>'a basın (Basit düzey). Uygulama kullanılabilen her motorun önerilen yöntemlerini dener, iki turda tam çalışan ilkinde durur ve ona geçer.</li>
+  </ol>
+</section>
+
+<section id="tr-levels">
+  <h2>3. Arayüz düzeyleri</h2>
+  <p>Düzeyi <b>Ayarlar</b>'dan ya da <b>Görünüm</b> sayfasından seçin; iki seçici aynı şekilde çalışır ve hiçbir şeyi başlatmaz, durdurmaz ya da seçmez.</p>
+  <ul>
+    <li><b>Basit</b> (varsayılan): Korumayı başlat/durdur, <b>Çalışan Yöntemi Bul ve Bağlan</b>, tüm motorların önerilen profillerini gösteren sade liste (seçili ya da çalışan uzman profil bir kez görünür ama taramaya eklenmez), Sorun Giderme, Görünüm, Ayarlar.</li>
+    <li><b>Orta</b>: motor sekmeleri, "Uzman profilleri göster", site listesi şablonları, DNS/DoH, ağ sayfaları, tarama kapsamı ve modu, isteğe bağlı aday seçimi.</li>
+    <li><b>Detaylı</b>: teknik etiketli uzman profiller, üç motorun doğrulanmış komut önizlemeli düzenleyicileri, aday matrisi, tarama hedefleri, katman sonuçları ve günlük.</li>
+  </ul>
+  <p><b>Komutu Kopyala</b> tam yerel komutu yalnızca siz bastığınızda ve yalnızca geçerli bir profil için kopyalar; önizleme ve günlük kısa adlar gösterir, kullanıcı klasörünüzü asla göstermez.</p>
+</section>
+
+<section id="tr-engines">
+  <h2>4. Üç motor</h2>
+  <table>
+    <thead><tr><th>Motor</th><th>Nasıl çalışır</th><th>Notlar</th></tr></thead>
+    <tbody>
+      <tr><td><b>GoodbyeDPI</b> 0.2.3rc3</td><td>Giden paketleri WinDivert 2.2 sürücüsüyle değiştirir; DNS'i standart dışı porttaki güvenli bir sunucuya da yönlendirebilir.</td><td>32 ve 64 bit Windows. Uygulama ve hizmet modu. DNS yönlendiren tek motor.</td></tr>
+      <tr><td><b>Zapret</b> (winws v72.13)</td><td>Kendi WinDivert 2.2.2 sürücüsüyle sahte paket, bölme ve sıra değiştirme; TCP, QUIC ve Discord sesi (UDP 50000–50100) için ayrı kurallar.</td><td>Yalnızca 64 bit (<a href="#tr-NSF-107">NSF-107</a>). Uygulama ve hizmet modu. Sistem DNS'ini kullanır.</td></tr>
+      <tr><td><b>ByeDPI</b> (ciadpi 0.17.3)</td><td><b>Sürücü yok:</b> <code>127.0.0.1</code> üzerindeki yerel SOCKS proxy, içinden geçen bağlantıları değiştirir. Uygulama çalışırken Windows proxy'sini yerel köprüsüne yöneltebilir ve sonra geri alır – çökmeden sonra da, elektrik kesintisinden sonra ise bir sonraki oturum açılışında (uygulamanın yönetici yetkisi istemeyen küçük bir yardımcısıyla). Bu arada sizin değiştirdiğiniz değerler korunur.</td><td>Yalnızca 64 bit. Yalnızca uygulama modu. Yalnızca proxy kullanan programlar etkilenir; Discord sesi (UDP) bundan geçmez.</td></tr>
+    </tbody>
+  </table>
+  <p>İki WinDivert motoru (GoodbyeDPI ve Zapret) asla aynı anda çalışmaz; geçişte diğer motorun sürücüsü yalnızca "sc stop" ile durdurulur (asla silinmez; başka bir programın hâlâ kullandığı sürücüye dokunulmaz).</p>
+</section>
+
+<section id="tr-methods">
+  <h2>5. Yöntemler (profiller)</h2>
+  <p><!--PROFILE_COUNT--> hazır yöntem var. <b>Önerilen</b> profiller sabit bir sırayla önce gelir; diğerleri <b>uzman</b> profillerdir. "Türk Telekom denemesi" ya da "Mobil ağ denemesi" gibi etiketler yalnızca önce neyin denenebileceğine dair önerilerdir: başarı, hız, Discord sesi ya da hile önleyici güvenliği vaat etmez. Komut sütunu doğrulanmış komutu kısa adlarla gösterir (çalıştırılacak bir komut değildir).</p>
+  <!--PROFILES:tr-->
+</section>
+
+<section id="tr-sites">
+  <h2>6. Site listeleri (Dahil / Hariç)</h2>
+  <ul>
+    <li><b>Dahil</b> (hedefli mod): aşma yalnızca listedeki sitelere uygulanır. Üç motor da destekler (GoodbyeDPI <code>--blacklist</code>, Zapret <code>--hostlist</code>, ByeDPI <code>--hosts</code>). Her Zapret kuralı ve her ByeDPI grubu listeyi alır; site adını bilemeyen bir Zapret kuralı (örneğin Discord sesi) hedefli modda tüm trafiğe uygulanmak yerine dışarıda bırakılır ve hiçbir kural kalmayacaksa koruma başlamaz.</li>
+    <li><b>Hariç</b>: bu sitelere hiç dokunulmaz. Zapret ve ByeDPI destekler; <b>GoodbyeDPI 0.2.3rc3'te hariç listesi yoktur</b>, bu yüzden GoodbyeDPI ile hariç listesi yok sayılır ve uyarı gösterilir.</li>
+    <li>Girdiler yalnızca alan adıdır (ASCII ya da punycode, liste başına en fazla 5000): adres, port, yol ya da joker karakter olmaz. Listeler <code>data\lists\include.txt</code> ve <code>exclude.txt</code> dosyalarına yazılır ve bir motor okurken yazmaya kilitli tutulur.</li>
+  </ul>
+</section>
+
+<section id="tr-scan">
+  <h2>7. Akıllı tarayıcı</h2>
+  <p><b>Kapsamlar:</b> Önerilenler, Aktif motor, Tüm motorlar, Yalnızca sürücüsüz. <b>Modlar:</b></p>
+  <ul>
+    <li><b>İlk çalışanda dur</b>: adaylar sabit sırayla (önerilenler önce) denenir. Yalnızca tam başarıda durur ve isterseniz o profili uygular.</li>
+    <li><b>Tümünü karşılaştır</b>: her aday bir kez denenir ve sıralanır; hiçbir şey kendiliğinden uygulanmaz. Önce önceki durum geri gelir; sonra <b>Uygula</b>'ya basabilirsiniz.</li>
+  </ul>
+  <p>Her aday yalıtılmış çalışır: kendi süreci, portu ve geçici liste dosyalarıyla; dosyaları SHA-256 denetiminden sonra kilitlenir. Ayarlarınız ve site listeleriniz aday tarafından asla değiştirilmez. Başka bir programın DPI aracı, sürücüsü ya da hizmeti kapatılmaz; WinDivert adayları o zaman gerekçesiyle atlanır. İptal, hata ve uygulanmayan sonuçların hepsi tek bir geri yükleme yolundan geçer; kapalı olan koruma kapalı kalır.</p>
+  <h3>Sonuçların anlamı</h3>
+  <ul>
+    <li><b>Skor</b>: zorunlu hedeflerden <b>iki turda da</b> geçenlerin oranı. <b>Gecikme</b> yalnızca başarılı HTTPS ölçümlerini sayar; "—" hiç ölçüm olmadığı anlamına gelir (asla "0 ms" değil).</li>
+    <li><b>HTTPS hedefleri</b>: her bağlantı denetlenmiş genel bir adrese yapılır ve özgün ad için tam sertifika denetimi uygulanır. "Sunucu yanıt verdi", "hedef çalışıyor" demek değildir: 407, 451, 5xx ve başka siteye yönlendirme başarı sayılmaz. Bir yönlendirme yalnızca <code>Location</code> başlığı, gerçek isteğe göre okunduğunda izin verilen bir HTTPS adresinde kalıyorsa sayılır.</li>
+    <li><b>Gateway bağlantısı</b> (<code>gateway.discord.gg</code>): Discord Gateway'e kısa bir WebSocket açılışı. Yalnızca geçerli <code>Upgrade</code>/<code>Connection</code> başlıkları ve o isteğe ait doğru <code>Sec-WebSocket-Accept</code> ile gelen "101 Switching Protocols" başarıdır; hiçbir token ya da oturum bilgisi gönderilmez ve bağlantı hemen kapatılır. Discord oturumu, ses ya da oyun hakkında bilgi vermez.</li>
+    <li><b>UDP/STUN</b>: <code>stun.cloudflare.com:3478</code> adresine isteğe bağlı STUN Binding (RFC 8489). Skoru asla değiştirmez; ByeDPI için "N/A"dır (yalnızca TCP proxy). STUN yanıtı QUIC, WebRTC ya da Discord sesinin çalıştığını kanıtlamaz.</li>
+    <li><b>DNS</b>: sistem DNS yanıtı DNS over HTTPS (JSON; dns.google, yedek cloudflare-dns.com) ile karşılaştırılır. Farklı genel CDN adresleri normaldir; sistem tarafında NXDOMAIN, boş ya da özel adresli yanıt müdahaleye işaret eder.</li>
+  </ul>
+</section>
+
+<section id="tr-dns">
+  <h2>8. DNS ve şifreli DNS</h2>
+  <ul>
+    <li><b>DNS yönlendirme</b> (GoodbyeDPI profilleri): DNS sorguları standart dışı porttaki güvenli bir sunucuya gider (Yandex 1253, AdGuard 5353, Quad9 9953, OpenDNS 5353).</li>
+    <li><b>DNS sayfası</b> (Orta/Detaylı): Windows DNS sunucusunu (Cloudflare, Google, Quad9, AdGuard, OpenDNS) ve Windows 11'de şifreli DNS'i (DoH) ayarlar. Önceki ayarlar kaydedilir ve geri alınabilir.</li>
+    <li>Ana ekrandaki <b>DNS çipi</b>, internet rotasını taşıyan bağdaştırıcının ayarını gösterir. "DoH" yalnızca o sunucu için şifreli DNS gerçekten kayıtlıysa görünür; ipucu "desteklenmiyor", "kayıtlı", "kayıtlı değil" ya da "bilinmiyor" der. "Karışık", farklı ayarlı birden çok bağdaştırıcı olduğu ve rotanın okunamadığı anlamına gelir. Otomatik (DHCP) DNS geçerli bir seçimdir ve sorun olarak işaretlenmez.</li>
+  </ul>
+</section>
+
+<section id="tr-diag">
+  <h2>9. Sorun Bul ve çakışma teşhisi</h2>
+  <p><b>Sorun Giderme → Tam kontrolü başlat</b>; kurulumu, motor dosyalarını, BFE'yi, çakışmaları, VPN/proxy'yi, antivirüsü, interneti, saati, hosts dosyasını, DNS'i, korumayı ve Discord sunucularını denetler. Çakışma bölümü <b>salt okunurdur</b> ve ana ekranın kullandığı sonucun aynısıdır:</p>
+  <ul>
+    <li><b>DPI süreçleri</b> şöyle ayrılır: bu uygulamanın motoru, süren taramanın adayı, başka bir kopya ya da program, veya "sahibi belirsiz". Ad ya da klasör asla kanıt değildir; kanıt, tam dosya yolu ve uygulamanın başlattığı süreç kimliğidir. Tarama sırasında denetim, tarama bitene kadar bekler.</li>
+    <li><b>WinDivert sürücü kayıtları</b>: bulunan her kayıt türü, durumu ve dosyasıyla (bu kurulum ya da başka bir klasör) listelenir. "Erişim reddedildi", "bulunamadı" ve "durdurulmuş" farklı sonuçlardır.</li>
+    <li><b>Hile önleyiciler</b>: Riot Vanguard (<code>vgk</code>), FACEIT, EasyAntiCheat / EasyAntiCheat_EOS ve BattlEye (<code>BEDaisy</code>). Yalnızca Windows'un çekirdek sürücüsü <b>ve</b> çalışıyor olarak bildirdiği kayıt etkin sürücü sayılır; kullanıcı modu hizmeti yalnızca ürünün kurulu olduğunu söyler. Okunamayan kayıt "denetlenemedi" olarak gösterilir, asla "bulunamadı" denmez. Etkin bir hile önleyici sürücüsü ile WinDivert motoru birlikte çalışıyorsa bir bilgi kartı sürücüsüz ByeDPI motorunu (ya da bu bilgisayarda neden önerilmediğini) açıklar. Kart en fazla profil sayfasını açar; hiçbir şey seçilmez, başlatılmaz ya da kapatılmaz. Hile önleyici uyumluluğu ya da yasaklanmama garantisi verilmez.</li>
+    <li><b>VPN / WARP</b>: "Açık" durumdaki sanal bağdaştırıcı, çalışan ürün hizmeti (ör. Cloudflare WARP) ve internet rotasının gerçekten VPN'den geçmesi üç ayrı bulgudur.</li>
+  </ul>
+</section>
+
+<section id="tr-network">
+  <h2>10. Ağ değişimi</h2>
+  <p>Ağ değiştiğinde (Wi-Fi, Ethernet, hotspot, bağlantı kopması) uygulama ortalık 2,5 saniye sakinleşene kadar bekler, yeni durumu arka planda okur, DNS çipini ve bağdaştırıcı özetini günceller; bildirimler açıksa kısa bir not gösterir. Açılıştaki ilk okuma sessizdir ve aynı durum iki kez bildirilmez. Tarama sırasında tek bir yenileme sonraya bırakılır. Ağ değişimi asla DNS temizlemez, internet testi yapmaz, motoru yeniden başlatmaz, tarama başlatmaz ya da DNS/proxy ayarı yazmaz. <b>Bağlantı bekçisi</b> (açtıysanız düzenli test) ve sizin başlattığınız tarama ve onarımlar eskisi gibi çalışır.</p>
+</section>
+
+<section id="tr-share">
+  <h2>11. Profil paylaşımı (NSF1)</h2>
+  <p>Profiller → <b>Paylaş</b> → "Profil kodunu kopyala", <code>NSF1:</code> ile başlayan bir kod verir. Arkadaşınız kodu (bir paylaşım mesajının içinde de olsa) kopyalayıp Profiller → Paylaş → "Koddan profil ekle"yi seçer.</p>
+  <ul>
+    <li>Kod yalnızca yöntemi içerir: motor, ad, açıklama ve o motorun yöntem alanları. Ayarlarınız, seçili profiliniz, listeleriniz ya da içerikleri, yollar, portlar, proxy şifreleri ya da gerçek komut satırı asla girmez.</li>
+    <li>Bir şey gösterilmeden önce kodun boyutu denetlenir (yapıştırılan metin en fazla 128 Ki karakter, paketli ve açılmış veri ayrı ayrı en fazla 64 KiB), DTD olmadan ayrıştırılır ve motorun izin listesiyle denetlenir.</li>
+    <li>İçe aktarma yalnızca siz onayladıktan sonra yeni bir özel profil ekler; "Hayır" hiçbir şeyi değiştirmez. Korumayı başlatmaz, profili seçmez ya da dosya yazmaz.</li>
+  </ul>
+</section>
+
+<section id="tr-tray">
+  <h2>12. Tepsi simgesi</h2>
+  <p>Pencereyi kapatınca ya da küçültünce uygulama tepsiye iner. Simgenin rengi durumu gösterir:</p>
+  <p class="colors"><span style="background:#22c55e"></span>açık &nbsp; <span style="background:#94a3b8"></span>kapalı &nbsp; <span style="background:#f59e0b"></span>başlatılıyor &nbsp; <span style="background:#ef4444"></span>hata</p>
+  <p>Tepsi menüsünde başlat/durdur, önerilen profiller (ve seçili olan), Discord'u test et, En iyi yöntemi bul ve Discord'u yeniden başlat vardır. Ayarlar'dan açılırsa <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd> korumayı açıp kapatır.</p>
+</section>
+
+<section id="tr-proxy">
+  <h2>13. Proxy</h2>
+  <p>Hiçbir yöntem işe yaramıyorsa (Site Analizi "IP engeli" diyorsa) trafik sizin sağladığınız bir proxy'den geçirilebilir (uygulama proxy sağlamaz). Proxy sayfası (Orta/Detaylı) bir proxy'yi test eder, Discord'u ya da seçtiğiniz programları onunla açar veya Windows proxy'si yapar (eski ayar kaydedilir). Proxy şifreleri Windows tarafından şifrelenerek saklanır. Discord sesi (UDP) proxy'den geçmez.</p>
+</section>
+
+<section id="tr-trouble">
+  <h2>14. Sorun giderme</h2>
+  <ul>
+    <li><b>Simge kırmızı, "sürücü engellendi"</b>: antivirüs WinDivert'i engelliyor → <a href="#tr-NSF-204">NSF-204</a>; ya da sürücüsüz ByeDPI motorunu kullanın.</li>
+    <li><b>Simge yeşil ama Discord "Bağlanılıyor…"da kalıyor</b>: Discord'u yeniden başlatın → <a href="#tr-NSF-901">NSF-901</a>.</li>
+    <li><b>"DNS yanıtı: YANLIŞ"</b>: profil DNS'i yönlendirmiyor → <a href="#tr-NSF-403">NSF-403</a>.</li>
+    <li><b>Hiçbir şey çalışmıyor</b>: Site Analizi'ni çalıştırın; "IP engeli" çıkarsa VPN ya da proxy gerekir → <a href="#tr-NSF-503">NSF-503</a>.</li>
+  </ul>
+  <p><b>Destek paketi</b> (Sorun Giderme) günlükleri, geçmişi ve bir ayar özetini (yalnızca anahtarlar ve sayılar: proxy adresi, adı ya da parolası, program yolu ve site listesi yok) IP adresleri, kullanıcı adları ve e-posta adresleri gizlenmiş olarak tek bir ZIP'e kaydeder. Her metin dosyasında kayıtlı proxy'leriniz (adres, ana makine adı, ad, kullanıcı adı) "Proxy #1", "Proxy #2"… ve program kuralları "App #1"… olarak görünür.</p>
+</section>
+
+<section id="tr-codes">
+  <h2>15. Hata kodları (<!--ERROR_COUNT-->)</h2>
+  <p>Nedenleri ve çözüm adımlarını görmek için bir koda tıklayın.</p>
+  <!--ERROR_CODES:tr-->
+</section>
+
+<section id="tr-scripts">
+  <h2>16. Yedek betikler</h2>
+  <p><code>scripts</code> klasöründeki <code>.cmd</code> dosyaları GoodbyeDPI'ı uygulama olmadan doğrudan çalıştırır (her hazır GoodbyeDPI yöntemi için bir dosya). Zapret ve ByeDPI yalnızca uygulama tarafından başlatılır. Önce NSF Shield'den çıkın ve aynı anda tek betik çalıştırın; <code>stop.cmd</code> GoodbyeDPI'ı kapatır, <code>reset.cmd</code> hizmetleri ve sürücü kaydını kaldırır.</p>
+</section>
+
+<section id="tr-uninstall">
+  <h2>17. Temiz kaldırma</h2>
+  <p>NSF Shield'in Windows'ta değiştirdiği her şey (hizmet, açılış görevi, bu klasöre ait WinDivert sürücü kayıtları, Windows proxy'si, DNS sunucuları ve şifreli DNS kayıtları) önceki hâline döndürülür:</p>
+  <ul>
+    <li><b>Kurulumlu:</b> Ayarlar → Uygulamalar → NSF Shield → <b>Kaldır</b> (ayarların da silinip silinmeyeceği sorulur).</li>
+    <li><b>Taşınabilir:</b> uygulamada <b>Ayarlar → Temiz kaldır</b>, ardından klasörü silin.</li>
+    <li><b>Komut satırı:</b> <code>NSFShield.exe --uninstall</code> (sessiz: <code>--uninstall --quiet</code>).</li>
+  </ul>
+  <p class="foot">GoodbyeDPI © ValdikSS (Apache 2.0) · WinDivert © basil00 (LGPLv3) · zapret © bol-van (MIT) · ByeDPI © hufrea (MIT). Lisans metinleri <code>licenses</code> klasöründedir. NSF Shield: MIT Lisansı, Copyright (c) 2026 Nightshift (Osman Barış MEDİNE). NSF Shield bir VPN değildir: trafiğinizi şifrelemez ve IP adresinizi değiştirmez. Proje sayfası ve kaynak kod: <a href="https://github.com/Mr-Leywin/nsf-shield">github.com/Mr-Leywin/nsf-shield</a></p>
+</section>
+</main>
+</div>
+<script>
+// language selection without any network request: #en / #tr (also #en-… / #tr-… links), otherwise the browser language
+(function () {
+  var d = document.documentElement;
+  d.className = d.className.replace(/\bnojs\b/, '');
+  function langOf(h) { var m = /^#(en|tr)(-|$)/.exec(h || ''); return m ? m[1] : null; }
+  function pick() {
+    var l = langOf(location.hash) || d.getAttribute('data-lang');
+    if (!l) { var n = (navigator.language || '').toLowerCase(); l = n.indexOf('tr') === 0 ? 'tr' : 'en'; }
+    d.setAttribute('data-lang', l);
+    d.setAttribute('lang', l);
+    document.title = l === 'tr' ? 'NSF Shield Rehberi' : 'NSF Shield Guide';
+    var h = location.hash.slice(1);
+    if (h.length > 3) { var el = document.getElementById(h); if (el) { if (el.tagName === 'DETAILS') el.open = true; el.scrollIntoView(); } }
+  }
+  window.addEventListener('hashchange', pick);
+  pick();
+})();
+</script>
+</body>
+</html>

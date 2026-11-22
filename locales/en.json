@@ -1,0 +1,3044 @@
+{
+  "_meta": {
+    "code": "en",
+    "name": "English",
+    "nativeName": "English"
+  },
+  "errors": {
+    "category": {
+      "app": "Application and permissions",
+      "driver": "Driver (WinDivert)",
+      "conflict": "Conflict",
+      "dns": "DNS",
+      "access": "Access blocking",
+      "goodbyedpi": "DPI engine",
+      "service": "Service and startup",
+      "network": "Network connection",
+      "discord": "Discord",
+      "proxy": "Proxy"
+    },
+    "fix": {
+      "RestartAsAdmin": "Restart as administrator",
+      "OpenAppFolder": "Open app folder",
+      "ResetAll": "Reset everything",
+      "ResolveConflicts": "Resolve conflicts",
+      "FlushDns": "Clear DNS cache",
+      "FindBest": "Find the best method",
+      "OpenProfiles": "Go to profiles",
+      "OpenDnsPage": "Go to DNS settings",
+      "TestDnsServers": "Test DNS servers",
+      "StartBfe": "Start BFE service",
+      "OpenWindowsSecurity": "Open Windows Security",
+      "RestartDiscord": "Restart Discord",
+      "StartProtection": "Restart protection",
+      "OpenLog": "Open log",
+      "OpenSites": "Go to target sites",
+      "OpenProxySettings": "Open proxy settings",
+      "OpenDateTime": "Open date/time settings",
+      "DisableServiceMode": "Switch to app mode",
+      "OpenHosts": "Show hosts file",
+      "SiteAnalysis": "Analyse site",
+      "OpenSettings": "Go to settings",
+      "OpenProxyPage": "Go to proxy page",
+      "ReportFalsePositive": "Report false positive"
+    },
+    "NSF-101": {
+      "title": "No administrator permission",
+      "summary": "NSF Shield must run as administrator to load the network driver (WinDivert).",
+      "causes": [
+        "The app was opened as a normal user.",
+        "Windows asked 'Do you want to allow this app to make changes?' and 'No' was chosen."
+      ],
+      "steps": [
+        "Close the app.",
+        "Right-click NSFShield.exe and choose 'Run as administrator'.",
+        "In the installed version, turning on Settings → 'Start with Windows' makes it start as administrator without asking next time."
+      ],
+      "detect": "Checked when the app starts and during the Find Problems scan."
+    },
+    "NSF-102": {
+      "title": "Engine files are missing",
+      "summary": "A file of the selected engine (goodbyedpi.exe, winws.exe, cygwin1.dll, ciadpi.exe or a WinDivert file) was not found in the bin folder.",
+      "causes": [
+        "An antivirus program quarantined or deleted the files.",
+        "The zip file was not fully extracted.",
+        "The files were moved or deleted manually."
+      ],
+      "steps": [
+        "Check your antivirus quarantine list and restore the NSF Shield files.",
+        "Report the file to Microsoft as a false positive ('Report false positive' button → microsoft.com/wdsi/filesubmission); once it is reviewed and approved, Defender stops warning.",
+        "Verify that the files are official: Troubleshooting → Full check compares the SHA-256 hashes on the 'File integrity' line with the official GoodbyeDPI 0.2.3rc3 release.",
+        "Extract the zip file again, completely, into a folder (or run the installer again).",
+        "Last resort: add only the NSF Shield folder (not the whole disk or Downloads) to the antivirus exclusions"
+      ],
+      "detect": "The files are checked when protection starts and during the Find Problems scan."
+    },
+    "NSF-103": {
+      "title": "The app is running from a temporary folder",
+      "summary": "The app was started from inside the zip file or from the Temp folder. Settings may be lost; the background service and startup task break.",
+      "causes": [
+        "The zip file was opened by double-clicking and the app was started directly from inside it.",
+        "The app is in a temporary place such as Downloads/Temp."
+      ],
+      "steps": [
+        "Exit the app.",
+        "Right-click the zip file and choose 'Extract All'.",
+        "Put the folder in a permanent place (e.g. C:\\Program Files\\NSF Shield or Documents).",
+        "Run the app from its new location."
+      ],
+      "detect": "The folder path is checked when the app starts."
+    },
+    "NSF-104": {
+      "title": "Settings cannot be saved",
+      "summary": "The app cannot write to its 'data' folder; your changes are lost when it closes.",
+      "causes": [
+        "The folder is read-only or in a protected location.",
+        "The disk is full.",
+        "The 'Controlled folder access' feature of Windows Security blocks writing."
+      ],
+      "steps": [
+        "Move the app to a writable folder.",
+        "Allow NSF Shield in Windows Security → Virus & threat protection → Ransomware protection → Controlled folder access.",
+        "Free up disk space."
+      ]
+    },
+    "NSF-105": {
+      "title": "Engine files could not be verified",
+      "summary": "A file of the selected engine is not identical to its official release (GoodbyeDPI 0.2.3rc3, zapret v72.13 or ByeDPI 0.17.3, SHA-256). For safety, protection was not started.",
+      "causes": [
+        "The file was corrupted during download.",
+        "A program or a person changed the file.",
+        "An antivirus tried to 'clean' the file and damaged it."
+      ],
+      "steps": [
+        "Download NSF Shield again from the official release page (GitHub) and extract it into a new folder.",
+        "If you use the installed version, repair or reinstall it.",
+        "If the problem persists, add the file name and hash from the log to your issue report."
+      ],
+      "detect": "Every time protection starts, the file hashes are compared with the official hashes built into the program."
+    },
+    "NSF-106": {
+      "title": "The last shutdown was unexpected",
+      "summary": "NSF Shield did not close properly last time. Protection in app mode may have stopped together with the app; it has started again now.",
+      "causes": [
+        "The app crashed because of an error.",
+        "It was force-closed from Task Manager or by another program.",
+        "There was a power cut, or the computer froze and was turned off."
+      ],
+      "steps": [
+        "You do not need to do anything; if it happens often, add the log and the data\\last-crash.txt file to your issue report (Troubleshooting → Support package)."
+      ],
+      "detect": "When the app starts, it checks whether the previous run closed properly."
+    },
+    "NSF-201": {
+      "title": "The WinDivert driver could not be loaded",
+      "summary": "The network driver that GoodbyeDPI uses to capture packets could not be started.",
+      "causes": [
+        "An antivirus program is blocking the driver.",
+        "A different WinDivert driver version loaded by another program is still in memory.",
+        "Windows is waiting for a restart to finish a pending update."
+      ],
+      "steps": [
+        "Press the Troubleshooting → 'Reset everything' button.",
+        "Restart the computer.",
+        "If an antivirus is blocking it, follow the steps of NSF-204 (report the false positive first).",
+        "Start protection again."
+      ],
+      "detect": "Detected from GoodbyeDPI's 'Error opening filter' output."
+    },
+    "NSF-202": {
+      "title": "Driver files not found",
+      "summary": "GoodbyeDPI reported that it could not find WinDivert.dll or WinDivert64.sys.",
+      "causes": [
+        "An antivirus deleted or quarantined the file.",
+        "The package was extracted incompletely."
+      ],
+      "steps": [
+        "Restore the files from the antivirus quarantine.",
+        "Report the file to Microsoft as a false positive ('Report false positive' button → microsoft.com/wdsi/filesubmission); once it is reviewed and approved, Defender stops warning.",
+        "Verify that the files are official: Troubleshooting → Full check compares the SHA-256 hashes on the 'File integrity' line with the official GoodbyeDPI 0.2.3rc3 release.",
+        "Extract the zip again.",
+        "Last resort: add only the NSF Shield folder (not the whole disk or Downloads) to the antivirus exclusions"
+      ],
+      "detect": "Detected from the 'were not found' text in GoodbyeDPI's output."
+    },
+    "NSF-203": {
+      "title": "The driver signature could not be verified",
+      "summary": "Windows did not accept the digital signature of the WinDivert driver.",
+      "causes": [
+        "Windows is very old and does not support SHA-2 signatures.",
+        "The driver file is corrupted.",
+        "Driver signature enforcement settings were changed."
+      ],
+      "steps": [
+        "Install all updates with Windows Update.",
+        "Download and extract the package again.",
+        "Restart the computer."
+      ],
+      "detect": "Detected from the 'digital signature' text in GoodbyeDPI's output."
+    },
+    "NSF-204": {
+      "title": "The driver was blocked by security software",
+      "summary": "Your antivirus program prevented the WinDivert driver from loading. WinDivert is not a virus; it is flagged as a 'RiskTool' because it processes network packets.",
+      "causes": [
+        "Antivirus programs such as Kaspersky, Norton, ESET, Bitdefender and Avast/AVG may block WinDivert."
+      ],
+      "steps": [
+        "Verify that the files are official: Troubleshooting → Full check compares the SHA-256 hashes on the 'File integrity' line with the official GoodbyeDPI 0.2.3rc3 release.",
+        "Report the file to Microsoft as a false positive ('Report false positive' button → microsoft.com/wdsi/filesubmission); once it is reviewed and approved, Defender stops warning.",
+        "For other antivirus products (Kaspersky, Norton, ESET…) also use the vendor's 'report a false positive' page.",
+        "If a file was quarantined, restore it and start protection again.",
+        "Last resort: add only the NSF Shield folder (not the whole disk or Downloads) to the antivirus exclusions (Kaspersky: Settings → Threats and Exclusions → Manage exclusions; Norton: Items to Exclude from Scans.)"
+      ],
+      "detect": "Detected from the 'blocked by security software' text in GoodbyeDPI's output."
+    },
+    "NSF-205": {
+      "title": "The Base Filtering Engine (BFE) is turned off",
+      "summary": "The 'Base Filtering Engine' Windows service that WinDivert needs is not running.",
+      "causes": [
+        "The service was disabled by an optimisation program or by a user."
+      ],
+      "steps": [
+        "Try the 'Start BFE service' button below.",
+        "If that fails: Win+R → services.msc → 'Base Filtering Engine' → Startup type: Automatic → Start.",
+        "Restart the computer."
+      ],
+      "detect": "Detected from GoodbyeDPI's output and, in the Find Problems scan, from the service status."
+    },
+    "NSF-206": {
+      "title": "An incompatible WinDivert version is loaded",
+      "summary": "A different WinDivert driver version loaded by another program is in memory.",
+      "causes": [
+        "zapret, an old GoodbyeDPI version or another tool that uses WinDivert was run."
+      ],
+      "steps": [
+        "Close the other programs that use WinDivert.",
+        "Press the 'Reset everything' button.",
+        "Restart the computer."
+      ],
+      "detect": "Detected from the 'incompatible version' text in GoodbyeDPI's output."
+    },
+    "NSF-207": {
+      "title": "An antivirus program was detected",
+      "summary": "There is a third-party antivirus on your computer. If protection works without problems you do not need to do anything; if you get a driver error, follow the steps of NSF-204.",
+      "causes": [
+        "Some antivirus programs block WinDivert or terminate GoodbyeDPI without notice."
+      ],
+      "steps": [
+        "If it gets blocked, first report the file as a false positive (NSF-204).",
+        "If the antivirus 'scan encrypted connections' (HTTPS scanning) feature causes certificate errors, turn it off."
+      ],
+      "detect": "Read from Windows Security Center during the Find Problems scan."
+    },
+    "NSF-301": {
+      "title": "Another DPI tool is running",
+      "summary": "A goodbyedpi.exe or winws.exe is running outside the app (for example old .cmd scripts or a zapret script). If two WinDivert tools run at the same time, connections break.",
+      "causes": [
+        "One of the old scripts numbered 1-4, or a zapret script, was run.",
+        "Another GoodbyeDPI or zapret front-end is in use."
+      ],
+      "steps": [
+        "Press the 'Resolve conflicts' button; NSF Shield closes the others and takes over."
+      ],
+      "detect": "Running processes are checked every 3 seconds."
+    },
+    "NSF-302": {
+      "title": "An old GoodbyeDPI service is installed",
+      "summary": "There is a 'GoodbyeDPI' Windows service installed by the service_install scripts; it starts by itself when the computer boots and conflicts with NSF Shield.",
+      "causes": [
+        "A service_install_*.cmd script was run earlier."
+      ],
+      "steps": [
+        "Press the 'Resolve conflicts' button; the old service is removed."
+      ]
+    },
+    "NSF-303": {
+      "title": "Another DPI bypass tool is running",
+      "summary": "Another blocking bypass program such as zapret (winws), ByeDPI, SpoofDPI or GreenTunnel is open. If two tools change packets at the same time, neither works properly.",
+      "causes": [
+        "A previously installed blocking bypass tool is running in the background."
+      ],
+      "steps": [
+        "Close the other tool (from Task Manager or from its own tray icon).",
+        "If necessary, remove that tool's service.",
+        "Restart NSF Shield protection."
+      ],
+      "detect": "Running processes are checked during the Find Problems scan."
+    },
+    "NSF-304": {
+      "title": "A VPN or proxy is active",
+      "summary": "A VPN connection or a system proxy is on. If traffic goes through the VPN/proxy, GoodbyeDPI is not needed, and using both together can cause problems.",
+      "causes": [
+        "A VPN program (WARP, Proton, Nord, WireGuard, OpenVPN…) is connected.",
+        "The Windows proxy setting is on."
+      ],
+      "steps": [
+        "If you want to use the VPN, turn NSF Shield protection off; if you want to use NSF Shield, turn the VPN off.",
+        "If you do not use a proxy, turn it off in Settings → Network & internet → Proxy."
+      ],
+      "detect": "Network adapters and the proxy setting are checked during the Find Problems scan."
+    },
+    "NSF-401": {
+      "title": "There is DNS blocking",
+      "summary": "Your provider's DNS server returns fake or empty addresses for blocked sites. In Turkey Discord is blocked this way; without DNS redirection Discord does not open.",
+      "causes": [
+        "The provider blocks access at the DNS level."
+      ],
+      "steps": [
+        "Use a profile that includes DNS redirection (e.g. 'Turkey – Recommended').",
+        "Alternative: change the Windows DNS server on the 'DNS Settings' page.",
+        "Then clear the DNS cache and restart Discord."
+      ],
+      "detect": "With protection off, the system DNS answer is compared with independent DNS servers."
+    },
+    "NSF-402": {
+      "title": "The redirected DNS server does not respond",
+      "summary": "The DNS server used by the profile cannot be reached. In this case no site may open while protection is on.",
+      "causes": [
+        "The DNS server is temporarily unreachable.",
+        "The provider or the modem blocks that port.",
+        "A firewall blocks UDP traffic."
+      ],
+      "steps": [
+        "Run Internet Check → DNS Servers test.",
+        "Switch to a profile that uses a responding DNS (AdGuard, Quad9, OpenDNS).",
+        "The 'Find the best method' scan skips non-responding servers automatically."
+      ],
+      "detect": "A test query is sent to the DNS server when protection starts."
+    },
+    "NSF-403": {
+      "title": "Protection is on but the DNS answer is still wrong",
+      "summary": "Although DNS redirection is on, Windows returns the blocked address.",
+      "causes": [
+        "An old record remained in the Windows DNS cache.",
+        "The connection goes to the provider's DNS over IPv6.",
+        "A VPN or another DNS client interferes.",
+        "There is an entry in the hosts file."
+      ],
+      "steps": [
+        "Clear the DNS cache.",
+        "Close Discord and the browser completely and open them again.",
+        "If the problem persists, change the Windows DNS on the 'DNS Settings' page."
+      ],
+      "detect": "The system DNS answer is verified after protection starts."
+    },
+    "NSF-404": {
+      "title": "IPv6 DNS queries are not redirected",
+      "summary": "Your connection uses IPv6, but the selected profile only redirects IPv4 DNS queries. Windows may get a fake answer over IPv6.",
+      "causes": [
+        "Only an IPv4 DNS address was entered in the custom profile."
+      ],
+      "steps": [
+        "Use one of the built-in profiles (all of them redirect IPv6 too) or add an IPv6 DNS address to your custom profile."
+      ]
+    },
+    "NSF-405": {
+      "title": "The hosts file has a Discord entry",
+      "summary": "An entry for Discord domains was found in the Windows hosts file. These entries override DNS and can point to old/wrong addresses.",
+      "causes": [
+        "A previously tried 'unblocking' method added addresses to the hosts file."
+      ],
+      "steps": [
+        "Open the file C:\\Windows\\System32\\drivers\\etc\\hosts with Notepad (as administrator).",
+        "Delete the lines that contain 'discord' or put # in front of them, then save.",
+        "Clear the DNS cache."
+      ],
+      "detect": "The hosts file is read during the Find Problems scan."
+    },
+    "NSF-501": {
+      "title": "DPI blocking could not be bypassed (connection is cut)",
+      "summary": "The connection reaches the right server but is cut while the encrypted connection is being set up. The provider's DPI device recognises the method in use.",
+      "causes": [
+        "The provider changed its DPI settings.",
+        "The selected method is ineffective on this line."
+      ],
+      "steps": [
+        "Try all methods automatically with 'Find the best method'.",
+        "To try manually: the Automatic TTL, Single-byte Fragmentation and Strengthened Fake Packet profiles.",
+        "If targeted mode is on, turn it off and try again."
+      ],
+      "detect": "Detected in the connection test from the TLS connection being reset."
+    },
+    "NSF-502": {
+      "title": "Timeout (packets are being dropped)",
+      "summary": "No answer comes from the server. The DPI device silently drops packets or your connection is very slow.",
+      "causes": [
+        "The provider drops packets instead of resetting the connection.",
+        "The internet connection is very slow or down."
+      ],
+      "steps": [
+        "Check that your internet connection works.",
+        "Run the 'Find the best method' scan."
+      ]
+    },
+    "NSF-503": {
+      "title": "IP blocking or the server is unreachable",
+      "summary": "Even the correct IP address of the site cannot be reached. This may be IP blocking; GoodbyeDPI cannot bypass IP blocking.",
+      "causes": [
+        "The provider blocked the server's IP address.",
+        "The server is temporarily down."
+      ],
+      "steps": [
+        "Try again later.",
+        "Restart the modem.",
+        "Confirm the situation with Internet Check → Site Analysis.",
+        "If the IP blocking continues, only a VPN helps."
+      ]
+    },
+    "NSF-504": {
+      "title": "Certificate mismatch",
+      "summary": "The server that was reached presented a different certificate. DNS gives a fake address or there is a program in between (antivirus HTTPS scanning, corporate proxy).",
+      "causes": [
+        "DNS redirection is off or not working.",
+        "The antivirus scans encrypted connections.",
+        "The computer clock is wrong."
+      ],
+      "steps": [
+        "Use a profile with DNS redirection and clear the DNS cache.",
+        "Turn off the antivirus 'scan encrypted connections' feature.",
+        "Check the computer's date and time."
+      ]
+    },
+    "NSF-505": {
+      "title": "Some servers open, others do not",
+      "summary": "Part of Discord works but some servers (images, updates, chat connection) cannot be reached.",
+      "causes": [
+        "The site list in targeted mode is incomplete.",
+        "Some servers are blocked with a different method."
+      ],
+      "steps": [
+        "If targeted mode is on, complete the list with 'Add Discord addresses' or turn targeted mode off.",
+        "Run the 'Find the best method' scan with the 'try all methods' option."
+      ]
+    },
+    "NSF-506": {
+      "title": "The site that does not open is not in the target list",
+      "summary": "Targeted mode is on and the server that does not open is not in the list, so no method is applied to it.",
+      "causes": [
+        "A domain that was not added to the target site list is being used."
+      ],
+      "steps": [
+        "Add the domain on the Target Sites page or turn targeted mode off.",
+        "Restart protection to apply the change."
+      ]
+    },
+    "NSF-601": {
+      "title": "The engine could not be started",
+      "summary": "The engine closed right after it opened and did not give a recognised error message.",
+      "causes": [
+        "An antivirus program terminated the process.",
+        "The driver could not be loaded.",
+        "The profile parameters are wrong."
+      ],
+      "steps": [
+        "Look at the last GoodbyeDPI lines on the Log page.",
+        "Try a different profile.",
+        "Do 'Reset everything' and restart the computer."
+      ]
+    },
+    "NSF-602": {
+      "title": "The engine closed unexpectedly",
+      "summary": "The engine process (goodbyedpi, winws or ciadpi) closed while protection was running.",
+      "causes": [
+        "An antivirus program terminated the process.",
+        "The driver was reset while the computer woke from sleep.",
+        "It was closed from Task Manager."
+      ],
+      "steps": [
+        "Keep 'Restart automatically if it closes' turned on in Settings.",
+        "If the antivirus closes it, report the file as a false positive (NSF-204).",
+        "Restart protection."
+      ]
+    },
+    "NSF-603": {
+      "title": "Invalid profile parameter",
+      "summary": "The engine did not recognise a parameter in the profile.",
+      "causes": [
+        "The custom profile contains a misspelled option or one that does not exist in this GoodbyeDPI version."
+      ],
+      "steps": [
+        "Edit the profile on the Profiles page; check 'Extra parameters' and the manually written command.",
+        "Switch to a built-in profile."
+      ]
+    },
+    "NSF-604": {
+      "title": "The start-up message could not be read",
+      "summary": "GoodbyeDPI is running but the 'Filter activated' message could not be read. Usually harmless.",
+      "causes": [
+        "The computer is very busy or the console output arrived late."
+      ],
+      "steps": [
+        "If the connection test succeeds, you do not need to do anything."
+      ]
+    },
+    "NSF-605": {
+      "title": "Unsafe parameter in the profile",
+      "summary": "The selected profile contains a parameter that its engine does not know, an abbreviated one or an unsafe one (one that writes files or takes a free path); protection was not started with this profile.",
+      "causes": [
+        "The profile was added from someone else's code or from a settings file.",
+        "The custom parameters were typed incorrectly (e.g. an abbreviation such as '--black').",
+        "The parameters contain command line characters (& | % \" …)."
+      ],
+      "steps": [
+        "Edit the profile on the Profiles page; write each option separately and with its full name.",
+        "Or choose one of the built-in profiles."
+      ],
+      "detect": "Parameters are checked against an allow-list when protection starts and when a profile code or settings file is imported."
+    },
+    "NSF-701": {
+      "title": "The background service could not be installed",
+      "summary": "GoodbyeDPI could not be installed as a Windows service.",
+      "causes": [
+        "A broken service entry with the same name remained.",
+        "An antivirus prevented the service from being created."
+      ],
+      "steps": [
+        "Press the 'Reset everything' button and restart the computer.",
+        "Or turn service mode off and use app mode."
+      ]
+    },
+    "NSF-702": {
+      "title": "The background service could not be started",
+      "summary": "The service was installed but could not be started, or it stopped immediately.",
+      "causes": [
+        "A driver error (usually the antivirus).",
+        "The app folder was moved."
+      ],
+      "steps": [
+        "First start in app mode to see the error code.",
+        "Once the problem is solved, turn service mode on again."
+      ]
+    },
+    "NSF-703": {
+      "title": "The startup task could not be created",
+      "summary": "The Task Scheduler task for 'Start with Windows' could not be created.",
+      "causes": [
+        "The Task Scheduler service is turned off.",
+        "The app is in a temporary folder."
+      ],
+      "steps": [
+        "Move the app to a permanent folder.",
+        "Turn the option off in Settings and on again."
+      ]
+    },
+    "NSF-704": {
+      "title": "The service points to an old folder",
+      "summary": "The installed NSF Shield service runs GoodbyeDPI from a different location than the app's current folder (the app was moved or updated).",
+      "causes": [
+        "The app folder was moved or the new version was extracted to a different folder."
+      ],
+      "steps": [
+        "Press the 'Restart protection' button; the service is updated to point to the new folder."
+      ]
+    },
+    "NSF-705": {
+      "title": "Service and startup task are off in the portable version",
+      "summary": "The background service (SYSTEM rights) and 'Start with Windows' (administrator rights without asking) can only be used in a version installed into an administrator-protected folder. Running with these rights from a folder that anyone can write to (Desktop, Downloads…) could let a malicious program on the computer gain those rights.",
+      "causes": [
+        "The app runs from a portable folder extracted from the zip.",
+        "A service/task turned on by a previous version was removed for security."
+      ],
+      "steps": [
+        "Protection works normally in app mode; as long as the app stays open (in the tray) you do not need to do anything.",
+        "To start it automatically at startup, install NSF Shield with the installer (Program Files)."
+      ],
+      "detect": "When the app starts, the folder permissions and the folder used by the installed service/task are checked."
+    },
+    "NSF-801": {
+      "title": "No internet connection",
+      "summary": "No public server (Cloudflare, Google, Quad9) can be reached; the problem is your connection, not blocking.",
+      "causes": [
+        "The cable/Wi-Fi connection is down.",
+        "There is a fault at the modem or the provider."
+      ],
+      "steps": [
+        "Turn protection off and check whether the internet works.",
+        "Turn the modem off and on again after 30 seconds.",
+        "Check the Wi-Fi/cable connection."
+      ]
+    },
+    "NSF-802": {
+      "title": "A system proxy is on",
+      "summary": "A proxy server is set in Windows. Traffic that goes through the proxy may not be affected by GoodbyeDPI.",
+      "causes": [
+        "A program or a user set a proxy."
+      ],
+      "steps": [
+        "If you do not use a proxy, turn it off in Settings → Network & internet → Proxy."
+      ]
+    },
+    "NSF-803": {
+      "title": "The computer clock is wrong",
+      "summary": "Your computer's clock is very different from the real time. Encrypted (HTTPS) connections give certificate errors.",
+      "causes": [
+        "The time zone is wrong or automatic time is off.",
+        "The motherboard battery is empty."
+      ],
+      "steps": [
+        "In the date and time settings turn on 'Set time automatically' and press 'Sync now'."
+      ]
+    },
+    "NSF-901": {
+      "title": "Discord was opened before protection",
+      "summary": "Because Discord was opened while blocked, it may keep old connections and DNS records; it can get stuck on the 'Connecting…' screen.",
+      "causes": [
+        "Discord started before NSF Shield when the computer booted.",
+        "Protection was started while Discord was open."
+      ],
+      "steps": [
+        "Close Discord completely from its tray icon and open it again (or use the button below)."
+      ],
+      "detect": "When protection starts, Discord's start time is checked."
+    },
+    "NSF-902": {
+      "title": "Discord is stuck on the update screen",
+      "summary": "Discord cannot reach its update servers at start-up.",
+      "causes": [
+        "updates.discord.com or dl.discordapp.net cannot be reached.",
+        "In targeted mode these addresses are not in the list."
+      ],
+      "steps": [
+        "Check in the connection test that the 'updates.discord.com' server is reachable.",
+        "Turn targeted mode off or add the Discord addresses.",
+        "Restart Discord."
+      ]
+    },
+    "NSF-903": {
+      "title": "Discord cannot connect to voice chat",
+      "summary": "Text chat works but voice stays on 'RTC connecting'. Discord voice servers use UDP; GoodbyeDPI does not change UDP traffic.",
+      "causes": [
+        "The voice server's IP address is blocked or a device on the way restricts UDP."
+      ],
+      "steps": [
+        "Discord → Settings → Voice & Video → turn off 'Enable Quality of Service High Packet Priority'.",
+        "Change the voice region (Rotterdam, Frankfurt…) in the server settings.",
+        "If the problem persists, only a VPN helps."
+      ]
+    },
+    "NSF-904": {
+      "title": "Opens in the browser, not in the app",
+      "summary": "discord.com opens in the browser but the Discord app cannot connect.",
+      "causes": [
+        "The app keeps old connections.",
+        "There is a proxy setting in Discord.",
+        "Discord is not up to date."
+      ],
+      "steps": [
+        "Close Discord completely and open it again.",
+        "Clear the DNS cache.",
+        "Download Discord from the web again and install it."
+      ]
+    },
+    "NSF-805": {
+      "title": "Cannot connect to the proxy server",
+      "summary": "A connection to the entered proxy address could not be made, or the server did not answer like a proxy.",
+      "causes": [
+        "The IP address or port was typed wrong.",
+        "The proxy server is down (free proxies go down often).",
+        "The wrong proxy type was chosen (SOCKS5 instead of HTTP or the other way round).",
+        "The proxy's IP address is blocked too."
+      ],
+      "steps": [
+        "Check the address and port (e.g. 185.12.34.56:8080).",
+        "Change the type (HTTP ↔ SOCKS5) and test again.",
+        "Try another proxy.",
+        "Paste the details from your proxy provider as they are into the 'Quick entry' box."
+      ],
+      "detect": "Detected with the 'Test' button on the Proxy page."
+    },
+    "NSF-806": {
+      "title": "Wrong proxy user name/password",
+      "summary": "The proxy server requires authentication and the entered details were not accepted.",
+      "causes": [
+        "The user name or password is wrong.",
+        "The proxy subscription has expired.",
+        "The proxy only allows certain IP addresses."
+      ],
+      "steps": [
+        "Check the user name and password and enter them again.",
+        "Add your own IP to the IP allow-list in your proxy provider's panel."
+      ]
+    },
+    "NSF-807": {
+      "title": "The proxy cannot reach Discord",
+      "summary": "The proxy works, but an encrypted connection to Discord could not be made through it.",
+      "causes": [
+        "Discord is blocked in the proxy's country too.",
+        "The proxy does not allow tunnels to port 443.",
+        "The proxy alters the traffic (the certificate does not match)."
+      ],
+      "steps": [
+        "Try a proxy in another country.",
+        "Use an HTTP proxy that supports HTTPS/CONNECT or a SOCKS5 proxy."
+      ]
+    },
+    "NSF-107": {
+      "title": "The engine cannot run on this Windows",
+      "summary": "Zapret (winws) and ByeDPI (ciadpi) are shipped for 64-bit Windows only.",
+      "causes": [
+        "The computer runs 32-bit Windows."
+      ],
+      "steps": [
+        "Use the GoodbyeDPI engine (Profiles → GoodbyeDPI); it has a 32-bit version too."
+      ],
+      "detect": "Checked when protection starts."
+    },
+    "NSF-606": {
+      "title": "A site list cannot be used by this engine",
+      "summary": "The Exclude list is on, but GoodbyeDPI has no exclude list; the list was not applied.",
+      "causes": [
+        "GoodbyeDPI 0.2.3rc3 only has an include list (--blacklist)."
+      ],
+      "steps": [
+        "Switch to Zapret or ByeDPI (Profiles page or tray menu) to use the Exclude list.",
+        "Or turn the Exclude list off on the Site Lists page."
+      ],
+      "detect": "Checked when protection starts."
+    },
+    "NSF-808": {
+      "title": "ByeDPI port is in use",
+      "summary": "ByeDPI could not listen on its local port (127.0.0.1), or its local bridge could not be opened.",
+      "causes": [
+        "Another program (another proxy or a ByeDPI copy) uses the same port.",
+        "An antivirus or firewall blocked ciadpi.exe."
+      ],
+      "steps": [
+        "Choose another ByeDPI port in Settings (for example 18990) and start again.",
+        "Close other proxy programs.",
+        "Check the antivirus quarantine for ciadpi.exe."
+      ],
+      "detect": "Checked when ByeDPI starts."
+    },
+    "NSF-809": {
+      "title": "The Windows proxy was not set for ByeDPI",
+      "summary": "ByeDPI runs, but the Windows proxy points to your own proxy or could not be changed, so browsers do not use ByeDPI.",
+      "causes": [
+        "A proxy from the Proxy page is set as the Windows proxy.",
+        "The proxy setting is managed by a company policy."
+      ],
+      "steps": [
+        "Turn off the Windows proxy on the Proxy page and restart protection.",
+        "Or use per-program rules with 'ByeDPI engine' on the Proxy page."
+      ],
+      "detect": "Checked when ByeDPI starts."
+    }
+  },
+  "engine": {
+    "missingFile": "{0} was not found ({1}). An antivirus may have quarantined the file: restore it from quarantine and report the file to Microsoft as a false positive (NSF-102); add an exclusion only as a last resort.",
+    "unsafeProfile": "The '{0}' profile contains an unsafe or unknown parameter: {1}",
+    "integrityFailed": "{1} files could not be verified: {0} The file may be corrupted or modified; download NSF Shield again from the official release page.",
+    "cannotRun": "{1} could not be run: {0}. An antivirus may be blocking the file.",
+    "exitedImmediately": "{2} closed immediately (exit code {0}). {1}",
+    "startFailed": "{1} could not be started. {0}",
+    "hint": {
+      "driverFilesMissing": "WinDivert driver files were not found. An antivirus may have deleted them; restore them from quarantine and report them as a false positive, or extract the package again.",
+      "incompatible": "A different WinDivert driver version is loaded. Do 'Reset everything' and restart the computer.",
+      "blockedByAv": "The WinDivert driver was blocked by an antivirus program. Verify with the Full check that the files are official and report them as a false positive; use an exclusion only as a last resort.",
+      "bfe": "The 'Base Filtering Engine' (BFE) Windows service is turned off.",
+      "signature": "The driver signature could not be verified. Windows is not up to date or the driver file is corrupted.",
+      "parameters": "There is an error in the profile parameters. Edit the profile and check it.",
+      "driverLoad": "The WinDivert driver could not be loaded. An antivirus may be blocking it or another DPI tool may be running; try 'Reset everything'.",
+      "generic": "An antivirus may be blocking GoodbyeDPI or another DPI tool may be running. Try 'Reset everything'."
+    },
+    "hintWithOutput": "{0} (Output: {1})",
+    "exitedUnexpectedly": "{2} closed unexpectedly (exit code {0}). {1}",
+    "serviceInstalledOnly": "The background service can only be used in the installed version ({0})",
+    "serviceCreateFailed": "The background service could not be created: {0}",
+    "serviceConfigFailed": "The service could not be configured: {0}",
+    "serviceStoppedAfterStart": "The service stopped right after it started. Try app mode first to see the error code.",
+    "serviceStartFailed": "The service could not be started: {0}. Try app mode first to see the error code.",
+    "serviceStopped": "The background service stopped.",
+    "processCount": "{0} WinDivert program(s) (goodbyedpi/winws) that are not this app's are running.",
+    "uninstall": {
+      "serviceRemoved": "Background service (NSFShield) removed.",
+      "serviceRemoveFailed": "The background service could not be removed: {0}",
+      "driverKept": "{0} driver entry was kept because another GoodbyeDPI is running.",
+      "driverRemoved": "{0} driver entry removed.",
+      "serviceKept": "The NSFShield service was kept: it runs a program of another installation or its owner could not be read ({0}).",
+      "driverForeign": "{0} driver entry was kept: its file is not in this folder or could not be read."
+    },
+    "raw": "{0}",
+    "serviceForeign": "The NSFShield service belongs to another installation ({0}); it is not changed. Start protection yourself to move it to this folder.",
+    "serviceNotVerified": "The service command line read back from Windows is not the one that was written; the change was undone.",
+    "serviceStartTimeout": "The service did not start within 15 seconds; the change was undone.",
+    "serviceUnreadable": "The NSFShield service could not be read ({0}), so it was not changed.",
+    "serviceAppeared": "The service could not be created and a service with the same name appeared meanwhile; it is not NSF Shield's, so it was left as it is. {0}",
+    "repointRefused": "The service is not this installation's stopped service (or it cannot be read), so it was not set up again.",
+    "repointFailed": "The service could not be set up again for this folder: {0}"
+  },
+  "dns": {
+    "provider": {
+      "Yandex": {
+        "note": "The server used by the old scripts 3/4. Because it is in Russia its answers are a little slow (~100 ms) but it is very stable."
+      },
+      "AdGuard": {
+        "note": "Very fast (~20 ms). Also blocks ad and tracker domains; ad areas may look empty on some sites."
+      },
+      "AdGuardFree": {
+        "name": "AdGuard Unfiltered",
+        "short": "AdGuard unfiltered (5353)",
+        "note": "AdGuard's version that blocks nothing. It is fast."
+      },
+      "Quad9": {
+        "note": "Based in Switzerland, privacy-focused and fast. Only blocks malware sites."
+      },
+      "OpenDns": {
+        "note": "Cisco's DNS service. Fast and stable."
+      },
+      "Cloudflare": {
+        "note": "Uses the standard port 53. Useless if your provider interferes with traffic on port 53; the scan checks this by itself."
+      },
+      "Google": {
+        "note": "Uses the standard port 53. In Turkey, queries to this address were redirected in the past; it is not reliable on its own."
+      }
+    }
+  },
+  "profiles": {
+    "builtin": {
+      "tr-recommended": {
+        "name": "Turkey – Recommended",
+        "description": "First choice for Discord. The most complete mode (-9) + Yandex DNS redirection. Same setting as the old scripts 3 and 4."
+      },
+      "tr-adguard": {
+        "name": "Turkey – AdGuard DNS",
+        "description": "-9 mode + AdGuard DNS (port 5353). Answers much faster than Yandex; also blocks ad domains."
+      },
+      "tr-quad9": {
+        "name": "Turkey – Quad9 DNS",
+        "description": "-9 mode + Quad9 DNS (port 9953). Fast and privacy-focused, no ad filter."
+      },
+      "tr-opendns": {
+        "name": "Turkey – OpenDNS",
+        "description": "-9 mode + OpenDNS (port 5353). Try it if the other DNS servers are slow or do not respond."
+      },
+      "tr-autottl": {
+        "name": "Automatic TTL (-5)",
+        "description": "Sets the TTL of fake packets automatically from the distance to the server. Try it if the fixed-TTL methods stopped working."
+      },
+      "tr-legacy1-dns": {
+        "name": "Old Script 1 + DNS (TTL 3)",
+        "description": "1_bunu_dene.cmd with DNS redirection added: only TTL 3 fake packets + Yandex DNS."
+      },
+      "tr-legacy2-dns": {
+        "name": "Old Script 2 + DNS (-4, TTL 5)",
+        "description": "2_bunu_dene.cmd with DNS redirection added: -4 mode + TTL 5 fake packets + Yandex DNS."
+      },
+      "tr-wrongseq": {
+        "name": "Wrong Sequence Number (-6)",
+        "description": "Sends fake packets with a past TCP sequence number. On some modems it is more stable than -9."
+      },
+      "tr-wrongchk": {
+        "name": "Wrong Checksum (-7)",
+        "description": "Sends fake packets with a wrong TCP checksum. May not work in virtual machines and on some modems."
+      },
+      "tr-mode8": {
+        "name": "Sequence + Checksum (-8)",
+        "description": "Uses the -6 and -7 methods together; there is no QUIC blocking (its only difference from -9)."
+      },
+      "tr-fakegen": {
+        "name": "Strengthened Fake Packet",
+        "description": "-9 mode + 5 random fake packets. For providers that apply strict DPI."
+      },
+      "tr-resend": {
+        "name": "Repeated Fake Packet",
+        "description": "-9 mode + 3 fake packets, each sent 3 times. More reliable on lines with packet loss (Wi-Fi, mobile)."
+      },
+      "tr-e1": {
+        "name": "Single-byte Fragmentation",
+        "description": "-9 mode, but the first HTTPS packet is split into 1-byte pieces. DPI cannot read the site name at all; opening connections gets a little slower."
+      },
+      "tr-sni": {
+        "name": "Split at Site Name (SNI)",
+        "description": "-9 mode + splits the packet exactly where the site name (SNI) starts. The site name falls into two separate packets."
+      },
+      "tr-native": {
+        "name": "Plain-order Fragmentation",
+        "description": "Same as -9, but the fragments are sent in normal instead of reverse order. For networks that do not accept reverse-ordered fragments."
+      },
+      "tr-alt": {
+        "name": "Alternative (-5 + 1 byte + fake)",
+        "description": "Automatic TTL + 1-byte fragmentation + 5 fake packets + QUIC blocking. The method from GoodbyeDPI's 'ALT' scripts."
+      },
+      "tr-compatible": {
+        "name": "Most Compatible Classic (-1)",
+        "description": "Classic method without fake packets: splits packets into 2-byte pieces. Slow but works on every network."
+      },
+      "tr-classic2": {
+        "name": "Classic Fast (-2)",
+        "description": "Faster version of -1: HTTPS is split into 40-byte pieces."
+      },
+      "dns-only": {
+        "name": "DNS Redirection Only",
+        "description": "Applies no DPI trick, only redirects DNS. The lightest option if your provider blocks only via DNS."
+      },
+      "legacy-1": {
+        "name": "Old Script 1 (TTL 3, no DNS)",
+        "description": "Exactly the same as 1_bunu_dene.cmd. Because it has no DNS redirection it does not open Discord in Turkey; for comparison."
+      },
+      "legacy-2": {
+        "name": "Old Script 2 (-4, TTL 5, no DNS)",
+        "description": "Exactly the same as 2_bunu_dene.cmd. Because it has no DNS redirection it does not open Discord in Turkey; for comparison."
+      },
+      "plain": {
+        "name": "Plain (-9, no DNS)",
+        "description": "Only the -9 mode. May be enough if you changed the Windows DNS on the 'DNS Settings' page."
+      },
+      "zapret-discord": {
+        "name": "Discord + Web (TLS + QUIC)",
+        "description": "Recommended Zapret profile: HTTPS with a fake ClientHello and split, QUIC (UDP 443) and Discord voice (UDP 50000-50100)."
+      },
+      "zapret-aggressive": {
+        "name": "Aggressive ISP",
+        "description": "More repeats, more split points and a modified fake packet, for providers where the recommended profile is not enough."
+      },
+      "zapret-tls": {
+        "name": "TLS only",
+        "description": "Only HTTPS (TCP 443) with a fake packet and split; the lightest, no UDP."
+      },
+      "zapret-split": {
+        "name": "Compatible (split only)",
+        "description": "Splits the first packet without fake packets, for networks that drop fake packets."
+      },
+      "byedpi-recommended": {
+        "name": "Recommended (split)",
+        "description": "ByeDPI's recommended Windows setting. First tried: split at SNI+1 and disorder at SNI+3 (HTTP: Host header case and space). Fallback group (on reset or timeout): a TLS record split at SNI+1."
+      },
+      "byedpi-fake": {
+        "name": "Fake packet",
+        "description": "One group, no fallback: disorder at 1 and a fake first part sent with TTL 8 before the real data."
+      },
+      "byedpi-tlsrec": {
+        "name": "TLS record + split (no TTL)",
+        "description": "First tried: split at SNI+1 with a TLS record split at SNI+3. Fallback group (no answer within 3 s, or reset): disorder at 1 with a record split at SNI+1. No fake packets or TTL tricks."
+      },
+      "byedpi-oob": {
+        "name": "Out-of-band (OOB)",
+        "description": "First tried: split at SNI+1 with an out-of-band byte at SNI+3. Fallback group (on reset or timeout): disorder at SNI+3."
+      },
+      "zapret-general": {
+        "name": "Web (fakedsplit, auto TTL)",
+        "description": "General web traffic: QUIC (UDP 443) with fake Initial packets; HTTP and HTTPS with a fake packet and a split ClientHello (fakedsplit), TTL set automatically. The Discord voice ports are not captured."
+      },
+      "zapret-ttl": {
+        "name": "Fixed TTL (fake + split)",
+        "description": "Fake packets with a fixed TTL of 4 (they expire before the server) and a split at the SNI, for HTTP, HTTPS and QUIC. Try it when the profiles with an automatic TTL do not work."
+      },
+      "zapret-voice": {
+        "name": "Discord voice (STUN / IP discovery)",
+        "description": "Discord voice first: fake IP discovery and STUN packets on UDP 50000-50100, plus light QUIC and HTTPS rules. Whether voice works depends on the network; the scanner does not measure it."
+      },
+      "zapret-light": {
+        "name": "Low intervention (TLS reorder)",
+        "description": "The smallest change: only TCP 443, the first part of the ClientHello is sent out of order. No fake packets, no UDP."
+      },
+      "zapret-lastresort": {
+        "name": "Last resort (heavy)",
+        "description": "Many fake packets with a wrong sequence and checksum, fakeddisorder on HTTP and HTTPS, fakes for QUIC and Discord voice. More traffic and more side effects; use it only when the others fail."
+      },
+      "byedpi-tlsrec-only": {
+        "name": "TLS record split only",
+        "description": "First tried: the TLS ClientHello is split into two TLS records at SNI+1. Fallback group (on reset or timeout): the split at SNI+3. No other method and no HTTP change."
+      },
+      "byedpi-hybrid-oob": {
+        "name": "Hybrid OOB (disoob + TLS record)",
+        "description": "First tried: disorder with an out-of-band byte (disoob) and a TLS record split at SNI+1. Fallback group (on reset or timeout): OOB at SNI+3 with a record split at SNI+3."
+      },
+      "byedpi-http-https": {
+        "name": "HTTP and HTTPS separately",
+        "description": "HTTP connections: split at the Host and Host header tricks (case, space). HTTPS connections use the second group (the first is limited to HTTP): split + disorder at the SNI and a TLS record split."
+      }
+    },
+    "newProfile": "New Profile",
+    "dnsManual": "Set manually",
+    "copySuffix": " (copy)",
+    "group": {
+      "custom": "Custom",
+      "recommended": "Recommended",
+      "alternative": "Alternative methods",
+      "nodns": "Without DNS redirection (old)"
+    },
+    "code": {
+      "noCode": "The text does not contain a profile code starting with 'NSF1:'.",
+      "corrupt": "The profile code is corrupt or was copied incompletely.",
+      "empty": "The profile code is empty.",
+      "unsafe": "The code contains an unsafe or unknown parameter: {0}",
+      "tooLong": "The pasted text is too long (more than {0} Ki characters). Copy only the code.",
+      "tooLarge": "The profile code is too large (more than 64 KiB packed or unpacked).",
+      "multiple": "The text contains several different profile codes. Copy only one.",
+      "dtd": "The profile code contains a forbidden XML feature (document type definition).",
+      "unsupportedVersion": "This code has an unknown format version ({0}); it may come from a newer NSF Shield.",
+      "noEngine": "The profile code does not say which engine it is for.",
+      "unknownEngine": "The profile code is for an unknown engine: {0}",
+      "unknownField": "The profile code contains an unknown field: {0}",
+      "duplicateField": "The profile code contains a field twice: {0}",
+      "conflicting": "The profile code contains fields that do not belong together: {0}",
+      "missingField": "A required field is missing from the profile code: {0}",
+      "badValue": "Invalid value in the profile code: {0} = {1}",
+      "badFlag": "Unknown option in the profile code: {0}",
+      "roundTrip": "The profile could not be written as a code that reads back the same.",
+      "trailing": "The code has extra data after the profile."
+    },
+    "importedName": "Imported profile",
+    "dnsSystem": "System DNS",
+    "tier": {
+      "Recommended": "Recommended",
+      "Specialized": "Specialized",
+      "custom": "Custom"
+    },
+    "tag": {
+      "discord": "Discord",
+      "voice": "Discord voice (try)",
+      "web": "Web (HTTPS)",
+      "quic": "QUIC",
+      "dns": "DNS redirect",
+      "aggressive": "Aggressive",
+      "tls": "TLS only",
+      "nofake": "No fake packets",
+      "balanced": "Balanced",
+      "driverless": "Driverless",
+      "ttl": "Fixed TTL",
+      "nottl": "No TTL tricks",
+      "oob": "OOB",
+      "light": "Low intervention",
+      "lastresort": "Last resort",
+      "tlsrec": "TLS record split",
+      "http": "HTTP + HTTPS",
+      "try-tt": "Try on Turk Telekom",
+      "try-superonline": "Try on Superonline",
+      "try-vodafone": "Try on Vodafone/Kablonet",
+      "try-mobile": "Try on mobile networks"
+    },
+    "tech": {
+      "noDns": "system DNS",
+      "quicBlocked": "QUIC blocked (falls back to TCP)"
+    }
+  },
+  "common": {
+    "off": "Off",
+    "and": "and",
+    "ok": "OK",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "saveFailed": "Could not save:",
+    "error": "Error: {0}",
+    "secondsShort": "s"
+  },
+  "settings": {
+    "import": {
+      "unsafeProfile": "The '{0}' profile in the backup contains an unsafe or unknown parameter: {1}",
+      "badAppRule": "The '{0}' program rule in the backup contains an invalid character.",
+      "badDns": "The DNS address in the backup is invalid: {0}",
+      "badDomain": "The file contains an invalid domain name: {0}",
+      "badTarget": "Invalid scan target: {0}",
+      "tooManyTargets": "Too many scan targets (at most {0})."
+    },
+    "tooLarge": "The settings file is larger than {0} MB and is not read."
+  },
+  "speed": {
+    "measuringPing": "Measuring latency…",
+    "noInternet": "No internet connection (NSF-801).",
+    "measuringDown": "Measuring download speed…",
+    "downloading": "Downloading… {0} Mbit/s",
+    "measuringUp": "Measuring upload speed…",
+    "uploading": "Uploading… {0} Mbit/s",
+    "done": "Done."
+  },
+  "history": {
+    "kind": {
+      "test": "Test",
+      "repair": "Repair",
+      "scan": "Scan",
+      "speed": "Speed",
+      "update": "Update"
+    }
+  },
+  "actions": {
+    "heal": {
+      "title": "Auto-repair",
+      "searching": "Discord cannot be reached. Searching for a working method automatically (about 30 seconds)…",
+      "fixedTitle": "Problem solved",
+      "restartDiscordHint": " Restart Discord if it cannot connect.",
+      "failedTitle": "Auto-repair failed",
+      "sameMethod": "Method unchanged ({0}); the connection was re-established.",
+      "newMethod": "New method: {0} ({1} was not working).",
+      "noMethod": "No working method found",
+      "failedText": "No working method was found{0}. See the Troubleshooting page for details."
+    },
+    "accessProblem": {
+      "title": "Access problem",
+      "text": "Protection is on but {0} server(s) could not be reached. 'Find the best method' can find a working method automatically."
+    },
+    "restartDiscord": {
+      "title": "Restart Discord",
+      "text": "Discord was opened before protection. If it cannot connect, use the 'Restart Discord' button on the home page."
+    },
+    "dnsNotRedirected": "The selected profile does not redirect DNS."
+  },
+  "guide": {
+    "causes": "Possible causes",
+    "solution": "Solution",
+    "oneClick": "One click in the app:",
+    "method": "Method",
+    "description": "Description"
+  },
+  "crash": {
+    "previousRun": "previous run",
+    "lastError": "· last error:"
+  },
+  "support": {
+    "protectionNotWorking": "Protection is not working"
+  },
+  "uninstall": {
+    "started": "Clean uninstall started.",
+    "serviceCleanupFailed": "Service/driver could not be cleaned up: {0}",
+    "taskRemoved": "Windows startup task removed.",
+    "taskKept": "The startup task was kept because it belongs to another NSF Shield installation: {0}",
+    "taskRemoveFailed": "The startup task could not be removed: {0}",
+    "proxyRestored": "The Windows proxy setting was restored to its state before NSF Shield.",
+    "proxyRestoreFailed": "The Windows proxy setting could not be restored: {0}",
+    "dnsRestored": "The changed DNS servers were restored.",
+    "dnsPartial": "Some DNS servers could not be restored:\n{0}",
+    "dnsRestoreFailed": "The DNS setting could not be restored: {0}",
+    "nothingToRevert": "No system change to revert was found.",
+    "browserProfilesKept": "Browser profiles created for proxies were not deleted (they may contain personal data): {0}",
+    "removed": {
+      "service": "background service",
+      "task": "Windows startup task"
+    },
+    "done": "The changes NSF Shield made to Windows were reverted:\n\n{0}\n\nYou can now delete the program folder.",
+    "proxyNotVerified": "the restored values could not be read back; the backup is kept"
+  },
+  "diag": {
+    "admin": {
+      "title": "Administrator rights",
+      "ok": "The app is running as administrator.",
+      "fail": "No administrator rights; the driver cannot be loaded."
+    },
+    "folder": {
+      "title": "App folder",
+      "temp": "Running from a temporary folder: {0}"
+    },
+    "files": {
+      "title": "Engine files",
+      "missing": "{0} was not found.",
+      "okEngine": "The files of {0} are in place."
+    },
+    "integrity": {
+      "title": "File integrity",
+      "okEngine": "The {0} files are identical to the official release (SHA-256)."
+    },
+    "installType": {
+      "title": "Installation type",
+      "installed": "Installed version (administrator-protected folder): the background service and the startup task can be used.",
+      "portable": "Portable version: protection runs in app mode; the service and the startup task are off. ({0})"
+    },
+    "bfe": {
+      "title": "Base Filtering Engine (BFE)",
+      "notRunning": "Not running ({0})."
+    },
+    "running": "Running.",
+    "conflict": {
+      "title": "Conflicting WinDivert programs",
+      "found": "{0} goodbyedpi.exe process(es) outside the app are running.",
+      "list": "{0} WinDivert program(s) that are not this app's: {1}",
+      "onlyOwn": "none; only this app's: {0}",
+      "deferred": "A scan is running: the processes are checked again when it has finished."
+    },
+    "none": "None.",
+    "legacyService": {
+      "title": "Old GoodbyeDPI service",
+      "found": "The 'GoodbyeDPI' service is installed."
+    },
+    "otherDpi": {
+      "title": "Other DPI tools",
+      "found": "Running: {0}"
+    },
+    "vpn": {
+      "title": "VPN",
+      "found": "Active VPN adapter: {0}",
+      "none": "No active VPN.",
+      "route": "Internet traffic goes through the VPN adapter {0}.",
+      "upNoRoute": "VPN adapter is up ({0}), but internet traffic does not go through it.",
+      "upRouteUnknown": "VPN adapter is up ({0}); whether internet traffic goes through it could not be read.",
+      "serviceRunning": "{0} service is running (this alone is not an active tunnel)",
+      "serviceUnreadable": "{0} service ({1}) could not be read"
+    },
+    "proxy": {
+      "title": "System proxy",
+      "ours": "Set from NSF Shield's Proxy page: {0} ({1}).",
+      "on": "On: {0}"
+    },
+    "off": "Off.",
+    "av": {
+      "title": "Antivirus",
+      "unknown": "No information could be obtained.",
+      "listThirdParty": "{0} – if you get a driver error, follow the steps in NSF-204."
+    },
+    "internet": {
+      "title": "Internet connection",
+      "ok": "Working ({0} ms).",
+      "fail": "Cannot connect to public servers."
+    },
+    "clock": {
+      "title": "Computer clock",
+      "skewed": "The clock is off by {0} minutes."
+    },
+    "correct": "Correct.",
+    "notMeasured": "Could not be measured.",
+    "hosts": {
+      "title": "hosts file",
+      "found": "{0} Discord entries: {1}",
+      "none": "No Discord entries."
+    },
+    "dns": {
+      "title": "DNS check",
+      "noReference": "Independent DNS servers could not be reached.",
+      "titleOn": "DNS check (protection on)",
+      "wrongDespite": "Wrong address despite the redirection: {0}",
+      "correctAddress": "The correct address is received ({0}).",
+      "titleNoRedirect": "DNS check (no redirection)",
+      "titleOff": "DNS check (protection off)",
+      "blocked": "Your provider's DNS is blocked: a profile with DNS redirection is needed.",
+      "systemOk": "The system DNS answers correctly."
+    },
+    "redirectDns": {
+      "title": "Redirected DNS server",
+      "ok": "{0} responds ({1} ms).",
+      "fail": "{0} does not respond."
+    },
+    "ipv6": {
+      "title": "IPv6 DNS",
+      "notRedirected": "You have an IPv6 connection but the profile does not redirect IPv6 DNS.",
+      "redirected": "IPv6 queries are redirected too.",
+      "none": "No IPv6 connection."
+    },
+    "protection": {
+      "title": "Protection",
+      "error": "Error: {0}",
+      "running": "Running: {0}",
+      "serviceSuffix": " (service)",
+      "off": "Protection is off. Start it to reach Discord."
+    },
+    "service": {
+      "title": "Background service",
+      "elsewhere": "The service runs GoodbyeDPI from another folder.",
+      "ok": "Installed and using this folder."
+    },
+    "discord": {
+      "title": "Discord servers",
+      "all": "{0}/{1} reachable.",
+      "partial": "{0}/{1} reachable – failing: {2}"
+    },
+    "discordApp": {
+      "title": "Discord app",
+      "before": "Discord was opened before protection; restart it if it cannot connect."
+    },
+    "open": "Open.",
+    "closed": "Closed.",
+    "otherEngine": {
+      "title": "Files: {0}",
+      "problem": "Not usable now: {0} (only matters if you switch to this engine)."
+    },
+    "listJoin": "{0}; {1}",
+    "owner": {
+      "item": "{0}.exe (PID {1}): {2}",
+      "own": "this app's engine",
+      "candidate": "a candidate of the running scan",
+      "ownFileUnknownPid": "this installation's file, but not started by this app now (owner unknown)",
+      "other": "another copy or program: {0}",
+      "denied": "owner could not be read (access denied)",
+      "unreadable": "owner could not be read"
+    },
+    "scm": {
+      "running": "running",
+      "stopped": "stopped",
+      "pending": "changing state",
+      "paused": "paused",
+      "unknown": "unknown state",
+      "NotFound": "not found",
+      "AccessDenied": "access denied",
+      "Error": "query failed",
+      "driver": "kernel driver",
+      "service": "service",
+      "entry": "{0} ({1}): {2}, {3}, {4}",
+      "entryUnreadable": "{0}: could not be read ({1})",
+      "pathUnknown": "file unknown",
+      "ours": "{0} (this installation)",
+      "otherFolder": "{0} (another folder)"
+    },
+    "windivert": {
+      "title": "WinDivert driver entries",
+      "none": "No WinDivert driver entry."
+    },
+    "anticheat": {
+      "title": "Anti-cheat drivers",
+      "none": "None of the checked anti-cheat entries (Riot Vanguard, FACEIT, EasyAntiCheat, BattlEye) is installed.",
+      "activeDriver": "{0}: kernel driver {1} is running",
+      "driverInstalled": "{0}: kernel driver {1} is installed ({2})",
+      "userService": "{0}: service {1} ({2}), information about the product only",
+      "unreadable": "{0} ({1}): could not be checked ({2}); this does not mean it is absent"
+    },
+    "notice": {
+      "anticheatTitle": "{0} kernel driver is running",
+      "anticheatByeDpi": "The running engine ({1}) uses the WinDivert driver. If games protected by {0} complain, you can try the driverless ByeDPI engine on the Profiles page. This is a suggestion only; no anti-cheat compatibility is guaranteed.",
+      "anticheatNoByeDpi": "The running engine ({1}) uses the WinDivert driver. The driverless ByeDPI engine is not offered on this computer: {2} No anti-cheat compatibility is guaranteed.",
+      "anticheatShortByeDpi": "The running engine ({1}) uses the WinDivert driver. If games protected by {0} complain, try the driverless ByeDPI engine. No compatibility is guaranteed.",
+      "anticheatShortNoByeDpi": "The running engine ({1}) uses the WinDivert driver. The driverless ByeDPI engine is not offered here: {2} No compatibility is guaranteed."
+    }
+  },
+  "scripts": {
+    "unsafeProfile": "The '{0}' profile was not converted to a script because it contains an unsafe parameter: {1}",
+    "unsafePath": "The path of the app folder contains a character that cannot be used in a script (% ! \").",
+    "method": "'{0}' method",
+    "dnsRedirect": "DNS redirection: {0}",
+    "usage1": "Administrator rights are requested when it runs. To stop it, close the",
+    "usage2": "GoodbyeDPI window that opens or run stop.cmd.",
+    "usage3": "Run only ONE script at a time.",
+    "needAdmin": "Right-click this script and choose Run as administrator.",
+    "stop": {
+      "rem": "Closes all running GoodbyeDPI processes. Right-click - Run as administrator."
+    },
+    "reset": {
+      "rem": "Removes the GoodbyeDPI services and the WinDivert driver entry (the old ayarlari_sifirla.cmd). Right-click - Run as administrator.",
+      "done": "Reset finished. Restarting the computer is recommended."
+    },
+    "readme": {
+      "title": "NSF SHIELD - BACKUP SCRIPTS",
+      "intro": "The .cmd files in this folder run GoodbyeDPI directly WITHOUT the NSF Shield app. Use them if the app does not open or if you want to try a method by hand. If you use the app you do not need them.",
+      "usage": "Usage:",
+      "step1": "If the NSF Shield app is open, first choose 'Exit' from the tray.",
+      "step2": "Double-click a script and confirm the administrator prompt.",
+      "step3": "It works as long as the GoodbyeDPI window that opens stays open.",
+      "step4": "Close the window or run stop.cmd before trying another script.",
+      "order": "Order: try them starting from 01. In Turkey Discord is also blocked through DNS, so the last three scripts without DNS redirection will NOT open Discord; they are only there for comparison.",
+      "stop": "closes all running GoodbyeDPI processes (right-click -> Run as administrator).",
+      "reset": "cleans up the services and the driver entry (right-click -> Run as administrator)."
+    },
+    "goodbyeDpiOnly": "{0}: scripts are made for GoodbyeDPI profiles only."
+  },
+  "scan": {
+    "status": {
+      "pending": "Waiting",
+      "testing": "Testing",
+      "skipped": "Skipped",
+      "startFailed": "Could not start",
+      "partial": "Partial",
+      "failed": "Not working",
+      "full": "Full success",
+      "unavailable": "Unavailable",
+      "invalid": "Invalid",
+      "isolation": "Not isolated",
+      "noScope": "Outside the lists",
+      "cancelled": "Cancelled"
+    },
+    "preparing": "Preparing…",
+    "step": {
+      "internet": "Checking the general connection…",
+      "dns": "Comparing the system DNS with DNS over HTTPS…",
+      "baseline": "Measuring the targets without protection…",
+      "firstMatch": "Trying {0} candidate(s), stopping at the first full success…",
+      "benchmark": "Comparing {0} candidate(s) (each once; nothing is applied by itself)…"
+    },
+    "skipped": "{0}: skipped ({1})",
+    "done": "Done",
+    "error": "Error: {0}",
+    "noneWorked": "No candidate fully worked for every target.",
+    "noneWorkedCause": "{0} Possible cause: {1} – {2}",
+    "cancelled": "Scan cancelled.",
+    "problemSource": "Method scan",
+    "historyNote": "{0} · {1} method(s) tried",
+    "busy": "A scan is already running.",
+    "noCandidates": "No candidate is selected; protection was not changed.",
+    "noTargets": "There is no scan target; protection was not changed.",
+    "rejected": "Left out: {0}",
+    "env": "Before the scan: {0} ({1}).",
+    "envOff": "protection off",
+    "paused": "Your protection ({0}) is paused during the scan and restored afterwards.",
+    "byedpiKept": "The running ByeDPI stays on (no driver; the Windows proxy keeps a working address).",
+    "foreignDriver": "A WinDivert driver of another program is loaded ({0}); it is left as it is.",
+    "driverNote": "Driver-based candidates run one after another; the internet may drop for a moment between them.",
+    "pretestOk": "The general connection works.",
+    "pretestFailed": "The fixed connection test failed (on its own this does not mean there is no internet).",
+    "dohDown": "DNS over HTTPS could not be reached; the scan continues with the system DNS.",
+    "dohHint": "Tip: if the system DNS is interfered with, turn on DoH on the DNS page (nothing is changed automatically).",
+    "baseline": "Without protection {0}/{1} target(s) already open (they do not show what a method adds).",
+    "udpBaseline": "UDP (STUN) without protection: {0}",
+    "udpRow": "UDP/STUN: {0}",
+    "noScope": "{0} applies to none of the targets with your site lists.",
+    "widened": "{0}: temporary wider include list (+{1}); a result is checked again with your real lists before it is applied.",
+    "rowResult": "{0}: {1} · score {2} · {3} · {4}/{5} targets in both rounds",
+    "reverify": "{0} is checked again with your real site lists…",
+    "notVerifiedReal": "{0} worked only with the temporary wider list; it was not applied.",
+    "applying": "Applying {0}…",
+    "applied": "Applied: {0} (average {1}). Protection is on with it.",
+    "apply": {
+      "failedWhy": "[{0}] {1}"
+    },
+    "applyFailed": "{0} worked in the test but could not be applied: {1}. The previous state was restored.",
+    "suggested": "Found: {0} (full success in both rounds); it was not applied.",
+    "suggestedBenchmark": "Best result: {0}. Select a row and press “Apply” to use it.",
+    "openWithout": "Note: the targets opened without protection too, so the result says little about what a method adds.",
+    "block": {
+      "serviceTimeout": "The background service did not stop in time; driver-based candidates are skipped so that they do not conflict.",
+      "serviceNotOwned": "The NSFShield service runs another installation's program ({0}); it is not stopped, so driver-based candidates are skipped.",
+      "foreignProcess": "Another WinDivert program is running ({0}); it is not closed, so driver-based candidates are skipped.",
+      "driverFailed": "The WinDivert driver could not be loaded [{0}]; the other driver-based candidates are skipped.",
+      "engineFailed": "{0} cannot run [{1}]; its other candidates are skipped."
+    },
+    "trial": {
+      "listsFailed": "its site lists could not be prepared ({0}); it was not tried on all traffic instead",
+      "noPort": "no free local port for the test",
+      "exited": "The candidate's process exited during the measurement; its result does not count.",
+      "portLost": "The candidate no longer owns its port {0} ({1}); its result does not count."
+    },
+    "restore": {
+      "engine": "Restored: {0}.",
+      "engineFailed": "{0} could not be started again [{1}].",
+      "kept": "Unchanged: {0} kept running.",
+      "off": "Protection stays off, as before the scan.",
+      "service": "The background service runs again.",
+      "serviceFailed": "The background service could not be started again.",
+      "startTypeFailed": "The start type of the service could not be restored.",
+      "serviceNotRunning": "The service ran before the scan but does not run now.",
+      "serviceStillRunning": "The service was stopped before the scan but runs now.",
+      "proxyChanged": "The Windows proxy no longer points at ByeDPI; check the proxy settings.",
+      "error": "Restore error: {0}",
+      "serviceCreated": "A background service created during the scan could not be removed.",
+      "serviceCommandFailed": "The background service's command could not be put back as it was before the scan."
+    },
+    "dns": {
+      "nxdomain": "name not found (system)",
+      "nodata": "no address record",
+      "timeout": "DNS timed out",
+      "error": "resolution error",
+      "ok": "{0}"
+    },
+    "dnsVerdict": {
+      "Match": "{0}: the system DNS matches DoH",
+      "DifferentPublic": "{0}: different public addresses (normal for CDNs)",
+      "Interference": "{0}: DoH finds it, but the system DNS fails or gives a non-public address – a sign of interference",
+      "NotFound": "{0}: the name does not exist (system and DoH)",
+      "DohUnavailable": "{0}: DoH could not be reached – no comparison",
+      "Unclear": "{0}: the answers differ, no verdict",
+      "NotPublicTarget": "{0}: DoH gives non-public addresses – not a public target"
+    },
+    "http": {
+      "proxyAuth": "proxy authentication required (407)",
+      "blocked": "block answer ({0})",
+      "serverError": "the server answered with an error ({0})",
+      "expected": "expected answer ({0})",
+      "unexpected": "unexpected answer {0} (expected: {1})",
+      "redirectAway": "redirect to another site ({0} → {1})",
+      "unclear": "the server answered ({0}), but it is not clear that the target works",
+      "redirectOk": "redirect inside the target ({0} → {1}, HTTPS)",
+      "redirectMissing": "redirect without a Location header ({0})",
+      "redirectBad": "redirect with an invalid or repeated Location ({0})",
+      "redirectDowngrade": "redirect from HTTPS to plain HTTP ({0} → {1})"
+    },
+    "probe": {
+      "bodyTooLarge": "answer too large",
+      "certError": "the certificate could not be verified ({0})",
+      "connectFailed": "connection failed ({0})",
+      "connectTimeout": "connection timed out",
+      "headTooLarge": "response headers too large",
+      "httpClosed": "the connection closed before an answer",
+      "httpTimeout": "no HTTP answer in time",
+      "notHttp": "not an HTTP answer",
+      "notPublic": "the DNS answer is not public ({0}: {1}); not contacted",
+      "socksAuth": "the candidate's SOCKS5 port refused the handshake",
+      "socksBad": "invalid SOCKS5 answer",
+      "socksClosed": "the candidate's tunnel closed",
+      "socksRefused": "the candidate's tunnel refused the connection (code {0}); no direct fallback",
+      "socksTimeout": "the candidate's tunnel did not answer",
+      "tlsFailed": "TLS failed ({0})",
+      "tlsTimeout": "TLS timed out",
+      "socksOwner": "The SOCKS port {0} no longer belongs to the candidate."
+    },
+    "target": {
+      "bad": {
+        "empty": "empty",
+        "tooLong": "too long",
+        "space": "spaces or control characters are not allowed",
+        "scheme": "enter only the host name, without https://",
+        "port": "no port (:443)",
+        "path": "no path (/…)",
+        "query": "no query or anchor (? # & =)",
+        "wildcard": "no wildcard (*)",
+        "ip": "IP addresses are not allowed; enter a domain name",
+        "credentials": "no user name (@)",
+        "ascii": "ASCII only; write names with special letters as punycode (xn--…)",
+        "chars": "invalid character",
+        "invalid": "not a valid domain name",
+        "local": "local or special-use names (localhost, .local, .lan …) are not allowed"
+      }
+    },
+    "udp": {
+      "na": "N/A — not measured on this TCP proxy path",
+      "ok": "reachable ({0} ms)",
+      "Timeout": "no answer (timeout)",
+      "Invalid": "invalid answer",
+      "ErrorResponse": "error answer",
+      "DnsFailed": "server name not resolved",
+      "general": "general UDP access only",
+      "profile": "port in the profile's rules"
+    },
+    "gateway": {
+      "name": "Gateway connection",
+      "ok": "Gateway connection opened (WebSocket 101, key confirmed); this says nothing about a Discord session, voice or games",
+      "badHeaders": "the Gateway answered 101 without valid Upgrade/Connection headers (or with extensions that were not asked for)",
+      "badAccept": "the Gateway answered 101 but the WebSocket key confirmation does not match this request",
+      "notUpgraded": "the Gateway answered HTTP {0} instead of opening the WebSocket",
+      "rateLimited": "the Gateway answered 429 (too many requests); not counted as working"
+    }
+  },
+  "net": {
+    "dnsReport": {
+      "noReference": "Independent DNS servers could not be reached; no comparison was possible.",
+      "noAnswer": "The system DNS cannot resolve this name → DNS BLOCK DETECTED.",
+      "fake": "The system DNS returns a fake address → DNS BLOCK DETECTED.",
+      "ok": "The DNS answer is correct; no block at the DNS level."
+    },
+    "site": {
+      "reachable": "REACHABLE",
+      "okWithProtection": "The site opens without problems while protection is on.",
+      "okWithout": "The site opens even without protection; there is no block for this site.",
+      "notFound": "DOMAIN NOT FOUND",
+      "notFoundAdvice": "Neither the system DNS nor the independent DNS servers could resolve this name. Make sure you typed it correctly.",
+      "ipBlock": "IP BLOCK OR SERVER DOWN",
+      "ipBlockAdvice": "Even the correct IP address cannot be reached. GoodbyeDPI cannot bypass an IP block; if the server is not down, a VPN is needed.",
+      "dnsAndSni": "DNS + DPI (SNI) BLOCK",
+      "dnsAndSniAdvice": "There is a two-layer block. A DPI profile with DNS redirection is needed (e.g. 'Turkey – Recommended').",
+      "dnsOnly": "DNS BLOCK ONLY",
+      "dnsOnlyOn": "Protection is on but DNS is still wrong. Choose a profile with DNS redirection or flush the DNS cache.",
+      "dnsOnlyOff": "An encrypted connection to the correct address works. DNS redirection or a Windows DNS change is enough.",
+      "sni": "DPI (SNI) BLOCK",
+      "sniOn": "DNS is correct but the method in use cannot bypass DPI. Run the 'Find the best method' scan.",
+      "sniOff": "DNS is correct but the connection is cut based on the site name. Start protection.",
+      "cert": "CERTIFICATE PROBLEM",
+      "certAdvice": "The server showed an unexpected certificate. It may be antivirus HTTPS scanning or a wrong clock.",
+      "unclear": "UNCLEAR",
+      "opens": "The site opens.",
+      "httpFailed": "The connection layers work but the HTTP request failed:"
+    },
+    "dnsTest": {
+      "system": "System DNS (Windows)",
+      "noAnswer": "No answer",
+      "noCompare": "Could not be compared",
+      "correct": "Correct answer",
+      "empty": "Empty answer (blocked)",
+      "fake": "Fake address (blocked)",
+      "redirected": " · protection redirects it"
+    },
+    "adapter": {
+      "wired": "Wired (Ethernet)",
+      "wifi": "Wireless (Wi-Fi)",
+      "tunnel": "Tunnel",
+      "mobile": "Mobile broadband"
+    },
+    "probe": {
+      "ok": "Encrypted connection established ({0} ms)",
+      "connectFail": "Could not connect to the server",
+      "connectFailWhy": "Could not connect to the server ({0})",
+      "connectTimeout": "The connection timed out",
+      "reset": "The encrypted connection was cut while being set up (DPI block)",
+      "timeout": "The encrypted connection got no answer (packets are being dropped)",
+      "certError": "The server showed a wrong certificate ({0})"
+    },
+    "dnsFailed": "The domain name could not be resolved (DNS block)",
+    "reachable": "Reachable (HTTP {0})",
+    "timeout": "Timeout (packets are being dropped)",
+    "connectFail": "Could not connect to the server (possible IP block)",
+    "reset": "The connection was cut (DPI block)",
+    "tlsFailed": "The encrypted connection could not be established (DPI block)",
+    "certMismatch": "The certificate does not match (DNS may be returning a fake address)"
+  },
+  "discord": {
+    "noShortcut": "Discord was closed but its start shortcut could not be found; open Discord yourself.",
+    "notInstalled": "Discord does not seem to be installed.",
+    "restarted": "Discord was restarted.",
+    "started": "Discord was started.",
+    "startFailed": "Discord could not be started."
+  },
+  "sysdns": {
+    "auto": {
+      "name": "Automatic (your provider's DNS)",
+      "note": "Windows default. In Turkey Discord is blocked on this DNS."
+    },
+    "cloudflare": {
+      "note": "The fastest public DNS. Recommended with encrypted DNS (DoH)."
+    },
+    "google": {
+      "note": "Widespread and stable. Use it with encrypted DNS."
+    },
+    "quad9": {
+      "note": "Privacy-focused, blocks malicious sites."
+    },
+    "adguard": {
+      "note": "Also blocks ads and trackers."
+    },
+    "dohNoTemplate": "Encrypted DNS (DoH) → there is no valid DoH address for this choice.",
+    "dohRestored": "The encrypted DNS (DoH) entries were restored.",
+    "opendns": {
+      "note": "Cisco's DNS service."
+    },
+    "dohUnsupported": "Encrypted DNS (DoH) is not supported on this Windows version (build {0}; Windows 11 is required). The DNS server was set without encryption; that is enough for Discord access.",
+    "invalidAdapter": "invalid adapter name skipped.",
+    "invalidAddresses": "{0} invalid address(es) skipped.",
+    "dohGlobalFailed": "The global encrypted DNS setting could not be turned on:",
+    "netshFailed": "netsh failed ({0}): {1}",
+    "notVerified": "the command ran but could not be verified (Auto-upgrade: {0}, template: {1})",
+    "none": "none",
+    "dohVerified": "Encrypted DNS (DoH) → enabled and verified: {0} (Auto-upgrade: yes).",
+    "dohPartial": "Encrypted DNS (DoH) → could be enabled on {0}/{1} server(s):",
+    "netshFailedShort": "netsh failed: {0}",
+    "restoreNotVerified": "restored but could not be verified (Auto-upgrade: {0})",
+    "dohRestoreFailed": "Encrypted DNS could not be restored:",
+    "dohGlobalRestoreFailed": "The global encrypted DNS setting could not be restored:",
+    "automatic": "automatic",
+    "restoreKept": "{0}: the DNS setting could not be read back as it was; its backup is kept so you can try again.",
+    "backupUnreadable": "{0}: the current DNS setting could not be read or its backup could not be saved; this adapter was not changed.",
+    "restoreUnreadable": "{0}: the DNS setting could not be read after the restore; its backup is kept so you can try again.",
+    "dohUnreadable": "the encrypted DNS entry could not be read (netsh error); nothing was assumed",
+    "dohTemplateNotRestored": "the old DoH template cannot be written back safely; the backup is kept"
+  },
+  "guard": {
+    "networkFolder": "The app is in a network folder.",
+    "userAccount": "a user account",
+    "installedOnly": "This feature can only be used in NSF Shield installed with the setup package (to Program Files).\n\nThe portable (zip) version runs in a folder that can be changed without administrator rights. Running the files there with a SYSTEM service or with a task that opens as administrator without asking could let a malicious program on the computer gain privileges, so it is turned off.\n\nProtection works normally in app mode.",
+    "aclUnreadable": "The folder permissions could not be read:",
+    "owner": "The owner of '{0}' is {1} (not an administrator).",
+    "canModify": "can modify:",
+    "reparse": "A junction or symbolic link is on the way: {0}",
+    "finalPath": "The folder does not resolve to itself (link, mount point or SUBST drive): {0}"
+  },
+  "args": {
+    "tooLong": "The parameters are too long.",
+    "noBlacklist": "--blacklist (or an abbreviation of it) cannot be added by hand; use the targeted mode on the Target Sites page.",
+    "noProfile": "No profile.",
+    "badChar": "Character not allowed: {0}.",
+    "controlChar": "(control character)",
+    "unexpectedValue": "Unexpected value:",
+    "shortWithEquals": "'=' cannot be used with short options:",
+    "unknown": "Unknown or abbreviated parameter: {0} (write the options with their full names and separately).",
+    "noValue": "takes no value.",
+    "fragFormat": "value must have the form a1-a2-m (e.g. 1-4-10).",
+    "range": "value must be a number between {0} and {1}.",
+    "missingValue": "is missing a value.",
+    "invalidValue": "has an invalid value:",
+    "abbreviation": "'{0}' is an abbreviation of '{1}'; write the full option name (the engine would accept the abbreviation silently).",
+    "byedpiNeedsMethod": "No bypass method: add at least one of --split, --disorder, --oob, --disoob, --fake, --tlsrec, --mod-http, --tlsminor or --udp-fake.",
+    "empty": "No parameters.",
+    "forbidden": {
+      "autoList": "{0} is not used: the automatic list writes to a file. Use the Include/Exclude lists on the Site Lists page.",
+      "freePath": "{0} reads a file from any path and is not allowed; payloads are chosen by name and lists are managed on the Site Lists page.",
+      "linuxOnly": "{0} only works on Linux.",
+      "listenAddress": "{0} cannot be set: ByeDPI always listens on 127.0.0.1 and its port is set in Settings.",
+      "notSupported": "{0} cannot be used in NSF Shield profiles.",
+      "rawFilter": "{0} (raw WinDivert filter) is not allowed; use --wf-tcp, --wf-udp and the --filter-… options.",
+      "writesFile": "{0} writes a file and is not allowed."
+    },
+    "managedList": "only the managed list name can be used: {0} (the file is in data\\lists).",
+    "missingValueEq": "needs a value in the form --option=value.",
+    "payloadName": "'{0}' is not a payload of NSF Shield; use one of the names in bin\\zapret\\payloads or a 0x… hex value.",
+    "singleDash": "The single-dash form '{0}' is not accepted; write the option with two dashes and its full name.",
+    "tooManyRules": "At most {0} rules (--new) are allowed.",
+    "winwsNeedsCapture": "winws needs a capture filter: add --wf-tcp=… and/or --wf-udp=…."
+  },
+  "integrity": {
+    "noHash": "There is no known hash for {0}.",
+    "mismatch": "{0} is not identical to the official release (SHA-256 {1}…, expected {2}…).",
+    "notFound": "{0} was not found.",
+    "notPlain": "{0} is not a plain file (link, second hard link or another path)."
+  },
+  "proxy": {
+    "parse": {
+      "empty": "The proxy address is empty.",
+      "badIpv6": "Invalid IPv6 proxy address.",
+      "format": "Write the address in the form 'IP:port' (e.g. 185.12.34.56:8080).",
+      "port": "The port must be between 1 and 65535.",
+      "badScheme": "Unsupported proxy type: {0} (must be http or socks5).",
+      "badHost": "Invalid server name or IP:",
+      "httpsUnsupported": "https:// proxies (an encrypted connection to the proxy) are not supported. Use http:// or socks5:// – note that an HTTP proxy receives its password unencrypted."
+    },
+    "closed": "The proxy closed the connection.",
+    "noAnswer": "The proxy server did not answer (timeout).",
+    "closedMaybeSocks": "The proxy closed the connection (it may not be an HTTP proxy; try SOCKS5).",
+    "auth407": "The proxy wants a user name/password or the details are wrong (HTTP 407).",
+    "notSocks": "This server is not a SOCKS5 proxy (it may be an HTTP proxy).",
+    "socksAuth": "The SOCKS5 proxy wants a user name/password.",
+    "socksAuthRejected": "The SOCKS5 user name/password was not accepted.",
+    "tlsCut": "The encrypted connection through the proxy was cut (there may also be a block in the proxy's country).",
+    "handshakeCut": "The proxy cut the connection during the handshake (the proxy type may be wrong).",
+    "noAnswerOrCut": "The proxy did not answer or cut the connection.",
+    "discordNotFound": "Discord installation not found (%LOCALAPPDATA%\\Discord\\Update.exe is missing).",
+    "connectFailed": "Could not connect to the proxy server{0}.",
+    "noTunnel": "The proxy did not open a tunnel to {0}:",
+    "socks": {
+      "1": "general failure",
+      "2": "not allowed by the rules",
+      "3": "network unreachable",
+      "4": "host unreachable",
+      "5": "connection refused",
+      "6": "TTL expired",
+      "7": "command not supported",
+      "8": "address type not supported"
+    },
+    "socksConnectFailed": "The SOCKS5 proxy could not connect to {0}: {1}",
+    "socksCode": "code {0}",
+    "badCert": "No valid certificate could be obtained for {0} through the proxy (the proxy may be interfering with the traffic).",
+    "reachable": "{0} is reachable through the proxy ({1} ms).",
+    "kindFixed": "(Type corrected to {0}.)",
+    "working": "Working",
+    "discordOpening": "Discord is opening with the {0} proxy ({1}).",
+    "sys": {
+      "unreadable": "The current Windows proxy setting could not be read, so it was not changed.",
+      "notPrepared": "The restore record of the Windows proxy could not be prepared ({0}), so the Windows proxy was not changed.",
+      "writeFailed": "The Windows proxy could not be written ({0}); NSF Shield's changes were undone (if that failed too, it is tried again at the next start).",
+      "previousNotRestored": "NSF Shield's previous Windows proxy change could not be undone ({0}), so the new proxy was not set.",
+      "notSaved": "The settings could not be saved, so the Windows proxy was not changed."
+    }
+  },
+  "bridge": {
+    "portFailed": "The local bridge could not open port 127.0.0.1:{0}:"
+  },
+  "appProxy": {
+    "mode": {
+      "firefox": "Firefox (separate proxy profile)",
+      "env": "Environment variables (HTTP_PROXY)"
+    },
+    "invalidChars": "The program rule or the proxy address contains an invalid character (control character).",
+    "badExePath": "The program path contains a character that cannot be used in environment variable mode (\" % !).",
+    "badProxyUrl": "The proxy address contains a character that cannot be used in environment variable mode.",
+    "badExtraArgs": "The characters & | < > ^ % ! cannot be used in the extra parameters.",
+    "notFound": "Program not found:",
+    "opening": "{0} is opening with the {1} proxy ({2}).",
+    "openingBridge": "{0} is opening with the {1} proxy ({2}) – through the local bridge.",
+    "startFailed": "{0} could not be started.",
+    "openFailed": "{0} could not be opened with the proxy:"
+  },
+  "update": {
+    "unexpectedRedirect": "The release information request was redirected to an unexpected address: {0}",
+    "unreadable": "The release information could not be read.",
+    "noRelease": "No release has been published yet.",
+    "githubUnreachable": "GitHub could not be reached: {0}",
+    "notGithub": "The update address is outside GitHub: {0}",
+    "noHash": "There is no verification hash (SHA-256) for this release; for security the update was not installed.",
+    "noExe": "NSFShield.exe is missing from the package.",
+    "incomplete": "The package is incomplete: {0}",
+    "versionMismatch": "The app version in the package ({0}) does not match the expected version ({1}).",
+    "redirectedOutside": "The update request was redirected outside GitHub: {0}",
+    "tooBig": "The package is much bigger than expected.",
+    "hashMismatch": "The hash of the downloaded file does not match (expected {0}…, got {1}…). The update was cancelled.",
+    "setupNotGithub": "The address of the setup package is outside GitHub: {0}",
+    "setupNoHash": "There is no verification hash (SHA-256) for the setup package; for security the update was not installed.",
+    "setupInfoMismatch": "The product/version information of the setup package does not match the expected one ({0}).",
+    "setupChanged": "The setup package changed after it was downloaded; for security the installation was cancelled.",
+    "zipSlip": "The package contains an entry that leaves the folder: {0}",
+    "extractTooBig": "The extracted size of the package is much bigger than expected.",
+    "exeChanged": "The update file changed after it was extracted; for security the installation was cancelled.",
+    "packageChanged": "The update package folder changed after it was verified ({0}); nothing was installed."
+  },
+  "nav": {
+    "home": "Home",
+    "profiles": "Profiles",
+    "net": "Internet Check",
+    "dns": "DNS Settings",
+    "sites": "Site Lists",
+    "proxy": "Proxy",
+    "trouble": "Troubleshooting",
+    "log": "Log",
+    "appearance": "Appearance",
+    "settings": "Settings",
+    "about": "About"
+  },
+  "main": {
+    "minimize": "Minimize to the system tray",
+    "closeToTray": "Close (keeps running in the tray)",
+    "close": "Close",
+    "uiLevelTip": "You can switch between the Simple / Standard / Advanced UI in Settings.",
+    "protectionStopped": "Protection stopped",
+    "trayHint": "Click the shield icon next to the clock to open the window. You can quickly start and stop it from the right-click menu.",
+    "updatedTitle": "NSF Shield updated",
+    "crashTitle": "The last shutdown was unexpected",
+    "crashText": "NSF Shield did not close properly last time (crash, forced close or power cut). Details: Troubleshooting → NSF-106 or the log.",
+    "updateFailedTitle": "Update failed",
+    "updateFailedText": "Rolled back to the previous version. Details: data\\update.log",
+    "securityClosedText": "Running automatically from a portable folder with administrator/SYSTEM rights is not safe. Protection continues in app mode; use the installed version to start at boot.",
+    "tagline": "Internet access shield",
+    "hotkeyStopping": "Stopping protection ({0}).",
+    "hotkeyStarting": "Starting protection ({0}).",
+    "uiLevel": "UI: {0}",
+    "methodLabel": "Method:",
+    "runningInBackground": "is running in the background",
+    "exitConfirm": "If you exit the app, protection stops and access to blocked sites is cut.\n\nClosing the window (minimizing it to the tray) is enough to keep it running in the background.\n\nExit anyway?",
+    "updatedText": "Version {0} → {1}. Your settings were kept.",
+    "securityClosed": "Turned off for security: {0}",
+    "service": "service",
+    "errorCode": "Error code",
+    "needAdmin": "NSF Shield must be run as administrator so it can load its network driver (NSF-101).\n\nRight-click the app and choose 'Run as administrator'.",
+    "netChanged": {
+      "title": "Network changed",
+      "text": "Now: {0} · DNS: {1}",
+      "severalAdapters": "several adapters",
+      "offline": "No network connection."
+    }
+  },
+  "tray": {
+    "status": "Status",
+    "start": "Start protection",
+    "method": "Method (profile)",
+    "test": "Test the Discord connection",
+    "testTitle": "Connection test",
+    "scan": "Find the best method…",
+    "update": "Update",
+    "restartDiscord": "Restart Discord",
+    "open": "Open window",
+    "exit": "Exit",
+    "stop": "Stop protection",
+    "testResult": "{0}/{1} servers reachable.",
+    "dnsWrong": "The DNS answer is wrong!",
+    "updateTo": "Update: version {0}",
+    "activeWithWarning": "Active – there is a warning",
+    "engine": "Engine"
+  },
+  "state": {
+    "running": "Protection active",
+    "starting": "Starting…",
+    "stopping": "Stopping…",
+    "error": "Error – protection is not working",
+    "stopped": "Protection off"
+  },
+  "uiLevel": {
+    "Simple": "Simple",
+    "Standard": "Standard",
+    "Advanced": "Advanced"
+  },
+  "home": {
+    "stateOff": "Protection Off",
+    "start": "Start Protection",
+    "testDiscord": "Test Discord",
+    "fix": "Fix",
+    "details": "Details",
+    "discordAccess": "DISCORD ACCESS",
+    "notTested": "Not tested",
+    "restartDiscord": "Restart Discord",
+    "methodInUse": "METHOD IN USE",
+    "change": "Change",
+    "stillNotOpening": "Discord still does not open?",
+    "findProblemHint": "'Find the problem' checks everything and shows the error with its code and solution.",
+    "findProblem": "Find the problem",
+    "activeMethod": "ACTIVE METHOD",
+    "internetCheck": "Internet check",
+    "session": "SESSION",
+    "uptime": "uptime",
+    "row": {
+      "mode": "Mode",
+      "dns": "DNS",
+      "targeted": "Targeted mode",
+      "lastScan": "Last scan"
+    },
+    "scanHint": "The scan tries every method, verifies DNS and selects the working one automatically.",
+    "findBest": "Find the best method",
+    "stateOn": "Protection Active",
+    "subOn": "Access blocks are being bypassed. Discord and blocked sites should be usable now.",
+    "stateStarting": "Starting…",
+    "subStarting": "Loading GoodbyeDPI and the WinDivert driver.",
+    "stateStopping": "Stopping…",
+    "stateError": "Protection Not Working",
+    "subOff": "Start protection to reach blocked sites and Discord.",
+    "stop": "Stop Protection",
+    "retry": "Try Again",
+    "testing": "Testing…",
+    "hintError": "The 'Details' button below shows the cause of the error and its solution.",
+    "hintScanning": "An automatic method scan is running…",
+    "hintTray": "Tip: when you close the window, the app keeps running in the system tray.",
+    "takeOverFix": "Take Over and Fix",
+    "updateText": "Press 'Update' to see what is new and install it with one click. Your settings are kept.",
+    "update": "Update",
+    "later": "Later",
+    "testPrompt": "Test to see whether the Discord servers can be reached.",
+    "reachable": "Reachable",
+    "noAccess": "No access",
+    "dnsProblem": "DNS problem",
+    "partialAccess": "Partial access",
+    "dnsCorrect": "DNS answer: correct ✓",
+    "dnsWrong": "DNS answer: WRONG",
+    "openDiscord": "Open Discord",
+    "mode": {
+      "service": "Background service",
+      "app": "App"
+    },
+    "targetedOff": "Off (all)",
+    "never": "Never",
+    "errorCode": "Error code {0}:",
+    "updateReady": "New version ready: NSF Shield {0}",
+    "answered": "{0}/{1} servers answered",
+    "answeredAvg": "{0}/{1} servers answered · avg. {2} ms",
+    "failing": "Not opening: {0}",
+    "lastTest": "Last test:",
+    "targetedOn": "On ({0} sites)",
+    "chip": {
+      "engine": "Engine",
+      "mode": "Mode",
+      "dns": "DNS",
+      "uptime": "Uptime",
+      "dnsSystem": "System",
+      "dnsCustom": "Custom",
+      "dnsMixed": "Mixed"
+    },
+    "switchTitle": "Switch to the installed version",
+    "switchText": "Runs as a service and starts with Windows; your settings move with you.",
+    "switchButton": "Switch to installer",
+    "engineMenu": "ENGINE",
+    "excludedCount": "−{0} excluded",
+    "findAndConnect": "Find and Connect",
+    "notice": {
+      "openProfiles": "Open profiles"
+    },
+    "dnsTip": {
+      "unknown": "Windows DNS: not read yet",
+      "line": "Windows DNS: {0} · encrypted DNS: {1}\n{2}",
+      "redirect": "Protection redirects DNS: {0}",
+      "adapterRoute": "Adapter: {0}, carries the internet route",
+      "adapterOnly": "Adapter: {0} (the only one; the route table could not be read)",
+      "adapterSeveral": "{0} adapters; which one carries the internet route could not be read",
+      "adapterNone": "No connected adapter",
+      "doh": {
+        "Configured": "registered",
+        "NotConfigured": "not registered",
+        "Unsupported": "not supported by this Windows",
+        "Unknown": "unknown"
+      }
+    }
+  },
+  "profileHelp": {
+    "intro": {
+      "title": "How to use this window",
+      "text": "Point at or click an option; what it does is explained here.\n\nYour provider blocks Discord in two layers:\n1) DNS: it gives a wrong answer to the question 'where is discord.com?'.\n2) DPI: it reads the site name (SNI) in the first packet of the connection and cuts the connection.\n\nDNS redirection bypasses the first layer, the DPI methods below bypass the second. In Turkey both are needed together."
+    },
+    "name": {
+      "title": "Profile name and description",
+      "text": "Helps you recognise the profile in the list. It has no effect on the command line."
+    },
+    "mode": {
+      "title": "Base mode",
+      "text": "Selects one of GoodbyeDPI's ready-made method sets. A mode turns on several of the options below at once.\n\n• Modern modes (-5 … -9): split the packets and send 'fake' packets to fool the DPI device. They give the best results in Turkey.\n• Classic modes (-1 … -4): only split the packets and play with the HTTP headers. They are more compatible but weak against current DPI systems.\n\nIf you choose a mode and also tick options, the options are added on top of the mode."
+    },
+    "modeNone": {
+      "title": "No mode",
+      "text": "No ready-made set is used; only the options you tick below are applied. Leave the mode empty if you only want DNS redirection."
+    },
+    "mode1": {
+      "title": "-1 · Classic, most compatible",
+      "text": "Splits HTTP and HTTPS packets into 2-byte pieces and makes small changes to the HTTP headers. Sends no fake packets. Works on every network but is the slowest mode and may not get past strict DPI."
+    },
+    "mode2": {
+      "title": "-2 · Classic, faster for HTTPS",
+      "text": "Same as -1 but HTTPS packets are split into 40-byte pieces; connections open faster."
+    },
+    "mode3": {
+      "title": "-3 · Classic, fast HTTP/HTTPS",
+      "text": "No fragmentation of persistent HTTP connections; even faster."
+    },
+    "mode4": {
+      "title": "-4 · Classic, fastest",
+      "text": "Only header tricks for unencrypted HTTP. It does not touch HTTPS (including Discord); on its own it is not enough for Discord. The old script number 2 combined it with TTL 5 fake packets."
+    },
+    "mode5": {
+      "title": "-5 · Modern, automatic TTL",
+      "text": "Sets the lifetime (TTL) of the fake packets automatically on every connection, based on the distance to the server. When fixed-TTL methods break over time (as the old scripts 1 and 2 did), this is the most robust option."
+    },
+    "mode6": {
+      "title": "-6 · Modern, wrong sequence number",
+      "text": "Fake packets are sent with a past TCP sequence number; the server ignores them while the DPI reads them and is fooled."
+    },
+    "mode7": {
+      "title": "-7 · Modern, wrong checksum",
+      "text": "Fake packets are sent with a broken checksum. Some modems and virtual machines drop these packets on the way, so it may have no effect."
+    },
+    "mode8": {
+      "title": "-8 · Modern, sequence + checksum",
+      "text": "-6 and -7 used together. The only difference from -9 is that it does not block QUIC."
+    },
+    "mode9": {
+      "title": "-9 · Modern, full (default)",
+      "text": "GoodbyeDPI's default and most complete mode. This is the recommended mode for Discord in Turkey."
+    },
+    "ttl": {
+      "title": "Fake packet TTL (lifetime)",
+      "text": "The fake packet must reach the provider's DPI device but 'die' before it reaches the real server. The TTL sets how many routers the packet can pass.\n\n• Too small and it does not even reach the DPI device → no effect.\n• Too big and it reaches the server → the connection breaks.\n• 'Automatic' measures the distance on every connection and picks a suitable value; it keeps working even when the provider changes its network.\n\nThe old script 1 used TTL 3 and script 2 used TTL 5; fixed values can stop working over time."
+    },
+    "fakegen": {
+      "title": "Number of fake packets",
+      "text": "This many fake packets filled with random data are sent ahead of the real connection. The DPI device takes the fake packets for real ones and reads the wrong site name.\n\n0 = GoodbyeDPI's default single fake packet. 3-10 helps on lines with strict DPI; a very high value slows down opening connections. At most 30."
+    },
+    "fakeresend": {
+      "title": "Fake packet repeats",
+      "text": "Sends every fake packet this many times. On connections with packet loss, such as Wi-Fi or mobile lines, it makes sure the DPI device sees the fake packet. 1 = no repeat."
+    },
+    "dns": {
+      "title": "DNS redirection",
+      "text": "Sends every DNS query your computer makes (port 53) to a different port of the selected server instead of your provider's server.\n\nIn Turkey Discord is also blocked at the DNS level, so this option is REQUIRED: if it is off, Discord does not open (this is why the old scripts 1 and 2 did not work).\n\nProviders only inspect port 53, so queries to ports such as 1253, 5353 or 9953 are not blocked. All ready-made choices redirect IPv6 queries too."
+    },
+    "dnsCustom": {
+      "title": "Custom DNS server",
+      "text": "Enter your own DNS server. Choose a server that uses a non-standard port; port 53 can be redirected by the provider.\n\nIf you have an IPv6 connection, enter the IPv6 address too; otherwise Windows may ask the provider's DNS over IPv6 and get a fake answer (NSF-404)."
+    },
+    "httpsfrag": {
+      "title": "HTTPS piece size",
+      "text": "Into how many bytes the first packet of the encrypted connection (which contains the site name) is split. If the DPI device cannot see the site name in one piece, it cannot block it.\n\n1-2: most effective but opening a connection gets a little slower. 40: faster, some DPIs may catch it. 0 = the mode's default."
+    },
+    "httpfrag": {
+      "title": "HTTP piece size",
+      "text": "Piece size of unencrypted HTTP requests. Discord and almost all sites use HTTPS, so its effect is small. 0 = the mode's default."
+    },
+    "wrongchk": {
+      "title": "Wrong checksum",
+      "text": "Sends the fake packets with a wrong TCP checksum. The real server throws these packets away; the DPI device usually reads them without checking and is fooled.\n\nSome modems and virtual machines (VirtualBox/VMware NAT) drop broken packets on the way, so it may have no effect."
+    },
+    "wrongseq": {
+      "title": "Wrong sequence number",
+      "text": "Sends the fake packets with a past TCP sequence/acknowledgement number. The server ignores them as 'old packets'; the DPI device looks at the content and reads the wrong site name. Usually the most reliable fake packet method."
+    },
+    "native": {
+      "title": "Native fragmentation",
+      "text": "Really sends the first packet as separate small TCP packets. It does not shrink the window size, so it does not slow the connection down."
+    },
+    "reverse": {
+      "title": "Reverse-order fragmentation",
+      "text": "Sends the pieces in reverse order (the last piece first). DPI devices cannot put reversed pieces together and cannot read the site name. Very rarely a site cannot handle the reverse order; if there is a problem, turn it off and use 'Native fragmentation'."
+    },
+    "quic": {
+      "title": "Block QUIC/HTTP3",
+      "text": "Blocks the QUIC/HTTP3 (UDP 443) traffic browsers use. The browser falls back to normal HTTPS, which GoodbyeDPI can handle. Recommended; it does not affect Discord voice chat."
+    },
+    "sni": {
+      "title": "Split at the site name (SNI)",
+      "text": "Splits the first packet exactly where the site name starts; the site name ends up in two separate packets. A more targeted split, independent of the -e value."
+    },
+    "payload": {
+      "title": "Skip large packets",
+      "text": "Does not process packets carrying more than 1200 bytes of data (file downloads, video streams). Reduces CPU usage; does not affect bypassing blocks. Already on in the modern modes."
+    },
+    "nosni": {
+      "title": "Also apply when the site name cannot be read",
+      "text": "Only matters while 'Targeted mode' is on: also applies the method to connections whose site name cannot be read (e.g. those using encrypted SNI/ECH)."
+    },
+    "passive": {
+      "title": "Block passive DPI",
+      "text": "Catches and drops the fake 'redirect' (HTTP 302) and connection reset packets the provider injects. On in the classic modes."
+    },
+    "hostr": {
+      "title": "Host → hoSt",
+      "text": "Writes the 'Host' header of unencrypted HTTP requests as 'hoSt'; old DPI systems do not recognise the header. No effect on HTTPS."
+    },
+    "hosts": {
+      "title": "Remove the Host space",
+      "text": "Removes the space in the HTTP 'Host:' header. Unencrypted HTTP only."
+    },
+    "hostm": {
+      "title": "Mix the Host letter case",
+      "text": "Mixes upper and lower case in the site name (dIsCoRd.CoM). Unencrypted HTTP only."
+    },
+    "extra": {
+      "title": "Extra parameters",
+      "text": "For adding GoodbyeDPI options that are not listed above by hand. Examples:\n• --min-ttl 3 : send the fake packet only to servers at least 3 hops away\n• --fake-from-hex 1603… : set the fake packet content yourself\n• --port 8443 : also fragment on an extra TCP port\n\nDo not add --blacklist; use the 'Target Sites' page for that."
+    },
+    "raw": {
+      "title": "Write the command by hand (expert)",
+      "text": "You write the whole GoodbyeDPI command line yourself; the options above are ignored. If there is a typo, protection does not start and shows the error 'NSF-603 Invalid profile parameter'."
+    },
+    "preview": {
+      "title": "Command preview",
+      "text": "The exact command NSF Shield runs for this profile. You can put this line in a .cmd file and use it without the app."
+    },
+    "explain": {
+      "raw": "Manually written command",
+      "rawText": "This profile uses the command line directly: {0}",
+      "dnsYes": "DNS redirection: yes",
+      "dnsNo": "DNS redirection: NONE",
+      "rawDnsYes": "The command contains --dns-addr.",
+      "rawDnsNo": "In Turkey Discord is also blocked through DNS, so this profile alone may not open Discord.",
+      "dnsTo": "DNS redirection → {0}",
+      "dnsToProvider": "DNS queries go to the {0} server ({1}, port {2}) instead of your provider. This bypasses the DNS block.",
+      "dnsToCustom": "DNS queries go to the custom server instead of your provider. This bypasses the DNS block.",
+      "dnsNoText": "Queries go to your provider's DNS. In Turkey Discord is also blocked through DNS, so this profile alone does NOT open Discord (unless you changed the Windows DNS on the 'DNS Settings' page).",
+      "mode": "Base mode {0}",
+      "httpsFrag": "The first HTTPS packet is split into {0}-byte pieces",
+      "httpsFragText": "The site name (SNI) is not visible in one piece; the DPI device cannot read which site you are going to.",
+      "httpsFragSmallText": "The site name (SNI) is not visible in one piece; the DPI device cannot read which site you are going to. Small pieces are the most effective option.",
+      "sni": "Split at the start of the site name",
+      "reverse": "Pieces are sent in reverse order",
+      "reverseText": "The DPI device cannot put reversed pieces together.",
+      "native": "Pieces are sent in normal order",
+      "howAutoTtl": "lifetime (TTL) set automatically",
+      "howTtl": "fixed lifetime TTL {0}",
+      "howSeq": "with a past sequence number",
+      "howChk": "with a broken checksum",
+      "fakeCount": "Fake packets: {0} random",
+      "fakeSent": "Fake packets are sent",
+      "fakeResend": ", each {0} times",
+      "fakeTextHow": "A fake packet that fools the DPI device is sent before the real connection ({0}). The server ignores the fake packet.",
+      "fakeText": "A fake packet that fools the DPI device is sent before the real connection. The server ignores the fake packet.",
+      "quic": "QUIC is blocked",
+      "quicText": "Browsers use normal HTTPS instead of HTTP3; GoodbyeDPI can handle this traffic.",
+      "passive": "Passive DPI packets are dropped",
+      "headers": "HTTP header tricks",
+      "headersText": "Only effective on unencrypted HTTP sites; unimportant for Discord.",
+      "payload": "Large packets are skipped",
+      "payloadText": "Reduces CPU usage during downloads and videos.",
+      "noDpi": "No DPI method",
+      "noDpiText": "This profile only redirects DNS. It is not enough if the provider also blocks by site name."
+    },
+    "when": {
+      "first": "First choice. If it works, nothing else is needed.",
+      "dnsAlt": "If the recommended profile works but pages open slowly, or Yandex DNS does not answer.",
+      "autoTtl": "If the -9 mode cuts connections, or the old fixed-TTL scripts suddenly stopped working.",
+      "legacy": "If these scripts used to work for you; now they also have DNS redirection.",
+      "connectionCut": "If the recommended profile gives the 'connection was cut' (NSF-501) error.",
+      "unstable": "On Wi-Fi/mobile lines, or if the recommended profile is unstable.",
+      "fakeAlt": "To try a different deception method if your modem drops some fake packets.",
+      "lastResort": "Last resort if none of the modern methods work.",
+      "dnsOnly": "If the block comes only from DNS (when the site analysis says 'DNS BLOCK ONLY').",
+      "compare": "Only for comparison, or if you changed the Windows DNS.",
+      "custom": "A profile you created yourself.",
+      "zapretFirst": "Start here with Zapret: covers websites, Discord text and voice.",
+      "zapretAggressive": "When the recommended Zapret profile opens some sites but not all.",
+      "zapretTls": "When UDP/QUIC causes problems or only websites matter.",
+      "zapretSplit": "When connections break with the fake-packet profiles.",
+      "byedpiFirst": "Start here with ByeDPI; the best choice when a kernel driver is not wanted (games with anti-cheat).",
+      "byedpiFake": "When the recommended ByeDPI profile does not open the sites.",
+      "byedpiAlt": "Alternatives for providers that detect split packets."
+    }
+  },
+  "profilesPage": {
+    "title": "Profiles",
+    "subtitle": "Every profile is a different way of getting past the block. What the selected profile does is explained in detail on the right.",
+    "use": "Use this profile",
+    "new": "New",
+    "copy": "Copy",
+    "edit": "Edit",
+    "delete": "Delete",
+    "shareButton": "Share",
+    "newName": "New Profile",
+    "inspect": "Inspect",
+    "selectHint": "Select a profile on the left.",
+    "builtIn": "Built-in profile",
+    "custom": "Custom profile",
+    "inUse": "in use now",
+    "selected": "selected",
+    "whatItDoes": "WHAT DOES THIS PROFILE DO?",
+    "whenToTry": "WHEN SHOULD YOU TRY IT?",
+    "command": "COMMAND",
+    "applyChanges": "This profile is in use now. Apply the changes (protection restarts)?",
+    "share": {
+      "copyCode": "Copy the profile code (send it to a friend)",
+      "paste": "Add profile from code (code on the clipboard)",
+      "saveCmd": "Save as a .cmd script…",
+      "copied": "The code of the profile '{0}' was copied to the clipboard.\n\nYour friend can use the same profile with Profiles → Share → 'Add profile from code'.",
+      "copiedCode": "The code of the profile '{0}' ({1}, {2} characters) was copied to the clipboard.\n\nYour friend can add it with Profiles → Share → 'Add profile from code'. The code contains only the method: no settings, lists, paths or passwords.",
+      "failed": "This profile cannot be shared as a code: {0}"
+    },
+    "cmdFilter": "Command file (*.cmd)|*.cmd",
+    "badge": {
+      "running": "RUNNING",
+      "selected": "SELECTED",
+      "custom": "CUSTOM",
+      "noDns": "NO DNS",
+      "noDriver": "no driver",
+      "expert": "Expert"
+    },
+    "deleteConfirm": "Delete the profile '{0}'?",
+    "import": {
+      "hint": "First copy the code your friend sent you; it starts with 'NSF1:'.",
+      "suffix": "(imported)",
+      "confirm": "Add this profile?\n\n{0}\n{1}\n\nCommand: ",
+      "confirmEngine": "Add this profile?\n\n{0}\nEngine: {1}\n{2}\n\nNothing is started; the profile is only added to the list.\n\nCommand: "
+    },
+    "scriptSaved": "Script saved. If you move the app folder, the script will not work.",
+    "engineInfo": {
+      "goodbyedpi": "WinDivert 2.2.0 driver · DNS redirection · service mode · include list",
+      "zapret": "WinDivert 2.2.2 driver · TCP + UDP/QUIC · service mode · include and exclude lists",
+      "byedpi": "No driver · local proxy (127.0.0.1) · app mode · include and exclude lists"
+    },
+    "subtitleSimple": "Recommended methods. The selected or running method is always listed too.",
+    "simpleInfo": "The recommended methods of the three engines. Press “Use”, or let the home page find a working one.",
+    "showExperts": "Show expert profiles",
+    "exceptionNote": "Shown because it is selected or running; it is not added to the recommended scan.",
+    "scenarios": "Try scenarios: {0}",
+    "technical": "TECHNICAL",
+    "commandPreview": "COMMAND PREVIEW (SHORT NAMES, NOT RUNNABLE)",
+    "copyCommand": "Copy Command",
+    "commandCopied": "The full local command was copied to the clipboard. It contains the real paths of this computer and was not written to the log.",
+    "commandInvalid": "The command cannot be built: {0}"
+  },
+  "profileEdit": {
+    "mode": {
+      "none": "None (only the options below)",
+      "m1": "-1  Classic, most compatible",
+      "m2": "-2  Classic, faster for HTTPS",
+      "m3": "-3  Classic, fast HTTP/HTTPS",
+      "m4": "-4  Classic, fastest (HTTP only)",
+      "m5": "-5  Modern: automatic TTL",
+      "m6": "-6  Modern: wrong sequence number",
+      "m7": "-7  Modern: wrong checksum",
+      "m8": "-8  Modern: sequence + checksum",
+      "m9": "-9  Modern: full (recommended)"
+    },
+    "title": "Edit Profile",
+    "name": "Profile name",
+    "description": "Description",
+    "method": "METHOD",
+    "baseMode": "Base mode",
+    "fakeTtl": "Fake packet TTL",
+    "ttlOff": "Off",
+    "ttlAuto": "Automatic (--auto-ttl)",
+    "httpsFrag": "HTTPS piece (-e)",
+    "fakeCount": "Number of fake packets",
+    "fakeRepeat": "Fake repeats",
+    "httpFrag": "HTTP piece (-f)",
+    "dnsRedirect": "DNS REDIRECTION",
+    "dnsServer": "DNS server",
+    "customServer": "Custom server…",
+    "dnsOff": "Off – your provider's DNS (Discord will not open!)",
+    "ipv4": "   IPv4 address : port",
+    "ipv6": "   IPv6 address : port",
+    "extraOptions": "EXTRA OPTIONS",
+    "wrongSeq": "Wrong sequence number (--wrong-seq)",
+    "wrongChk": "Wrong checksum (--wrong-chksum)",
+    "native": "Native fragmentation (--native-frag)",
+    "reverse": "Reverse fragmentation (--reverse-frag)",
+    "sni": "Split at the site name (--frag-by-sni)",
+    "payload": "Skip large packets (--max-payload)",
+    "quic": "Block QUIC/HTTP3 (-q)",
+    "noSni": "Apply to connections without SNI",
+    "passive": "Block passive DPI (-p)",
+    "hostSpace": "Remove the Host space (-s)",
+    "hostCase": "Mix the Host letter case (-m)",
+    "extraParams": "Extra parameters",
+    "raw": "Write the command by hand (expert – the options above are ignored)",
+    "preview": "Command preview",
+    "editCopy": "Edit a copy",
+    "summary": "SUMMARY OF THIS PROFILE",
+    "nameEmpty": "The profile name cannot be empty.",
+    "badIpv4": "Enter a valid IPv4 DNS address (e.g. 94.140.14.14).",
+    "badIpv6": "Enter a valid IPv6 DNS address.",
+    "customDnsEmpty": "Enter at least one address for the custom DNS.",
+    "noMethod": "The profile contains no method. Choose at least a base mode or a DNS.",
+    "noDnsConfirm": "This profile has no DNS redirection. In Turkey Discord is also blocked through DNS, so Discord may not open with this profile.\n\nSave it anyway?",
+    "builtInTitle": "Built-in profile: {0}",
+    "recommended": "(recommended)",
+    "selectedDns": "Selected:",
+    "argsRejected": "The parameters were not accepted:",
+    "previewNote": "Short names: a preview, not a runnable command. “Copy Command” copies the full local command."
+  },
+  "netPage": {
+    "title": "Internet Check",
+    "subtitle": "Examine your connection, DNS and why a site does not open, step by step.",
+    "tab": {
+      "connection": "Connection",
+      "site": "Site Analysis",
+      "speed": "Speed Test",
+      "history": "History",
+      "network": "Network Info"
+    },
+    "col": {
+      "server": "Server",
+      "status": "Status",
+      "duration": "Time",
+      "ip": "IP address",
+      "detail": "Details",
+      "code": "Code",
+      "address": "Address",
+      "answer": "Answer",
+      "result": "Result",
+      "when": "Time",
+      "kind": "Type",
+      "method": "Method"
+    },
+    "addServer": "Add server",
+    "removeSelected": "Remove selected",
+    "defaults": "Default",
+    "startTest": "Start test",
+    "findBest": "Find the best method",
+    "testInfo": "A new encrypted connection is opened to every server; the system DNS answer is also compared with independent servers.",
+    "site": {
+      "intro": "If a site does not open, type its address: the DNS answer, a connection to the correct address (TCP), the encrypted handshake (TLS) and HTTP are tried step by step, and the type of block is determined.",
+      "analyze": "Analyze",
+      "resultHere": "The result will appear here.",
+      "badDomain": "Enter a valid domain name (e.g. discord.com).",
+      "noAnswer": "no answer",
+      "noCompare": "could not be compared",
+      "fake": "FAKE/BLOCKED answer",
+      "correct": "correct",
+      "step2": "2) Connection to the correct address",
+      "connectFailed": "COULD NOT CONNECT",
+      "step3": "3) Real request (HTTPS)",
+      "analysis": "Analysis: {0}",
+      "stateOn": "Protection is currently ON ({0}); the results reflect this state.",
+      "stateOff": "Protection is currently OFF; the results reflect this state.",
+      "systemDns": "System DNS (Windows)",
+      "independentDns": "Independent DNS ({0})",
+      "connected": "connected ({0} ms)",
+      "tls": "TLS (encrypted handshake)",
+      "fakeAddress": "Connection to the fake address ({0})",
+      "diagnosis": "DIAGNOSIS: {0}",
+      "relatedCode": "Related error code: {0} – {1}"
+    },
+    "dns": {
+      "intro": "discord.com is asked of every DNS server. Ports other than 53 cannot be changed by the provider, so their answer is taken as 'correct' and the others are compared with it.",
+      "test": "Test the DNS servers",
+      "windowsSetting": "Windows setting",
+      "noneAnswered": "None of the DNS servers on non-standard ports answered (NSF-402).",
+      "sysBlocked": "The DNS that Windows uses gives blocked answers → DNS redirection (or the DNS Settings page) is needed.",
+      "sysOk": "The Windows DNS answers correctly right now.",
+      "fastest": "Fastest correct answer: {0} ({1} ms).",
+      "useProfile": "Use the '{0}' profile"
+    },
+    "speed": {
+      "intro": "Measures your latency, download and upload speed with Cloudflare's speed server (uses about 60 MB of data). You can compare with protection on or off.",
+      "latency": "LATENCY",
+      "download": "DOWNLOAD",
+      "upload": "UPLOAD",
+      "start": "Start the speed test",
+      "note": "Note: GoodbyeDPI does not lower your speed; it only splits the first packets while a connection is set up. Unlike VPNs, your traffic is not routed through another country.",
+      "failed": "Could not measure: {0}",
+      "jitter": "ms · jitter {0} ms",
+      "doneOn": "Measurement finished ({0}, protection on).",
+      "doneOff": "Measurement finished ({0}, protection off).",
+      "warning": "Warning:"
+    },
+    "history": {
+      "clear": "Clear",
+      "clearConfirm": "Delete the connection history?",
+      "none": "No tests with protection on in the last 24 hours.",
+      "ok": "successful",
+      "failed": "failed",
+      "stats": "Last 24 hours: {0} tests · {1}% successful",
+      "avg": "avg. {0} ms",
+      "repairs": "{0} automatic repairs in the last 7 days",
+      "protectionOff": "protection off"
+    },
+    "net": {
+      "refresh": "Refresh",
+      "collecting": "Collecting information…",
+      "adapters": "Network adapters",
+      "system": "System",
+      "off": "off",
+      "ipv6Internet": "IPv6 internet",
+      "yes": "yes",
+      "no": "no",
+      "hostsDiscord": "Discord in the hosts file",
+      "noEntries": "no entries",
+      "antivirus": "Antivirus",
+      "unknown": "unknown",
+      "otherDpi": "Other DPI tools",
+      "none": "none",
+      "gdpiFolder": "GoodbyeDPI folder",
+      "doh": "Encrypted DNS (DoH) support",
+      "dohYes": "yes (Windows 11)",
+      "dhcp": "(automatic)",
+      "static": "(manual)",
+      "local": "(local)",
+      "gateway": "Gateway (modem)",
+      "dnsServers": "DNS servers",
+      "proxyOn": "ON –"
+    },
+    "status": {
+      "open": "✓ Open",
+      "closed": "✗ Closed"
+    },
+    "allReachable": "✓ All servers are reachable.",
+    "badServer": "Enter a valid server address (e.g. discord.com).",
+    "testing": "Testing…",
+    "chart": {
+      "empty": "No tests yet. Tests are recorded when protection starts and when the connection watchdog runs."
+    },
+    "dnsCorrect": "The DNS answer is correct.",
+    "dnsWrong": "The DNS answer is WRONG (blocked address)!",
+    "someUnreachable": "✗ {0} servers could not be reached. Look up the error code in Troubleshooting or run 'Find the best method'."
+  },
+  "dnsPage": {
+    "title": "DNS Settings",
+    "subtitle": "Change the DNS server Windows uses. This bypasses the DNS block even while NSF Shield is off.",
+    "current": "CURRENT SETTING",
+    "check": "Check the DNS block",
+    "newServer": "NEW DNS SERVER",
+    "useDoh": "Use encrypted DNS (DoH)",
+    "dohInfo": "Queries are encrypted with HTTPS; the provider can neither see nor change them. Recommended.",
+    "dohUnsupported": "This Windows version does not support encrypted DNS (Windows 11 is required).",
+    "apply": "Apply",
+    "restore": "Restore old settings",
+    "allAdapters": "The change is applied to all connected network adapters (except VPNs).",
+    "note": "Note: while protection is on, GoodbyeDPI's DNS redirection already sends every query to a safe server. This page is an extra safeguard (while protection is off, or when you use a method without DNS).",
+    "dhcp": "DHCP – DNS from the modem",
+    "noAdapter": "No connected network adapter was found.",
+    "manualServer": "Manually entered custom server",
+    "backedUp": "Your previous settings were backed up; you can undo the change with 'Restore old settings'.",
+    "checking": "Checking…",
+    "autoProvider": "automatic (your provider's DNS)",
+    "applied": "✓ Applied.",
+    "someFailed": "! Some steps failed:",
+    "restored": "✓ The old settings were restored.",
+    "someFailedEnd": "! Some steps failed.",
+    "setting": "Setting",
+    "dnsInUse": "DNS in use",
+    "redirecting": "(Protection is on; queries are being redirected.)",
+    "encryptedDns": "encrypted DNS",
+    "applyConfirm": "The Windows DNS setting will be changed on these adapters:\n  {0}\n\nNew setting: {1}\n\nThe current settings are backed up; you can undo the change with 'Restore old settings'. Continue?"
+  },
+  "sitesPage": {
+    "title": "Site Lists",
+    "subtitle": "Choose the sites the bypass is applied to (Include) or never applied to (Exclude).",
+    "targeted": "Apply only to the sites in the list",
+    "targetedInfo": "When on, the traffic of other sites is not touched at all; safer and faster. When off, it is applied to all HTTPS traffic.",
+    "list": "SITE LIST",
+    "add": "Add",
+    "deleteSelected": "Delete selected",
+    "addPreset": "Add a ready-made list",
+    "restartNeeded": "Protection must be restarted for the changes to take effect.",
+    "applyNow": "Apply now",
+    "keepOne": "At least one site must stay in the list.",
+    "presetCount": "({0} addresses)",
+    "tabInclude": "Include",
+    "tabExclude": "Exclude",
+    "excludeMode": "Never touch the sites in the list",
+    "excludeInfo": "Useful for banks, e-Devlet and games with anti-cheat: their traffic always passes unchanged. Used by Zapret and ByeDPI.",
+    "addSites": "Add sites (one per line)",
+    "badDomains": "These entries are not valid domain names and were not added:\n{0}\n\nExample: discord.com",
+    "countText": "{0} sites",
+    "fileInfo": "Subdomains are included automatically. Written to {0} when protection starts.",
+    "supportInclude": "{0} uses this list.",
+    "supportExclude": "{0} uses this list.",
+    "unsupported": "{0} cannot use this list; it is applied with Zapret and ByeDPI."
+  },
+  "proxyPage": {
+    "subtitle": "Send your traffic through your own proxy: system-wide or only in the programs you choose.",
+    "tab": {
+      "proxies": "Proxies",
+      "apps": "Per-program proxy"
+    },
+    "saved": "SAVED PROXIES",
+    "new": "New",
+    "bulkAdd": "Bulk add",
+    "delete": "Delete",
+    "details": "PROXY DETAILS",
+    "quickEntry": "Quick entry",
+    "fill": "Fill",
+    "quickExample": "e.g. 1.2.3.4:8080  ·  ip:port:user:password\nsocks5://user:password@1.2.3.4:1080",
+    "name": "Name",
+    "kind": "Type",
+    "kindAutoFix": "The test corrects a wrong type by itself.",
+    "address": "Address",
+    "user": "User",
+    "password": "Password",
+    "passwordInfo": "Optional. The password is stored encrypted.",
+    "test": "Test",
+    "testIntro": "You can test the proxy without saving it. The test opens an encrypted connection to discord.com through the proxy and shows the exit IP. Try many proxies at once with 'Bulk add'.",
+    "useSelected": "USE THE SELECTED PROXY",
+    "openDiscord": "Open Discord with this proxy",
+    "desktopShortcut": "Desktop shortcut",
+    "openDiscordNormal": "Open Discord without proxy",
+    "makeSystem": "Make it the Windows proxy",
+    "systemOff": "Turn off the Windows proxy",
+    "useInfo": "Use the 'Per-program proxy' tab for other programs. The Windows proxy affects all programs, browsers included. Discord voice chat (UDP) does not go through the proxy.",
+    "systemRestored": "The Windows proxy setting was restored.",
+    "apps": {
+      "list": "PROGRAMS USING A PROXY",
+      "add": "Add program",
+      "setting": "PROGRAM SETTING",
+      "program": "Program",
+      "browse": "Browse",
+      "method": "Method",
+      "separate": "Separate browser profile (works while the browser is open too)",
+      "closeFirst": "Close the running copy of the program before opening it",
+      "extra": "Extra argument",
+      "launch": "Open with proxy",
+      "shortcut": "Shortcut",
+      "howTitle": "HOW DOES IT WORK?",
+      "how": "The selected program is started with the proxy setting; other programs and the Windows settings are not affected. Chromium-based programs such as Chrome, Edge, Brave, Opera, Discord and Spotify get --proxy-server, Firefox is opened with a separate proxy profile, other programs get the HTTP_PROXY environment variables (no effect if the program does not support them). Proxies with a password are used through NSF Shield's local bridge (127.0.0.1); in that case NSF Shield must be running. 'Shortcut' adds a permanent launcher to the desktop.",
+      "emptyNoProxy": "First add a proxy on the 'Proxies' tab, then choose a program with 'Add program'.",
+      "empty": "Choose a program with 'Add program'.",
+      "mode": {
+        "discord": "Discord is closed and reopened with the proxy.",
+        "chromium": "The program is opened with --proxy-server.",
+        "firefox": "Firefox is opened with a separate profile whose settings point to the proxy.",
+        "env": "Opened with HTTP_PROXY/HTTPS_PROXY; only works in programs that support it."
+      },
+      "addProxyFirst": "First add and test a proxy on the 'Proxies' tab.",
+      "other": "Choose another program (.exe)…",
+      "filter": "Programs (*.exe)|*.exe",
+      "chooseTitle": "Choose the program to open with the proxy",
+      "chooseProxy": "Choose a proxy.",
+      "badExtra": "The characters & | < > ^ % ! cannot be used in the extra arguments (this mode starts through the command line).",
+      "noProxy": "→ no proxy selected",
+      "usesBridge": "The local bridge is used (127.0.0.1:{0}).",
+      "deleteConfirm": "Delete the rule '{0}'? (The program is not affected; if there is a desktop shortcut, delete it too.)",
+      "running": "{0} is open now. It will be closed to reopen it with the proxy (save any unsaved work first). Continue?",
+      "shortcutDone": "The shortcut '{0}' was created on the desktop.",
+      "shortcutBridge": "This proxy has a password, so the shortcut uses NSF Shield's local bridge; it works while NSF Shield is running.",
+      "bridge": "bridge",
+      "byedpiChoice": "ByeDPI engine ({0}, while it runs)",
+      "byedpiNotRunning": "This rule uses the ByeDPI engine. Start protection with a ByeDPI profile first."
+    },
+    "add": "Add",
+    "sys": {
+      "off": "Windows proxy: off",
+      "ours": "Windows proxy: {0} (set by NSF Shield)",
+      "other": "Windows proxy: {0} (set by another program)",
+      "socksWarning": "Warning: the Windows system proxy does not fully support SOCKS5 (many programs take it for SOCKS4). For SOCKS5 the 'Per-program proxy' is more reliable.",
+      "authNote": "This proxy wants a password; programs may ask for it separately. The per-program proxy handles this automatically with the local bridge.",
+      "confirm": "The Windows proxy will be set to {0} {1}. Browsers and all programs that use the system proxy will go through this proxy.",
+      "confirmEnd": "The current setting is backed up; you can undo it with 'Turn off the Windows proxy'. Continue?",
+      "failed": "Could not be set: {0}"
+    },
+    "enterAddress": "Enter the proxy address (IP or server name).",
+    "notWorking": "The proxy does not work",
+    "bridge": {
+      "off": "Local bridge: off (not needed for proxies without a password).",
+      "on": "Local bridge: on for {0} proxies · {1} active connections. It runs as long as NSF Shield is running."
+    },
+    "badAddress": "Invalid address: {0}",
+    "deleteConfirm": "Delete '{0}'?",
+    "deleteRules": "The {0} program rules that use this proxy will be deleted too.",
+    "testing": "Testing: {0} {1} …",
+    "working": "✓ Working · discord.com is reachable · {0} ms",
+    "exitIp": "Exit IP:",
+    "country": "Country:",
+    "kindFixed": "Type corrected to {0}",
+    "backToNormal": "To go back to normal Discord, use the 'Open Discord without proxy' button.",
+    "discordShortcutDone": "The shortcut '{0}' was created on the desktop. When you open Discord with this shortcut, the proxy is used.",
+    "shortcutFailed": "The shortcut could not be created: {0}",
+    "tag": {
+      "system": "Windows proxy",
+      "bridge": "bridge on",
+      "auth": "with password"
+    },
+    "systemNotRestored": "The Windows proxy could not be restored exactly; the record is kept, so you can try again."
+  },
+  "proxyBulk": {
+    "title": "Bulk add and test proxies",
+    "intro": "Paste one proxy per line (ip:port, ip:port:user:password, socks5://…). All of them are tested at the same time; only the ones that can reach Discord are added.",
+    "defaultKind": "If no type is given:",
+    "kindHint": "(if wrong, the test also tries the other type)",
+    "testAll": "Test all",
+    "country": "Country",
+    "addWorking": "Add the working ones",
+    "windowTitle": "Bulk add proxies",
+    "noneValid": "No valid proxy found",
+    "unreadable": "({0} lines could not be read).",
+    "testing": "Testing {0} proxies (24 at a time)…",
+    "unreadableLines": "{0} lines could not be read.",
+    "progress": "{0}/{1} tested…",
+    "auth": "(with password)",
+    "working": "✓ Working",
+    "kindFixed": "(type corrected)",
+    "result": "{0}/{1} proxies can reach Discord.",
+    "freeHint": "Free proxies often shut down; try another list.",
+    "addWorkingN": "Add the working ones ({0})",
+    "added": "{0} proxies added"
+  },
+  "troublePage": {
+    "title": "Troubleshooting",
+    "subtitle": "Find out why it does not work. Every problem has an error code, an explanation and solution steps.",
+    "tab": {
+      "find": "Find the Problem",
+      "codes": "Error Codes and Solutions"
+    },
+    "runFull": "Start the full check",
+    "runInfo": "About 20 points, from the installation to Discord, are checked in 10-20 seconds.",
+    "supportPack": "Support package",
+    "report": "Report a problem",
+    "supportTip": "Saves the log, the history and the settings (with IP addresses, user name and proxy details hidden) into a single zip file.",
+    "issueTip": "Opens a new issue page on GitHub with the version, Windows and error code filled in; you can edit it before sending.",
+    "zipFilter": "Zip file|*.zip",
+    "packSaved": "The support package was saved. IP addresses, user name, e-mail and proxy details were hidden.\n\nYou can attach this file when you ask for help (e.g. to the issue on GitHub).",
+    "issueConfirm": "GitHub's new issue page will open in the browser. The version, Windows build, error code and a short summary (with IP addresses hidden) are filled in beforehand; you can see and edit them before sending. A GitHub account is needed to send it.\n\nContinue?",
+    "searchCue": "Search: code or word (e.g. NSF-204, antivirus)",
+    "copyTip": "Copy the description (to share when asking for help)",
+    "noProblem": "No problem detected right now",
+    "noProblemHint": "If Discord does not open, press 'Start the full check' or look for a solution by symptom on the 'Error Codes' tab.",
+    "solution": "Solution",
+    "checking": "Checking…",
+    "checkAgain": "Check again",
+    "allGood": "✓ No problems found. Everything looks fine.",
+    "noMatch": "No error code matches your search.",
+    "sev": {
+      "error": "Error",
+      "warning": "Warning",
+      "info": "Info"
+    },
+    "causes": "POSSIBLE CAUSES",
+    "steps": "SOLUTION STEPS",
+    "packFailed": "Could not be created: {0}",
+    "allCategories": "All categories ({0})",
+    "detected": "DETECTED PROBLEMS ({0})",
+    "found": "✗ {0} errors, {1} warnings. Each row's button fixes it; 'Solution' shows the steps.",
+    "detectedNow": "DETECTED NOW",
+    "category": "Category: {0}",
+    "detectedAt": "This problem was detected at {0}",
+    "howDetected": "How it is detected: {0}"
+  },
+  "logPage": {
+    "title": "Log",
+    "subtitle": "Everything the app and GoodbyeDPI do is recorded here. Errors are written with a [NSF-xxx] code.",
+    "verbose": "Detailed (commands)",
+    "errorsOnly": "Warnings/errors only",
+    "folder": "Folder",
+    "copy": "Copy",
+    "clear": "Clear",
+    "txtFilter": "Text file|*.txt"
+  },
+  "settingsPage": {
+    "title": "Settings",
+    "interface": "INTERFACE",
+    "uiLevel": "UI level",
+    "uiLevelInfo": "Simple: only what is needed (recommended). Standard: profiles, internet check, DNS. Advanced: everything, the log and expert options.",
+    "colors": "Colors and theme…",
+    "startup": "STARTUP",
+    "startWin": "Start the app when Windows starts",
+    "startWinInfo": "After you sign in, NSF Shield starts in the system tray without asking for administrator permission.",
+    "autoStart": "Start protection automatically when the app opens",
+    "autoStartInfo": "Protection takes effect right away with the selected method.",
+    "service": "Background service mode",
+    "serviceInfo": "GoodbyeDPI is installed as a Windows service: it starts before you sign in and keeps running while the app is closed.",
+    "windowSection": "WINDOW AND NOTIFICATIONS",
+    "closeToTray": "The close button minimizes to the system tray",
+    "closeToTrayInfo": "If off, closing the window exits the app.",
+    "hideTaskbar": "Do not show in the taskbar",
+    "hideTaskbarInfo": "The app only appears in the system tray next to the clock (it does not appear in Alt+Tab either).",
+    "notifications": "Show notifications",
+    "notificationsInfo": "Shows a notification when protection starts or stops, or when there is an access problem.",
+    "protection": "PROTECTION",
+    "autoHeal": "Find a working method automatically if access is lost",
+    "autoHealInfo": "If Discord cannot be reached while protection is on (e.g. when the provider changes its method), the methods are tried automatically and a working one is selected.",
+    "watchdog": "Check the connection regularly",
+    "watchdogInfo": "Discord access is tested silently at intervals and when the network changes (e.g. a Wi-Fi change).",
+    "off": "Off",
+    "autoRestart": "Restart automatically if it closes",
+    "autoRestartInfo": "If GoodbyeDPI closes unexpectedly, it is restarted after 5 seconds (NSF-602).",
+    "suggestDiscord": "Suggest restarting Discord",
+    "suggestDiscordInfo": "If Discord was opened before protection, it may not connect; in that case a warning and a button are shown (NSF-901).",
+    "testAfterStart": "Test the connection after starting",
+    "testAfterStartInfo": "When protection starts, access to the Discord servers and the DNS answer are checked automatically.",
+    "flushDns": "Flush the DNS cache on changes",
+    "flushDnsInfo": "Prevents old (blocked) DNS records from being used while starting/stopping.",
+    "verifyDns": "Verify the DNS server when starting",
+    "verifyDnsInfo": "Warns if the redirected DNS server does not answer (NSF-402). If you turn it off, starting gets about 1 s faster.",
+    "repairSection": "REPAIR AND REMOVAL",
+    "repairInfo": "If you have problems, first try Troubleshooting → 'Start the full check'. 'Reset everything' also removes the GoodbyeDPI service and the WinDivert driver installed by the old .cmd scripts (a more thorough version of the old ayarlari_sifirla.cmd).",
+    "flushBtn": "Flush the DNS cache",
+    "conflicts": "Resolve conflicts",
+    "resetAll": "Reset everything",
+    "cleanUninstall": "Clean uninstall…",
+    "cleanInfo": "Undoes the service, the startup task, the WinDivert registration and the Windows proxy and DNS changes; use it before deleting the program folder.",
+    "cleanConfirm": "All changes NSF Shield made in Windows will be undone:\n\n• Protection stops; the background service and the WinDivert driver registration are removed\n• The Windows startup task is deleted\n• The Windows proxy and DNS servers set by NSF Shield are restored\n\nThe program folder and your settings are not deleted. Continue?",
+    "cleanDone": "Clean uninstall finished.",
+    "updates": "UPDATES",
+    "autoUpdate": "Check for updates automatically",
+    "autoUpdateInfo": "Once a day GitHub is checked for a new version; if there is one, you are notified. It is always installed with your approval and SHA-256 verification.",
+    "checkNow": "Check now",
+    "backup": "BACKUP",
+    "backupInfo": "Save all settings (methods, custom profiles, theme, proxies, target sites) into a single file and move them to a new computer or to a friend. Proxy passwords can only be decrypted on this Windows account, so they must be entered again on another computer.",
+    "export": "Export settings…",
+    "import": "Import settings…",
+    "xmlFilter": "NSF Shield settings (*.xml)|*.xml",
+    "importConfirm": "All current settings will be replaced with the ones in the file. Continue?",
+    "advanced": "ADVANCED",
+    "exportInfo": "You can save all built-in methods into a folder as .cmd scripts that work without the app.",
+    "exportScripts": "Export scripts…",
+    "openData": "Open the settings folder",
+    "chooseFolder": "Choose the folder to save the scripts in",
+    "tempFolder": "The app is running from a temporary folder (NSF-103). First extract the zip to a permanent folder, then turn this option on.",
+    "serviceConfirm": "GoodbyeDPI will be installed as a Windows service named 'NSF Shield' and will start automatically when the computer starts.\n\nProtection keeps running even if you close the app. Restart protection in this mode now?",
+    "themeLabel": "Theme: {0}",
+    "onlyInstalled": "Off in the portable (zip) version for security reasons; available in the version installed to Program Files with the setup package.",
+    "hotkey": "Hotkey: {0}",
+    "hotkeyInfo": "Turn protection on and off from anywhere with {0} (works while the window is hidden too).",
+    "minutes": "{0} min",
+    "cleanReverted": "Undone:\n\n{0}\n\nYou can now exit the app and delete the program folder. Exit the app?",
+    "updInfo": "Version {0} · Last check: {1}",
+    "never": "never",
+    "updReady": "New version ready: {0}",
+    "readFailed": "The file could not be read: {0}",
+    "exportFailed": "Could not export: {0}",
+    "detail": "Details:",
+    "taskFailed": "The startup task could not be created (NSF-703):",
+    "serviceFailed": "Service mode could not be started; switched back to app mode.",
+    "languageAuto": "Automatic (Windows language)",
+    "languageHint": "Interface language; it changes instantly.",
+    "switchTitle": "Switch to the installed version",
+    "switchInfo": "Installs the latest verified version into Program Files and carries your profiles, theme, language and DNS settings over.",
+    "switchButton": "Switch…",
+    "byedpiSection": "BYEDPI (DRIVERLESS PROXY)",
+    "byedpiSystemProxy": "Set the Windows proxy while ByeDPI runs",
+    "byedpiSystemProxyInfo": "Browsers and Discord use ByeDPI by themselves; the previous setting comes back when it stops (after a crash too). Off: only programs set on the Proxy page use it.",
+    "byedpiPort": "ByeDPI port (127.0.0.1)",
+    "byedpiPortInfo": "SOCKS port; the HTTP bridge uses the next port. Used from the next start."
+  },
+  "aboutPage": {
+    "title": "About",
+    "intro": "An easy-to-use internet access shield for GoodbyeDPI, Zapret and ByeDPI. It bypasses the blocks providers apply with DNS and Deep Packet Inspection (DPI). It is not a VPN: your traffic is not encrypted and your IP address does not change.",
+    "guide": "User guide",
+    "project": "Project page",
+    "scripts": "Backup scripts",
+    "licenses": "Licenses",
+    "howTitle": "HOW DOES IT WORK?",
+    "how": "Your provider blocks Discord in two ways: by changing DNS answers and by reading the site name (SNI) in the connection and cutting it. DNS redirection sends the queries to an unblocked DNS server; GoodbyeDPI splits the packets and sends fake packets so that the DPI device cannot read the site name.",
+    "antivirus": "Antivirus warning: WinDivert is a network driver; some antivirus programs (Kaspersky, Norton…) may flag it as 'RiskTool'. It is not a virus; Troubleshooting → Full check verifies that the files are the official ones. If you get a warning, first report it to Microsoft as a false positive (NSF-204).",
+    "license": "LICENSE",
+    "thirdParty": "The bundled components are covered by their own licenses: GoodbyeDPI © ValdikSS (Apache 2.0), WinDivert © basil00 (LGPLv3). Texts: the Licenses button.",
+    "thanks": "Thanks: GoodbyeDPI – ValdikSS (Apache 2.0) · WinDivert – basil00 (LGPLv3) · uthash, getline.",
+    "version": "Version {0}",
+    "mit": "MIT License",
+    "whatsNew": "NEW IN {0}",
+    "new": {
+      "10": {
+        "1": "Three engines: GoodbyeDPI, Zapret (winws; also Discord voice and QUIC over UDP) and ByeDPI (ciadpi; a local proxy without a driver), with {1} built-in profiles in Recommended and Specialized layers.",
+        "2": "Smart scan: candidate methods are tried in isolation and compared with encrypted DNS; your previous state comes back when it ends. Automatic repair and a connection watchdog when the network changes.",
+        "3": "Site lists: Include (apply only to these sites) and Exclude (never touch these sites, e.g. banks and games with anti-cheat); a read-only conflict and anti-cheat diagnosis.",
+        "4": "{2} DNS servers, Windows DNS and encrypted DNS (DoH) that can always be undone; per-program proxy, a local proxy bridge and a Windows proxy that comes back even after a power loss.",
+        "5": "Troubleshooting: a full check, {4} error codes in {3} categories, one-click fixes and a support package with personal details hidden. Profile sharing codes (NSF1) and the {0} hotkey.",
+        "6": "English and Turkish interface, Simple / Standard / Advanced levels, {5} themes with a custom palette. Setup package (recommended) or portable ZIP; both update themselves with SHA-256 verification."
+      }
+    },
+    "thirdPartyEngines": "Zapret: winws © bol-van (MIT), Cygwin DLL (LGPLv3+), WinDivert 2.2.2 © basil00 (LGPLv3). ByeDPI: ciadpi © hufrea (MIT).",
+    "thanksEngines": "Thanks also: zapret – bol-van (MIT) · ByeDPI – hufrea (MIT) · Cygwin · zlib."
+  },
+  "scanDialog": {
+    "title": "Smart Scanner",
+    "intro": "Candidates are started one by one in a fixed order (recommended first) and measured in two rounds with new connections: DNS, connection, TLS (certificate of the real name) and HTTP. Your current state is recorded first and restored at the end.",
+    "ready": "Ready.",
+    "pressStart": "Choose the candidates and press Start. Nothing is applied without a full success in both rounds.",
+    "start": "Start Scan",
+    "restartDiscord": "Restart Discord",
+    "viewCode": "View the error code",
+    "cancelling": "Cancelling; the window closes when the candidate is stopped and your state is restored…",
+    "finished": "Finished.",
+    "again": "Scan Again",
+    "discordOpen": "Discord is open: restarting Discord is recommended so that the new setting takes effect.",
+    "openDiscordNow": "You can open Discord now.",
+    "trying": "Trying: {0}  ({1}/{2})",
+    "doneWith": "Done: {0}",
+    "done": "Done",
+    "whatToDo": "What to do? ({0} – {1})",
+    "introSimple": "One click: the recommended methods of every engine are tried in order; the first one that fully works is applied.",
+    "simpleInfo": "{0} recommended candidate(s); {1} engine(s) can run on this computer. The connection may drop for a moment between driver-based candidates.",
+    "scopeTitle": "CANDIDATES",
+    "scope": {
+      "Recommended": "Recommended",
+      "ActiveEngine": "Active engine",
+      "AllEngines": "All engines",
+      "DriverlessOnly": "Driverless only"
+    },
+    "scopeHint": {
+      "Recommended": "The recommended profiles of every engine, in a fixed order.",
+      "ActiveEngine": "Every profile of the active engine (built-in and custom).",
+      "AllEngines": "Every profile of the three engines; a comparison can take several minutes.",
+      "DriverlessOnly": "Only ByeDPI (no WinDivert driver): it covers the programs that use the proxy."
+    },
+    "scopeInfo": "{0} candidate(s): {1}",
+    "modeTitle": "MODE",
+    "mode": {
+      "StopOnFirstMatch": "Stop at first match",
+      "FullBenchmark": "Compare all"
+    },
+    "autoApply": "Apply when found",
+    "customize": "Customize candidates",
+    "panel": {
+      "candidates": "Candidates",
+      "targets": "Targets"
+    },
+    "widen": "Widen the include list temporarily",
+    "col": {
+      "profile": "Profile",
+      "tier": "Layer",
+      "engine": "Engine",
+      "state": "State",
+      "result": "Result",
+      "score": "Score",
+      "latency": "Latency",
+      "udp": "UDP/STUN",
+      "layers": "Layers"
+    },
+    "selectAll": "Select all",
+    "selectRecommended": "Recommended only",
+    "selectNone": "Clear",
+    "count": "{0} of {1} selected",
+    "state": {
+      "ready": "ready",
+      "missing": "files missing (NSF-102)"
+    },
+    "addTarget": "Add",
+    "removeTarget": "Remove selected",
+    "resetTargets": "Default targets",
+    "targetNote": "Host names only (e.g. discord.com): no https://, port, path, IP or local names. At most {0}. The quick test list of the Network page is separate.",
+    "tooManyTargets": "At most {0} targets.",
+    "pressStartSimple": "Press “Find and Connect”.",
+    "findAndConnect": "Find and Connect",
+    "apply": "Apply",
+    "appliedMark": "applied",
+    "appliedNow": "Applied: {0}.",
+    "applyFailed": "{0} could not be applied [{1}] {2}; the previous profile was restored.",
+    "detailHint": "Select a row to see the layers of every target in both rounds.",
+    "doneApplied": "Done – applied: {0}",
+    "notApplied": "It was not applied automatically. Select it and press “Apply” to use it.",
+    "pickAndApply": "Your previous state was restored. Select a result and press “Apply” to use it.",
+    "openWithout": "opens without protection too",
+    "outOfScope": "outside the list scope (not counted)",
+    "profileGone": "This profile no longer exists."
+  },
+  "fix": {
+    "denied": "Permission was not given.",
+    "falsePositive": "Microsoft's file submission page was opened. Choose 'Home customer' (not 'Software developer') and submit the quarantined file as 'Incorrectly detected as malware'. Troubleshooting → Full check (File integrity) shows that the file is the official one.",
+    "resetConfirm": "Protection will stop; the GoodbyeDPI/NSF Shield services and the WinDivert driver registration will be removed.\n\nContinue?",
+    "resetDoneRestored": "Reset finished; the proxy/DNS settings were restored too. If the problem continues, restart the computer.",
+    "resetDone": "Reset finished. If the problem continues, restart the computer.",
+    "conflictsResolved": "Conflicts resolved.",
+    "dnsFlushed": "DNS cache flushed. Restart Discord and the browser.",
+    "bfeStarted": "The BFE service was started.",
+    "protectionRestarted": "Protection was restarted.",
+    "hostsSelected": "The hosts file was selected in Explorer. Open Notepad as administrator to edit it.",
+    "appMode": "Switched to app mode.",
+    "folderOpened": "Folder opened: {0}",
+    "restoreBoth": "Also restore the Windows proxy and DNS settings changed by NSF Shield?",
+    "restoreProxy": "Also restore the Windows proxy setting changed by NSF Shield?",
+    "restoreDns": "Also restore the DNS servers changed by NSF Shield?",
+    "bfeFailed": "BFE could not be started: {0}"
+  },
+  "updateDialog": {
+    "whatsNew": "WHAT'S NEW",
+    "info": "The update is downloaded and verified, and the app reopens with the new version. Your settings are kept; protection is interrupted for a few seconds.",
+    "updateNow": "Update now",
+    "skip": "Skip this version",
+    "later": "Later",
+    "downloading": "Downloading…",
+    "installing": "Verified (SHA-256). Installing… The app will reopen in a few seconds.",
+    "cancelled": "Cancelled.",
+    "checkFailed": "The update check failed.",
+    "upToDate": "NSF Shield is up to date ({0}).",
+    "newVersion": "New version: {0}",
+    "released": "NSF Shield {0} has been released. You can install it with the 'Update' button on the home page.",
+    "title": "Update",
+    "heading": "New version: NSF Shield {0}",
+    "current": "Current version {0}",
+    "publishedOn": "Released:",
+    "verifiedSha": "verified with SHA-256",
+    "downloadingKb": "Downloading… {0} / {1} KB",
+    "failed": "The update could not be done: {0}",
+    "needsSetup": "Version {0} is published only as a setup package. This portable copy cannot install it by itself.\n\nSwitch to the installed version now? (Your settings are carried over; the portable folder is not deleted.)",
+    "needsSetupShort": "Version {0} is published as a setup package only: use \"Switch to the installed version\".",
+    "noPackage": "Version {0} has no package this copy can install (with a published SHA-256)."
+  },
+  "theme": {
+    "name": {
+      "light": "Light (classic)",
+      "emerald": "Emerald",
+      "ocean": "Ocean",
+      "lavender": "Lavender",
+      "solarizedLight": "Solarized Light",
+      "githubLight": "GitHub Light",
+      "dark": "Dark",
+      "githubDark": "GitHub Dark",
+      "solarizedDark": "Solarized Dark",
+      "sunset": "Sunset",
+      "contrast": "High Contrast",
+      "system": "System",
+      "systemHc": "System (high contrast)",
+      "systemDark": "System (dark)",
+      "systemLight": "System (light)"
+    },
+    "color": {
+      "Accent": "Accent color (buttons, selections)",
+      "Bg": "Window background",
+      "Card": "Card / panel",
+      "Border": "Border",
+      "Text": "Text",
+      "Muted": "Secondary text",
+      "Sidebar": "Sidebar",
+      "SidebarText": "Sidebar text",
+      "Green": "Success (green)",
+      "Amber": "Warning (orange)",
+      "Red": "Error (red)",
+      "LogBg": "Log (console) background"
+    },
+    "customSuffix": "+ custom colors"
+  },
+  "appearancePage": {
+    "title": "Appearance",
+    "subtitle": "Choose a ready-made theme or set every color yourself. The 'System' theme uses the Windows colors.",
+    "uiLevel": "UI LEVEL",
+    "appliedNow": "The change is applied right away.",
+    "presets": "READY-MADE THEMES",
+    "custom": "CUSTOM COLORS",
+    "colorHint": "Type a color code (#2563EB, 2563EB, #FFF or 37,99,235) or click the color box to pick one.",
+    "resetCustom": "Reset to theme defaults",
+    "copyCode": "Copy theme code",
+    "codeCopied": "The theme code was copied to the clipboard. Your friend can use the same colors with 'Paste theme code'.",
+    "pasteCode": "Paste theme code",
+    "tip": "Tip: first choose the ready-made theme closest to your taste, then edit only the colors you want to change. Button and badge text colors are adjusted automatically for readability.",
+    "level": {
+      "simple": "Simple: only what is needed. Start with one button, set up automatically, find problems. For beginners.",
+      "standard": "Standard: profiles, Internet Check, DNS settings and target sites are shown too.",
+      "advanced": "Advanced: everything. Log, network info, command lines, script export and all advanced settings."
+    },
+    "keepCustom": "Keep applying your custom colors on top of the new theme?\n\nIf you answer 'No', the custom colors are deleted.",
+    "badCode": "There is no valid theme code on the clipboard. The code must start with 'DKT1:'.",
+    "followSection": "WINDOWS LIGHT / DARK MODE",
+    "follow": "Follow the Windows light/dark mode",
+    "followInfo": "Windows is in {0} now. When it switches, the theme below switches too.",
+    "modeDark": "dark mode",
+    "modeLight": "light mode",
+    "lightTheme": "Light theme",
+    "darkTheme": "Dark theme",
+    "featured": "RECOMMENDED THEMES",
+    "apply": "Apply",
+    "unapplied": "Not applied yet",
+    "customInUse": "Custom colors are in use",
+    "contrastOk": "Readable: every text/background pair meets {0}:1 (WCAG AA).",
+    "contrastLow": "Low contrast: {0}. At least {1}:1 is recommended (WCAG AA); you can still apply it.",
+    "discardDraft": "You changed colors but did not apply them.\n\nApply them now? Choose 'No' to discard the changes.",
+    "pair": {
+      "textBg": "Text on background",
+      "textCard": "Text on card",
+      "mutedCard": "Secondary text on card",
+      "button": "Button text",
+      "sidebar": "Menu text"
+    },
+    "preview": {
+      "title": "Preview",
+      "text": "Secondary text looks like this.",
+      "badge": "Active",
+      "button": "Start",
+      "secondary": "Test"
+    }
+  },
+  "switch": {
+    "title": "Switch to the installed version",
+    "subtitle": "The portable copy is replaced by a normal installation. Nothing is deleted; you can remove this folder later.",
+    "stepsTitle": "WHAT HAPPENS",
+    "step1": "The latest setup package is downloaded and verified (HTTPS, SHA-256, publisher, version).",
+    "step2": "NSF Shield is installed into Program Files (administrator approval may be asked).",
+    "step3": "Your profiles, theme, language and DNS settings are checked and carried over.",
+    "step4": "The installed version opens; this window closes. You can then turn on the service and start with Windows.",
+    "sourceGithub": "Source: the latest release on GitHub.",
+    "sourceLocal": "Source (test): {0}",
+    "ready": "Ready. Protection stops briefly during the installation.",
+    "go": "Install and switch",
+    "previewOnly": "Not available in the preview build.",
+    "checking": "Looking for the latest version…",
+    "verifyingLocal": "Verifying the local setup package…",
+    "installing": "Installing… Approve the administrator prompt if it appears.",
+    "transferring": "Carrying your settings over…",
+    "opening": "Done. Opening the installed version…",
+    "failed": "The switch could not be completed: {0}",
+    "setupFailed": "The setup package ended with error code {0}.",
+    "setupTimeout": "The setup package did not finish within 15 minutes.",
+    "noRelease": "No release information was found.",
+    "olderRelease": "The published version ({0}) is older than this copy ({1}).",
+    "noSetup": "Version {0} has no verified setup package.",
+    "notSetup": "The file is not a NSF Shield setup package ({0}).",
+    "localPath": "The setup package path must be a full local path to an .exe file.",
+    "localMissing": "The setup package was not found or its size is invalid: {0}",
+    "localHash": "A valid SHA-256 (64 hex characters) is required for the local setup package.",
+    "localHashMismatch": "The SHA-256 of the local setup package does not match.",
+    "badTarget": "The installation folder is not valid: {0}",
+    "unprotectedTarget": "The installation folder is not write-protected, so settings are not copied there: {0}",
+    "doneTitle": "Welcome to the installed version",
+    "doneText": "Your settings were carried over. You can now let protection start with Windows or run it as a background service.",
+    "startInfo": "Opens at sign-in, minimized to the tray.",
+    "serviceInfo": "Protection runs even when the window is closed.",
+    "turnOn": "Turn on",
+    "turningOn": "Turning on…",
+    "fileTooLarge": "{0} is too large to carry over.",
+    "targetExists": "{0} already exists in the installed folder; it was not overwritten."
+  },
+  "engineEdit": {
+    "params": "{0} PARAMETERS (one rule or group per line)",
+    "helpSafety": "For your safety only full option names are accepted; options that write files or take a file path are refused. Payloads are chosen by name; the Include/Exclude lists are added by the app.",
+    "payloads": "PAYLOADS (bin\\zapret\\payloads)",
+    "options": "ALLOWED OPTIONS",
+    "valid": "The parameters are valid.",
+    "help": {
+      "zapret": "winws (zapret) captures traffic with the WinDivert driver. --wf-tcp and --wf-udp choose the captured ports. Every rule starts with --filter-tcp, --filter-udp or --filter-l7, and --new starts the next rule. Common methods: --dpi-desync=fake,multisplit or fake,multidisorder with --dpi-desync-split-pos and --dpi-desync-fooling=badseq,md5sig.",
+      "byedpi": "ByeDPI (ciadpi) is a local SOCKS proxy and needs no driver. Write the options as --name value. --split, --disorder, --fake, --oob and --tlsrec take a position such as 1+s (counted from the SNI). --auto=torst starts a group that is tried only when a connection is reset or times out."
+    }
+  },
+  "engineHelp": {
+    "zapret": {
+      "capture": "Captured traffic",
+      "captureText": "TCP ports {0} · UDP ports {1} (WinDivert filter).",
+      "rules": "{0} rule(s)",
+      "rulesText": "Every rule handles part of the traffic (for example QUIC, Discord voice, HTTP, HTTPS) with its own method.",
+      "methods": "Methods",
+      "voice": "Discord voice (UDP)",
+      "voiceText": "The Discord IP discovery and STUN packets of voice and video calls are handled too (UDP 50000-50100).",
+      "quic": "QUIC / HTTP3",
+      "quicText": "UDP 443 (QUIC) connections get fake initial packets, so browsers do not fall back slowly.",
+      "payloads": "Fake payloads",
+      "driverText": "Uses its own signed WinDivert 2.2.2 driver (bin\\zapret); the GoodbyeDPI driver is unloaded when you switch."
+    },
+    "driver": "Driver",
+    "noDns": "No DNS redirection",
+    "noDnsText": "This engine uses the system DNS. If your provider answers with fake addresses, turn on encrypted DNS (DoH) on the DNS Settings page.",
+    "byedpi": {
+      "proxy": "Local proxy",
+      "proxyText": "SOCKS5 on 127.0.0.1:{0} and HTTP on 127.0.0.1:{1}; only this computer can use it. While it runs, the Windows proxy points to it (this can be turned off in Settings).",
+      "methods": "Methods",
+      "auto": "Automatic fallback",
+      "autoText": "The methods after --auto are tried only when a connection is reset or times out.",
+      "noDriver": "No driver",
+      "noDriverText": "Loads no kernel driver: no conflict with anti-cheat software (Vanguard, FACEIT…), and it works in the portable version too.",
+      "tcpOnly": "Only programs that use the proxy",
+      "tcpOnlyText": "Programs that ignore the Windows proxy, and UDP traffic such as Discord voice, are not covered."
+    }
+  },
+  "engines": {
+    "byedpi": {
+      "noListen": "ByeDPI did not open its port 127.0.0.1:{0}.",
+      "notLoopback": "ByeDPI listened on an address other than 127.0.0.1 ({0}) and was stopped.",
+      "portBusy": "Port 127.0.0.1:{0} is used by another program; choose another ByeDPI port in Settings.",
+      "systemProxyBusy": "Your own proxy ({0}) is set as the Windows proxy, so it was not replaced. Programs use ByeDPI only through the Proxy page.",
+      "systemProxyFailed": "The Windows proxy could not be set: {0}",
+      "tip": "No driver · local proxy on 127.0.0.1 · anti-cheat friendly",
+      "portTaken": "Another process listens on port {0} ({1}); ByeDPI was not used there.",
+      "backupNotSaved": "The previous Windows proxy setting could not be saved, so the Windows proxy was not changed.",
+      "recoveryMissing": "The sign-in recovery helper is missing or changed, so the Windows proxy was not changed (a power loss could not be undone): {0} Reinstall NSF Shield."
+    },
+    "hint": {
+      "generic": "An antivirus may be blocking {0}, or another DPI tool may be running. Try 'Reset everything'."
+    },
+    "only64": "{0} only runs on 64-bit Windows.",
+    "wrongEngine": "This profile does not belong to {0}.",
+    "zapret": {
+      "alreadyRunning": "Another winws with the same filter is running (for example a zapret script). Use 'Resolve conflicts'.",
+      "fileProblem": "winws could not read a payload or list file. Check the file integrity (Troubleshooting → Full check).",
+      "tip": "WinDivert driver · TCP + UDP/QUIC (Discord voice) · service mode"
+    },
+    "goodbyedpi": {
+      "tip": "WinDivert driver · DNS redirection · service mode"
+    }
+  },
+  "lists": {
+    "badEntry": "'{0}' is not a valid domain name.",
+    "excludeUnsupported": "{0} has no exclude list; the Exclude list is used with Zapret and ByeDPI.",
+    "includeUnsupported": "{0} cannot use the include list.",
+    "tooMany": "A list can hold at most {0} domains.",
+    "template": {
+      "discordVoice": "Discord & voice",
+      "roblox": "Roblox",
+      "wattpad": "Wattpad",
+      "banksGov": "Banks & e-Devlet",
+      "antiCheat": "Games & anti-cheat"
+    },
+    "writeFailedStop": "The site lists you turned on could not be written and locked ({0}); protection was not started so it never applies to more sites than you chose.",
+    "changed": "The site list {0} changed while it was being locked; protection was not started.",
+    "targetedRulesLeftOut": "Targeted mode: {0} rule(s) of this profile cannot be limited to the target sites (no host name, e.g. Discord voice) and were left out.",
+    "targetedNothingLeft": "Targeted mode: no rule of this {0} profile can be limited to the target sites, so protection was not started. Choose another profile or turn off targeted mode.",
+    "excludePartial": "The exclusion list cannot reach {0} rule(s) without host names (e.g. Discord voice); those rules keep working."
+  },
+  "setup": {
+    "serviceNotRestored": "The setup package installed the files, but the background service (protection) could not be started again. Start protection again."
+  }
+}

@@ -1,0 +1,189 @@
+# Builds on every push, builds twice (unsigned) to check that NSFShield.exe, the recovery helper, the ZIP and the Setup are
+# identical, and runs the unit tests (the step fails on a non-zero exit code or a missing, empty or old report). When a tag
+# starting with "v" is pushed (e.g. v1.0.0), exactly this version's two distributions – NSF-Shield-x.y.z-Setup.exe
+# (recommended) and the portable NSF-Shield-x.y.z.zip – and NSF-Shield-x.y.z.SHA256SUMS.txt are published as a GitHub
+# release with build provenance; the app's automatic update uses these releases (installed copies the Setup, portable
+# copies the ZIP).
+#
+# Every action is pinned to a full commit SHA (the version in the comment is for information only). Tool versions:
+# .NET SDK from global.json, Inno Setup from the INNO_* values below (SHA-256 verified); build.ps1 prints the versions it used.
+# The runner label (windows-2025) is a moving image maintained by GitHub: its contents change over time, so the
+# reproducibility check compares two builds of the same run, not builds of different days.
+#
+# Signing hook: if the NSF_SIGN_ARGS (and if needed NSF_SIGNTOOL) secret is set in the repository settings,
+# build.ps1 signs the exe and the setup package; otherwise nothing is signed.
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  INNO_VERSION: '6.7.3'
+  INNO_URL: 'https://github.com/jrsoftware/issrc/releases/download/is-6_7_3/innosetup-6.7.3.exe'
+  INNO_SHA256: '9c73c3bae7ed48d44112a0f48e66742c00090bdb5bef71d9d3c056c66e97b732'
+
+jobs:
+  build:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          global-json-file: global.json
+
+      - name: Inno Setup (pinned version, SHA-256 verified)
+        shell: pwsh
+        run: |
+          $exe = Join-Path $env:RUNNER_TEMP 'innosetup.exe'
+          Invoke-WebRequest $env:INNO_URL -OutFile $exe
+          $h = (Get-FileHash $exe -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($h -ne $env:INNO_SHA256) { throw "Inno Setup hash mismatch: $h" }
+          $dir = Join-Path $env:RUNNER_TEMP 'inno'
+          $p = Start-Process $exe -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/SP-','/CURRENTUSER',"/DIR=$dir" -Wait -PassThru
+          if ($p.ExitCode -ne 0 -or -not (Test-Path "$dir\ISCC.exe")) { throw 'Inno Setup could not be installed' }
+          "ISCC=$dir\ISCC.exe" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Version (single source src/Program.cs)
+        shell: pwsh
+        run: |
+          $m = [regex]::Match((Get-Content src\Program.cs -Raw), '\[assembly: AssemblyInformationalVersion\("(\d+\.\d+\.\d+)"\)\]')
+          if (-not $m.Success) { throw 'Version not found in src\Program.cs' }
+          "NSF_VERSION=$($m.Groups[1].Value)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Build, package and verify reproducibility
+        shell: powershell
+        env:
+          NSF_SIGN_ARGS: ${{ secrets.NSF_SIGN_ARGS }}
+          NSF_SIGNTOOL: ${{ secrets.NSF_SIGNTOOL }}
+        run: ./build.ps1 -VerifyReproducible
+
+      - name: Unit tests
+        shell: powershell
+        run: |
+          # a report of this run only: a new file name, checked for presence, size and time, and the process exit code
+          $out = Join-Path $env:RUNNER_TEMP "selftest-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT.txt"
+          Remove-Item $out -ErrorAction SilentlyContinue
+          $start = (Get-Date).ToUniversalTime()
+          $p = Start-Process build\NSFShield.preview.exe -ArgumentList '--selftest', "`"$out`"" -Wait -NoNewWindow -PassThru
+          if (-not (Test-Path $out)) { throw 'No test report' }
+          $item = Get-Item $out
+          if ($item.Length -eq 0) { throw 'Empty test report' }
+          if ($item.LastWriteTimeUtc -lt $start) { throw 'The test report is not from this run' }
+          Get-Content $out -Encoding UTF8
+          $ok = @(Select-String -Path $out -Pattern '^OK ').Count
+          $fail = @(Select-String -Path $out -Pattern '^FAIL').Count
+          Write-Host "OK: $ok  FAIL: $fail  exit code: $($p.ExitCode)"
+          if ($p.ExitCode -ne 0) { throw "Unit tests failed (exit code $($p.ExitCode))" }
+          if ($fail -gt 0 -or $ok -eq 0) { throw 'Unit tests failed' }
+
+      - name: Release notes (the ZIP and Setup hashes first)
+        shell: powershell
+        run: |
+          $v = $env:NSF_VERSION
+          $p = Start-Process build\NSFShield.preview.exe -ArgumentList '--release-notes', $v, "dist\NSF-Shield-$v.zip", "dist\NSF-Shield-$v-Setup.exe", 'CHANGELOG.md', '.github\release-notes.md', $env:GITHUB_REPOSITORY, "dist\NSF-Shield-$v.release-notes.md" -Wait -NoNewWindow -PassThru
+          if ($p.ExitCode -ne 0 -or -not (Test-Path "dist\NSF-Shield-$v.release-notes.md")) { throw 'Release notes could not be made' }
+
+      - name: Does the version tag match the code?
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: powershell
+        run: |
+          $v = $env:GITHUB_REF_NAME.TrimStart('v')
+          if ($v -ne $env:NSF_VERSION) { throw "The tag ($v) does not match the version in src\Program.cs ($env:NSF_VERSION)." }
+          foreach ($f in "dist\NSF-Shield-$v.zip", "dist\NSF-Shield-$v-Setup.exe", "dist\NSF-Shield-$v.SHA256SUMS.txt") {
+            if (-not (Test-Path $f)) { throw "$f was not produced." }
+          }
+
+      # exactly this version's files (never a wide pattern that could pick up other dist files)
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: NSF-Shield
+          path: |
+            dist/NSF-Shield-${{ env.NSF_VERSION }}.zip
+            dist/NSF-Shield-${{ env.NSF_VERSION }}-Setup.exe
+            dist/NSF-Shield-${{ env.NSF_VERSION }}.SHA256SUMS.txt
+            dist/NSF-Shield-${{ env.NSF_VERSION }}.release-notes.md
+          if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: windows-2025
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: NSF-Shield
+          path: dist
+
+      - name: SHA256SUMS
+        shell: pwsh
+        run: |
+          $v = $env:GITHUB_REF_NAME.TrimStart('v')
+          "NSF_VERSION=$v" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          # the versioned manifest of the build is published as it is; its first two lines are the ZIP and the Setup
+          $sums = "dist\NSF-Shield-$v.SHA256SUMS.txt"
+          if (-not (Test-Path $sums)) { throw "$sums was not produced." }
+          $first = Get-Content $sums -TotalCount 2
+          $i = 0
+          foreach ($f in "NSF-Shield-$v.zip", "NSF-Shield-$v-Setup.exe") {
+            $h = (Get-FileHash "dist\$f" -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($first[$i] -ne "$h  $f") { throw "The hash of $f does not match $sums" }
+            $i++
+          }
+
+      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: |
+            dist/NSF-Shield-${{ env.NSF_VERSION }}.zip
+            dist/NSF-Shield-${{ env.NSF_VERSION }}-Setup.exe
+            dist/NSF-Shield-${{ env.NSF_VERSION }}.SHA256SUMS.txt
+
+      - name: Publish the GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $v = $env:GITHUB_REF_NAME.TrimStart('v')
+          $zip = "dist\NSF-Shield-$v.zip"
+          $setup = "dist\NSF-Shield-$v-Setup.exe"
+          $sums = "dist\NSF-Shield-$v.SHA256SUMS.txt"
+          # made by the build job (NSFShield.preview.exe --release-notes): the ZIP and Setup SHA-256 lines come first, each
+          # next to its file name (the updater reads the hash next to the name when GitHub gives no digest)
+          $notes = "dist\NSF-Shield-$v.release-notes.md"
+          $hz = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          if (-not (Get-Content $notes -TotalCount 1).Contains($hz)) { throw 'The release notes do not start with the ZIP hash' }
+          # the release of this tag (.github/scripts/release-check.ps1, tested offline by tests/release-check.Tests.ps1):
+          # exit 0 = none yet (HTTP 404); exit 10 = published, not a draft or pre-release, the three files byte-identical;
+          # a failed query, a draft, a pre-release or a missing or different file fail the job
+          & ./.github/scripts/release-check.ps1 -Tag $env:GITHUB_REF_NAME -Dist dist
+          if ($LASTEXITCODE -eq 10) { Write-Host 'This release is already published with identical files.'; exit 0 }
+          if ($LASTEXITCODE -ne 0) { throw "The release check failed (exit code $LASTEXITCODE)" }
+          gh release create $env:GITHUB_REF_NAME $setup $zip $sums --title "NSF Shield $v" --notes-file $notes --latest
+          if ($LASTEXITCODE -ne 0) { throw 'The release could not be created' }
+          # read back: the new release must now be published exactly as checked above
+          & ./.github/scripts/release-check.ps1 -Tag $env:GITHUB_REF_NAME -Dist dist
+          if ($LASTEXITCODE -ne 10) { throw "The published release could not be verified (exit code $LASTEXITCODE)" }

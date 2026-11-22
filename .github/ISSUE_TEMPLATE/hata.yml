@@ -1,0 +1,45 @@
+name: Hata bildir
+description: Bir şey çalışmıyorsa (Discord açılmıyor, hata kodu, çökme…)
+labels: ["hata"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bildirmeden önce uygulamada **Sorun Giderme → Tam kontrolü başlat**'ı deneyin; çoğu sorun hata kodu ve çözümüyle orada görünür.
+        Uygulamadaki **Sorun bildir** düğmesi bu formu sizin için doldurur. **Destek paketi** (kişisel bilgileri gizlenmiş zip) eklemek çözümü hızlandırır.
+  - type: input
+    id: surum
+    attributes:
+      label: NSF Shield sürümü
+      placeholder: "ör. 1.0.0 (Hakkında sayfasında yazar)"
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows sürümü
+      placeholder: "ör. Windows 11 23H2 / Derleme 22631"
+  - type: input
+    id: kod
+    attributes:
+      label: Hata kodu (varsa)
+      placeholder: "ör. NSF-204"
+  - type: input
+    id: isp
+    attributes:
+      label: İnternet servis sağlayıcısı (isteğe bağlı)
+      description: Farklı servis sağlayıcılarda farklı yöntemler çalıştığı için yardımcı olur.
+      placeholder: "ör. Türk Telekom, Turkcell Superonline, Vodafone, TurkNet…"
+  - type: textarea
+    id: aciklama
+    attributes:
+      label: Ne oldu?
+      description: Ne yapmaya çalıştınız, ne bekliyordunuz, ne oldu?
+    validations:
+      required: true
+  - type: textarea
+    id: ozet
+    attributes:
+      label: Uygulamanın özeti
+      description: Uygulamadaki "Sorun bildir" düğmesi bu alanı doldurur (IP adresleri gizlenmiştir).
+      render: text

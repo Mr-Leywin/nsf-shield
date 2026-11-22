@@ -1,0 +1,3044 @@
+{
+  "_meta": {
+    "code": "tr",
+    "name": "Turkish",
+    "nativeName": "Türkçe"
+  },
+  "errors": {
+    "category": {
+      "app": "Uygulama ve yetki",
+      "driver": "Sürücü (WinDivert)",
+      "conflict": "Çakışma",
+      "dns": "DNS",
+      "access": "Erişim engeli",
+      "goodbyedpi": "DPI motoru",
+      "service": "Hizmet ve başlangıç",
+      "network": "Ağ bağlantısı",
+      "discord": "Discord",
+      "proxy": "Proxy"
+    },
+    "fix": {
+      "RestartAsAdmin": "Yönetici olarak yeniden aç",
+      "OpenAppFolder": "Uygulama klasörünü aç",
+      "ResetAll": "Tümünü sıfırla",
+      "ResolveConflicts": "Çakışmaları gider",
+      "FlushDns": "DNS önbelleğini temizle",
+      "FindBest": "En iyi yöntemi bul",
+      "OpenProfiles": "Profillere git",
+      "OpenDnsPage": "DNS ayarlarına git",
+      "TestDnsServers": "DNS sunucularını test et",
+      "StartBfe": "BFE hizmetini başlat",
+      "OpenWindowsSecurity": "Windows Güvenliği'ni aç",
+      "RestartDiscord": "Discord'u yeniden başlat",
+      "StartProtection": "Korumayı yeniden başlat",
+      "OpenLog": "Günlüğü aç",
+      "OpenSites": "Hedef sitelere git",
+      "OpenProxySettings": "Proxy ayarlarını aç",
+      "OpenDateTime": "Tarih/saat ayarlarını aç",
+      "DisableServiceMode": "Uygulama moduna geç",
+      "OpenHosts": "hosts dosyasını göster",
+      "SiteAnalysis": "Site analizi yap",
+      "OpenSettings": "Ayarlara git",
+      "OpenProxyPage": "Proxy sayfasına git",
+      "ReportFalsePositive": "Yanlış pozitif bildir"
+    },
+    "NSF-101": {
+      "title": "Yönetici izni yok",
+      "summary": "NSF Shield ağ sürücüsünü (WinDivert) yükleyebilmek için yönetici olarak çalışmalıdır.",
+      "causes": [
+        "Uygulama normal kullanıcı olarak açıldı.",
+        "Windows'un 'Bu uygulamanın değişiklik yapmasına izin verilsin mi?' sorusuna 'Hayır' denildi."
+      ],
+      "steps": [
+        "Uygulamayı kapatın.",
+        "NSFShield.exe'ye sağ tıklayıp 'Yönetici olarak çalıştır'ı seçin.",
+        "Kurulumlu sürümde Ayarlar → 'Windows açılışında başlat'ı açarsanız sonraki açılışlarda izin sorulmadan yönetici olarak başlar."
+      ],
+      "detect": "Uygulama açılırken ve Sorun Bul taramasında kontrol edilir."
+    },
+    "NSF-102": {
+      "title": "Motor dosyaları eksik",
+      "summary": "Seçili motorun bir dosyası (goodbyedpi.exe, winws.exe, cygwin1.dll, ciadpi.exe ya da bir WinDivert dosyası) bin klasöründe bulunamadı.",
+      "causes": [
+        "Antivirüs programı dosyaları karantinaya aldı ya da sildi.",
+        "Zip dosyası tam olarak çıkarılmadı.",
+        "Dosyalar elle taşındı veya silindi."
+      ],
+      "steps": [
+        "Antivirüsün karantina listesine bakın; NSF Shield dosyalarını geri yükleyin.",
+        "Dosyayı Microsoft'a yanlış pozitif olarak bildirin ('Yanlış pozitif bildir' düğmesi → microsoft.com/wdsi/filesubmission); incelenip onaylanınca Defender uyarmayı bırakır.",
+        "Dosyaların resmi olduğunu doğrulayın: Sorun Giderme → Tam kontrol, 'Dosya bütünlüğü' satırında SHA-256 özetlerini resmi GoodbyeDPI 0.2.3rc3 sürümüyle karşılaştırır.",
+        "Zip dosyasını yeniden, tamamen bir klasöre çıkarın (ya da kurulum paketini yeniden çalıştırın).",
+        "Son çare: yalnızca NSF Shield klasörünü (tüm diski ya da İndirilenler'i değil) antivirüs istisnalarına ekleyin"
+      ],
+      "detect": "Koruma başlatılırken ve Sorun Bul taramasında dosyalar kontrol edilir."
+    },
+    "NSF-103": {
+      "title": "Uygulama geçici bir klasörden çalışıyor",
+      "summary": "Uygulama zip dosyasının içinden ya da Temp klasöründen çalıştırılmış. Ayarlar kaybolabilir; arka plan hizmeti ve açılış görevi bozulur.",
+      "causes": [
+        "Zip dosyası çift tıklanarak açıldı ve uygulama doğrudan içinden başlatıldı.",
+        "Uygulama İndirilenler/Temp gibi geçici bir yerde duruyor."
+      ],
+      "steps": [
+        "Uygulamadan çıkın.",
+        "Zip dosyasına sağ tıklayıp 'Tümünü ayıkla' deyin.",
+        "Klasörü kalıcı bir yere koyun (ör. C:\\Program Files\\NSF Shield ya da Belgeler).",
+        "Uygulamayı yeni yerinden çalıştırın."
+      ],
+      "detect": "Uygulama açılırken klasör yolu kontrol edilir."
+    },
+    "NSF-104": {
+      "title": "Ayarlar kaydedilemiyor",
+      "summary": "Uygulama 'data' klasörüne yazamıyor; yaptığınız değişiklikler kapatınca kaybolur.",
+      "causes": [
+        "Klasör salt okunur ya da korumalı bir konumda.",
+        "Disk dolu.",
+        "Windows Güvenliği'nin 'Denetimli klasör erişimi' özelliği yazmayı engelliyor."
+      ],
+      "steps": [
+        "Uygulamayı yazılabilir bir klasöre taşıyın.",
+        "Windows Güvenliği → Virüs ve tehdit koruması → Fidye yazılımı koruması → Denetimli klasör erişimi'nde NSF Shield'e izin verin.",
+        "Diskte yer açın."
+      ]
+    },
+    "NSF-105": {
+      "title": "Motor dosyaları doğrulanamadı",
+      "summary": "Seçili motorun bir dosyası resmi sürümüyle (GoodbyeDPI 0.2.3rc3, zapret v72.13 ya da ByeDPI 0.17.3, SHA-256) aynı değil. Güvenlik için koruma başlatılmadı.",
+      "causes": [
+        "Dosya indirme sırasında bozuldu.",
+        "Bir program ya da kişi dosyayı değiştirdi.",
+        "Antivirüs dosyayı 'temizlemeye' çalışıp bozdu."
+      ],
+      "steps": [
+        "NSF Shield'i resmi sürüm sayfasından (GitHub) yeniden indirin ve yeni bir klasöre çıkarın.",
+        "Kurulumlu sürümü kullanıyorsanız kurulumu onarın ya da yeniden kurun.",
+        "Sorun sürerse günlükteki dosya adını ve özeti sorun bildirimine ekleyin."
+      ],
+      "detect": "Koruma her başlatıldığında dosyaların özeti programa gömülü resmi özetlerle karşılaştırılır."
+    },
+    "NSF-106": {
+      "title": "Son kapanış beklenmedikti",
+      "summary": "NSF Shield geçen sefer düzgün kapanmadı. Uygulama modundaki koruma uygulamayla birlikte durmuş olabilir; şimdi yeniden başladı.",
+      "causes": [
+        "Uygulama bir hata nedeniyle çöktü.",
+        "Görev Yöneticisi'nden ya da başka bir programla zorla kapatıldı.",
+        "Elektrik kesildi ya da bilgisayar donup kapatıldı."
+      ],
+      "steps": [
+        "Bir şey yapmanız gerekmez; sık tekrarlanıyorsa günlüğü ve data\\last-crash.txt dosyasını sorun bildirimine ekleyin (Sorun Giderme → Destek paketi)."
+      ],
+      "detect": "Uygulama açılırken bir önceki çalışmanın düzgün kapanıp kapanmadığı denetlenir."
+    },
+    "NSF-201": {
+      "title": "WinDivert sürücüsü yüklenemedi",
+      "summary": "GoodbyeDPI'ın paketleri yakalamak için kullandığı ağ sürücüsü başlatılamadı.",
+      "causes": [
+        "Antivirüs programı sürücüyü engelliyor.",
+        "Başka bir programın yüklediği farklı sürüm WinDivert sürücüsü bellekte kalmış.",
+        "Windows bekleyen bir güncelleme için yeniden başlatılmayı bekliyor."
+      ],
+      "steps": [
+        "Sorun Giderme → 'Tümünü sıfırla' düğmesine basın.",
+        "Bilgisayarı yeniden başlatın.",
+        "Antivirüs engelliyorsa NSF-204'teki adımları izleyin (önce yanlış pozitif bildirimi).",
+        "Korumayı tekrar başlatın."
+      ],
+      "detect": "GoodbyeDPI'ın 'Error opening filter' çıktısından algılanır."
+    },
+    "NSF-202": {
+      "title": "Sürücü dosyaları bulunamadı",
+      "summary": "GoodbyeDPI, WinDivert.dll veya WinDivert64.sys dosyasını bulamadığını bildirdi.",
+      "causes": [
+        "Antivirüs dosyayı sildi ya da karantinaya aldı.",
+        "Paket eksik çıkarıldı."
+      ],
+      "steps": [
+        "Antivirüs karantinasından dosyaları geri yükleyin.",
+        "Dosyayı Microsoft'a yanlış pozitif olarak bildirin ('Yanlış pozitif bildir' düğmesi → microsoft.com/wdsi/filesubmission); incelenip onaylanınca Defender uyarmayı bırakır.",
+        "Dosyaların resmi olduğunu doğrulayın: Sorun Giderme → Tam kontrol, 'Dosya bütünlüğü' satırında SHA-256 özetlerini resmi GoodbyeDPI 0.2.3rc3 sürümüyle karşılaştırır.",
+        "Zip'i yeniden çıkarın.",
+        "Son çare: yalnızca NSF Shield klasörünü (tüm diski ya da İndirilenler'i değil) antivirüs istisnalarına ekleyin"
+      ],
+      "detect": "GoodbyeDPI çıktısındaki 'were not found' ifadesinden algılanır."
+    },
+    "NSF-203": {
+      "title": "Sürücü imzası doğrulanamadı",
+      "summary": "Windows, WinDivert sürücüsünün dijital imzasını kabul etmedi.",
+      "causes": [
+        "Windows çok eski ve SHA-2 imzalarını desteklemiyor.",
+        "Sürücü dosyası bozulmuş.",
+        "Sürücü imza zorlaması ayarlarıyla oynanmış."
+      ],
+      "steps": [
+        "Windows Update ile tüm güncellemeleri yükleyin.",
+        "Paketi yeniden indirip çıkarın.",
+        "Bilgisayarı yeniden başlatın."
+      ],
+      "detect": "GoodbyeDPI çıktısındaki 'digital signature' ifadesinden algılanır."
+    },
+    "NSF-204": {
+      "title": "Sürücü güvenlik yazılımı tarafından engellendi",
+      "summary": "Antivirüs programınız WinDivert sürücüsünün yüklenmesini engelledi. WinDivert bir virüs değildir; ağ paketlerini işlediği için 'RiskTool' olarak işaretlenir.",
+      "causes": [
+        "Kaspersky, Norton, ESET, Bitdefender, Avast/AVG gibi antivirüsler WinDivert'i engelleyebilir."
+      ],
+      "steps": [
+        "Dosyaların resmi olduğunu doğrulayın: Sorun Giderme → Tam kontrol, 'Dosya bütünlüğü' satırında SHA-256 özetlerini resmi GoodbyeDPI 0.2.3rc3 sürümüyle karşılaştırır.",
+        "Dosyayı Microsoft'a yanlış pozitif olarak bildirin ('Yanlış pozitif bildir' düğmesi → microsoft.com/wdsi/filesubmission); incelenip onaylanınca Defender uyarmayı bırakır.",
+        "Diğer antivirüsler (Kaspersky, Norton, ESET…) için de üreticinin 'yanlış pozitif bildir' sayfasını kullanın.",
+        "Karantinaya alınan dosya varsa geri yükleyin ve korumayı yeniden başlatın.",
+        "Son çare: yalnızca NSF Shield klasörünü (tüm diski ya da İndirilenler'i değil) antivirüs istisnalarına ekleyin (Kaspersky: Ayarlar → Tehditler ve İstisnalar → İstisnaları yönet; Norton: Taramalardan Dışlanacak Öğeler.)"
+      ],
+      "detect": "GoodbyeDPI çıktısındaki 'blocked by security software' ifadesinden algılanır."
+    },
+    "NSF-205": {
+      "title": "Temel Filtreleme Altyapısı (BFE) kapalı",
+      "summary": "WinDivert'in çalışması için gereken 'Base Filtering Engine' Windows hizmeti çalışmıyor.",
+      "causes": [
+        "Hizmet bir optimizasyon programı ya da kullanıcı tarafından devre dışı bırakıldı."
+      ],
+      "steps": [
+        "Aşağıdaki 'BFE hizmetini başlat' düğmesini deneyin.",
+        "Olmazsa: Win+R → services.msc → 'Base Filtering Engine' → Başlangıç türü: Otomatik → Başlat.",
+        "Bilgisayarı yeniden başlatın."
+      ],
+      "detect": "GoodbyeDPI çıktısından ve Sorun Bul taramasında hizmet durumundan algılanır."
+    },
+    "NSF-206": {
+      "title": "Uyumsuz WinDivert sürümü yüklü",
+      "summary": "Bellekte başka bir programın yüklediği farklı sürümde WinDivert sürücüsü var.",
+      "causes": [
+        "zapret, eski GoodbyeDPI sürümleri ya da WinDivert kullanan başka bir araç çalıştı."
+      ],
+      "steps": [
+        "WinDivert kullanan diğer programları kapatın.",
+        "'Tümünü sıfırla' düğmesine basın.",
+        "Bilgisayarı yeniden başlatın."
+      ],
+      "detect": "GoodbyeDPI çıktısındaki 'incompatible version' ifadesinden algılanır."
+    },
+    "NSF-207": {
+      "title": "Antivirüs programı tespit edildi",
+      "summary": "Bilgisayarınızda üçüncü taraf bir antivirüs var. Koruma sorunsuz çalışıyorsa bir şey yapmanıza gerek yok; sürücü hatası alırsanız NSF-204'teki adımları izleyin.",
+      "causes": [
+        "Bazı antivirüsler WinDivert'i haber vermeden engeller ya da GoodbyeDPI'ı sonlandırır."
+      ],
+      "steps": [
+        "Engelleme olursa önce dosyayı yanlış pozitif olarak bildirin (NSF-204).",
+        "Antivirüsün 'şifreli bağlantıları tara' (HTTPS tarama) özelliği sertifika hatalarına yol açıyorsa kapatın."
+      ],
+      "detect": "Sorun Bul taramasında Windows Güvenlik Merkezi'nden okunur."
+    },
+    "NSF-301": {
+      "title": "Başka bir DPI aracı çalışıyor",
+      "summary": "Uygulama dışında çalışan bir goodbyedpi.exe veya winws.exe var (ör. eski .cmd betikleri ya da bir zapret betiği). İki WinDivert aracı aynı anda çalışırsa bağlantılar bozulur.",
+      "causes": [
+        "Eski 1-4 numaralı betiklerden biri ya da bir zapret betiği çalıştırıldı.",
+        "Başka bir GoodbyeDPI veya zapret arayüzü kullanılıyor."
+      ],
+      "steps": [
+        "'Çakışmaları gider' düğmesine basın; NSF Shield diğerlerini kapatıp devralır."
+      ],
+      "detect": "Her 3 saniyede bir çalışan işlemler kontrol edilir."
+    },
+    "NSF-302": {
+      "title": "Eski GoodbyeDPI hizmeti kurulu",
+      "summary": "service_install betikleriyle kurulmuş 'GoodbyeDPI' Windows hizmeti var; bilgisayar açılınca kendiliğinden başlar ve NSF Shield ile çakışır.",
+      "causes": [
+        "Daha önce bir service_install_*.cmd betiği çalıştırıldı."
+      ],
+      "steps": [
+        "'Çakışmaları gider' düğmesine basın; eski hizmet kaldırılır."
+      ]
+    },
+    "NSF-303": {
+      "title": "Başka bir DPI aşma aracı çalışıyor",
+      "summary": "zapret (winws), ByeDPI, SpoofDPI, GreenTunnel gibi başka bir engel aşma programı açık. Aynı anda iki araç paketleri değiştirirse hiçbiri düzgün çalışmaz.",
+      "causes": [
+        "Daha önce kurulan başka bir engel aşma aracı arka planda çalışıyor."
+      ],
+      "steps": [
+        "Diğer aracı kapatın (görev yöneticisinden ya da kendi tepsi simgesinden).",
+        "Gerekirse o aracın hizmetini kaldırın.",
+        "NSF Shield korumasını yeniden başlatın."
+      ],
+      "detect": "Sorun Bul taramasında çalışan işlemler kontrol edilir."
+    },
+    "NSF-304": {
+      "title": "VPN veya proxy etkin",
+      "summary": "Bir VPN bağlantısı ya da sistem proxy'si açık. Trafik VPN/proxy üzerinden gidiyorsa GoodbyeDPI'a gerek yoktur, ikisi birlikte sorun çıkarabilir.",
+      "causes": [
+        "VPN programı (WARP, Proton, Nord, WireGuard, OpenVPN…) bağlı.",
+        "Windows proxy ayarı açık."
+      ],
+      "steps": [
+        "VPN kullanacaksanız NSF Shield korumasını kapatın; NSF Shield kullanacaksanız VPN'i kapatın.",
+        "Proxy kullanmıyorsanız Ayarlar → Ağ ve İnternet → Proxy'den kapatın."
+      ],
+      "detect": "Sorun Bul taramasında ağ bağdaştırıcıları ve proxy ayarı kontrol edilir."
+    },
+    "NSF-401": {
+      "title": "DNS engeli var",
+      "summary": "Servis sağlayıcınızın DNS sunucusu engelli siteler için sahte ya da boş adres döndürüyor. Türkiye'de Discord bu şekilde engelli; DNS yönlendirmesi olmadan Discord açılmaz.",
+      "causes": [
+        "Servis sağlayıcı DNS düzeyinde erişim engeli uyguluyor."
+      ],
+      "steps": [
+        "DNS yönlendirmesi içeren bir profil kullanın (ör. 'Türkiye – Önerilen').",
+        "Alternatif: 'DNS Ayarları' sayfasından Windows'un DNS sunucusunu değiştirin.",
+        "Ardından DNS önbelleğini temizleyip Discord'u yeniden başlatın."
+      ],
+      "detect": "Koruma kapalıyken sistem DNS'inin yanıtı bağımsız DNS sunucularıyla karşılaştırılır."
+    },
+    "NSF-402": {
+      "title": "Yönlendirilen DNS sunucusu yanıt vermiyor",
+      "summary": "Profilin kullandığı DNS sunucusuna ulaşılamıyor. Bu durumda koruma açıkken hiçbir site açılmayabilir.",
+      "causes": [
+        "DNS sunucusu geçici olarak erişilemez.",
+        "Servis sağlayıcı ya da modem o portu engelliyor.",
+        "Güvenlik duvarı UDP trafiğini engelliyor."
+      ],
+      "steps": [
+        "İnternet Kontrolü → DNS Sunucuları testini çalıştırın.",
+        "Yanıt veren bir DNS kullanan profile geçin (AdGuard, Quad9, OpenDNS).",
+        "'En iyi yöntemi bul' taraması yanıt vermeyen sunucuları otomatik atlar."
+      ],
+      "detect": "Koruma başlatılırken DNS sunucusuna deneme sorgusu gönderilir."
+    },
+    "NSF-403": {
+      "title": "Koruma açık ama DNS yanıtı hâlâ yanlış",
+      "summary": "DNS yönlendirmesi açık olduğu hâlde Windows engelli adresi döndürüyor.",
+      "causes": [
+        "Windows DNS önbelleğinde eski kayıt kaldı.",
+        "Bağlantı IPv6 üzerinden servis sağlayıcının DNS'ine gidiyor.",
+        "VPN ya da başka bir DNS istemcisi araya giriyor.",
+        "hosts dosyasında kayıt var."
+      ],
+      "steps": [
+        "DNS önbelleğini temizleyin.",
+        "Discord'u ve tarayıcıyı tamamen kapatıp yeniden açın.",
+        "Sorun sürerse 'DNS Ayarları' sayfasından Windows DNS'ini değiştirin."
+      ],
+      "detect": "Koruma başladıktan sonra sistem DNS yanıtı doğrulanır."
+    },
+    "NSF-404": {
+      "title": "IPv6 DNS sorguları yönlendirilmiyor",
+      "summary": "Bağlantınız IPv6 kullanıyor ama seçili profil yalnızca IPv4 DNS sorgularını yönlendiriyor. Windows IPv6 üzerinden sahte yanıt alabilir.",
+      "causes": [
+        "Özel profilde yalnızca IPv4 DNS adresi girildi."
+      ],
+      "steps": [
+        "Hazır profillerden birini kullanın (hepsi IPv6'yı da yönlendirir) ya da özel profilinize IPv6 DNS adresi ekleyin."
+      ]
+    },
+    "NSF-405": {
+      "title": "hosts dosyasında Discord kaydı var",
+      "summary": "Windows'un hosts dosyasında Discord alan adlarıyla ilgili kayıt bulundu. Bu kayıtlar DNS'i geçersiz kılar ve eski/yanlış adreslere yönlendirebilir.",
+      "causes": [
+        "Daha önce denenen bir 'engel aşma' yöntemi hosts dosyasına adres ekledi."
+      ],
+      "steps": [
+        "C:\\Windows\\System32\\drivers\\etc\\hosts dosyasını Not Defteri ile (yönetici olarak) açın.",
+        "İçinde 'discord' geçen satırları silin ya da başına # koyun ve kaydedin.",
+        "DNS önbelleğini temizleyin."
+      ],
+      "detect": "Sorun Bul taramasında hosts dosyası okunur."
+    },
+    "NSF-501": {
+      "title": "DPI engeli aşılamadı (bağlantı kesiliyor)",
+      "summary": "Doğru sunucuya bağlanılıyor ama şifreli bağlantı kurulurken kesiliyor. Servis sağlayıcının DPI cihazı kullanılan yöntemi tanıyor.",
+      "causes": [
+        "Servis sağlayıcı DPI ayarlarını değiştirdi.",
+        "Seçili yöntem bu hatta etkisiz."
+      ],
+      "steps": [
+        "'En iyi yöntemi bul' ile tüm yöntemleri otomatik deneyin.",
+        "Elle denemek için: Otomatik TTL, Tek Bayt Parçalama, Güçlendirilmiş Sahte Paket profilleri.",
+        "Hedefli mod açıksa kapatıp tekrar deneyin."
+      ],
+      "detect": "Bağlantı testinde TLS bağlantısının sıfırlanmasından algılanır."
+    },
+    "NSF-502": {
+      "title": "Zaman aşımı (paketler düşürülüyor)",
+      "summary": "Sunucudan yanıt gelmiyor. DPI cihazı paketleri sessizce düşürüyor ya da bağlantınız çok yavaş.",
+      "causes": [
+        "Servis sağlayıcı bağlantıyı kesmek yerine paketleri düşürüyor.",
+        "İnternet bağlantısı çok yavaş ya da kopuk."
+      ],
+      "steps": [
+        "İnternet bağlantınızın çalıştığını kontrol edin.",
+        "'En iyi yöntemi bul' taramasını çalıştırın."
+      ]
+    },
+    "NSF-503": {
+      "title": "IP engeli ya da sunucuya ulaşılamıyor",
+      "summary": "Sitenin doğru IP adresine bile bağlanılamıyor. Bu bir IP engeli olabilir; GoodbyeDPI IP engelini aşamaz.",
+      "causes": [
+        "Servis sağlayıcı sunucunun IP adresini engelledi.",
+        "Sunucu geçici olarak kapalı."
+      ],
+      "steps": [
+        "Bir süre sonra tekrar deneyin.",
+        "Modemi yeniden başlatın.",
+        "İnternet Kontrolü → Site Analizi ile durumu doğrulayın.",
+        "IP engeli sürüyorsa yalnızca VPN işe yarar."
+      ]
+    },
+    "NSF-504": {
+      "title": "Sertifika uyuşmazlığı",
+      "summary": "Bağlanılan sunucu farklı bir sertifika gösterdi. DNS sahte adres veriyor ya da araya giren bir program (antivirüs HTTPS taraması, kurumsal proxy) var.",
+      "causes": [
+        "DNS yönlendirmesi kapalı ya da çalışmıyor.",
+        "Antivirüs şifreli bağlantıları tarıyor.",
+        "Bilgisayar saati yanlış."
+      ],
+      "steps": [
+        "DNS yönlendirmeli bir profil kullanın ve DNS önbelleğini temizleyin.",
+        "Antivirüsün 'şifreli bağlantıları tara' özelliğini kapatın.",
+        "Bilgisayarın tarih ve saatini kontrol edin."
+      ]
+    },
+    "NSF-505": {
+      "title": "Bazı sunucular açılıyor, bazıları açılmıyor",
+      "summary": "Discord'un bir kısmı çalışıyor ama bazı sunuculara (resimler, güncelleme, sohbet bağlantısı) erişilemiyor.",
+      "causes": [
+        "Hedefli moddaki site listesi eksik.",
+        "Bazı sunucular farklı bir yöntemle engelleniyor."
+      ],
+      "steps": [
+        "Hedefli mod açıksa 'Discord adreslerini ekle' ile listeyi tamamlayın ya da hedefli modu kapatın.",
+        "'En iyi yöntemi bul' taramasını 'tüm yöntemleri dene' seçeneğiyle çalıştırın."
+      ]
+    },
+    "NSF-506": {
+      "title": "Açılmayan site hedef listesinde yok",
+      "summary": "Hedefli mod açık ve açılmayan sunucu listede değil; bu yüzden ona hiçbir yöntem uygulanmıyor.",
+      "causes": [
+        "Hedef site listesine eklenmemiş bir alan adı kullanılıyor."
+      ],
+      "steps": [
+        "Hedef Siteler sayfasından alan adını ekleyin ya da hedefli modu kapatın.",
+        "Değişikliği uygulamak için korumayı yeniden başlatın."
+      ]
+    },
+    "NSF-601": {
+      "title": "Motor başlatılamadı",
+      "summary": "Motor açıldıktan hemen sonra kapandı ve tanınan bir hata mesajı vermedi.",
+      "causes": [
+        "Antivirüs programı işlemi sonlandırdı.",
+        "Sürücü yüklenemedi.",
+        "Profil parametreleri hatalı."
+      ],
+      "steps": [
+        "Günlük sayfasında GoodbyeDPI'ın son satırlarına bakın.",
+        "Farklı bir profil deneyin.",
+        "'Tümünü sıfırla' yapıp bilgisayarı yeniden başlatın."
+      ]
+    },
+    "NSF-602": {
+      "title": "Motor beklenmedik şekilde kapandı",
+      "summary": "Koruma çalışırken motor işlemi (goodbyedpi, winws veya ciadpi) kapandı.",
+      "causes": [
+        "Antivirüs programı işlemi sonlandırdı.",
+        "Bilgisayar uykudan uyanırken sürücü sıfırlandı.",
+        "Görev Yöneticisi'nden kapatıldı."
+      ],
+      "steps": [
+        "Ayarlar'da 'Kapanırsa otomatik yeniden başlat' açık olsun.",
+        "Antivirüs kapatıyorsa dosyayı yanlış pozitif olarak bildirin (NSF-204).",
+        "Korumayı yeniden başlatın."
+      ]
+    },
+    "NSF-603": {
+      "title": "Geçersiz profil parametresi",
+      "summary": "Motor profildeki bir parametreyi tanımadı.",
+      "causes": [
+        "Özel profilde yanlış yazılmış ya da bu GoodbyeDPI sürümünde olmayan bir seçenek var."
+      ],
+      "steps": [
+        "Profiller sayfasından profili düzenleyin; 'Ek parametreler' ve elle yazılan komutu kontrol edin.",
+        "Hazır bir profile geçin."
+      ]
+    },
+    "NSF-604": {
+      "title": "Başlangıç mesajı okunamadı",
+      "summary": "GoodbyeDPI çalışıyor ancak 'Filter activated' mesajı okunamadı. Genellikle zararsızdır.",
+      "causes": [
+        "Bilgisayar çok yoğun ya da konsol çıktısı geç geldi."
+      ],
+      "steps": [
+        "Bağlantı testi başarılıysa bir şey yapmanıza gerek yok."
+      ]
+    },
+    "NSF-605": {
+      "title": "Profilde güvenli olmayan parametre",
+      "summary": "Seçili profil, motorunun tanımadığı, kısaltılmış ya da güvensiz (dosya yazan veya serbest yol alan) bir parametre içeriyor; koruma bu profille başlatılmadı.",
+      "causes": [
+        "Profil başkasından gelen bir kodla ya da ayar dosyasıyla eklendi.",
+        "Özel parametreler elle yanlış yazıldı (ör. '--black' gibi kısaltma).",
+        "Parametrelerde komut satırı karakterleri (& | % \" …) var."
+      ],
+      "steps": [
+        "Profiller sayfasında profili düzenleyin; seçenekleri tam adıyla ve ayrı ayrı yazın.",
+        "Ya da hazır profillerden birini seçin."
+      ],
+      "detect": "Koruma başlatılırken ve profil kodu/ayar dosyası içe aktarılırken parametreler beyaz listeyle denetlenir."
+    },
+    "NSF-701": {
+      "title": "Arka plan hizmeti kurulamadı",
+      "summary": "GoodbyeDPI Windows hizmeti olarak kurulamadı.",
+      "causes": [
+        "Aynı adlı bozuk bir hizmet kaydı kaldı.",
+        "Antivirüs hizmet oluşturmayı engelledi."
+      ],
+      "steps": [
+        "'Tümünü sıfırla' düğmesine basın ve bilgisayarı yeniden başlatın.",
+        "Ya da hizmet modunu kapatıp uygulama modunda kullanın."
+      ]
+    },
+    "NSF-702": {
+      "title": "Arka plan hizmeti başlatılamadı",
+      "summary": "Hizmet kuruldu ama başlatılamadı ya da hemen durdu.",
+      "causes": [
+        "Sürücü hatası (genellikle antivirüs).",
+        "Uygulama klasörü taşındı."
+      ],
+      "steps": [
+        "Önce uygulama modunda başlatıp hata kodunu görün.",
+        "Sorun çözülünce hizmet modunu tekrar açın."
+      ]
+    },
+    "NSF-703": {
+      "title": "Açılış görevi oluşturulamadı",
+      "summary": "'Windows açılışında başlat' için Görev Zamanlayıcı görevi oluşturulamadı.",
+      "causes": [
+        "Görev Zamanlayıcı hizmeti kapalı.",
+        "Uygulama geçici bir klasörde."
+      ],
+      "steps": [
+        "Uygulamayı kalıcı bir klasöre taşıyın.",
+        "Ayarlar'dan seçeneği kapatıp yeniden açın."
+      ]
+    },
+    "NSF-704": {
+      "title": "Hizmet eski bir klasörü gösteriyor",
+      "summary": "Kurulu NSF Shield hizmeti, uygulamanın şu anki klasöründen farklı bir yerdeki GoodbyeDPI'ı çalıştırıyor (uygulama taşınmış ya da güncellenmiş).",
+      "causes": [
+        "Uygulama klasörü taşındı ya da yeni sürüm farklı bir klasöre çıkarıldı."
+      ],
+      "steps": [
+        "'Korumayı yeniden başlat' düğmesine basın; hizmet yeni klasörü gösterecek şekilde güncellenir."
+      ]
+    },
+    "NSF-705": {
+      "title": "Taşınabilir sürümde hizmet ve açılış görevi kapalı",
+      "summary": "Arka plan hizmeti (SYSTEM yetkisi) ve 'Windows açılışında başlat' (izin sormadan yönetici yetkisi) yalnızca yönetici korumalı bir klasöre kurulan sürümde kullanılabilir. Herkesin yazabildiği bir klasörden (Masaüstü, İndirilenler…) bu yetkilerle çalışmak, bilgisayardaki zararlı bir programın yetki kazanmasına yol açabilir.",
+      "causes": [
+        "Uygulama zip'ten çıkarılan taşınabilir bir klasörden çalışıyor.",
+        "Önceki sürümde açılan hizmet/görev güvenlik nedeniyle kaldırıldı."
+      ],
+      "steps": [
+        "Koruma uygulama modunda normal çalışır; uygulama açık (tepside) kaldığı sürece bir şey yapmanız gerekmez.",
+        "Açılışta otomatik başlaması için NSF Shield'i kurulum paketiyle kurun (Program Files)."
+      ],
+      "detect": "Uygulama açılırken klasör izinleri ve kurulu hizmet/görevin gösterdiği klasör denetlenir."
+    },
+    "NSF-801": {
+      "title": "İnternet bağlantısı yok",
+      "summary": "Hiçbir genel sunucuya (Cloudflare, Google, Quad9) bağlanılamıyor; sorun engelden değil bağlantınızdan kaynaklanıyor.",
+      "causes": [
+        "Kablo/Wi-Fi bağlantısı kopuk.",
+        "Modem ya da servis sağlayıcıda arıza var."
+      ],
+      "steps": [
+        "Korumayı kapatıp internetin çalışıp çalışmadığına bakın.",
+        "Modemi kapatıp 30 saniye sonra açın.",
+        "Wi-Fi/kablo bağlantısını kontrol edin."
+      ]
+    },
+    "NSF-802": {
+      "title": "Sistem proxy'si açık",
+      "summary": "Windows'ta bir proxy sunucusu ayarlı. Proxy üzerinden giden trafik GoodbyeDPI'dan etkilenmeyebilir.",
+      "causes": [
+        "Bir program ya da kullanıcı proxy ayarladı."
+      ],
+      "steps": [
+        "Proxy kullanmıyorsanız Ayarlar → Ağ ve İnternet → Proxy'den kapatın."
+      ]
+    },
+    "NSF-803": {
+      "title": "Bilgisayar saati yanlış",
+      "summary": "Bilgisayarınızın saati gerçek saatten çok farklı. Şifreli (HTTPS) bağlantılar sertifika hatası verir.",
+      "causes": [
+        "Saat dilimi yanlış ya da otomatik saat ayarı kapalı.",
+        "Anakart pili bitmiş."
+      ],
+      "steps": [
+        "Tarih ve saat ayarlarından 'Saati otomatik olarak ayarla'yı açın ve 'Şimdi eşitle'ye basın."
+      ]
+    },
+    "NSF-901": {
+      "title": "Discord korumadan önce açılmış",
+      "summary": "Discord, engel varken açıldığı için eski bağlantıları ve DNS kayıtlarını tutuyor olabilir; 'Bağlanılıyor…' ekranında takılabilir.",
+      "causes": [
+        "Discord bilgisayar açılışında NSF Shield'den önce başladı.",
+        "Koruma Discord açıkken başlatıldı."
+      ],
+      "steps": [
+        "Discord'u tepsi simgesinden tamamen kapatıp yeniden açın (ya da aşağıdaki düğmeyi kullanın)."
+      ],
+      "detect": "Koruma başladığında Discord'un açılış zamanı kontrol edilir."
+    },
+    "NSF-902": {
+      "title": "Discord güncelleme ekranında takılıyor",
+      "summary": "Discord açılışta güncelleme sunucularına ulaşamıyor.",
+      "causes": [
+        "updates.discord.com ya da dl.discordapp.net erişilemiyor.",
+        "Hedefli modda bu adresler listede yok."
+      ],
+      "steps": [
+        "Bağlantı testinde 'updates.discord.com' sunucusunun açık olduğunu kontrol edin.",
+        "Hedefli modu kapatın ya da Discord adreslerini ekleyin.",
+        "Discord'u yeniden başlatın."
+      ]
+    },
+    "NSF-903": {
+      "title": "Discord sesli sohbete bağlanamıyor",
+      "summary": "Yazılı sohbet çalışıyor ama ses 'RTC bağlanıyor' durumunda kalıyor. Discord ses sunucuları UDP kullanır; GoodbyeDPI UDP trafiğini değiştirmez.",
+      "causes": [
+        "Ses sunucusunun IP adresi engelli ya da yoldaki bir cihaz UDP'yi kısıtlıyor."
+      ],
+      "steps": [
+        "Discord → Ayarlar → Ses ve Görüntü → 'Hizmet Kalitesi Yüksek Paket Önceliği'ni kapatın.",
+        "Sunucu ayarlarından ses bölgesini (Rotterdam, Frankfurt…) değiştirin.",
+        "Sorun sürerse yalnızca VPN yardımcı olur."
+      ]
+    },
+    "NSF-904": {
+      "title": "Tarayıcıda açılıyor, uygulamada açılmıyor",
+      "summary": "discord.com tarayıcıda açılıyor ama Discord uygulaması bağlanamıyor.",
+      "causes": [
+        "Uygulama eski bağlantıları tutuyor.",
+        "Discord'da proxy ayarı var.",
+        "Discord güncel değil."
+      ],
+      "steps": [
+        "Discord'u tamamen kapatıp yeniden açın.",
+        "DNS önbelleğini temizleyin.",
+        "Discord'u web'den yeniden indirip kurun."
+      ]
+    },
+    "NSF-805": {
+      "title": "Proxy sunucusuna bağlanılamıyor",
+      "summary": "Girilen proxy adresine bağlantı kurulamadı ya da sunucu proxy gibi yanıt vermedi.",
+      "causes": [
+        "IP adresi ya da port yanlış yazıldı.",
+        "Proxy sunucusu kapalı (ücretsiz proxy'ler sık sık kapanır).",
+        "Proxy türü yanlış seçildi (HTTP yerine SOCKS5 ya da tersi).",
+        "Proxy'nin IP adresi de engelli."
+      ],
+      "steps": [
+        "Adresi ve portu kontrol edin (ör. 185.12.34.56:8080).",
+        "Türü değiştirip (HTTP ↔ SOCKS5) tekrar test edin.",
+        "Başka bir proxy deneyin.",
+        "Proxy sağlayıcınızın verdiği bilgileri olduğu gibi 'Hızlı giriş' kutusuna yapıştırın."
+      ],
+      "detect": "Proxy sayfasındaki 'Test et' düğmesiyle algılanır."
+    },
+    "NSF-806": {
+      "title": "Proxy kullanıcı adı/şifre hatalı",
+      "summary": "Proxy sunucusu kimlik doğrulama istiyor ve girilen bilgiler kabul edilmedi.",
+      "causes": [
+        "Kullanıcı adı ya da şifre yanlış.",
+        "Proxy aboneliğinin süresi dolmuş.",
+        "Proxy yalnızca belirli IP adreslerine izin veriyor."
+      ],
+      "steps": [
+        "Kullanıcı adı ve şifreyi kontrol edip yeniden girin.",
+        "Proxy sağlayıcınızın panelinde IP izin listesine kendi IP'nizi ekleyin."
+      ]
+    },
+    "NSF-807": {
+      "title": "Proxy Discord'a ulaşamıyor",
+      "summary": "Proxy çalışıyor ama üzerinden Discord'a şifreli bağlantı kurulamadı.",
+      "causes": [
+        "Proxy'nin bulunduğu ülkede de Discord engelli.",
+        "Proxy 443. porta tünel açmaya izin vermiyor.",
+        "Proxy trafiği değiştiriyor (sertifika uyuşmuyor)."
+      ],
+      "steps": [
+        "Başka bir ülkedeki proxy'yi deneyin.",
+        "HTTPS/CONNECT destekleyen bir HTTP proxy ya da SOCKS5 proxy kullanın."
+      ]
+    },
+    "NSF-107": {
+      "title": "Motor bu Windows'ta çalışamaz",
+      "summary": "Zapret (winws) ve ByeDPI (ciadpi) yalnızca 64 bit Windows için paketlenmiştir.",
+      "causes": [
+        "Bilgisayarda 32 bit Windows çalışıyor."
+      ],
+      "steps": [
+        "GoodbyeDPI motorunu kullanın (Profiller → GoodbyeDPI); onun 32 bit sürümü de var."
+      ],
+      "detect": "Koruma başlarken kontrol edilir."
+    },
+    "NSF-606": {
+      "title": "Site listesi bu motorla kullanılamıyor",
+      "summary": "Hariç tut listesi açık ama GoodbyeDPI'ın hariç tutma listesi yok; liste uygulanmadı.",
+      "causes": [
+        "GoodbyeDPI 0.2.3rc3 yalnızca dahil etme listesine (--blacklist) sahiptir."
+      ],
+      "steps": [
+        "Hariç tut listesini kullanmak için Zapret ya da ByeDPI'a geçin (Profiller sayfası veya tepsi menüsü).",
+        "Ya da Site Listeleri sayfasında Hariç tut listesini kapatın."
+      ],
+      "detect": "Koruma başlarken kontrol edilir."
+    },
+    "NSF-808": {
+      "title": "ByeDPI portu kullanımda",
+      "summary": "ByeDPI yerel portunda (127.0.0.1) dinleyemedi ya da yerel köprüsü açılamadı.",
+      "causes": [
+        "Başka bir program (başka bir proxy ya da ByeDPI kopyası) aynı portu kullanıyor.",
+        "Bir antivirüs veya güvenlik duvarı ciadpi.exe'yi engelledi."
+      ],
+      "steps": [
+        "Ayarlar'dan başka bir ByeDPI portu seçin (ör. 18990) ve yeniden başlatın.",
+        "Diğer proxy programlarını kapatın.",
+        "Antivirüs karantinasında ciadpi.exe olup olmadığına bakın."
+      ],
+      "detect": "ByeDPI başlarken kontrol edilir."
+    },
+    "NSF-809": {
+      "title": "ByeDPI için Windows proxy'si ayarlanmadı",
+      "summary": "ByeDPI çalışıyor ama Windows proxy'si kendi proxy'nizi gösteriyor ya da değiştirilemedi; bu yüzden tarayıcılar ByeDPI'ı kullanmıyor.",
+      "causes": [
+        "Proxy sayfasındaki bir proxy Windows proxy'si olarak ayarlı.",
+        "Proxy ayarı bir şirket politikasıyla yönetiliyor."
+      ],
+      "steps": [
+        "Proxy sayfasında Windows proxy'sini kapatıp korumayı yeniden başlatın.",
+        "Ya da Proxy sayfasında 'ByeDPI motoru' ile program bazlı kurallar kullanın."
+      ],
+      "detect": "ByeDPI başlarken kontrol edilir."
+    }
+  },
+  "engine": {
+    "missingFile": "{0} bulunamadı ({1}). Antivirüs dosyayı karantinaya almış olabilir: karantinadan geri yükleyin ve dosyayı Microsoft'a yanlış pozitif olarak bildirin (NSF-102); istisna eklemeyi yalnızca son çare olarak kullanın.",
+    "unsafeProfile": "'{0}' profili güvenli olmayan ya da tanınmayan bir parametre içeriyor: {1}",
+    "integrityFailed": "{1} dosyaları doğrulanamadı: {0} Dosya bozulmuş ya da değiştirilmiş olabilir; NSF Shield'i resmi sürüm sayfasından yeniden indirin.",
+    "cannotRun": "{1} çalıştırılamadı: {0}. Antivirüs dosyayı engelliyor olabilir.",
+    "exitedImmediately": "{2} hemen kapandı (çıkış kodu {0}). {1}",
+    "startFailed": "{1} başlatılamadı. {0}",
+    "hint": {
+      "driverFilesMissing": "WinDivert sürücü dosyaları bulunamadı. Antivirüs dosyaları silmiş olabilir; karantinadan geri yükleyip yanlış pozitif olarak bildirin ya da paketi yeniden çıkarın.",
+      "incompatible": "Farklı sürümde bir WinDivert sürücüsü yüklü. 'Tümünü sıfırla' yapıp bilgisayarı yeniden başlatın.",
+      "blockedByAv": "WinDivert sürücüsü antivirüs programı tarafından engellendi. Dosyaların resmi olduğunu Tam kontrolle doğrulayıp yanlış pozitif olarak bildirin; istisna yalnızca son çare.",
+      "bfe": "'Temel Filtreleme Altyapısı' (BFE) Windows hizmeti kapalı.",
+      "signature": "Sürücü imzası doğrulanamadı. Windows güncel değil ya da sürücü dosyası bozuk.",
+      "parameters": "Profil parametrelerinde hata var. Profili düzenleyip kontrol edin.",
+      "driverLoad": "WinDivert sürücüsü yüklenemedi. Antivirüs engelliyor ya da başka bir DPI aracı çalışıyor olabilir; 'Tümünü sıfırla' deneyin.",
+      "generic": "Antivirüs GoodbyeDPI'ı engelliyor olabilir ya da başka bir DPI aracı çalışıyor olabilir. 'Tümünü sıfırla' deneyin."
+    },
+    "hintWithOutput": "{0} (Çıktı: {1})",
+    "exitedUnexpectedly": "{2} beklenmedik şekilde kapandı (çıkış kodu {0}). {1}",
+    "serviceInstalledOnly": "Arka plan hizmeti yalnızca kurulumlu sürümde kullanılabilir ({0})",
+    "serviceCreateFailed": "Arka plan hizmeti oluşturulamadı: {0}",
+    "serviceConfigFailed": "Hizmet yapılandırılamadı: {0}",
+    "serviceStoppedAfterStart": "Hizmet başladıktan hemen sonra durdu. Önce uygulama modunda deneyip hata kodunu görün.",
+    "serviceStartFailed": "Hizmet başlatılamadı: {0}. Önce uygulama modunda deneyip hata kodunu görün.",
+    "serviceStopped": "Arka plan hizmeti durdu.",
+    "processCount": "Bu uygulamaya ait olmayan {0} WinDivert programı (goodbyedpi/winws) çalışıyor.",
+    "uninstall": {
+      "serviceRemoved": "Arka plan hizmeti (NSFShield) kaldırıldı.",
+      "serviceRemoveFailed": "Arka plan hizmeti kaldırılamadı: {0}",
+      "driverKept": "{0} sürücü kaydı başka bir GoodbyeDPI çalıştığı için bırakıldı.",
+      "driverRemoved": "{0} sürücü kaydı kaldırıldı.",
+      "serviceKept": "NSFShield hizmeti bırakıldı: başka bir kurulumun programını çalıştırıyor ya da sahibi okunamadı ({0}).",
+      "driverForeign": "{0} sürücü kaydı bırakıldı: dosyası bu klasörde değil ya da okunamadı."
+    },
+    "raw": "{0}",
+    "serviceForeign": "NSFShield hizmeti başka bir kuruluma ait ({0}); değiştirilmedi. Bu klasöre taşımak için korumayı kendiniz başlatın.",
+    "serviceNotVerified": "Windows'tan geri okunan hizmet komutu yazılanla aynı değil; değişiklik geri alındı.",
+    "serviceStartTimeout": "Hizmet 15 saniye içinde başlamadı; değişiklik geri alındı.",
+    "serviceUnreadable": "NSFShield hizmeti okunamadı ({0}), bu yüzden değiştirilmedi.",
+    "serviceAppeared": "Hizmet oluşturulamadı ve bu sırada aynı adlı bir hizmet ortaya çıktı; NSF Shield'in olmadığı için olduğu gibi bırakıldı. {0}",
+    "repointRefused": "Hizmet bu kurulumun durmuş hizmeti değil (ya da okunamıyor), bu yüzden yeniden ayarlanmadı.",
+    "repointFailed": "Hizmet bu klasör için yeniden ayarlanamadı: {0}"
+  },
+  "dns": {
+    "provider": {
+      "Yandex": {
+        "note": "Eski 3/4 numaralı betiklerin kullandığı sunucu. Rusya'da olduğu için yanıtı biraz yavaştır (~100 ms) ama çok kararlıdır."
+      },
+      "AdGuard": {
+        "note": "Çok hızlı (~20 ms). Reklam ve izleyici alan adlarını da engeller; bazı sitelerde reklam alanları boş görünebilir."
+      },
+      "AdGuardFree": {
+        "name": "AdGuard Filtresiz",
+        "short": "AdGuard filtresiz (5353)",
+        "note": "AdGuard'ın hiçbir şeyi engellemeyen sürümü. Hızlıdır."
+      },
+      "Quad9": {
+        "note": "İsviçre merkezli, gizlilik odaklı ve hızlı. Yalnızca zararlı yazılım sitelerini engeller."
+      },
+      "OpenDns": {
+        "note": "Cisco'nun DNS hizmeti. Hızlı ve kararlıdır."
+      },
+      "Cloudflare": {
+        "note": "Standart 53. portu kullanır. Servis sağlayıcınız 53. porttaki trafiğe müdahale ediyorsa işe yaramaz; tarama bunu kendisi kontrol eder."
+      },
+      "Google": {
+        "note": "Standart 53. portu kullanır. Türkiye'de geçmişte bu adrese yapılan sorgular yönlendirilmişti; tek başına güvenilir değildir."
+      }
+    }
+  },
+  "profiles": {
+    "builtin": {
+      "tr-recommended": {
+        "name": "Türkiye – Önerilen",
+        "description": "Discord için ilk tercih. En kapsamlı mod (-9) + Yandex DNS yönlendirmesi. Eski 3 ve 4 numaralı betiklerle aynı ayar."
+      },
+      "tr-adguard": {
+        "name": "Türkiye – AdGuard DNS",
+        "description": "-9 modu + AdGuard DNS (port 5353). Yandex'ten çok daha hızlı yanıt verir; reklam alan adlarını da engeller."
+      },
+      "tr-quad9": {
+        "name": "Türkiye – Quad9 DNS",
+        "description": "-9 modu + Quad9 DNS (port 9953). Hızlı ve gizlilik odaklı, reklam filtresi yok."
+      },
+      "tr-opendns": {
+        "name": "Türkiye – OpenDNS",
+        "description": "-9 modu + OpenDNS (port 5353). Diğer DNS sunucuları yavaşsa ya da yanıt vermiyorsa dene."
+      },
+      "tr-autottl": {
+        "name": "Otomatik TTL (-5)",
+        "description": "Sahte paketlerin TTL değerini sunucuya olan mesafeye göre otomatik ayarlar. Sabit TTL'li yöntemler çalışmayı bıraktıysa dene."
+      },
+      "tr-legacy1-dns": {
+        "name": "Eski Betik 1 + DNS (TTL 3)",
+        "description": "1_bunu_dene.cmd'nin DNS yönlendirmesi eklenmiş hali: yalnızca TTL 3 sahte paket + Yandex DNS."
+      },
+      "tr-legacy2-dns": {
+        "name": "Eski Betik 2 + DNS (-4, TTL 5)",
+        "description": "2_bunu_dene.cmd'nin DNS yönlendirmesi eklenmiş hali: -4 modu + TTL 5 sahte paket + Yandex DNS."
+      },
+      "tr-wrongseq": {
+        "name": "Yanlış Sıra Numarası (-6)",
+        "description": "Sahte paketleri geçmiş bir TCP sıra numarasıyla gönderir. Bazı modemlerde -9'dan daha kararlı çalışır."
+      },
+      "tr-wrongchk": {
+        "name": "Yanlış Sağlama Toplamı (-7)",
+        "description": "Sahte paketleri hatalı TCP sağlama toplamıyla gönderir. Sanal makinelerde ve bazı modemlerde çalışmayabilir."
+      },
+      "tr-mode8": {
+        "name": "Sıra + Sağlama (-8)",
+        "description": "-6 ve -7 yöntemlerini birlikte kullanır; QUIC engellemesi yoktur (-9'dan tek farkı)."
+      },
+      "tr-fakegen": {
+        "name": "Güçlendirilmiş Sahte Paket",
+        "description": "-9 modu + 5 adet rastgele sahte paket. Sıkı DPI uygulayan servis sağlayıcılar için."
+      },
+      "tr-resend": {
+        "name": "Tekrarlı Sahte Paket",
+        "description": "-9 modu + 3 sahte paket, her biri 3 kez gönderilir. Paket kaybı olan (Wi-Fi, mobil) hatlarda daha güvenilirdir."
+      },
+      "tr-e1": {
+        "name": "Tek Bayt Parçalama",
+        "description": "-9 modu ama ilk HTTPS paketi 1 baytlık parçalara bölünür. DPI site adını hiç okuyamaz; bağlantı açılışı biraz yavaşlar."
+      },
+      "tr-sni": {
+        "name": "Site Adından Bölme (SNI)",
+        "description": "-9 modu + paketi tam site adının (SNI) başladığı yerden böler. Site adı iki ayrı pakete düşer."
+      },
+      "tr-native": {
+        "name": "Düz Sıralı Parçalama",
+        "description": "-9 ile aynı ama parçalar ters değil normal sırayla gönderilir. Ters sıralı parçaları kabul etmeyen ağlar için."
+      },
+      "tr-alt": {
+        "name": "Alternatif (-5 + 1 bayt + sahte)",
+        "description": "Otomatik TTL + 1 baytlık parçalama + 5 sahte paket + QUIC engeli. GoodbyeDPI'ın 'ALT' betiklerindeki yöntem."
+      },
+      "tr-compatible": {
+        "name": "En Uyumlu Klasik (-1)",
+        "description": "Sahte paket kullanmayan klasik yöntem: paketleri 2 baytlık parçalara böler. Yavaş ama her ağda çalışır."
+      },
+      "tr-classic2": {
+        "name": "Klasik Hızlı (-2)",
+        "description": "-1'in daha hızlı hali: HTTPS 40 baytlık parçalara bölünür."
+      },
+      "dns-only": {
+        "name": "Yalnızca DNS Yönlendirme",
+        "description": "Hiçbir DPI hilesi uygulamaz, yalnızca DNS'i yönlendirir. Servis sağlayıcınız sadece DNS ile engelliyorsa en hafif seçenek."
+      },
+      "legacy-1": {
+        "name": "Eski Betik 1 (TTL 3, DNS'siz)",
+        "description": "1_bunu_dene.cmd ile birebir aynı. DNS yönlendirmesi olmadığı için Türkiye'de Discord'u açmaz; karşılaştırma için."
+      },
+      "legacy-2": {
+        "name": "Eski Betik 2 (-4, TTL 5, DNS'siz)",
+        "description": "2_bunu_dene.cmd ile birebir aynı. DNS yönlendirmesi olmadığı için Türkiye'de Discord'u açmaz; karşılaştırma için."
+      },
+      "plain": {
+        "name": "Sade (-9, DNS'siz)",
+        "description": "Yalnızca -9 modu. Windows DNS'ini 'DNS Ayarları' sayfasından değiştirdiyseniz yeterli olabilir."
+      },
+      "zapret-discord": {
+        "name": "Discord + Genel (TLS + QUIC)",
+        "description": "Önerilen Zapret profili: sahte ClientHello ve bölmeyle HTTPS, QUIC (UDP 443) ve Discord sesi (UDP 50000-50100)."
+      },
+      "zapret-aggressive": {
+        "name": "Agresif ISS",
+        "description": "Önerilen profilin yetmediği sağlayıcılar için daha fazla tekrar, daha fazla bölme noktası ve değiştirilmiş sahte paket."
+      },
+      "zapret-tls": {
+        "name": "Sadece TLS",
+        "description": "Yalnızca HTTPS (TCP 443) için sahte paket ve bölme; en hafifi, UDP yok."
+      },
+      "zapret-split": {
+        "name": "Uyumlu (yalnızca bölme)",
+        "description": "Sahte paket göndermeden ilk paketi böler; sahte paketleri düşüren ağlar için."
+      },
+      "byedpi-recommended": {
+        "name": "Önerilen (bölme)",
+        "description": "ByeDPI'ın önerdiği Windows ayarı. İlk denenen: SNI+1'de bölme ve SNI+3'te sıra değiştirme (HTTP: Host başlığında harf ve boşluk). Geri dönüş grubu (sıfırlama veya zaman aşımında): SNI+1'de TLS kayıt bölme."
+      },
+      "byedpi-fake": {
+        "name": "Sahte paket",
+        "description": "Tek grup, geri dönüş yok: 1'de sıra değiştirme ve gerçek veriden önce TTL 8 ile gönderilen sahte ilk parça."
+      },
+      "byedpi-tlsrec": {
+        "name": "TLS kaydı + bölme (TTL'siz)",
+        "description": "İlk denenen: SNI+1'de bölme ve SNI+3'te TLS kayıt bölme. Geri dönüş grubu (3 sn içinde yanıt yoksa veya sıfırlanırsa): 1'de sıra değiştirme ve SNI+1'de kayıt bölme. Sahte paket ve TTL oyunu yok."
+      },
+      "byedpi-oob": {
+        "name": "Bant dışı (OOB)",
+        "description": "İlk denenen: SNI+1'de bölme ve SNI+3'te bant dışı bayt. Geri dönüş grubu (sıfırlama veya zaman aşımında): SNI+3'te sıra değiştirme."
+      },
+      "zapret-general": {
+        "name": "Web (fakedsplit, oto TTL)",
+        "description": "Genel web trafiği: QUIC (UDP 443) sahte Initial paketleriyle; HTTP ve HTTPS sahte paket ve bölünmüş ClientHello (fakedsplit) ile, TTL otomatik. Discord ses portları yakalanmaz."
+      },
+      "zapret-ttl": {
+        "name": "Sabit TTL (sahte + bölme)",
+        "description": "TTL değeri 4'e sabit sahte paketler (sunucuya ulaşmadan düşer) ve SNI'den bölme; HTTP, HTTPS ve QUIC için. Otomatik TTL'li profiller çalışmazsa deneyin."
+      },
+      "zapret-voice": {
+        "name": "Discord ses (STUN / IP keşfi)",
+        "description": "Önce Discord sesi: UDP 50000-50100'de sahte IP keşfi ve STUN paketleri, ayrıca hafif QUIC ve HTTPS kuralları. Sesin çalışıp çalışmadığı ağa bağlıdır; tarayıcı bunu ölçmez."
+      },
+      "zapret-light": {
+        "name": "Düşük müdahale (TLS sırası)",
+        "description": "En küçük değişiklik: yalnızca TCP 443, ClientHello'nun ilk parçası sırasız gönderilir. Sahte paket ve UDP yok."
+      },
+      "zapret-lastresort": {
+        "name": "Son çare (ağır)",
+        "description": "Yanlış sıra ve sağlama toplamlı çok sayıda sahte paket, HTTP ve HTTPS'te fakeddisorder, QUIC ve Discord sesi için sahteler. Daha fazla trafik ve yan etki; yalnızca diğerleri çalışmazsa kullanın."
+      },
+      "byedpi-tlsrec-only": {
+        "name": "Yalnızca TLS kayıt bölme",
+        "description": "İlk denenen: TLS ClientHello, SNI+1 noktasında iki TLS kaydına bölünür. Geri dönüş grubu (sıfırlama veya zaman aşımında): bölme SNI+3'te. Başka yöntem ve HTTP değişikliği yok."
+      },
+      "byedpi-hybrid-oob": {
+        "name": "Karma OOB (disoob + TLS kaydı)",
+        "description": "İlk denenen: bant dışı baytla sıra değiştirme (disoob) ve SNI+1'de TLS kayıt bölme. Geri dönüş grubu (sıfırlama veya zaman aşımında): SNI+3'te OOB ve SNI+3'te kayıt bölme."
+      },
+      "byedpi-http-https": {
+        "name": "HTTP ve HTTPS ayrı",
+        "description": "HTTP bağlantıları: Host'tan bölme ve Host başlığı oyunları (harf, boşluk). HTTPS bağlantıları ikinci grubu kullanır (ilk grup yalnızca HTTP içindir): SNI'de bölme + sıra değiştirme ve TLS kayıt bölme."
+      }
+    },
+    "newProfile": "Yeni Profil",
+    "dnsManual": "Elle tanımlı",
+    "copySuffix": " (kopya)",
+    "group": {
+      "custom": "Özel",
+      "recommended": "Önerilen",
+      "alternative": "Alternatif yöntemler",
+      "nodns": "DNS yönlendirmesiz (eski)"
+    },
+    "code": {
+      "noCode": "Metin 'NSF1:' ile başlayan bir profil kodu içermiyor.",
+      "corrupt": "Profil kodu bozuk ya da eksik kopyalanmış.",
+      "empty": "Profil kodu boş.",
+      "unsafe": "Kod güvenli olmayan ya da tanınmayan bir parametre içeriyor: {0}",
+      "tooLong": "Yapıştırılan metin çok uzun ({0} Ki karakterden fazla). Yalnızca kodu kopyalayın.",
+      "tooLarge": "Profil kodu çok büyük (paketli ya da açılmış hâli 64 KiB'den fazla).",
+      "multiple": "Metinde birden fazla farklı profil kodu var. Yalnızca birini kopyalayın.",
+      "dtd": "Profil kodu yasak bir XML özelliği (belge türü tanımı) içeriyor.",
+      "unsupportedVersion": "Bu kodun biçim sürümü bilinmiyor ({0}); daha yeni bir NSF Shield'den gelmiş olabilir.",
+      "noEngine": "Profil kodu hangi motor için olduğunu belirtmiyor.",
+      "unknownEngine": "Profil kodu bilinmeyen bir motor için: {0}",
+      "unknownField": "Profil kodu bilinmeyen bir alan içeriyor: {0}",
+      "duplicateField": "Profil kodunda bir alan iki kez var: {0}",
+      "conflicting": "Profil kodunda birbiriyle çelişen alanlar var: {0}",
+      "missingField": "Profil kodunda gerekli bir alan eksik: {0}",
+      "badValue": "Profil kodunda geçersiz değer: {0} = {1}",
+      "badFlag": "Profil kodunda bilinmeyen seçenek: {0}",
+      "roundTrip": "Profil, aynı şekilde geri okunabilen bir koda dönüştürülemedi.",
+      "trailing": "Kodda profilden sonra fazladan veri var."
+    },
+    "importedName": "İçe aktarılan profil",
+    "dnsSystem": "Sistem DNS",
+    "tier": {
+      "Recommended": "Önerilen",
+      "Specialized": "Uzman",
+      "custom": "Özel"
+    },
+    "tag": {
+      "discord": "Discord",
+      "voice": "Discord sesi (deneme)",
+      "web": "Web (HTTPS)",
+      "quic": "QUIC",
+      "dns": "DNS yönlendirme",
+      "aggressive": "Agresif",
+      "tls": "Yalnızca TLS",
+      "nofake": "Sahte paketsiz",
+      "balanced": "Dengeli",
+      "driverless": "Sürücüsüz",
+      "ttl": "Sabit TTL",
+      "nottl": "TTL'siz",
+      "oob": "OOB",
+      "light": "Düşük müdahale",
+      "lastresort": "Son çare",
+      "tlsrec": "TLS kayıt bölme",
+      "http": "HTTP + HTTPS",
+      "try-tt": "Türk Telekom denemesi",
+      "try-superonline": "Superonline denemesi",
+      "try-vodafone": "Vodafone/Kablonet denemesi",
+      "try-mobile": "Mobil ağ denemesi"
+    },
+    "tech": {
+      "noDns": "sistem DNS'i",
+      "quicBlocked": "QUIC engelli (TCP'ye düşer)"
+    }
+  },
+  "common": {
+    "off": "Kapalı",
+    "and": "ve",
+    "ok": "tamam",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "close": "Kapat",
+    "saveFailed": "Kaydedilemedi:",
+    "error": "Hata: {0}",
+    "secondsShort": "sn"
+  },
+  "settings": {
+    "import": {
+      "unsafeProfile": "Yedekteki '{0}' profili güvenli olmayan ya da tanınmayan bir parametre içeriyor: {1}",
+      "badAppRule": "Yedekteki '{0}' program kuralı geçersiz karakter içeriyor.",
+      "badDns": "Yedekteki DNS adresi geçersiz: {0}",
+      "badDomain": "Dosyada geçersiz bir alan adı var: {0}",
+      "badTarget": "Geçersiz tarama hedefi: {0}",
+      "tooManyTargets": "Çok fazla tarama hedefi (en fazla {0})."
+    },
+    "tooLarge": "Ayar dosyası {0} MB'tan büyük; okunmadı."
+  },
+  "speed": {
+    "measuringPing": "Gecikme ölçülüyor…",
+    "noInternet": "İnternet bağlantısı yok (NSF-801).",
+    "measuringDown": "İndirme hızı ölçülüyor…",
+    "downloading": "İndiriliyor… {0} Mbit/s",
+    "measuringUp": "Yükleme hızı ölçülüyor…",
+    "uploading": "Yükleniyor… {0} Mbit/s",
+    "done": "Bitti."
+  },
+  "history": {
+    "kind": {
+      "test": "Test",
+      "repair": "Onarım",
+      "scan": "Tarama",
+      "speed": "Hız",
+      "update": "Güncelleme"
+    }
+  },
+  "actions": {
+    "heal": {
+      "title": "Otomatik onarım",
+      "searching": "Discord'a erişilemiyor. Çalışan yöntem otomatik aranıyor (yaklaşık 30 saniye)…",
+      "fixedTitle": "Sorun giderildi",
+      "restartDiscordHint": " Discord bağlanamıyorsa yeniden başlatın.",
+      "failedTitle": "Otomatik onarım başarısız",
+      "sameMethod": "Yöntem değişmedi ({0}); bağlantı yeniden kuruldu.",
+      "newMethod": "Yeni yöntem: {0} ({1} çalışmıyordu).",
+      "noMethod": "Çalışan yöntem bulunamadı",
+      "failedText": "Çalışan yöntem bulunamadı{0}. Ayrıntı için Sorun Giderme sayfasına bakın."
+    },
+    "accessProblem": {
+      "title": "Erişim sorunu",
+      "text": "Koruma açık ama {0} sunucu açılamadı. 'En iyi yöntemi bul' ile çalışan yöntemi otomatik bulabilirsiniz."
+    },
+    "restartDiscord": {
+      "title": "Discord'u yeniden başlatın",
+      "text": "Discord korumadan önce açılmış. Bağlanamıyorsa ana sayfadaki 'Discord'u yeniden başlat' düğmesini kullanın."
+    },
+    "dnsNotRedirected": "Seçili profil DNS'i yönlendirmiyor."
+  },
+  "guide": {
+    "causes": "Olası nedenler",
+    "solution": "Çözüm",
+    "oneClick": "Uygulamada tek tıkla:",
+    "method": "Yöntem",
+    "description": "Açıklama"
+  },
+  "crash": {
+    "previousRun": "önceki çalışma",
+    "lastError": "· son hata:"
+  },
+  "support": {
+    "protectionNotWorking": "Koruma çalışmıyor"
+  },
+  "uninstall": {
+    "started": "Temiz kaldırma başlatıldı.",
+    "serviceCleanupFailed": "Hizmet/sürücü temizlenemedi: {0}",
+    "taskRemoved": "Windows açılış görevi kaldırıldı.",
+    "taskKept": "Açılış görevi başka bir NSF Shield kurulumuna ait olduğu için bırakıldı: {0}",
+    "taskRemoveFailed": "Açılış görevi kaldırılamadı: {0}",
+    "proxyRestored": "Windows proxy ayarı NSF Shield'den önceki hâline döndürüldü.",
+    "proxyRestoreFailed": "Windows proxy ayarı geri alınamadı: {0}",
+    "dnsRestored": "Değiştirilen DNS sunucuları eski hâline döndürüldü.",
+    "dnsPartial": "DNS sunucularının bir kısmı geri alınamadı:\n{0}",
+    "dnsRestoreFailed": "DNS ayarı geri alınamadı: {0}",
+    "nothingToRevert": "Geri alınacak bir sistem değişikliği bulunamadı.",
+    "browserProfilesKept": "Proxy için oluşturulan tarayıcı profilleri silinmedi (kişisel veri içerebilir): {0}",
+    "removed": {
+      "service": "arka plan hizmeti",
+      "task": "Windows açılış görevi"
+    },
+    "done": "NSF Shield'in Windows'ta yaptığı değişiklikler geri alındı:\n\n{0}\n\nArtık program klasörünü silebilirsiniz.",
+    "proxyNotVerified": "geri yazılan değerler doğrulanamadı; yedek saklandı"
+  },
+  "diag": {
+    "admin": {
+      "title": "Yönetici izni",
+      "ok": "Uygulama yönetici olarak çalışıyor.",
+      "fail": "Yönetici izni yok; sürücü yüklenemez."
+    },
+    "folder": {
+      "title": "Uygulama klasörü",
+      "temp": "Geçici bir klasörden çalışıyor: {0}"
+    },
+    "files": {
+      "title": "Motor dosyaları",
+      "missing": "{0} bulunamadı.",
+      "okEngine": "{0} dosyaları yerinde."
+    },
+    "integrity": {
+      "title": "Dosya bütünlüğü",
+      "okEngine": "{0} dosyaları resmi sürümle aynı (SHA-256)."
+    },
+    "installType": {
+      "title": "Kurulum türü",
+      "installed": "Kurulumlu sürüm (yönetici korumalı klasör): arka plan hizmeti ve açılış görevi kullanılabilir.",
+      "portable": "Taşınabilir sürüm: koruma uygulama modunda çalışır; hizmet ve açılış görevi kapalı. ({0})"
+    },
+    "bfe": {
+      "title": "Temel Filtreleme Altyapısı (BFE)",
+      "notRunning": "Çalışmıyor ({0})."
+    },
+    "running": "Çalışıyor.",
+    "conflict": {
+      "title": "Çakışan WinDivert programları",
+      "found": "{0} adet uygulama dışı goodbyedpi.exe çalışıyor.",
+      "list": "Bu uygulamaya ait olmayan {0} WinDivert programı: {1}",
+      "onlyOwn": "yok; yalnızca bu uygulamanınki: {0}",
+      "deferred": "Tarama sürüyor: süreçler tarama bitince yeniden denetlenecek."
+    },
+    "none": "Yok.",
+    "legacyService": {
+      "title": "Eski GoodbyeDPI hizmeti",
+      "found": "'GoodbyeDPI' hizmeti kurulu."
+    },
+    "otherDpi": {
+      "title": "Diğer DPI araçları",
+      "found": "Çalışıyor: {0}"
+    },
+    "vpn": {
+      "title": "VPN",
+      "found": "Etkin VPN bağdaştırıcısı: {0}",
+      "none": "Etkin VPN yok.",
+      "route": "İnternet trafiği {0} VPN bağdaştırıcısından geçiyor.",
+      "upNoRoute": "VPN bağdaştırıcısı açık ({0}) ama internet trafiği ondan geçmiyor.",
+      "upRouteUnknown": "VPN bağdaştırıcısı açık ({0}); trafiğin ondan geçip geçmediği okunamadı.",
+      "serviceRunning": "{0} hizmeti çalışıyor (bu tek başına etkin tünel değildir)",
+      "serviceUnreadable": "{0} hizmeti ({1}) okunamadı"
+    },
+    "proxy": {
+      "title": "Sistem proxy'si",
+      "ours": "NSF Shield'in Proxy sayfasından ayarlandı: {0} ({1}).",
+      "on": "Açık: {0}"
+    },
+    "off": "Kapalı.",
+    "av": {
+      "title": "Antivirüs",
+      "unknown": "Bilgi alınamadı.",
+      "listThirdParty": "{0} – sürücü hatası alırsanız NSF-204'teki adımları izleyin."
+    },
+    "internet": {
+      "title": "İnternet bağlantısı",
+      "ok": "Çalışıyor ({0} ms).",
+      "fail": "Genel sunuculara bağlanılamıyor."
+    },
+    "clock": {
+      "title": "Bilgisayar saati",
+      "skewed": "Saat {0} dakika kaymış."
+    },
+    "correct": "Doğru.",
+    "notMeasured": "Ölçülemedi.",
+    "hosts": {
+      "title": "hosts dosyası",
+      "found": "{0} Discord kaydı: {1}",
+      "none": "Discord kaydı yok."
+    },
+    "dns": {
+      "title": "DNS doğrulaması",
+      "noReference": "Bağımsız DNS sunucularına ulaşılamadı.",
+      "titleOn": "DNS doğrulaması (koruma açık)",
+      "wrongDespite": "Yönlendirmeye rağmen yanlış adres: {0}",
+      "correctAddress": "Doğru adres alınıyor ({0}).",
+      "titleNoRedirect": "DNS doğrulaması (yönlendirme yok)",
+      "titleOff": "DNS doğrulaması (koruma kapalı)",
+      "blocked": "Servis sağlayıcı DNS'i engelli: DNS yönlendirmeli profil gerekir.",
+      "systemOk": "Sistem DNS'i doğru yanıt veriyor."
+    },
+    "redirectDns": {
+      "title": "Yönlendirilen DNS sunucusu",
+      "ok": "{0} yanıt veriyor ({1} ms).",
+      "fail": "{0} yanıt vermiyor."
+    },
+    "ipv6": {
+      "title": "IPv6 DNS",
+      "notRedirected": "IPv6 bağlantınız var ama profil IPv6 DNS'i yönlendirmiyor.",
+      "redirected": "IPv6 sorguları da yönlendiriliyor.",
+      "none": "IPv6 bağlantısı yok."
+    },
+    "protection": {
+      "title": "Koruma",
+      "error": "Hata: {0}",
+      "running": "Çalışıyor: {0}",
+      "serviceSuffix": " (hizmet)",
+      "off": "Koruma kapalı. Discord'a erişmek için başlatın."
+    },
+    "service": {
+      "title": "Arka plan hizmeti",
+      "elsewhere": "Hizmet başka bir klasördeki GoodbyeDPI'ı çalıştırıyor.",
+      "ok": "Kurulu ve bu klasörü kullanıyor."
+    },
+    "discord": {
+      "title": "Discord sunucuları",
+      "all": "{0}/{1} erişilebilir.",
+      "partial": "{0}/{1} erişilebilir – açılmayan: {2}"
+    },
+    "discordApp": {
+      "title": "Discord uygulaması",
+      "before": "Discord korumadan önce açılmış; bağlanamıyorsa yeniden başlatın."
+    },
+    "open": "Açık.",
+    "closed": "Kapalı.",
+    "otherEngine": {
+      "title": "Dosyalar: {0}",
+      "problem": "Şu an kullanılamaz: {0} (yalnızca bu motora geçerseniz önemlidir)."
+    },
+    "listJoin": "{0}; {1}",
+    "owner": {
+      "item": "{0}.exe (PID {1}): {2}",
+      "own": "bu uygulamanın motoru",
+      "candidate": "süren taramanın adayı",
+      "ownFileUnknownPid": "bu kurulumun dosyası ama şu an bu uygulama başlatmadı (sahibi belirsiz)",
+      "other": "başka bir kopya ya da program: {0}",
+      "denied": "sahibi okunamadı (erişim reddedildi)",
+      "unreadable": "sahibi okunamadı"
+    },
+    "scm": {
+      "running": "çalışıyor",
+      "stopped": "durdurulmuş",
+      "pending": "durum değiştiriyor",
+      "paused": "duraklatılmış",
+      "unknown": "durum bilinmiyor",
+      "NotFound": "bulunamadı",
+      "AccessDenied": "erişim reddedildi",
+      "Error": "sorgu başarısız",
+      "driver": "çekirdek sürücüsü",
+      "service": "hizmet",
+      "entry": "{0} ({1}): {2}, {3}, {4}",
+      "entryUnreadable": "{0}: okunamadı ({1})",
+      "pathUnknown": "dosya bilinmiyor",
+      "ours": "{0} (bu kurulum)",
+      "otherFolder": "{0} (başka bir klasör)"
+    },
+    "windivert": {
+      "title": "WinDivert sürücü kayıtları",
+      "none": "WinDivert sürücü kaydı yok."
+    },
+    "anticheat": {
+      "title": "Hile önleyici sürücüler",
+      "none": "Denetlenen hile önleyici kayıtlarından (Riot Vanguard, FACEIT, EasyAntiCheat, BattlEye) hiçbiri kurulu değil.",
+      "activeDriver": "{0}: {1} çekirdek sürücüsü çalışıyor",
+      "driverInstalled": "{0}: {1} çekirdek sürücüsü kurulu ({2})",
+      "userService": "{0}: {1} hizmeti ({2}), yalnızca ürün hakkında bilgi",
+      "unreadable": "{0} ({1}): denetlenemedi ({2}); bu, yok olduğu anlamına gelmez"
+    },
+    "notice": {
+      "anticheatTitle": "{0} çekirdek sürücüsü çalışıyor",
+      "anticheatByeDpi": "Çalışan motor ({1}) WinDivert sürücüsünü kullanıyor. {0} korumalı oyunlar sorun çıkarırsa Profiller sayfasından sürücüsüz ByeDPI motorunu deneyebilirsiniz. Bu yalnızca bir öneridir; hile önleyici uyumluluğu garanti edilmez.",
+      "anticheatNoByeDpi": "Çalışan motor ({1}) WinDivert sürücüsünü kullanıyor. Sürücüsüz ByeDPI motoru bu bilgisayarda önerilmiyor: {2} Hile önleyici uyumluluğu garanti edilmez.",
+      "anticheatShortByeDpi": "Çalışan motor ({1}) WinDivert sürücüsünü kullanıyor. {0} korumalı oyunlar sorun çıkarırsa sürücüsüz ByeDPI motorunu deneyin. Uyumluluk garanti edilmez.",
+      "anticheatShortNoByeDpi": "Çalışan motor ({1}) WinDivert sürücüsünü kullanıyor. Sürücüsüz ByeDPI motoru burada önerilmiyor: {2} Uyumluluk garanti edilmez."
+    }
+  },
+  "scripts": {
+    "unsafeProfile": "'{0}' profili güvenli olmayan bir parametre içerdiği için betiğe dönüştürülmedi: {1}",
+    "unsafePath": "Uygulama klasörünün yolu betikte kullanılamayan bir karakter (% ! \") içeriyor.",
+    "method": "'{0}' yöntemi",
+    "dnsRedirect": "DNS yönlendirme: {0}",
+    "usage1": "Çalıştırınca yönetici izni istenir. Durdurmak için açılan",
+    "usage2": "GoodbyeDPI penceresini kapatın ya da stop.cmd'yi çalıştırın.",
+    "usage3": "Aynı anda yalnızca BİR betik çalıştırın.",
+    "needAdmin": "Bu betiğe sağ tıklayıp Yönetici olarak çalıştır'ı seçin.",
+    "stop": {
+      "rem": "Çalışan tüm GoodbyeDPI işlemlerini kapatır. Sağ tık - Yönetici olarak çalıştır."
+    },
+    "reset": {
+      "rem": "GoodbyeDPI hizmetlerini ve WinDivert sürücü kaydını kaldırır (eski ayarlari_sifirla.cmd). Sağ tık - Yönetici olarak çalıştır.",
+      "done": "Sıfırlama tamamlandı. Bilgisayarı yeniden başlatmanız önerilir."
+    },
+    "readme": {
+      "title": "NSF SHIELD - YEDEK BETİKLER",
+      "intro": "Bu klasördeki .cmd dosyaları NSF Shield uygulaması OLMADAN GoodbyeDPI'ı doğrudan çalıştırır. Uygulama açılmıyorsa ya da bir yöntemi elle denemek istiyorsanız kullanın. Uygulamayı kullanıyorsanız bunlara gerek yoktur.",
+      "usage": "Kullanım:",
+      "step1": "NSF Shield uygulaması açıksa önce tepsiden 'Çıkış' deyin.",
+      "step2": "Bir betiğe çift tıklayın, yönetici iznini onaylayın.",
+      "step3": "Açılan GoodbyeDPI penceresi açık kaldığı sürece çalışır.",
+      "step4": "Başka bir betik denemeden önce pencereyi kapatın ya da stop.cmd çalıştırın.",
+      "order": "Sıralama: 01'den başlayarak deneyin. Türkiye'de Discord DNS ile de engellendiği için DNS yönlendirmesiz son üç betik Discord'u AÇMAZ; yalnızca karşılaştırma için vardır.",
+      "stop": "çalışan tüm GoodbyeDPI işlemlerini kapatır (sağ tık -> Yönetici olarak çalıştır).",
+      "reset": "hizmetleri ve sürücü kaydını temizler (sağ tık -> Yönetici olarak çalıştır)."
+    },
+    "goodbyeDpiOnly": "{0}: betikler yalnızca GoodbyeDPI profilleri için oluşturulur."
+  },
+  "scan": {
+    "status": {
+      "pending": "Bekliyor",
+      "testing": "Deneniyor",
+      "skipped": "Atlandı",
+      "startFailed": "Başlatılamadı",
+      "partial": "Kısmen",
+      "failed": "Çalışmıyor",
+      "full": "Tam başarı",
+      "unavailable": "Kullanılamaz",
+      "invalid": "Geçersiz",
+      "isolation": "Yalıtılamadı",
+      "noScope": "Liste kapsamı dışında",
+      "cancelled": "İptal edildi"
+    },
+    "preparing": "Hazırlanıyor…",
+    "step": {
+      "internet": "Genel bağlantı kontrol ediliyor…",
+      "dns": "Sistem DNS'i DNS over HTTPS ile karşılaştırılıyor…",
+      "baseline": "Hedefler korumasız ölçülüyor…",
+      "firstMatch": "{0} aday deneniyor, ilk tam başarıda duruluyor…",
+      "benchmark": "{0} aday karşılaştırılıyor (her biri bir kez; kendiliğinden uygulanmaz)…"
+    },
+    "skipped": "{0}: atlandı ({1})",
+    "done": "Bitti",
+    "error": "Hata: {0}",
+    "noneWorked": "Hiçbir aday her hedefte tam çalışmadı.",
+    "noneWorkedCause": "{0} Olası neden: {1} – {2}",
+    "cancelled": "Tarama iptal edildi.",
+    "problemSource": "Yöntem taraması",
+    "historyNote": "{0} · {1} yöntem denendi",
+    "busy": "Zaten bir tarama sürüyor.",
+    "noCandidates": "Hiç aday seçilmedi; koruma değiştirilmedi.",
+    "noTargets": "Tarama hedefi yok; koruma değiştirilmedi.",
+    "rejected": "Çıkarıldı: {0}",
+    "env": "Tarama öncesi: {0} ({1}).",
+    "envOff": "koruma kapalı",
+    "paused": "Korumanız ({0}) tarama süresince duraklatılır, sonra geri yüklenir.",
+    "byedpiKept": "Çalışan ByeDPI açık kalıyor (sürücü yok; Windows proxy'si çalışan bir adresi göstermeye devam ediyor).",
+    "foreignDriver": "Başka bir programın WinDivert sürücüsü yüklü ({0}); olduğu gibi bırakılıyor.",
+    "driverNote": "Sürücülü adaylar sırayla çalışır; aralarında internet bir anlığına kesilebilir.",
+    "pretestOk": "Genel bağlantı çalışıyor.",
+    "pretestFailed": "Sabit bağlantı ön testi başarısız (tek başına internet yok anlamına gelmez).",
+    "dohDown": "DNS over HTTPS'e ulaşılamadı; tarama sistem DNS'iyle sürüyor.",
+    "dohHint": "İpucu: sistem DNS'ine müdahale varsa DNS sayfasından DoH'u açın (otomatik bir değişiklik yapılmaz).",
+    "baseline": "Koruma olmadan {0}/{1} hedef zaten açılıyor (bunlar bir yöntemin katkısını göstermez).",
+    "udpBaseline": "Korumasız UDP (STUN): {0}",
+    "udpRow": "UDP/STUN: {0}",
+    "noScope": "{0}, site listelerinize göre hedeflerin hiçbirine uygulanmıyor.",
+    "widened": "{0}: geçici geniş dahil listesi (+{1}); sonuç uygulanmadan önce asıl listelerinizle yeniden doğrulanır.",
+    "rowResult": "{0}: {1} · skor {2} · {3} · iki turda {4}/{5} hedef",
+    "reverify": "{0} asıl site listelerinizle yeniden doğrulanıyor…",
+    "notVerifiedReal": "{0} yalnızca geçici geniş listeyle çalıştı; uygulanmadı.",
+    "applying": "{0} uygulanıyor…",
+    "applied": "Uygulandı: {0} (ortalama {1}). Koruma bununla açık.",
+    "apply": {
+      "failedWhy": "[{0}] {1}"
+    },
+    "applyFailed": "{0} testte çalıştı ama uygulanamadı: {1}. Önceki durum geri yüklendi.",
+    "suggested": "Bulundu: {0} (iki turda tam başarı); uygulanmadı.",
+    "suggestedBenchmark": "En iyi sonuç: {0}. Kullanmak için bir satır seçip “Uygula”ya basın.",
+    "openWithout": "Not: hedefler koruma olmadan da açıldı; sonuç bir yöntemin katkısı hakkında az şey söyler.",
+    "block": {
+      "serviceTimeout": "Arka plan hizmeti zamanında durmadı; çakışmamaları için sürücülü adaylar atlanıyor.",
+      "serviceNotOwned": "NSFShield hizmeti başka bir kurulumun programını çalıştırıyor ({0}); durdurulmadığı için sürücülü adaylar atlanıyor.",
+      "foreignProcess": "Başka bir WinDivert programı çalışıyor ({0}); kapatılmadığı için sürücülü adaylar atlanıyor.",
+      "driverFailed": "WinDivert sürücüsü yüklenemedi [{0}]; diğer sürücülü adaylar atlanıyor.",
+      "engineFailed": "{0} çalıştırılamıyor [{1}]; diğer adayları atlanıyor."
+    },
+    "trial": {
+      "listsFailed": "site listeleri hazırlanamadı ({0}); bunun yerine tüm trafikte denenmedi",
+      "noPort": "test için boş yerel port yok",
+      "exited": "Adayın süreci ölçüm sırasında kapandı; sonucu sayılmadı.",
+      "portLost": "Aday artık {0} portunun sahibi değil ({1}); sonucu sayılmadı."
+    },
+    "restore": {
+      "engine": "Geri yüklendi: {0}.",
+      "engineFailed": "{0} yeniden başlatılamadı [{1}].",
+      "kept": "Değişmedi: {0} çalışmaya devam ediyor.",
+      "off": "Koruma, tarama öncesindeki gibi kapalı kalıyor.",
+      "service": "Arka plan hizmeti yeniden çalışıyor.",
+      "serviceFailed": "Arka plan hizmeti yeniden başlatılamadı.",
+      "startTypeFailed": "Hizmetin başlangıç türü geri yüklenemedi.",
+      "serviceNotRunning": "Hizmet tarama öncesinde çalışıyordu ama şimdi çalışmıyor.",
+      "serviceStillRunning": "Hizmet tarama öncesinde durmuştu ama şimdi çalışıyor.",
+      "proxyChanged": "Windows proxy'si artık ByeDPI'ı göstermiyor; proxy ayarlarını kontrol edin.",
+      "error": "Geri yükleme hatası: {0}",
+      "serviceCreated": "Tarama sırasında oluşturulan arka plan hizmeti kaldırılamadı.",
+      "serviceCommandFailed": "Arka plan hizmetinin komutu tarama öncesindeki hâline geri getirilemedi."
+    },
+    "dns": {
+      "nxdomain": "ad bulunamadı (sistem)",
+      "nodata": "adres kaydı yok",
+      "timeout": "DNS zaman aşımı",
+      "error": "çözümleme hatası",
+      "ok": "{0}"
+    },
+    "dnsVerdict": {
+      "Match": "{0}: sistem DNS'i DoH ile aynı",
+      "DifferentPublic": "{0}: farklı genel adresler (CDN'lerde normal)",
+      "Interference": "{0}: DoH buluyor ama sistem DNS'i başarısız ya da genel olmayan adres veriyor – müdahale belirtisi",
+      "NotFound": "{0}: ad mevcut değil (sistem ve DoH)",
+      "DohUnavailable": "{0}: DoH'a ulaşılamadı – karşılaştırma yok",
+      "Unclear": "{0}: cevaplar farklı, hüküm yok",
+      "NotPublicTarget": "{0}: DoH genel olmayan adres veriyor – genel bir hedef değil"
+    },
+    "http": {
+      "proxyAuth": "proxy kimlik doğrulaması istedi (407)",
+      "blocked": "engelleme yanıtı ({0})",
+      "serverError": "sunucu hatayla yanıt verdi ({0})",
+      "expected": "beklenen yanıt ({0})",
+      "unexpected": "beklenmeyen yanıt {0} (beklenen: {1})",
+      "redirectAway": "başka siteye yönlendirme ({0} → {1})",
+      "unclear": "sunucu yanıt verdi ({0}) ama hedefin çalıştığı belli değil",
+      "redirectOk": "hedef içinde yönlendirme ({0} → {1}, HTTPS)",
+      "redirectMissing": "Location başlığı olmayan yönlendirme ({0})",
+      "redirectBad": "geçersiz ya da yinelenen Location ile yönlendirme ({0})",
+      "redirectDowngrade": "HTTPS'ten düz HTTP'ye yönlendirme ({0} → {1})"
+    },
+    "probe": {
+      "bodyTooLarge": "yanıt çok büyük",
+      "certError": "sertifika doğrulanamadı ({0})",
+      "connectFailed": "bağlantı kurulamadı ({0})",
+      "connectTimeout": "bağlantı zaman aşımı",
+      "headTooLarge": "yanıt başlıkları çok büyük",
+      "httpClosed": "yanıttan önce bağlantı kapandı",
+      "httpTimeout": "zamanında HTTP yanıtı yok",
+      "notHttp": "HTTP yanıtı değil",
+      "notPublic": "DNS cevabı genel değil ({0}: {1}); bağlanılmadı",
+      "socksAuth": "adayın SOCKS5 portu el sıkışmayı reddetti",
+      "socksBad": "geçersiz SOCKS5 yanıtı",
+      "socksClosed": "adayın tüneli kapandı",
+      "socksRefused": "adayın tüneli bağlantıyı reddetti (kod {0}); doğrudan bağlantıya düşülmedi",
+      "socksTimeout": "adayın tüneli yanıt vermedi",
+      "tlsFailed": "TLS başarısız ({0})",
+      "tlsTimeout": "TLS zaman aşımı",
+      "socksOwner": "SOCKS portu {0} artık adaya ait değil."
+    },
+    "target": {
+      "bad": {
+        "empty": "boş",
+        "tooLong": "çok uzun",
+        "space": "boşluk veya denetim karakteri olamaz",
+        "scheme": "https:// olmadan yalnızca alan adını yazın",
+        "port": "port (:443) olamaz",
+        "path": "yol (/…) olamaz",
+        "query": "sorgu veya çapa (? # & =) olamaz",
+        "wildcard": "joker karakter (*) olamaz",
+        "ip": "IP adresi olamaz; alan adı yazın",
+        "credentials": "kullanıcı adı (@) olamaz",
+        "ascii": "yalnızca ASCII; Türkçe karakterli adları punycode (xn--…) olarak yazın",
+        "chars": "geçersiz karakter",
+        "invalid": "geçerli bir alan adı değil",
+        "local": "yerel veya özel amaçlı adlar (localhost, .local, .lan …) olamaz"
+      }
+    },
+    "udp": {
+      "na": "N/A — bu TCP proxy yolunda ölçülmedi",
+      "ok": "erişilebilir ({0} ms)",
+      "Timeout": "yanıt yok (zaman aşımı)",
+      "Invalid": "geçersiz yanıt",
+      "ErrorResponse": "hata yanıtı",
+      "DnsFailed": "sunucu adı çözülemedi",
+      "general": "yalnızca genel UDP erişimi",
+      "profile": "port profilin kurallarında"
+    },
+    "gateway": {
+      "name": "Gateway bağlantısı",
+      "ok": "Gateway bağlantısı açıldı (WebSocket 101, anahtar doğrulandı); Discord oturumu, ses veya oyun hakkında bilgi vermez",
+      "badHeaders": "Gateway 101 verdi ama Upgrade/Connection başlıkları geçersiz (ya da istenmeyen eklenti var)",
+      "badAccept": "Gateway 101 verdi ama WebSocket anahtar doğrulaması bu isteğe uymuyor",
+      "notUpgraded": "Gateway WebSocket açmak yerine HTTP {0} ile yanıt verdi",
+      "rateLimited": "Gateway 429 (çok fazla istek) verdi; çalışıyor sayılmaz"
+    }
+  },
+  "net": {
+    "dnsReport": {
+      "noReference": "Bağımsız DNS sunucularına ulaşılamadı; karşılaştırma yapılamadı.",
+      "noAnswer": "Sistem DNS'i bu adı çözemiyor → DNS ENGELİ VAR.",
+      "fake": "Sistem DNS'i sahte bir adres döndürüyor → DNS ENGELİ VAR.",
+      "ok": "DNS yanıtı doğru; DNS düzeyinde engel yok."
+    },
+    "site": {
+      "reachable": "ERİŞİLEBİLİR",
+      "okWithProtection": "Site koruma açıkken sorunsuz açılıyor.",
+      "okWithout": "Site koruma olmadan da açılıyor; bu site için engel yok.",
+      "notFound": "ALAN ADI BULUNAMADI",
+      "notFoundAdvice": "Ne sistem DNS'i ne de bağımsız DNS sunucuları bu adı çözebildi. Adı doğru yazdığınızdan emin olun.",
+      "ipBlock": "IP ENGELİ YA DA SUNUCU KAPALI",
+      "ipBlockAdvice": "Doğru IP adresine bile bağlanılamıyor. GoodbyeDPI IP engelini aşamaz; sunucu kapalı değilse VPN gerekir.",
+      "dnsAndSni": "DNS + DPI (SNI) ENGELİ",
+      "dnsAndSniAdvice": "İki katmanlı engel var. DNS yönlendirmeli bir DPI profili gerekir (ör. 'Türkiye – Önerilen').",
+      "dnsOnly": "YALNIZCA DNS ENGELİ",
+      "dnsOnlyOn": "Koruma açık ama DNS hâlâ yanlış. DNS yönlendirmeli bir profil seçin ya da DNS önbelleğini temizleyin.",
+      "dnsOnlyOff": "Doğru adrese şifreli bağlantı kurulabiliyor. DNS yönlendirmesi ya da Windows DNS değişikliği yeterli.",
+      "sni": "DPI (SNI) ENGELİ",
+      "sniOn": "DNS doğru ama kullanılan yöntem DPI'ı aşamıyor. 'En iyi yöntemi bul' taramasını çalıştırın.",
+      "sniOff": "DNS doğru ama bağlantı site adına göre kesiliyor. Korumayı başlatın.",
+      "cert": "SERTİFİKA SORUNU",
+      "certAdvice": "Sunucu beklenmeyen bir sertifika gösterdi. Antivirüs HTTPS taraması ya da yanlış saat olabilir.",
+      "unclear": "BELİRSİZ",
+      "opens": "Site açılıyor.",
+      "httpFailed": "Bağlantı katmanları çalışıyor ama HTTP isteği başarısız:"
+    },
+    "dnsTest": {
+      "system": "Sistem DNS'i (Windows)",
+      "noAnswer": "Yanıt yok",
+      "noCompare": "Karşılaştırılamadı",
+      "correct": "Doğru yanıt",
+      "empty": "Boş yanıt (engelli)",
+      "fake": "Sahte adres (engelli)",
+      "redirected": " · koruma yönlendiriyor"
+    },
+    "adapter": {
+      "wired": "Kablolu (Ethernet)",
+      "wifi": "Kablosuz (Wi-Fi)",
+      "tunnel": "Tünel",
+      "mobile": "Mobil geniş bant"
+    },
+    "probe": {
+      "ok": "Şifreli bağlantı kuruldu ({0} ms)",
+      "connectFail": "Sunucuya bağlanılamadı",
+      "connectFailWhy": "Sunucuya bağlanılamadı ({0})",
+      "connectTimeout": "Bağlantı zaman aşımına uğradı",
+      "reset": "Şifreli bağlantı kurulurken kesildi (DPI engeli)",
+      "timeout": "Şifreli bağlantı yanıtsız kaldı (paketler düşürülüyor)",
+      "certError": "Sunucu yanlış sertifika gösterdi ({0})"
+    },
+    "dnsFailed": "Alan adı çözümlenemedi (DNS engeli)",
+    "reachable": "Erişilebilir (HTTP {0})",
+    "timeout": "Zaman aşımı (paketler düşürülüyor)",
+    "connectFail": "Sunucuya bağlanılamadı (IP engeli olası)",
+    "reset": "Bağlantı kesildi (DPI engeli)",
+    "tlsFailed": "Şifreli bağlantı kurulamadı (DPI engeli)",
+    "certMismatch": "Sertifika uyuşmuyor (DNS sahte adres veriyor olabilir)"
+  },
+  "discord": {
+    "noShortcut": "Discord kapatıldı ama başlatma kısayolu bulunamadı; Discord'u kendiniz açın.",
+    "notInstalled": "Discord kurulu görünmüyor.",
+    "restarted": "Discord yeniden başlatıldı.",
+    "started": "Discord başlatıldı.",
+    "startFailed": "Discord başlatılamadı."
+  },
+  "sysdns": {
+    "auto": {
+      "name": "Otomatik (servis sağlayıcının DNS'i)",
+      "note": "Windows varsayılanı. Türkiye'de Discord bu DNS'te engelli."
+    },
+    "cloudflare": {
+      "note": "En hızlı genel DNS. Şifreli DNS (DoH) ile önerilir."
+    },
+    "google": {
+      "note": "Yaygın ve kararlı. Şifreli DNS ile kullanın."
+    },
+    "quad9": {
+      "note": "Gizlilik odaklı, zararlı siteleri engeller."
+    },
+    "adguard": {
+      "note": "Reklam ve izleyicileri de engeller."
+    },
+    "dohNoTemplate": "Şifreli DNS (DoH) → bu seçenek için geçerli bir DoH adresi yok.",
+    "dohRestored": "Şifreli DNS (DoH) kayıtları eski hâline döndürüldü.",
+    "opendns": {
+      "note": "Cisco'nun DNS hizmeti."
+    },
+    "dohUnsupported": "Şifreli DNS (DoH) bu Windows sürümünde desteklenmiyor (derleme {0}; Windows 11 gerekir). DNS sunucusu şifresiz olarak ayarlandı; Discord erişimi için bu da yeterlidir.",
+    "invalidAdapter": "geçersiz bağdaştırıcı adı atlandı.",
+    "invalidAddresses": "{0} geçersiz adres atlandı.",
+    "dohGlobalFailed": "Şifreli DNS genel ayarı açılamadı:",
+    "netshFailed": "netsh hata verdi ({0}): {1}",
+    "notVerified": "komut çalıştı ama doğrulanamadı (Auto-upgrade: {0}, şablon: {1})",
+    "none": "yok",
+    "dohVerified": "Şifreli DNS (DoH) → etkin ve doğrulandı: {0} (Auto-upgrade: yes).",
+    "dohPartial": "Şifreli DNS (DoH) → {0}/{1} sunucuda etkinleştirilebildi:",
+    "netshFailedShort": "netsh hata verdi: {0}",
+    "restoreNotVerified": "geri alındı ama doğrulanamadı (Auto-upgrade: {0})",
+    "dohRestoreFailed": "Şifreli DNS geri alınamadı:",
+    "dohGlobalRestoreFailed": "Şifreli DNS genel ayarı geri alınamadı:",
+    "automatic": "otomatik",
+    "restoreKept": "{0}: DNS ayarı eski hâliyle geri okunamadı; yeniden deneyebilmeniz için yedeği saklandı.",
+    "backupUnreadable": "{0}: mevcut DNS ayarı okunamadı ya da yedeği kaydedilemedi; bu bağdaştırıcı değiştirilmedi.",
+    "restoreUnreadable": "{0}: geri yüklemeden sonra DNS ayarı okunamadı; yeniden deneyebilmeniz için yedeği saklandı.",
+    "dohUnreadable": "şifreli DNS kaydı okunamadı (netsh hatası); hiçbir şey varsayılmadı",
+    "dohTemplateNotRestored": "eski DoH şablonu güvenle geri yazılamıyor; yedek saklandı"
+  },
+  "guard": {
+    "networkFolder": "Uygulama bir ağ klasöründe.",
+    "userAccount": "bir kullanıcı hesabı",
+    "installedOnly": "Bu özellik yalnızca kurulum paketiyle (Program Files'a) kurulan NSF Shield'de kullanılabilir.\n\nTaşınabilir (zip) sürüm, yönetici izni olmadan değiştirilebilen bir klasörde çalışıyor. Buradaki dosyaları SYSTEM yetkili bir hizmetle ya da izin sormadan yönetici olarak açılan bir görevle çalıştırmak, bilgisayardaki zararlı bir programın yetki kazanmasına yol açabileceği için kapalıdır.\n\nKoruma uygulama modunda normal çalışır.",
+    "aclUnreadable": "Klasör izinleri okunamadı:",
+    "owner": "'{0}' sahibi {1} (yönetici değil).",
+    "canModify": "şunu değiştirebiliyor:",
+    "reparse": "Yolda bir bağlantı noktası (junction) ya da sembolik bağlantı var: {0}",
+    "finalPath": "Klasör kendi yoluna çözülmüyor (bağlantı, bağlama noktası ya da SUBST sürücüsü): {0}"
+  },
+  "args": {
+    "tooLong": "Parametreler çok uzun.",
+    "noBlacklist": "--blacklist (ya da kısaltması) elle eklenemez; Hedef Siteler sayfasındaki hedefli modu kullanın.",
+    "noProfile": "Profil yok.",
+    "badChar": "İzin verilmeyen karakter: {0}.",
+    "controlChar": "(kontrol karakteri)",
+    "unexpectedValue": "Beklenmeyen değer:",
+    "shortWithEquals": "Kısa seçeneklerde '=' kullanılamaz:",
+    "unknown": "Bilinmeyen ya da kısaltılmış parametre: {0} (seçenekleri tam adıyla ve ayrı ayrı yazın).",
+    "noValue": "değer almaz.",
+    "fragFormat": "değeri a1-a2-m biçiminde olmalı (ör. 1-4-10).",
+    "range": "değeri {0}–{1} arasında bir sayı olmalı.",
+    "missingValue": "için değer eksik.",
+    "invalidValue": "için geçersiz değer:",
+    "abbreviation": "'{0}', '{1}' seçeneğinin kısaltmasıdır; seçeneği tam adıyla yazın (motor kısaltmayı sessizce kabul ederdi).",
+    "byedpiNeedsMethod": "Atlatma yöntemi yok: --split, --disorder, --oob, --disoob, --fake, --tlsrec, --mod-http, --tlsminor veya --udp-fake seçeneklerinden en az birini ekleyin.",
+    "empty": "Parametre yok.",
+    "forbidden": {
+      "autoList": "{0} kullanılmaz: otomatik liste dosyaya yazar. Site Listeleri sayfasındaki Dahil et/Hariç tut listelerini kullanın.",
+      "freePath": "{0} herhangi bir yoldan dosya okur ve izin verilmez; sahte paketler adıyla seçilir, listeler Site Listeleri sayfasından yönetilir.",
+      "linuxOnly": "{0} yalnızca Linux'ta çalışır.",
+      "listenAddress": "{0} ayarlanamaz: ByeDPI her zaman 127.0.0.1 üzerinde dinler, portu Ayarlar'dan belirlenir.",
+      "notSupported": "{0} NSF Shield profillerinde kullanılamaz.",
+      "rawFilter": "{0} (ham WinDivert filtresi) izinli değil; --wf-tcp, --wf-udp ve --filter-… seçeneklerini kullanın.",
+      "writesFile": "{0} dosyaya yazar ve izin verilmez."
+    },
+    "managedList": "yalnızca yönetilen liste adı kullanılabilir: {0} (dosya data\\lists klasöründedir).",
+    "missingValueEq": "--seçenek=değer biçiminde bir değer ister.",
+    "payloadName": "'{0}' NSF Shield'in sahte paketlerinden biri değil; bin\\zapret\\payloads içindeki adlardan birini ya da 0x… onaltılık değer kullanın.",
+    "singleDash": "Tek tireli yazım ('{0}') kabul edilmez; seçeneği iki tire ve tam adıyla yazın.",
+    "tooManyRules": "En fazla {0} kural (--new) kullanılabilir.",
+    "winwsNeedsCapture": "winws bir yakalama filtresi ister: --wf-tcp=… ve/veya --wf-udp=… ekleyin."
+  },
+  "integrity": {
+    "noHash": "{0} için bilinen özet yok.",
+    "mismatch": "{0} resmi sürümle aynı değil (SHA-256 {1}…, beklenen {2}…).",
+    "notFound": "{0} bulunamadı.",
+    "notPlain": "{0} düz bir dosya değil (bağlantı, ikinci sabit bağlantı ya da başka bir yol)."
+  },
+  "proxy": {
+    "parse": {
+      "empty": "Proxy adresi boş.",
+      "badIpv6": "Geçersiz IPv6 proxy adresi.",
+      "format": "Adresi 'IP:port' biçiminde yazın (ör. 185.12.34.56:8080).",
+      "port": "Port 1-65535 arasında olmalı.",
+      "badScheme": "Desteklenmeyen proxy türü: {0} (http ya da socks5 olmalı).",
+      "badHost": "Geçersiz sunucu adı ya da IP:",
+      "httpsUnsupported": "https:// proxy'ler (proxy'ye şifreli bağlantı) desteklenmiyor. http:// ya da socks5:// kullanın; HTTP proxy'nin parolayı şifresiz aldığını unutmayın."
+    },
+    "closed": "Proxy bağlantıyı kapattı.",
+    "noAnswer": "Proxy sunucusu yanıt vermedi (zaman aşımı).",
+    "closedMaybeSocks": "Proxy bağlantıyı kapattı (HTTP proxy değil olabilir; SOCKS5 deneyin).",
+    "auth407": "Proxy kullanıcı adı/şifre istiyor ya da bilgiler yanlış (HTTP 407).",
+    "notSocks": "Bu sunucu SOCKS5 proxy değil (HTTP proxy olabilir).",
+    "socksAuth": "SOCKS5 proxy kullanıcı adı/şifre istiyor.",
+    "socksAuthRejected": "SOCKS5 kullanıcı adı/şifre kabul edilmedi.",
+    "tlsCut": "Proxy üzerinden şifreli bağlantı kesildi (proxy'nin bulunduğu ülkede de engel olabilir).",
+    "handshakeCut": "Proxy el sıkışmada bağlantıyı kesti (proxy türü yanlış olabilir).",
+    "noAnswerOrCut": "Proxy yanıt vermedi ya da bağlantıyı kesti.",
+    "discordNotFound": "Discord kurulu bulunamadı (%LOCALAPPDATA%\\Discord\\Update.exe yok).",
+    "connectFailed": "Proxy sunucusuna bağlanılamadı{0}.",
+    "noTunnel": "Proxy {0} adresine tünel açmadı:",
+    "socks": {
+      "1": "genel hata",
+      "2": "kurallarca yasak",
+      "3": "ağa ulaşılamıyor",
+      "4": "sunucuya ulaşılamıyor",
+      "5": "bağlantı reddedildi",
+      "6": "süre doldu",
+      "7": "komut desteklenmiyor",
+      "8": "adres türü desteklenmiyor"
+    },
+    "socksConnectFailed": "SOCKS5 proxy {0} adresine bağlanamadı: {1}",
+    "socksCode": "kod {0}",
+    "badCert": "Proxy üzerinden {0} için geçerli sertifika alınamadı (proxy trafiğe müdahale ediyor olabilir).",
+    "reachable": "{0} proxy üzerinden erişilebilir ({1} ms).",
+    "kindFixed": "(Tür {0} olarak düzeltildi.)",
+    "working": "Çalışıyor",
+    "discordOpening": "Discord {0} proxy ({1}) ile açılıyor.",
+    "sys": {
+      "unreadable": "Mevcut Windows proxy ayarı okunamadığı için değiştirilmedi.",
+      "notPrepared": "Windows proxy'si için geri yükleme kaydı hazırlanamadı ({0}), bu yüzden Windows proxy'si değiştirilmedi.",
+      "writeFailed": "Windows proxy'si yazılamadı ({0}); NSF Shield'in değişiklikleri geri alındı (bu da başarısız olduysa bir sonraki açılışta yeniden denenir).",
+      "previousNotRestored": "NSF Shield'in önceki Windows proxy değişikliği geri alınamadı ({0}), bu yüzden yeni proxy ayarlanmadı.",
+      "notSaved": "Ayarlar kaydedilemediği için Windows proxy'si değiştirilmedi."
+    }
+  },
+  "bridge": {
+    "portFailed": "Yerel köprü 127.0.0.1:{0} portunu açamadı:"
+  },
+  "appProxy": {
+    "mode": {
+      "firefox": "Firefox (ayrı proxy profili)",
+      "env": "Ortam değişkenleri (HTTP_PROXY)"
+    },
+    "invalidChars": "Program kuralı ya da proxy adresi geçersiz (kontrol karakteri) içeriyor.",
+    "badExePath": "Program yolu ortam değişkeni modunda kullanılamayan bir karakter (\" % !) içeriyor.",
+    "badProxyUrl": "Proxy adresi ortam değişkeni modunda kullanılamayan bir karakter içeriyor.",
+    "badExtraArgs": "Ek parametrelerde & | < > ^ % ! karakterleri kullanılamaz.",
+    "notFound": "Program bulunamadı:",
+    "opening": "{0} {1} proxy ({2}) ile açılıyor.",
+    "openingBridge": "{0} {1} proxy ({2}) ile açılıyor – yerel köprü üzerinden.",
+    "startFailed": "{0} başlatılamadı.",
+    "openFailed": "{0} proxy ile açılamadı:"
+  },
+  "update": {
+    "unexpectedRedirect": "Sürüm bilgisi isteği beklenmeyen bir adrese yönlendirildi: {0}",
+    "unreadable": "Sürüm bilgisi okunamadı.",
+    "noRelease": "Henüz yayımlanmış sürüm yok.",
+    "githubUnreachable": "GitHub'a ulaşılamadı: {0}",
+    "notGithub": "Güncelleme adresi GitHub dışında: {0}",
+    "noHash": "Bu sürüm için doğrulama özeti (SHA-256) yok; güvenlik nedeniyle güncelleme yapılmadı.",
+    "noExe": "Pakette NSFShield.exe yok.",
+    "incomplete": "Paket eksik: {0}",
+    "versionMismatch": "Paketteki uygulama sürümü ({0}) beklenen sürümle ({1}) uyuşmuyor.",
+    "redirectedOutside": "Güncelleme isteği GitHub dışına yönlendirildi: {0}",
+    "tooBig": "Paket beklenenden çok büyük.",
+    "hashMismatch": "İndirilen dosyanın özeti uyuşmuyor (beklenen {0}…, gelen {1}…). Güncelleme iptal edildi.",
+    "setupNotGithub": "Kurulum paketinin adresi GitHub dışında: {0}",
+    "setupNoHash": "Kurulum paketi için doğrulama özeti (SHA-256) yok; güvenlik nedeniyle güncelleme yapılmadı.",
+    "setupInfoMismatch": "Kurulum paketinin ürün/sürüm bilgisi beklenenle uyuşmuyor ({0}).",
+    "setupChanged": "Kurulum paketi indirildikten sonra değişmiş; güvenlik nedeniyle kurulum iptal edildi.",
+    "zipSlip": "Pakette klasör dışına çıkan bir girdi var: {0}",
+    "extractTooBig": "Paketin açılmış boyutu beklenenden çok büyük.",
+    "exeChanged": "Güncelleme dosyası açıldıktan sonra değişmiş; güvenlik nedeniyle kurulum iptal edildi.",
+    "packageChanged": "Güncelleme paketi klasörü doğrulandıktan sonra değişti ({0}); hiçbir şey kurulmadı."
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "profiles": "Profiller",
+    "net": "İnternet Kontrolü",
+    "dns": "DNS Ayarları",
+    "sites": "Site Listeleri",
+    "proxy": "Proxy",
+    "trouble": "Sorun Giderme",
+    "log": "Günlük",
+    "appearance": "Görünüm",
+    "settings": "Ayarlar",
+    "about": "Hakkında"
+  },
+  "main": {
+    "minimize": "Sistem tepsisine küçült",
+    "closeToTray": "Kapat (tepside çalışmaya devam eder)",
+    "close": "Kapat",
+    "uiLevelTip": "Basit / Orta / Detaylı arayüz arasında Ayarlar'dan geçiş yapabilirsiniz.",
+    "protectionStopped": "Koruma durdu",
+    "trayHint": "Pencereyi açmak için saat yanındaki kalkan simgesine tıklayın. Sağ tık menüsünden hızlıca başlatıp durdurabilirsiniz.",
+    "updatedTitle": "NSF Shield güncellendi",
+    "crashTitle": "Son kapanış beklenmedikti",
+    "crashText": "NSF Shield geçen sefer düzgün kapanmadı (çökme, zorla kapatma ya da elektrik kesintisi). Ayrıntı: Sorun Giderme → NSF-106 ya da günlük.",
+    "updateFailedTitle": "Güncelleme yapılamadı",
+    "updateFailedText": "Önceki sürüme dönüldü. Ayrıntı: data\\update.log",
+    "securityClosedText": "Taşınabilir klasörden yönetici/SYSTEM yetkisiyle otomatik çalışmak güvenli değil. Koruma uygulama modunda sürüyor; açılışta başlaması için kurulumlu sürümü kullanın.",
+    "tagline": "İnternet erişim kalkanı",
+    "hotkeyStopping": "Koruma kapatılıyor ({0}).",
+    "hotkeyStarting": "Koruma başlatılıyor ({0}).",
+    "uiLevel": "Arayüz: {0}",
+    "methodLabel": "Yöntem:",
+    "runningInBackground": "arka planda çalışıyor",
+    "exitConfirm": "Uygulamadan çıkarsanız koruma durur ve engelli sitelere erişim kesilir.\n\nArka planda çalışmaya devam etmesi için pencereyi kapatmanız (tepsiye küçültmeniz) yeterli.\n\nYine de çıkılsın mı?",
+    "updatedText": "Sürüm {0} → {1}. Ayarlarınız korundu.",
+    "securityClosed": "Güvenlik için kapatıldı: {0}",
+    "service": "hizmet",
+    "errorCode": "Hata kodu",
+    "needAdmin": "NSF Shield'in ağ sürücüsünü yükleyebilmesi için yönetici olarak çalıştırılması gerekir (NSF-101).\n\nUygulamaya sağ tıklayıp 'Yönetici olarak çalıştır'ı seçin.",
+    "netChanged": {
+      "title": "Ağ değişti",
+      "text": "Şimdi: {0} · DNS: {1}",
+      "severalAdapters": "birden çok bağdaştırıcı",
+      "offline": "Ağ bağlantısı yok."
+    }
+  },
+  "tray": {
+    "status": "Durum",
+    "start": "Korumayı başlat",
+    "method": "Yöntem (profil)",
+    "test": "Discord bağlantısını test et",
+    "testTitle": "Bağlantı testi",
+    "scan": "En iyi yöntemi bul…",
+    "update": "Güncelle",
+    "restartDiscord": "Discord'u yeniden başlat",
+    "open": "Pencereyi aç",
+    "exit": "Çıkış",
+    "stop": "Korumayı durdur",
+    "testResult": "{0}/{1} sunucu erişilebilir.",
+    "dnsWrong": "DNS yanıtı yanlış!",
+    "updateTo": "Güncelle: sürüm {0}",
+    "activeWithWarning": "Etkin – bir uyarı var",
+    "engine": "Motor"
+  },
+  "state": {
+    "running": "Koruma aktif",
+    "starting": "Başlatılıyor…",
+    "stopping": "Durduruluyor…",
+    "error": "Hata – koruma çalışmıyor",
+    "stopped": "Koruma kapalı"
+  },
+  "uiLevel": {
+    "Simple": "Basit",
+    "Standard": "Orta",
+    "Advanced": "Detaylı"
+  },
+  "home": {
+    "stateOff": "Koruma Kapalı",
+    "start": "Korumayı Başlat",
+    "testDiscord": "Discord'u Test Et",
+    "fix": "Düzelt",
+    "details": "Ayrıntı",
+    "discordAccess": "DISCORD ERİŞİMİ",
+    "notTested": "Test edilmedi",
+    "restartDiscord": "Discord'u yeniden başlat",
+    "methodInUse": "KULLANILAN YÖNTEM",
+    "change": "Değiştir",
+    "stillNotOpening": "Discord yine açılmıyor mu?",
+    "findProblemHint": "'Sorunu bul' her şeyi kontrol eder; hatayı kodu ve çözümüyle birlikte gösterir.",
+    "findProblem": "Sorunu bul",
+    "activeMethod": "AKTİF YÖNTEM",
+    "internetCheck": "İnternet kontrolü",
+    "session": "OTURUM",
+    "uptime": "çalışma süresi",
+    "row": {
+      "mode": "Mod",
+      "dns": "DNS",
+      "targeted": "Hedefli mod",
+      "lastScan": "Son tarama"
+    },
+    "scanHint": "Tarama tüm yöntemleri dener, DNS'i doğrular ve çalışanı otomatik seçer.",
+    "findBest": "En iyi yöntemi bul",
+    "stateOn": "Koruma Aktif",
+    "subOn": "Erişim engelleri aşılıyor. Discord ve engelli siteler şu an kullanılabilir olmalı.",
+    "stateStarting": "Başlatılıyor…",
+    "subStarting": "GoodbyeDPI ve WinDivert sürücüsü yükleniyor.",
+    "stateStopping": "Durduruluyor…",
+    "stateError": "Koruma Çalışmıyor",
+    "subOff": "Engellenen sitelere ve Discord'a erişmek için korumayı başlatın.",
+    "stop": "Korumayı Durdur",
+    "retry": "Tekrar Dene",
+    "testing": "Test ediliyor…",
+    "hintError": "Aşağıdaki 'Ayrıntı' düğmesi hatanın nedenini ve çözümünü gösterir.",
+    "hintScanning": "Otomatik yöntem taraması sürüyor…",
+    "hintTray": "İpucu: Pencereyi kapatınca uygulama sistem tepsisinde çalışmaya devam eder.",
+    "takeOverFix": "Devral ve Düzelt",
+    "updateText": "Yenilikleri görmek ve tek tıkla kurmak için 'Güncelle'ye basın. Ayarlarınız korunur.",
+    "update": "Güncelle",
+    "later": "Sonra",
+    "testPrompt": "Discord sunucularına erişilip erişilemediğini görmek için test edin.",
+    "reachable": "Erişilebilir",
+    "noAccess": "Erişim yok",
+    "dnsProblem": "DNS sorunu",
+    "partialAccess": "Kısmi erişim",
+    "dnsCorrect": "DNS yanıtı: doğru ✓",
+    "dnsWrong": "DNS yanıtı: YANLIŞ",
+    "openDiscord": "Discord'u aç",
+    "mode": {
+      "service": "Arka plan hizmeti",
+      "app": "Uygulama"
+    },
+    "targetedOff": "Kapalı (tümü)",
+    "never": "Hiç",
+    "errorCode": "Hata kodu {0}:",
+    "updateReady": "Yeni sürüm hazır: NSF Shield {0}",
+    "answered": "{0}/{1} sunucu yanıt verdi",
+    "answeredAvg": "{0}/{1} sunucu yanıt verdi · ort. {2} ms",
+    "failing": "Açılmayan: {0}",
+    "lastTest": "Son test:",
+    "targetedOn": "Açık ({0} site)",
+    "chip": {
+      "engine": "Motor",
+      "mode": "Mod",
+      "dns": "DNS",
+      "uptime": "Süre",
+      "dnsSystem": "Sistem",
+      "dnsCustom": "Özel",
+      "dnsMixed": "Karışık"
+    },
+    "switchTitle": "Kurulu sürüme geçin",
+    "switchText": "Hizmet olarak çalışır, Windows ile başlar; ayarlarınız taşınır.",
+    "switchButton": "Kurulu sürüme geç",
+    "engineMenu": "MOTOR",
+    "excludedCount": "−{0} hariç",
+    "findAndConnect": "Çalışan Yöntemi Bul ve Bağlan",
+    "notice": {
+      "openProfiles": "Profilleri aç"
+    },
+    "dnsTip": {
+      "unknown": "Windows DNS: henüz okunmadı",
+      "line": "Windows DNS: {0} · şifreli DNS: {1}\n{2}",
+      "redirect": "Koruma DNS'i yönlendiriyor: {0}",
+      "adapterRoute": "Bağdaştırıcı: {0}, internet rotası bunun üzerinden",
+      "adapterOnly": "Bağdaştırıcı: {0} (tek bağdaştırıcı; rota tablosu okunamadı)",
+      "adapterSeveral": "{0} bağdaştırıcı var; internet rotasının hangisinden geçtiği okunamadı",
+      "adapterNone": "Bağlı bağdaştırıcı yok",
+      "doh": {
+        "Configured": "kayıtlı",
+        "NotConfigured": "kayıtlı değil",
+        "Unsupported": "bu Windows desteklemiyor",
+        "Unknown": "bilinmiyor"
+      }
+    }
+  },
+  "profileHelp": {
+    "intro": {
+      "title": "Bu pencere nasıl kullanılır?",
+      "text": "Bir seçeneğin üzerine gelin ya da tıklayın; ne işe yaradığı burada açıklanır.\n\nServis sağlayıcınız Discord'u iki katmanda engeller:\n1) DNS: 'discord.com nerede?' sorusuna yanlış cevap verir.\n2) DPI: Bağlantının ilk paketindeki site adını (SNI) okuyup bağlantıyı keser.\n\nDNS yönlendirmesi birinci katmanı, aşağıdaki DPI yöntemleri ikinci katmanı aşar. Türkiye'de ikisi birlikte gerekir."
+    },
+    "name": {
+      "title": "Profil adı ve açıklama",
+      "text": "Profili listede tanımanızı sağlar. Komut satırına etkisi yoktur."
+    },
+    "mode": {
+      "title": "Temel mod",
+      "text": "GoodbyeDPI'ın hazır yöntem paketlerinden birini seçer. Mod, aşağıdaki seçeneklerden birkaçını birden açar.\n\n• Modern modlar (-5 … -9): Paketleri böler ve DPI cihazını kandırmak için 'sahte' paketler gönderir. Türkiye'de en iyi sonucu verirler.\n• Klasik modlar (-1 … -4): Yalnızca paketleri böler ve HTTP başlıklarıyla oynar. Daha uyumludur ama güncel DPI sistemlerine karşı zayıftır.\n\nMod seçip ayrıca seçenek işaretlerseniz, seçenekler modun üzerine eklenir."
+    },
+    "modeNone": {
+      "title": "Mod yok",
+      "text": "Hiçbir hazır paket kullanılmaz; yalnızca aşağıda işaretlediğiniz seçenekler uygulanır. Yalnızca DNS yönlendirmesi istiyorsanız modu boş bırakın."
+    },
+    "mode1": {
+      "title": "-1 · Klasik, en uyumlu",
+      "text": "HTTP ve HTTPS paketlerini 2 baytlık parçalara böler, HTTP başlıklarında küçük değişiklikler yapar. Sahte paket göndermez. Her ağda çalışır ama en yavaş moddur ve sıkı DPI'ı aşamayabilir."
+    },
+    "mode2": {
+      "title": "-2 · Klasik, HTTPS için daha hızlı",
+      "text": "-1 ile aynı ama HTTPS paketleri 40 baytlık parçalara bölünür; bağlantı daha hızlı açılır."
+    },
+    "mode3": {
+      "title": "-3 · Klasik, HTTP/HTTPS hızlı",
+      "text": "HTTP kalıcı bağlantı parçalaması yapılmaz; daha da hızlıdır."
+    },
+    "mode4": {
+      "title": "-4 · Klasik, en hızlı",
+      "text": "Yalnızca şifresiz HTTP başlık hileleri. HTTPS'e (Discord dahil) dokunmaz; tek başına Discord için yetersizdir. Eski 2 numaralı betik bunu TTL 5 sahte paketle birleştiriyordu."
+    },
+    "mode5": {
+      "title": "-5 · Modern, otomatik TTL",
+      "text": "Sahte paketlerin ömrünü (TTL) sunucuya olan mesafeye göre her bağlantıda otomatik ayarlar. Sabit TTL'li yöntemler zamanla bozulduğunda (eski 1 ve 2 numaralı betiklerde olduğu gibi) en dayanıklı seçenektir."
+    },
+    "mode6": {
+      "title": "-6 · Modern, yanlış sıra numarası",
+      "text": "Sahte paketler geçmiş bir TCP sıra numarasıyla gönderilir; sunucu onları yok sayar, DPI ise okuyup kandırılır."
+    },
+    "mode7": {
+      "title": "-7 · Modern, yanlış sağlama toplamı",
+      "text": "Sahte paketler bozuk sağlama toplamıyla gönderilir. Bazı modemler ve sanal makineler bu paketleri yolda düşürdüğü için etkisiz kalabilir."
+    },
+    "mode8": {
+      "title": "-8 · Modern, sıra + sağlama",
+      "text": "-6 ve -7'nin birlikte kullanılması. -9'dan tek farkı QUIC'i engellememesidir."
+    },
+    "mode9": {
+      "title": "-9 · Modern, tam (varsayılan)",
+      "text": "GoodbyeDPI'ın varsayılanı ve en kapsamlı modu. Türkiye'de Discord için önerilen mod budur."
+    },
+    "ttl": {
+      "title": "Sahte paket TTL (ömür)",
+      "text": "Sahte paket, servis sağlayıcının DPI cihazına ulaşmalı ama gerçek sunucuya ulaşmadan 'ölmelidir'. TTL, paketin kaç yönlendiriciden geçebileceğini belirler.\n\n• Çok küçükse DPI cihazına bile ulaşmaz → etkisiz.\n• Çok büyükse sunucuya ulaşır → bağlantı bozulur.\n• 'Otomatik' her bağlantıda mesafeyi ölçüp uygun değeri seçer; servis sağlayıcı ağ yapısını değiştirdiğinde bile çalışmaya devam eder.\n\nEski 1 numaralı betik TTL 3, 2 numaralı betik TTL 5 kullanıyordu; sabit değerler zamanla tutmaz hale gelebilir."
+    },
+    "fakegen": {
+      "title": "Sahte paket sayısı",
+      "text": "Gerçek bağlantının önüne, içi rastgele doldurulmuş bu kadar sahte paket gönderilir. DPI cihazı sahte paketleri gerçek sanıp yanlış site adını okur.\n\n0 = GoodbyeDPI'ın varsayılan tek sahte paketi. 3-10 arası sıkı DPI uygulayan hatlarda işe yarar; çok yüksek değer bağlantı açılışını yavaşlatır. En fazla 30."
+    },
+    "fakeresend": {
+      "title": "Sahte paket tekrarı",
+      "text": "Her sahte paketi bu kadar kez gönderir. Wi-Fi ya da mobil hat gibi paket kaybı olan bağlantılarda, DPI cihazının sahte paketi mutlaka görmesini sağlar. 1 = tekrar yok."
+    },
+    "dns": {
+      "title": "DNS yönlendirme",
+      "text": "Bilgisayarınızın yaptığı tüm DNS sorgularını (53. port) servis sağlayıcınızın sunucusu yerine seçilen sunucunun farklı bir portuna gönderir.\n\nTürkiye'de Discord DNS düzeyinde de engelli olduğu için bu seçenek ZORUNLUDUR: kapalıysa Discord açılmaz (eski 1 ve 2 numaralı betiklerin çalışmama sebebi budur).\n\nServis sağlayıcılar yalnızca 53. portu denetlediği için 1253, 5353, 9953 gibi portlara giden sorgular engellenmez. Hazır seçeneklerin hepsi IPv6 sorgularını da yönlendirir."
+    },
+    "dnsCustom": {
+      "title": "Özel DNS sunucusu",
+      "text": "Kendi DNS sunucunuzu girin. Standart dışı bir port kullanan sunucu seçin; 53. port servis sağlayıcı tarafından yönlendirilebilir.\n\nIPv6 bağlantınız varsa IPv6 adresini de girin; aksi halde Windows IPv6 üzerinden servis sağlayıcının DNS'ine sorup sahte yanıt alabilir (NSF-404)."
+    },
+    "httpsfrag": {
+      "title": "HTTPS parça boyutu",
+      "text": "Şifreli bağlantının ilk paketi (içinde site adı yazar) kaç baytlık parçalara bölünecek. DPI cihazı site adını tek parçada göremezse engelleyemez.\n\n1-2: en etkili ama bağlantı açılışı biraz yavaşlar. 40: daha hızlı, bazı DPI'lar yakalayabilir. 0 = modun varsayılanı."
+    },
+    "httpfrag": {
+      "title": "HTTP parça boyutu",
+      "text": "Şifresiz HTTP isteklerinin parça boyutu. Discord ve sitelerin neredeyse tamamı HTTPS kullandığı için etkisi küçüktür. 0 = modun varsayılanı."
+    },
+    "wrongchk": {
+      "title": "Yanlış sağlama toplamı",
+      "text": "Sahte paketleri hatalı TCP sağlama toplamıyla gönderir. Gerçek sunucu bu paketleri çöpe atar; DPI cihazı ise çoğu zaman kontrol etmeden okur ve kandırılır.\n\nBazı modemler ve sanal makineler (VirtualBox/VMware NAT) hatalı paketleri yolda düşürdüğü için etkisiz kalabilir."
+    },
+    "wrongseq": {
+      "title": "Yanlış sıra numarası",
+      "text": "Sahte paketleri geçmişe ait bir TCP sıra/onay numarasıyla gönderir. Sunucu 'eski paket' diye yok sayar; DPI cihazı içeriğe bakıp yanlış site adını okur. Genellikle en güvenilir sahte paket yöntemidir."
+    },
+    "native": {
+      "title": "Yerel parçalama",
+      "text": "İlk paketi gerçekten ayrı ayrı küçük TCP paketleri olarak gönderir. Pencere boyutunu küçültmediği için bağlantı hızını düşürmez."
+    },
+    "reverse": {
+      "title": "Ters sıralı parçalama",
+      "text": "Parçaları ters sırayla gönderir (önce son parça). DPI cihazları ters gelen parçaları birleştiremez ve site adını okuyamaz. Çok nadiren bazı siteler ters sırayı işleyemez; sorun olursa kapatıp 'Yerel parçalama'yı kullanın."
+    },
+    "quic": {
+      "title": "QUIC/HTTP3 engelle",
+      "text": "Tarayıcıların kullandığı QUIC/HTTP3 (UDP 443) trafiğini engeller. Tarayıcı normal HTTPS'e döner ve GoodbyeDPI bu trafiği işleyebilir. Önerilir; Discord sesli sohbetini etkilemez."
+    },
+    "sni": {
+      "title": "Site adından böl (SNI)",
+      "text": "İlk paketi tam olarak site adının başladığı yerden böler; site adı iki ayrı pakete düşer. -e değerinden bağımsız, daha hedefli bir bölmedir."
+    },
+    "payload": {
+      "title": "Büyük paketleri atla",
+      "text": "1200 bayttan büyük veri taşıyan paketleri işlemez (dosya indirme, video akışı). İşlemci kullanımını azaltır; engel aşmayı etkilemez. Modern modlarda zaten açıktır."
+    },
+    "nosni": {
+      "title": "Site adı okunamayanlara da uygula",
+      "text": "Yalnızca 'Hedefli mod' açıkken önemlidir: site adı okunamayan bağlantılara (ör. şifreli SNI/ECH kullananlar) da yöntemi uygular."
+    },
+    "passive": {
+      "title": "Pasif DPI'ı engelle",
+      "text": "Servis sağlayıcının araya soktuğu sahte 'yönlendirme' (HTTP 302) ve bağlantı sıfırlama paketlerini yakalayıp düşürür. Klasik modlarda açıktır."
+    },
+    "hostr": {
+      "title": "Host → hoSt",
+      "text": "Şifresiz HTTP isteklerinde 'Host' başlığını 'hoSt' yazar; eski DPI sistemleri başlığı tanıyamaz. HTTPS'e etkisi yoktur."
+    },
+    "hosts": {
+      "title": "Host boşluğunu kaldır",
+      "text": "HTTP 'Host:' başlığındaki boşluğu kaldırır. Yalnızca şifresiz HTTP."
+    },
+    "hostm": {
+      "title": "Host harflerini karıştır",
+      "text": "Site adındaki büyük/küçük harfleri karıştırır (dIsCoRd.CoM). Yalnızca şifresiz HTTP."
+    },
+    "extra": {
+      "title": "Ek parametreler",
+      "text": "Yukarıda olmayan GoodbyeDPI seçeneklerini elle eklemek için. Örnekler:\n• --min-ttl 3 : sahte paketi yalnızca en az 3 atlama uzaktaki sunuculara gönder\n• --fake-from-hex 1603… : sahte paket içeriğini kendiniz belirleyin\n• --port 8443 : ek TCP portunda da parçala\n\n--blacklist eklemeyin; bunun için 'Hedef Siteler' sayfasını kullanın."
+    },
+    "raw": {
+      "title": "Komutu elle yaz (uzman)",
+      "text": "Tüm GoodbyeDPI komut satırını kendiniz yazarsınız; yukarıdaki seçenekler yok sayılır. Yazım hatası olursa koruma 'NSF-603 Geçersiz profil parametresi' hatasıyla başlamaz."
+    },
+    "preview": {
+      "title": "Komut önizleme",
+      "text": "NSF Shield'in bu profil için çalıştıracağı tam komut. Bu satırı bir .cmd dosyasına koyarak uygulamasız da kullanabilirsiniz."
+    },
+    "explain": {
+      "raw": "Elle yazılmış komut",
+      "rawText": "Bu profil komut satırını doğrudan kullanır: {0}",
+      "dnsYes": "DNS yönlendirme: var",
+      "dnsNo": "DNS yönlendirme: YOK",
+      "rawDnsYes": "Komutta --dns-addr bulunuyor.",
+      "rawDnsNo": "Türkiye'de Discord DNS ile de engelli olduğu için bu profil tek başına Discord'u açmayabilir.",
+      "dnsTo": "DNS yönlendirme → {0}",
+      "dnsToProvider": "DNS sorguları servis sağlayıcı yerine {0} sunucusuna ({1}, port {2}) gider. DNS engelini aşar.",
+      "dnsToCustom": "DNS sorguları servis sağlayıcı yerine özel sunucuya gider. DNS engelini aşar.",
+      "dnsNoText": "Sorgular servis sağlayıcının DNS'ine gider. Türkiye'de Discord DNS ile de engelli olduğu için bu profil tek başına Discord'u AÇMAZ (Windows DNS'ini 'DNS Ayarları' sayfasından değiştirmediyseniz).",
+      "mode": "Temel mod {0}",
+      "httpsFrag": "HTTPS ilk paketi {0} baytlık parçalara bölünür",
+      "httpsFragText": "Site adı (SNI) tek parçada görünmez; DPI cihazı hangi siteye gittiğinizi okuyamaz.",
+      "httpsFragSmallText": "Site adı (SNI) tek parçada görünmez; DPI cihazı hangi siteye gittiğinizi okuyamaz. Küçük parça en etkili seçenektir.",
+      "sni": "Site adının başından bölme",
+      "reverse": "Parçalar ters sırayla gönderilir",
+      "reverseText": "DPI cihazı ters gelen parçaları birleştiremez.",
+      "native": "Parçalar normal sırayla gönderilir",
+      "howAutoTtl": "ömrü (TTL) otomatik ayarlanır",
+      "howTtl": "ömrü sabit TTL {0}",
+      "howSeq": "geçmiş sıra numarasıyla",
+      "howChk": "bozuk sağlama toplamıyla",
+      "fakeCount": "Sahte paket: {0} adet rastgele",
+      "fakeSent": "Sahte paket gönderilir",
+      "fakeResend": ", her biri {0} kez",
+      "fakeTextHow": "Gerçek bağlantıdan önce DPI cihazını kandıran sahte paket gönderilir ({0}). Sunucu sahte paketi yok sayar.",
+      "fakeText": "Gerçek bağlantıdan önce DPI cihazını kandıran sahte paket gönderilir. Sunucu sahte paketi yok sayar.",
+      "quic": "QUIC engellenir",
+      "quicText": "Tarayıcılar HTTP3 yerine normal HTTPS kullanır; GoodbyeDPI bu trafiği işleyebilir.",
+      "passive": "Pasif DPI paketleri düşürülür",
+      "headers": "HTTP başlık hileleri",
+      "headersText": "Yalnızca şifresiz HTTP sitelerinde etkilidir; Discord için önemsizdir.",
+      "payload": "Büyük paketler atlanır",
+      "payloadText": "İndirme ve videolarda işlemci kullanımını azaltır.",
+      "noDpi": "DPI yöntemi yok",
+      "noDpiText": "Bu profil yalnızca DNS'i yönlendirir. Servis sağlayıcı site adına göre de engelliyorsa yetmez."
+    },
+    "when": {
+      "first": "İlk tercih. Çalışıyorsa başka bir şeye gerek yok.",
+      "dnsAlt": "Önerilen profil çalışıyor ama sayfalar yavaş açılıyorsa ya da Yandex DNS yanıt vermiyorsa.",
+      "autoTtl": "-9 modu bağlantıları kesiyorsa ya da sabit TTL'li eski betikler bir anda çalışmaz olduysa.",
+      "legacy": "Eskiden bu betikler sizde çalışıyorduysa; artık DNS yönlendirmesi de var.",
+      "connectionCut": "Önerilen profil 'bağlantı kesildi' (NSF-501) hatası veriyorsa.",
+      "unstable": "Wi-Fi/mobil hatlarda ya da önerilen profil kararsız çalışıyorsa.",
+      "fakeAlt": "Modeminiz bazı sahte paketleri düşürüyorsa farklı bir kandırma yöntemi denemek için.",
+      "lastResort": "Modern yöntemlerin hiçbiri çalışmıyorsa son çare.",
+      "dnsOnly": "Engel yalnızca DNS kaynaklıysa (Site Analizi 'YALNIZCA DNS ENGELİ' diyorsa).",
+      "compare": "Yalnızca karşılaştırma için ya da Windows DNS'ini değiştirdiyseniz.",
+      "custom": "Kendi oluşturduğunuz profil.",
+      "zapretFirst": "Zapret ile buradan başlayın: web siteleri, Discord yazı ve sesini kapsar.",
+      "zapretAggressive": "Önerilen Zapret profili bazı siteleri açıp bazılarını açmıyorsa.",
+      "zapretTls": "UDP/QUIC sorun çıkarıyorsa ya da yalnızca web siteleri önemliyse.",
+      "zapretSplit": "Sahte paketli profillerde bağlantılar kopuyorsa.",
+      "byedpiFirst": "ByeDPI ile buradan başlayın; çekirdek sürücüsü istenmediğinde (hile önleyicili oyunlar) en iyi seçim.",
+      "byedpiFake": "Önerilen ByeDPI profili siteleri açmıyorsa.",
+      "byedpiAlt": "Bölünmüş paketleri algılayan sağlayıcılar için alternatifler."
+    }
+  },
+  "profilesPage": {
+    "title": "Profiller",
+    "subtitle": "Her profil farklı bir engel aşma yöntemidir. Seçtiğiniz profilin ne yaptığı sağda ayrıntılı açıklanır.",
+    "use": "Bu profili kullan",
+    "new": "Yeni",
+    "copy": "Kopyala",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "shareButton": "Paylaş",
+    "newName": "Yeni Profil",
+    "inspect": "İncele",
+    "selectHint": "Soldan bir profil seçin.",
+    "builtIn": "Hazır profil",
+    "custom": "Özel profil",
+    "inUse": "şu an kullanılıyor",
+    "selected": "seçili",
+    "whatItDoes": "BU PROFİL NE YAPAR?",
+    "whenToTry": "NE ZAMAN DENENİR?",
+    "command": "KOMUT",
+    "applyChanges": "Bu profil şu an kullanılıyor. Değişiklikler uygulansın mı (koruma yeniden başlatılır)?",
+    "share": {
+      "copyCode": "Profil kodunu kopyala (arkadaşına gönder)",
+      "paste": "Koddan profil ekle (panodaki kod)",
+      "saveCmd": ".cmd betiği olarak kaydet…",
+      "copied": "'{0}' profilinin kodu panoya kopyalandı.\n\nArkadaşınız Profiller → Paylaş → 'Koddan profil ekle' ile aynı profili kullanabilir.",
+      "copiedCode": "'{0}' profilinin kodu ({1}, {2} karakter) panoya kopyalandı.\n\nArkadaşınız Profiller → Paylaş → 'Koddan profil ekle' ile ekleyebilir. Kod yalnızca yöntemi içerir: ayar, liste, yol ya da şifre içermez.",
+      "failed": "Bu profil kod olarak paylaşılamıyor: {0}"
+    },
+    "cmdFilter": "Komut dosyası (*.cmd)|*.cmd",
+    "badge": {
+      "running": "ÇALIŞIYOR",
+      "selected": "SEÇİLİ",
+      "custom": "ÖZEL",
+      "noDns": "DNS YOK",
+      "noDriver": "sürücüsüz",
+      "expert": "Uzman"
+    },
+    "deleteConfirm": "'{0}' profili silinsin mi?",
+    "import": {
+      "hint": "Önce arkadaşınızın gönderdiği, 'NSF1:' ile başlayan kodu kopyalayın.",
+      "suffix": "(içe aktarıldı)",
+      "confirm": "Şu profil eklensin mi?\n\n{0}\n{1}\n\nKomut: ",
+      "confirmEngine": "Şu profil eklensin mi?\n\n{0}\nMotor: {1}\n{2}\n\nHiçbir şey başlatılmaz; profil yalnızca listeye eklenir.\n\nKomut: "
+    },
+    "scriptSaved": "Betik kaydedildi. Uygulama klasörünü taşırsanız betik çalışmaz.",
+    "engineInfo": {
+      "goodbyedpi": "WinDivert 2.2.0 sürücüsü · DNS yönlendirme · hizmet modu · dahil etme listesi",
+      "zapret": "WinDivert 2.2.2 sürücüsü · TCP + UDP/QUIC · hizmet modu · dahil ve hariç listeleri",
+      "byedpi": "Sürücüsüz · yerel proxy (127.0.0.1) · uygulama modu · dahil ve hariç listeleri"
+    },
+    "subtitleSimple": "Önerilen yöntemler. Seçili veya çalışan yöntem de her zaman listelenir.",
+    "simpleInfo": "Üç motorun önerilen yöntemleri. “Kullan”a basın ya da Ana Ekran'dan çalışan yöntemi otomatik buldurun.",
+    "showExperts": "Uzman profilleri göster",
+    "exceptionNote": "Seçili veya çalışan profil olduğu için gösteriliyor; önerilenler taramasına eklenmez.",
+    "scenarios": "Deneme senaryoları: {0}",
+    "technical": "TEKNİK",
+    "commandPreview": "KOMUT ÖNİZLEMESİ (KISA ADLAR, ÇALIŞTIRILAMAZ)",
+    "copyCommand": "Komutu Kopyala",
+    "commandCopied": "Tam yerel komut panoya kopyalandı. Bu bilgisayarın gerçek yollarını içerir ve günlüğe yazılmadı.",
+    "commandInvalid": "Komut oluşturulamıyor: {0}"
+  },
+  "profileEdit": {
+    "mode": {
+      "none": "Yok (yalnızca aşağıdaki seçenekler)",
+      "m1": "-1  Klasik, en uyumlu",
+      "m2": "-2  Klasik, HTTPS için daha hızlı",
+      "m3": "-3  Klasik, HTTP/HTTPS hızlı",
+      "m4": "-4  Klasik, en hızlı (yalnız HTTP)",
+      "m5": "-5  Modern: otomatik TTL",
+      "m6": "-6  Modern: yanlış sıra numarası",
+      "m7": "-7  Modern: yanlış sağlama toplamı",
+      "m8": "-8  Modern: sıra + sağlama",
+      "m9": "-9  Modern: tam (önerilen)"
+    },
+    "title": "Profili Düzenle",
+    "name": "Profil adı",
+    "description": "Açıklama",
+    "method": "YÖNTEM",
+    "baseMode": "Temel mod",
+    "fakeTtl": "Sahte paket TTL",
+    "ttlOff": "Kapalı",
+    "ttlAuto": "Otomatik (--auto-ttl)",
+    "httpsFrag": "HTTPS parça (-e)",
+    "fakeCount": "Sahte paket sayısı",
+    "fakeRepeat": "Sahte tekrar",
+    "httpFrag": "HTTP parça (-f)",
+    "dnsRedirect": "DNS YÖNLENDİRME",
+    "dnsServer": "DNS sunucusu",
+    "customServer": "Özel sunucu…",
+    "dnsOff": "Kapalı – servis sağlayıcının DNS'i (Discord açılmaz!)",
+    "ipv4": "   IPv4 adres : port",
+    "ipv6": "   IPv6 adres : port",
+    "extraOptions": "EK SEÇENEKLER",
+    "wrongSeq": "Yanlış sıra numarası (--wrong-seq)",
+    "wrongChk": "Yanlış sağlama toplamı (--wrong-chksum)",
+    "native": "Yerel parçalama (--native-frag)",
+    "reverse": "Ters parçalama (--reverse-frag)",
+    "sni": "Site adından böl (--frag-by-sni)",
+    "payload": "Büyük paketleri atla (--max-payload)",
+    "quic": "QUIC/HTTP3 engelle (-q)",
+    "noSni": "SNI'siz bağlantılara uygula",
+    "passive": "Pasif DPI'ı engelle (-p)",
+    "hostSpace": "Host boşluğunu kaldır (-s)",
+    "hostCase": "Host harflerini karıştır (-m)",
+    "extraParams": "Ek parametreler",
+    "raw": "Komutu elle yaz (uzman – yukarıdaki seçenekler yok sayılır)",
+    "preview": "Komut önizleme",
+    "editCopy": "Kopyasını düzenle",
+    "summary": "BU PROFİLİN ÖZETİ",
+    "nameEmpty": "Profil adı boş olamaz.",
+    "badIpv4": "Geçerli bir IPv4 DNS adresi girin (ör. 94.140.14.14).",
+    "badIpv6": "Geçerli bir IPv6 DNS adresi girin.",
+    "customDnsEmpty": "Özel DNS için en az bir adres girin.",
+    "noMethod": "Profil hiçbir yöntem içermiyor. En azından bir temel mod ya da DNS seçin.",
+    "noDnsConfirm": "Bu profilde DNS yönlendirmesi yok. Türkiye'de Discord DNS ile de engelli olduğu için bu profille Discord açılmayabilir.\n\nYine de kaydedilsin mi?",
+    "builtInTitle": "Hazır profil: {0}",
+    "recommended": "(önerilen)",
+    "selectedDns": "Seçili:",
+    "argsRejected": "Parametreler kabul edilmedi:",
+    "previewNote": "Kısa adlar: çalıştırılabilir komut değil, önizlemedir. “Komutu Kopyala” tam yerel komutu kopyalar."
+  },
+  "netPage": {
+    "title": "İnternet Kontrolü",
+    "subtitle": "Bağlantınızı, DNS'i ve bir sitenin neden açılmadığını adım adım inceleyin.",
+    "tab": {
+      "connection": "Bağlantı",
+      "site": "Site Analizi",
+      "speed": "Hız Testi",
+      "history": "Geçmiş",
+      "network": "Ağ Bilgisi"
+    },
+    "col": {
+      "server": "Sunucu",
+      "status": "Durum",
+      "duration": "Süre",
+      "ip": "IP adresi",
+      "detail": "Ayrıntı",
+      "code": "Kod",
+      "address": "Adres",
+      "answer": "Yanıt",
+      "result": "Sonuç",
+      "when": "Zaman",
+      "kind": "Tür",
+      "method": "Yöntem"
+    },
+    "addServer": "Sunucu ekle",
+    "removeSelected": "Seçileni kaldır",
+    "defaults": "Varsayılan",
+    "startTest": "Testi başlat",
+    "findBest": "En iyi yöntemi bul",
+    "testInfo": "Her sunucuya yeni bir şifreli bağlantı açılır; ayrıca sistem DNS yanıtı bağımsız sunucularla karşılaştırılır.",
+    "site": {
+      "intro": "Bir site açılmıyorsa adresini yazın: DNS yanıtı, doğru adrese bağlantı (TCP), şifreli el sıkışma (TLS) ve HTTP adım adım denenir; engelin türü belirlenir.",
+      "analyze": "Analiz et",
+      "resultHere": "Sonuç burada görünecek.",
+      "badDomain": "Geçerli bir alan adı girin (ör. discord.com).",
+      "noAnswer": "yanıt yok",
+      "noCompare": "karşılaştırılamadı",
+      "fake": "SAHTE/ENGELLİ yanıt",
+      "correct": "doğru",
+      "step2": "2) Doğru adrese bağlantı",
+      "connectFailed": "BAĞLANILAMADI",
+      "step3": "3) Gerçek istek (HTTPS)",
+      "analysis": "Analiz: {0}",
+      "stateOn": "Koruma şu an AÇIK ({0}); sonuçlar bu duruma göredir.",
+      "stateOff": "Koruma şu an KAPALI; sonuçlar bu duruma göredir.",
+      "systemDns": "Sistem DNS'i (Windows)",
+      "independentDns": "Bağımsız DNS ({0})",
+      "connected": "bağlandı ({0} ms)",
+      "tls": "TLS (şifreli el sıkışma)",
+      "fakeAddress": "Sahte adrese bağlantı ({0})",
+      "diagnosis": "TEŞHİS: {0}",
+      "relatedCode": "İlgili hata kodu: {0} – {1}"
+    },
+    "dns": {
+      "intro": "Her DNS sunucusuna discord.com sorulur. 53 dışındaki portlar servis sağlayıcı tarafından değiştirilemez; bu yüzden onların yanıtı 'doğru' kabul edilir ve diğerleri onunla karşılaştırılır.",
+      "test": "DNS sunucularını test et",
+      "windowsSetting": "Windows ayarı",
+      "noneAnswered": "Standart dışı porttaki hiçbir DNS sunucusu yanıt vermedi (NSF-402).",
+      "sysBlocked": "Windows'un kullandığı DNS engelli yanıt veriyor → DNS yönlendirmesi (ya da DNS Ayarları sayfası) gerekli.",
+      "sysOk": "Windows DNS'i şu an doğru yanıt veriyor.",
+      "fastest": "En hızlı doğru yanıt: {0} ({1} ms).",
+      "useProfile": "'{0}' profilini kullan"
+    },
+    "speed": {
+      "intro": "Gecikme, indirme ve yükleme hızınızı Cloudflare'in hız sunucusuyla ölçer (~60 MB veri harcar). Koruma açık ya da kapalıyken karşılaştırabilirsiniz.",
+      "latency": "GECİKME",
+      "download": "İNDİRME",
+      "upload": "YÜKLEME",
+      "start": "Hız testini başlat",
+      "note": "Not: GoodbyeDPI hızınızı düşürmez; yalnızca bağlantı kurulurken ilk paketleri böler. VPN'lerin aksine trafiğiniz başka bir ülkeden dolaşmaz.",
+      "failed": "Ölçülemedi: {0}",
+      "jitter": "ms · sapma {0} ms",
+      "doneOn": "Ölçüm tamamlandı ({0}, koruma açık).",
+      "doneOff": "Ölçüm tamamlandı ({0}, koruma kapalı).",
+      "warning": "Uyarı:"
+    },
+    "history": {
+      "clear": "Temizle",
+      "clearConfirm": "Bağlantı geçmişi silinsin mi?",
+      "none": "Son 24 saatte koruma açıkken yapılmış test yok.",
+      "ok": "başarılı",
+      "failed": "başarısız",
+      "stats": "Son 24 saat: {0} test · %{1} başarılı",
+      "avg": "ort. {0} ms",
+      "repairs": "son 7 günde {0} otomatik onarım",
+      "protectionOff": "koruma kapalı"
+    },
+    "net": {
+      "refresh": "Yenile",
+      "collecting": "Bilgiler toplanıyor…",
+      "adapters": "Ağ bağdaştırıcıları",
+      "system": "Sistem",
+      "off": "kapalı",
+      "ipv6Internet": "IPv6 internet",
+      "yes": "var",
+      "no": "yok",
+      "hostsDiscord": "hosts dosyasında Discord",
+      "noEntries": "kayıt yok",
+      "antivirus": "Antivirüs",
+      "unknown": "bilinmiyor",
+      "otherDpi": "Diğer DPI araçları",
+      "none": "yok",
+      "gdpiFolder": "GoodbyeDPI klasörü",
+      "doh": "Şifreli DNS (DoH) desteği",
+      "dohYes": "var (Windows 11)",
+      "dhcp": "(otomatik)",
+      "static": "(elle)",
+      "local": "(yerel)",
+      "gateway": "Ağ geçidi (modem)",
+      "dnsServers": "DNS sunucuları",
+      "proxyOn": "AÇIK –"
+    },
+    "status": {
+      "open": "✓ Açık",
+      "closed": "✗ Kapalı"
+    },
+    "allReachable": "✓ Tüm sunuculara erişilebiliyor.",
+    "badServer": "Geçerli bir sunucu adresi girin (ör. discord.com).",
+    "testing": "Test ediliyor…",
+    "chart": {
+      "empty": "Henüz test yok. Testler, koruma başladığında ve bağlantı bekçisi çalıştığında kaydedilir."
+    },
+    "dnsCorrect": "DNS yanıtı doğru.",
+    "dnsWrong": "DNS yanıtı YANLIŞ (engelli adres)!",
+    "someUnreachable": "✗ {0} sunucuya erişilemedi. Koddaki hata için Sorun Giderme'ye bakın ya da 'En iyi yöntemi bul'u çalıştırın."
+  },
+  "dnsPage": {
+    "title": "DNS Ayarları",
+    "subtitle": "Windows'un kullandığı DNS sunucusunu değiştirin. Bu, NSF Shield kapalıyken bile DNS engelini aşar.",
+    "current": "ŞU ANKİ AYAR",
+    "check": "DNS engelini kontrol et",
+    "newServer": "YENİ DNS SUNUCUSU",
+    "useDoh": "Şifreli DNS (DoH) kullan",
+    "dohInfo": "Sorgular HTTPS ile şifrelenir; servis sağlayıcı ne göremez ne değiştirebilir. Önerilir.",
+    "dohUnsupported": "Bu Windows sürümü şifreli DNS'i desteklemiyor (Windows 11 gerekir).",
+    "apply": "Uygula",
+    "restore": "Eski ayarlara dön",
+    "allAdapters": "Değişiklik tüm bağlı ağ bağdaştırıcılarına uygulanır (VPN hariç).",
+    "note": "Not: Koruma açıkken GoodbyeDPI'ın DNS yönlendirmesi zaten tüm sorguları güvenli sunucuya gönderir. Bu sayfa ek güvence içindir (koruma kapalıyken ya da DNS'siz bir yöntem kullanırken).",
+    "dhcp": "DHCP – modemden gelen DNS",
+    "noAdapter": "Bağlı ağ bağdaştırıcısı bulunamadı.",
+    "manualServer": "Elle girilmiş özel sunucu",
+    "backedUp": "Önceki ayarlarınız yedeklendi; 'Eski ayarlara dön' ile geri alabilirsiniz.",
+    "checking": "Kontrol ediliyor…",
+    "autoProvider": "otomatik (servis sağlayıcının DNS'i)",
+    "applied": "✓ Uygulandı.",
+    "someFailed": "! Bazı adımlar başarısız oldu:",
+    "restored": "✓ Eski ayarlara dönüldü.",
+    "someFailedEnd": "! Bazı adımlar başarısız oldu.",
+    "setting": "Ayar",
+    "dnsInUse": "Kullanılan DNS",
+    "redirecting": "(Koruma açık; sorgular yönlendiriliyor.)",
+    "encryptedDns": "şifreli DNS",
+    "applyConfirm": "Windows DNS ayarı şu bağdaştırıcılarda değiştirilecek:\n  {0}\n\nYeni ayar: {1}\n\nŞu anki ayarlar yedeklenir; 'Eski ayarlara dön' ile geri alabilirsiniz. Devam edilsin mi?"
+  },
+  "sitesPage": {
+    "title": "Site Listeleri",
+    "subtitle": "Atlatmanın hangi sitelere uygulanacağını (Dahil et) ya da hiç uygulanmayacağını (Hariç tut) seçin.",
+    "targeted": "Yalnızca listedeki sitelere uygula",
+    "targetedInfo": "Açıkken diğer sitelerin trafiğine hiç dokunulmaz; daha güvenli ve hızlıdır. Kapalıyken tüm HTTPS trafiğine uygulanır.",
+    "list": "SİTE LİSTESİ",
+    "add": "Ekle",
+    "deleteSelected": "Seçilenleri sil",
+    "addPreset": "Hazır liste ekle",
+    "restartNeeded": "Değişikliklerin geçerli olması için koruma yeniden başlatılmalı.",
+    "applyNow": "Şimdi uygula",
+    "keepOne": "Listede en az bir site kalmalı.",
+    "presetCount": "({0} adres)",
+    "tabInclude": "Dahil et",
+    "tabExclude": "Hariç tut",
+    "excludeMode": "Listedeki sitelere hiç dokunma",
+    "excludeInfo": "Bankalar, e-Devlet ve hile önleyicili oyunlar için kullanışlıdır: trafikleri her zaman değişmeden geçer. Zapret ve ByeDPI kullanır.",
+    "addSites": "Site ekle (her satıra bir tane)",
+    "badDomains": "Şu girdiler geçerli alan adı değil, eklenmedi:\n{0}\n\nÖrnek: discord.com",
+    "countText": "{0} site",
+    "fileInfo": "Alt alan adları otomatik kapsanır. Koruma başlarken {0} dosyasına yazılır.",
+    "supportInclude": "{0} bu listeyi kullanır.",
+    "supportExclude": "{0} bu listeyi kullanır.",
+    "unsupported": "{0} bu listeyi kullanamaz; liste Zapret ve ByeDPI ile uygulanır."
+  },
+  "proxyPage": {
+    "subtitle": "Trafiği kendi proxy'niz üzerinden geçirin: tüm sistemde ya da yalnızca seçtiğiniz programlarda.",
+    "tab": {
+      "proxies": "Proxy'ler",
+      "apps": "Program bazlı proxy"
+    },
+    "saved": "KAYITLI PROXY'LER",
+    "new": "Yeni",
+    "bulkAdd": "Toplu ekle",
+    "delete": "Sil",
+    "details": "PROXY BİLGİLERİ",
+    "quickEntry": "Hızlı giriş",
+    "fill": "Doldur",
+    "quickExample": "Ör. 1.2.3.4:8080  ·  ip:port:kullanıcı:şifre\nsocks5://kullanıcı:şifre@1.2.3.4:1080",
+    "name": "Ad",
+    "kind": "Tür",
+    "kindAutoFix": "Test yanlış türü kendisi düzeltir.",
+    "address": "Adres",
+    "user": "Kullanıcı",
+    "password": "Şifre",
+    "passwordInfo": "İsteğe bağlı. Şifre şifrelenerek saklanır.",
+    "test": "Test et",
+    "testIntro": "Proxy'yi kaydetmeden de test edebilirsiniz. Test, proxy üzerinden discord.com'a şifreli bağlantı kurar ve çıkış IP'sini gösterir. Çok sayıda proxy'yi 'Toplu ekle' ile aynı anda deneyin.",
+    "useSelected": "SEÇİLİ PROXY'Yİ KULLAN",
+    "openDiscord": "Discord'u bu proxy ile aç",
+    "desktopShortcut": "Masaüstüne kısayol",
+    "openDiscordNormal": "Discord'u proxy'siz aç",
+    "makeSystem": "Windows proxy'si yap",
+    "systemOff": "Windows proxy'sini kapat",
+    "useInfo": "Başka programlar için 'Program bazlı proxy' sekmesini kullanın. Windows proxy'si tarayıcılar dahil tüm programları etkiler. Discord sesli sohbeti (UDP) proxy'den geçmez.",
+    "systemRestored": "Windows proxy ayarı eski haline döndürüldü.",
+    "apps": {
+      "list": "PROXY KULLANAN PROGRAMLAR",
+      "add": "Program ekle",
+      "setting": "PROGRAM AYARI",
+      "program": "Program",
+      "browse": "Gözat",
+      "method": "Yöntem",
+      "separate": "Ayrı tarayıcı profili (tarayıcı açıkken de çalışır)",
+      "closeFirst": "Açmadan önce programın açık kopyasını kapat",
+      "extra": "Ek parametre",
+      "launch": "Proxy ile aç",
+      "shortcut": "Kısayol",
+      "howTitle": "NASIL ÇALIŞIR?",
+      "how": "Seçtiğiniz program proxy ayarıyla başlatılır; diğer programlar ve Windows ayarları etkilenmez. Chrome, Edge, Brave, Opera, Discord, Spotify gibi Chromium tabanlı programlara --proxy-server verilir, Firefox ayrı bir proxy profiliyle açılır, diğer programlara HTTP_PROXY ortam değişkenleri verilir (program desteklemiyorsa etkisi olmaz). Şifreli proxy'ler NSF Shield'in yerel köprüsü (127.0.0.1) üzerinden kullanılır; bu durumda NSF Shield açık olmalıdır. 'Kısayol' ile masaüstüne kalıcı bir başlatıcı eklenir.",
+      "emptyNoProxy": "Önce 'Proxy'ler' sekmesinden bir proxy ekleyin, sonra 'Program ekle' ile program seçin.",
+      "empty": "'Program ekle' ile bir program seçin.",
+      "mode": {
+        "discord": "Discord kapatılıp proxy ile yeniden açılır.",
+        "chromium": "Program --proxy-server ile açılır.",
+        "firefox": "Firefox, ayarları proxy'ye yönlendirilmiş ayrı bir profille açılır.",
+        "env": "HTTP_PROXY/HTTPS_PROXY ile açılır; yalnızca bunu destekleyen programlarda çalışır."
+      },
+      "addProxyFirst": "Önce 'Proxy'ler' sekmesinden bir proxy ekleyip test edin.",
+      "other": "Başka bir program seç (.exe)…",
+      "filter": "Programlar (*.exe)|*.exe",
+      "chooseTitle": "Proxy ile açılacak programı seçin",
+      "chooseProxy": "Bir proxy seçin.",
+      "badExtra": "Ek parametrelerde & | < > ^ % ! karakterleri kullanılamaz (bu mod komut satırı üzerinden başlatır).",
+      "noProxy": "→ proxy seçilmedi",
+      "usesBridge": "Yerel köprü kullanılır (127.0.0.1:{0}).",
+      "deleteConfirm": "'{0}' kuralı silinsin mi? (Program etkilenmez; masaüstü kısayolu varsa onu da silin.)",
+      "running": "{0} şu an açık. Proxy ile yeniden açmak için kapatılacak (kaydedilmemiş işleriniz varsa önce kaydedin). Devam edilsin mi?",
+      "shortcutDone": "Masaüstüne '{0}' kısayolu oluşturuldu.",
+      "shortcutBridge": "Bu proxy şifreli olduğu için kısayol NSF Shield'in yerel köprüsünü kullanır; NSF Shield açıkken çalışır.",
+      "bridge": "köprü",
+      "byedpiChoice": "ByeDPI motoru ({0}, çalışırken)",
+      "byedpiNotRunning": "Bu kural ByeDPI motorunu kullanıyor. Önce bir ByeDPI profiliyle korumayı başlatın."
+    },
+    "add": "Ekle",
+    "sys": {
+      "off": "Windows proxy'si: kapalı",
+      "ours": "Windows proxy'si: {0} (NSF Shield ayarladı)",
+      "other": "Windows proxy'si: {0} (başka bir program ayarlamış)",
+      "socksWarning": "Uyarı: Windows sistem proxy'si SOCKS5'i tam desteklemez (birçok program SOCKS4 sanır). SOCKS5 için 'Program bazlı proxy' daha güvenilirdir.",
+      "authNote": "Bu proxy şifre istiyor; programlar şifreyi ayrıca sorabilir. Program bazlı proxy bunu yerel köprüyle otomatik halleder.",
+      "confirm": "Windows proxy'si {0} {1} olarak ayarlanacak. Tarayıcılar ve sistem proxy'sini kullanan tüm programlar bu proxy'den geçer.",
+      "confirmEnd": "Şu anki ayar yedeklenir; 'Windows proxy'sini kapat' ile geri alabilirsiniz. Devam edilsin mi?",
+      "failed": "Ayarlanamadı: {0}"
+    },
+    "enterAddress": "Proxy adresini (IP ya da sunucu adı) girin.",
+    "notWorking": "Proxy çalışmıyor",
+    "bridge": {
+      "off": "Yerel köprü: kapalı (şifresiz proxy'lerde gerekmez).",
+      "on": "Yerel köprü: {0} proxy için açık · {1} etkin bağlantı. NSF Shield açık kaldığı sürece çalışır."
+    },
+    "badAddress": "Geçersiz adres: {0}",
+    "deleteConfirm": "'{0}' silinsin mi?",
+    "deleteRules": "Bu proxy'yi kullanan {0} program kuralı da silinecek.",
+    "testing": "Test ediliyor: {0} {1} …",
+    "working": "✓ Çalışıyor · discord.com erişilebilir · {0} ms",
+    "exitIp": "Çıkış IP'si:",
+    "country": "Ülke:",
+    "kindFixed": "Tür {0} olarak düzeltildi",
+    "backToNormal": "Normal Discord'a dönmek için 'Discord'u proxy'siz aç' düğmesini kullanın.",
+    "discordShortcutDone": "Masaüstüne '{0}' kısayolu oluşturuldu. Discord'u bu kısayolla açtığınızda proxy kullanılır.",
+    "shortcutFailed": "Kısayol oluşturulamadı: {0}",
+    "tag": {
+      "system": "Windows proxy'si",
+      "bridge": "köprü açık",
+      "auth": "şifreli"
+    },
+    "systemNotRestored": "Windows proxy'si tam olarak geri yüklenemedi; kayıt saklandı, yeniden deneyebilirsiniz."
+  },
+  "proxyBulk": {
+    "title": "Toplu proxy ekle ve test et",
+    "intro": "Her satıra bir proxy yapıştırın (ip:port, ip:port:kullanıcı:şifre, socks5://…). Hepsi aynı anda test edilir; yalnızca Discord'a ulaşabilenler eklenir.",
+    "defaultKind": "Tür belirtilmemişse:",
+    "kindHint": "(yanlışsa test diğer türü de dener)",
+    "testAll": "Hepsini test et",
+    "country": "Ülke",
+    "addWorking": "Çalışanları ekle",
+    "windowTitle": "Toplu proxy ekle",
+    "noneValid": "Geçerli proxy bulunamadı",
+    "unreadable": "({0} satır okunamadı).",
+    "testing": "{0} proxy test ediliyor (aynı anda 24)…",
+    "unreadableLines": "{0} satır okunamadı.",
+    "progress": "{0}/{1} test edildi…",
+    "auth": "(şifreli)",
+    "working": "✓ Çalışıyor",
+    "kindFixed": "(tür düzeltildi)",
+    "result": "{0}/{1} proxy Discord'a ulaşabiliyor.",
+    "freeHint": "Ücretsiz proxy'ler sık kapanır; başka bir liste deneyin.",
+    "addWorkingN": "Çalışanları ekle ({0})",
+    "added": "{0} proxy eklendi"
+  },
+  "troublePage": {
+    "title": "Sorun Giderme",
+    "subtitle": "Çalışmama sebebini bulun. Her sorunun bir hata kodu, açıklaması ve çözüm adımları vardır.",
+    "tab": {
+      "find": "Sorunu Bul",
+      "codes": "Hata Kodları ve Çözümleri"
+    },
+    "runFull": "Tam kontrolü başlat",
+    "runInfo": "Kurulumdan Discord'a ~20 nokta 10-20 saniyede kontrol edilir.",
+    "supportPack": "Destek paketi",
+    "report": "Sorun bildir",
+    "supportTip": "Günlük, geçmiş ve ayarları (IP adresleri, kullanıcı adı ve proxy bilgileri gizlenmiş olarak) tek bir zip dosyasına kaydeder.",
+    "issueTip": "GitHub'da sürüm, Windows ve hata kodu bilgileri doldurulmuş yeni bir sorun sayfası açar; göndermeden önce düzenleyebilirsiniz.",
+    "zipFilter": "Zip dosyası|*.zip",
+    "packSaved": "Destek paketi kaydedildi. IP adresleri, kullanıcı adı, e-posta ve proxy bilgileri gizlendi.\n\nYardım isterken bu dosyayı (ör. GitHub'daki sorun kaydına) ekleyebilirsiniz.",
+    "issueConfirm": "Tarayıcıda GitHub'ın yeni sorun sayfası açılacak. Sürüm, Windows derlemesi, hata kodu ve kısa bir özet (IP adresleri gizlenmiş) önceden doldurulur; göndermeden önce görüp düzenleyebilirsiniz. Göndermek için GitHub hesabı gerekir.\n\nDevam edilsin mi?",
+    "searchCue": "Ara: kod ya da kelime (ör. NSF-204, antivirüs)",
+    "copyTip": "Açıklamayı kopyala (yardım isterken paylaşmak için)",
+    "noProblem": "Şu an algılanmış bir sorun yok",
+    "noProblemHint": "Discord açılmıyorsa 'Tam kontrolü başlat'a basın ya da 'Hata Kodları' sekmesinden belirtiye göre çözüm arayın.",
+    "solution": "Çözüm",
+    "checking": "Kontrol ediliyor…",
+    "checkAgain": "Tekrar kontrol et",
+    "allGood": "✓ Sorun bulunamadı. Her şey yolunda görünüyor.",
+    "noMatch": "Aramanıza uyan hata kodu yok.",
+    "sev": {
+      "error": "Hata",
+      "warning": "Uyarı",
+      "info": "Bilgi"
+    },
+    "causes": "OLASI NEDENLER",
+    "steps": "ÇÖZÜM ADIMLARI",
+    "packFailed": "Oluşturulamadı: {0}",
+    "allCategories": "Tüm kategoriler ({0})",
+    "detected": "ALGILANAN SORUNLAR ({0})",
+    "found": "✗ {0} hata, {1} uyarı bulundu. Her satırdaki düğme sorunu çözer; 'Çözüm' ayrıntılı adımları gösterir.",
+    "detectedNow": "ŞU AN ALGILANDI",
+    "category": "Kategori: {0}",
+    "detectedAt": "Bu sorun saat {0} itibarıyla algılandı",
+    "howDetected": "Nasıl algılanır: {0}"
+  },
+  "logPage": {
+    "title": "Günlük",
+    "subtitle": "Uygulamanın ve GoodbyeDPI'ın yaptığı her şey burada kayıt altına alınır. Hatalar [NSF-xxx] koduyla yazılır.",
+    "verbose": "Ayrıntılı (komutlar)",
+    "errorsOnly": "Yalnızca uyarı/hata",
+    "folder": "Klasör",
+    "copy": "Kopyala",
+    "clear": "Temizle",
+    "txtFilter": "Metin dosyası|*.txt"
+  },
+  "settingsPage": {
+    "title": "Ayarlar",
+    "interface": "ARAYÜZ",
+    "uiLevel": "Arayüz düzeyi",
+    "uiLevelInfo": "Basit: yalnızca gerekenler (önerilen). Orta: profiller, internet kontrolü, DNS. Detaylı: her şey, günlük ve uzman seçenekleri.",
+    "colors": "Renkler ve tema…",
+    "startup": "BAŞLANGIÇ",
+    "startWin": "Windows açılışında uygulamayı başlat",
+    "startWinInfo": "Oturum açınca NSF Shield sistem tepsisinde, yönetici izni sormadan başlar.",
+    "autoStart": "Uygulama açılınca korumayı otomatik başlat",
+    "autoStartInfo": "Seçili yöntemle koruma hemen devreye girer.",
+    "service": "Arka plan hizmeti modu",
+    "serviceInfo": "GoodbyeDPI Windows hizmeti olarak kurulur: oturum açılmadan başlar, uygulama kapalıyken de çalışır.",
+    "windowSection": "PENCERE VE BİLDİRİMLER",
+    "closeToTray": "Kapat düğmesi sistem tepsisine küçültsün",
+    "closeToTrayInfo": "Kapalıysa pencereyi kapatmak uygulamadan çıkar.",
+    "hideTaskbar": "Görev çubuğunda gösterme",
+    "hideTaskbarInfo": "Uygulama yalnızca saat yanındaki sistem tepsisinde görünür (Alt+Tab'da da görünmez).",
+    "notifications": "Bildirimleri göster",
+    "notificationsInfo": "Koruma başladığında, durduğunda veya erişim sorunu olduğunda bildirim gösterir.",
+    "protection": "KORUMA",
+    "autoHeal": "Erişim kesilirse çalışan yöntemi otomatik bul",
+    "autoHealInfo": "Koruma açıkken Discord'a erişilemezse (ör. servis sağlayıcı yöntem değiştirdiğinde) yöntemler kendiliğinden denenir ve çalışan seçilir.",
+    "watchdog": "Bağlantıyı düzenli kontrol et",
+    "watchdogInfo": "Belirli aralıklarla ve ağ değiştiğinde (ör. Wi-Fi değişimi) Discord erişimi sessizce test edilir.",
+    "off": "Kapalı",
+    "autoRestart": "Kapanırsa otomatik yeniden başlat",
+    "autoRestartInfo": "GoodbyeDPI beklenmedik şekilde kapanırsa 5 saniye sonra yeniden başlatılır (NSF-602).",
+    "suggestDiscord": "Discord'u yeniden başlatmayı öner",
+    "suggestDiscordInfo": "Discord korumadan önce açıldıysa bağlanamayabilir; bu durumda uyarı ve düğme gösterilir (NSF-901).",
+    "testAfterStart": "Başlattıktan sonra bağlantıyı test et",
+    "testAfterStartInfo": "Koruma başlayınca Discord sunucularına erişim ve DNS yanıtı otomatik kontrol edilir.",
+    "flushDns": "Değişikliklerde DNS önbelleğini temizle",
+    "flushDnsInfo": "Başlatma/durdurma sırasında eski (engelli) DNS kayıtlarının kullanılmasını önler.",
+    "verifyDns": "Başlatırken DNS sunucusunu doğrula",
+    "verifyDnsInfo": "Yönlendirilen DNS sunucusu yanıt vermiyorsa uyarır (NSF-402). Kapatırsanız başlatma ~1 sn hızlanır.",
+    "repairSection": "ONARIM VE KALDIRMA",
+    "repairInfo": "Sorun yaşıyorsanız önce Sorun Giderme → 'Tam kontrolü başlat'ı deneyin. 'Tümünü sıfırla', eski .cmd betiklerinin kurduğu GoodbyeDPI hizmetini ve WinDivert sürücüsünü de kaldırır (eski ayarlari_sifirla.cmd'nin daha kapsamlısı).",
+    "flushBtn": "DNS önbelleğini temizle",
+    "conflicts": "Çakışmaları gider",
+    "resetAll": "Tümünü sıfırla",
+    "cleanUninstall": "Temiz kaldır…",
+    "cleanInfo": "Hizmet, açılış görevi, WinDivert kaydı, Windows proxy ve DNS değişikliklerini geri alır; program klasörünü silmeden önce kullanın.",
+    "cleanConfirm": "NSF Shield'in Windows'ta yaptığı tüm değişiklikler geri alınacak:\n\n• Koruma durur; arka plan hizmeti ve WinDivert sürücü kaydı kaldırılır\n• Windows açılış görevi silinir\n• NSF Shield'in ayarladığı Windows proxy'si ve DNS sunucuları eski hâline döner\n\nProgram klasörü ve ayarlarınız silinmez. Devam edilsin mi?",
+    "cleanDone": "Temiz kaldırma tamamlandı.",
+    "updates": "GÜNCELLEMELER",
+    "autoUpdate": "Güncellemeleri otomatik denetle",
+    "autoUpdateInfo": "Günde bir kez GitHub'daki yeni sürüm denetlenir; yeni sürüm varsa bildirilir. Kurulum her zaman sizin onayınızla ve SHA-256 doğrulamasıyla yapılır.",
+    "checkNow": "Şimdi denetle",
+    "backup": "YEDEKLEME",
+    "backupInfo": "Tüm ayarları (yöntemler, özel profiller, tema, proxy'ler, hedef siteler) tek bir dosyaya kaydedin; yeni bilgisayara ya da arkadaşınıza taşıyın. Proxy şifreleri yalnızca bu Windows hesabında çözülebildiği için başka bilgisayarda yeniden girilmelidir.",
+    "export": "Ayarları dışa aktar…",
+    "import": "Ayarları içe aktar…",
+    "xmlFilter": "NSF Shield ayarları (*.xml)|*.xml",
+    "importConfirm": "Şu anki tüm ayarlar dosyadakilerle değiştirilecek. Devam edilsin mi?",
+    "advanced": "GELİŞMİŞ",
+    "exportInfo": "Tüm hazır yöntemleri, uygulama olmadan çalışan .cmd betikleri olarak bir klasöre kaydedebilirsiniz.",
+    "exportScripts": "Betikleri dışa aktar…",
+    "openData": "Ayar klasörünü aç",
+    "chooseFolder": "Betiklerin kaydedileceği klasörü seçin",
+    "tempFolder": "Uygulama geçici bir klasörden çalışıyor (NSF-103). Önce zip'i kalıcı bir klasöre çıkarın, sonra bu seçeneği açın.",
+    "serviceConfirm": "GoodbyeDPI 'NSF Shield' adıyla Windows hizmeti olarak kurulacak ve bilgisayar açılınca otomatik başlayacak.\n\nUygulamayı kapatsanız bile koruma çalışmaya devam eder. Koruma şimdi bu modda yeniden başlatılsın mı?",
+    "themeLabel": "Tema: {0}",
+    "onlyInstalled": "Taşınabilir (zip) sürümde güvenlik nedeniyle kapalı; kurulum paketiyle Program Files'a kurulan sürümde kullanılabilir.",
+    "hotkey": "Kısayol tuşu: {0}",
+    "hotkeyInfo": "{0} ile korumayı her yerden açıp kapatın (pencere gizliyken de çalışır).",
+    "minutes": "{0} dk",
+    "cleanReverted": "Geri alınanlar:\n\n{0}\n\nArtık uygulamadan çıkıp program klasörünü silebilirsiniz. Uygulamadan çıkılsın mı?",
+    "updInfo": "Sürüm {0} · Son denetim: {1}",
+    "never": "hiç",
+    "updReady": "Yeni sürüm hazır: {0}",
+    "readFailed": "Dosya okunamadı: {0}",
+    "exportFailed": "Dışa aktarılamadı: {0}",
+    "detail": "Ayrıntı:",
+    "taskFailed": "Açılış görevi oluşturulamadı (NSF-703):",
+    "serviceFailed": "Hizmet modu başlatılamadı, uygulama moduna dönüldü.",
+    "languageAuto": "Otomatik (Windows dili)",
+    "languageHint": "Arayüz dili; anında değişir.",
+    "switchTitle": "Kurulu sürüme geç",
+    "switchInfo": "Doğrulanmış son sürümü Program Files'a kurar; profillerinizi, temanızı, dilinizi ve DNS ayarlarınızı taşır.",
+    "switchButton": "Geç…",
+    "byedpiSection": "BYEDPI (SÜRÜCÜSÜZ PROXY)",
+    "byedpiSystemProxy": "ByeDPI çalışırken Windows proxy'sini ayarla",
+    "byedpiSystemProxyInfo": "Tarayıcılar ve Discord ByeDPI'ı kendiliğinden kullanır; durunca (çökmeden sonra da) önceki ayar geri gelir. Kapalı: yalnızca Proxy sayfasında ayarlanan programlar kullanır.",
+    "byedpiPort": "ByeDPI portu (127.0.0.1)",
+    "byedpiPortInfo": "SOCKS portu; HTTP köprüsü bir sonraki portu kullanır. Bir sonraki başlatmada geçerli olur."
+  },
+  "aboutPage": {
+    "title": "Hakkında",
+    "intro": "GoodbyeDPI, Zapret ve ByeDPI için kolay kullanımlı internet erişim kalkanı. Servis sağlayıcıların DNS ve Derin Paket İnceleme (DPI) ile uyguladığı engelleri aşar. VPN değildir: trafiğiniz şifrelenmez ve IP adresiniz değişmez.",
+    "guide": "Kullanım rehberi",
+    "project": "Proje sayfası",
+    "scripts": "Yedek betikler",
+    "licenses": "Lisanslar",
+    "howTitle": "NASIL ÇALIŞIR?",
+    "how": "Servis sağlayıcınız Discord'u iki yolla engeller: DNS yanıtlarını değiştirerek ve bağlantıdaki site adını (SNI) okuyup bağlantıyı keserek. DNS yönlendirmesi sorguları engelsiz bir DNS sunucusuna gönderir; GoodbyeDPI ise paketleri parçalayıp sahte paketler göndererek DPI cihazının site adını okumasını engeller.",
+    "antivirus": "Antivirüs uyarısı: WinDivert bir ağ sürücüsüdür; bazı antivirüsler (Kaspersky, Norton…) onu 'RiskTool' olarak işaretleyebilir. Bu bir virüs değildir; dosyaların resmi olduğunu Sorun Giderme → Tam kontrol doğrular; uyarı alırsanız önce Microsoft'a yanlış pozitif olarak bildirin (NSF-204).",
+    "license": "LİSANS",
+    "thirdParty": "Birlikte dağıtılan bileşenler kendi lisanslarına tabidir: GoodbyeDPI © ValdikSS (Apache 2.0), WinDivert © basil00 (LGPLv3). Metinler: Lisanslar düğmesi.",
+    "thanks": "Teşekkürler: GoodbyeDPI – ValdikSS (Apache 2.0) · WinDivert – basil00 (LGPLv3) · uthash, getline.",
+    "version": "Sürüm {0}",
+    "mit": "MIT Lisansı",
+    "whatsNew": "{0} SÜRÜMÜNDE YENİ",
+    "new": {
+      "10": {
+        "1": "Üç motor: GoodbyeDPI, Zapret (winws; UDP üzerinden Discord sesi ve QUIC de) ve ByeDPI (ciadpi; sürücüsüz yerel proxy); Önerilen ve Özel katmanlarında {1} hazır profil.",
+        "2": "Akıllı tarama: aday yöntemler yalıtılmış olarak denenir ve şifreli DNS ile karşılaştırılır; bitince önceki durumunuz geri gelir. Otomatik onarım ve ağ değişince bağlantı bekçisi.",
+        "3": "Site listeleri: Dahil et (yalnızca bu sitelere uygula) ve Hariç tut (bu sitelere hiç dokunma; ör. bankalar ve hile önleyicili oyunlar); salt okunur çakışma ve hile önleyici teşhisi.",
+        "4": "{2} DNS sunucusu, her zaman geri alınabilen Windows DNS'i ve şifreli DNS (DoH); program bazlı proxy, yerel proxy köprüsü ve elektrik kesintisinden sonra bile geri gelen Windows proxy'si.",
+        "5": "Sorun Giderme: tam kontrol, {3} kategoride {4} hata kodu, tek tıkla düzeltme ve kişisel bilgileri gizlenmiş destek paketi. Profil paylaşma kodları (NSF1) ve {0} kısayol tuşu.",
+        "6": "İngilizce ve Türkçe arayüz, Basit / Orta / Detaylı seviyeler, özel paletle {5} tema. Kurulum paketi (önerilen) ya da taşınabilir ZIP; ikisi de SHA-256 doğrulamasıyla kendini günceller."
+      }
+    },
+    "thirdPartyEngines": "Zapret: winws © bol-van (MIT), Cygwin DLL (LGPLv3+), WinDivert 2.2.2 © basil00 (LGPLv3). ByeDPI: ciadpi © hufrea (MIT).",
+    "thanksEngines": "Ayrıca teşekkürler: zapret – bol-van (MIT) · ByeDPI – hufrea (MIT) · Cygwin · zlib."
+  },
+  "scanDialog": {
+    "title": "Akıllı Tarayıcı",
+    "intro": "Adaylar sabit bir sırayla (önce önerilenler) tek tek başlatılır ve yeni bağlantılarla iki turda ölçülür: DNS, bağlantı, TLS (gerçek adın sertifikası) ve HTTP. Mevcut durumunuz önce kaydedilir, sonunda geri yüklenir.",
+    "ready": "Hazır.",
+    "pressStart": "Adayları seçip Başlat'a basın. İki turda tam başarı olmadan hiçbir şey uygulanmaz.",
+    "start": "Taramayı Başlat",
+    "restartDiscord": "Discord'u yeniden başlat",
+    "viewCode": "Hata kodunu incele",
+    "cancelling": "İptal ediliyor; aday durdurulup durumunuz geri yüklenince pencere kapanacak…",
+    "finished": "Tamamlandı.",
+    "again": "Tekrar Tara",
+    "discordOpen": "Discord açık: yeni ayarın etkili olması için Discord'u yeniden başlatmanız önerilir.",
+    "openDiscordNow": "Discord'u şimdi açabilirsiniz.",
+    "trying": "Deneniyor: {0}  ({1}/{2})",
+    "doneWith": "Bitti: {0}",
+    "done": "Bitti",
+    "whatToDo": "Ne yapmalı? ({0} – {1})",
+    "introSimple": "Tek tık: tüm motorların önerilen yöntemleri sırayla denenir; tam çalışan ilk yöntem uygulanır.",
+    "simpleInfo": "{0} önerilen aday; bu bilgisayarda {1} motor çalışabilir. Sürücülü adaylar arasında bağlantı bir anlığına kesilebilir.",
+    "scopeTitle": "ADAYLAR",
+    "scope": {
+      "Recommended": "Önerilenler",
+      "ActiveEngine": "Aktif motor",
+      "AllEngines": "Tüm motorlar",
+      "DriverlessOnly": "Yalnızca sürücüsüz"
+    },
+    "scopeHint": {
+      "Recommended": "Tüm motorların önerilen profilleri, sabit sırayla.",
+      "ActiveEngine": "Aktif motorun tüm profilleri (yerleşik ve özel).",
+      "AllEngines": "Üç motorun tüm profilleri; karşılaştırma birkaç dakika sürebilir.",
+      "DriverlessOnly": "Yalnızca ByeDPI (WinDivert sürücüsü yok): proxy kullanan programları kapsar."
+    },
+    "scopeInfo": "{0} aday: {1}",
+    "modeTitle": "MOD",
+    "mode": {
+      "StopOnFirstMatch": "İlk çalışanda dur",
+      "FullBenchmark": "Tümünü karşılaştır"
+    },
+    "autoApply": "Bulunca uygula",
+    "customize": "Adayları özelleştir",
+    "panel": {
+      "candidates": "Adaylar",
+      "targets": "Hedefler"
+    },
+    "widen": "Dahil listesini geçici genişlet",
+    "col": {
+      "profile": "Profil",
+      "tier": "Katman",
+      "engine": "Motor",
+      "state": "Durum",
+      "result": "Sonuç",
+      "score": "Skor",
+      "latency": "Gecikme",
+      "udp": "UDP/STUN",
+      "layers": "Katmanlar"
+    },
+    "selectAll": "Tümünü Seç",
+    "selectRecommended": "Yalnızca Önerilenler",
+    "selectNone": "Temizle",
+    "count": "{1} adaydan {0} seçili",
+    "state": {
+      "ready": "hazır",
+      "missing": "dosyalar eksik (NSF-102)"
+    },
+    "addTarget": "Ekle",
+    "removeTarget": "Seçileni kaldır",
+    "resetTargets": "Varsayılan hedefler",
+    "targetNote": "Yalnızca alan adı (örn. discord.com): https://, port, yol, IP veya yerel ad olamaz. En fazla {0}. Ağ sayfasındaki hızlı test listesi ayrıdır.",
+    "tooManyTargets": "En fazla {0} hedef.",
+    "pressStartSimple": "“Çalışan Yöntemi Bul ve Bağlan”a basın.",
+    "findAndConnect": "Çalışan Yöntemi Bul ve Bağlan",
+    "apply": "Uygula",
+    "appliedMark": "uygulandı",
+    "appliedNow": "Uygulandı: {0}.",
+    "applyFailed": "{0} uygulanamadı [{1}] {2}; önceki profil geri yüklendi.",
+    "detailHint": "Her hedefin iki turdaki katmanlarını görmek için bir satır seçin.",
+    "doneApplied": "Bitti – uygulandı: {0}",
+    "notApplied": "Otomatik uygulanmadı. Kullanmak için seçip “Uygula”ya basın.",
+    "pickAndApply": "Önceki durumunuz geri yüklendi. Kullanmak için bir sonucu seçip “Uygula”ya basın.",
+    "openWithout": "korumasız da açılıyor",
+    "outOfScope": "liste kapsamı dışında (sayılmadı)",
+    "profileGone": "Bu profil artık yok."
+  },
+  "fix": {
+    "denied": "İzin verilmedi.",
+    "falsePositive": "Microsoft'un dosya gönderme sayfası açıldı. 'Software developer' değil 'Home customer' seçip karantinadaki dosyayı 'Incorrectly detected as malware' olarak gönderin. Dosyanın resmi olduğunu Sorun Giderme → Tam kontrol (Dosya bütünlüğü) gösterir.",
+    "resetConfirm": "Koruma durdurulacak; GoodbyeDPI/NSF Shield hizmetleri ve WinDivert sürücü kaydı kaldırılacak.\n\nDevam edilsin mi?",
+    "resetDoneRestored": "Sıfırlama tamamlandı; proxy/DNS ayarları da geri alındı. Sorun sürerse bilgisayarı yeniden başlatın.",
+    "resetDone": "Sıfırlama tamamlandı. Sorun sürerse bilgisayarı yeniden başlatın.",
+    "conflictsResolved": "Çakışmalar giderildi.",
+    "dnsFlushed": "DNS önbelleği temizlendi. Discord ve tarayıcıyı yeniden başlatın.",
+    "bfeStarted": "BFE hizmeti başlatıldı.",
+    "protectionRestarted": "Koruma yeniden başlatıldı.",
+    "hostsSelected": "hosts dosyası Gezgin'de seçildi. Not Defteri'ni yönetici olarak açıp düzenleyin.",
+    "appMode": "Uygulama moduna geçildi.",
+    "folderOpened": "Klasör açıldı: {0}",
+    "restoreBoth": "NSF Shield'in değiştirdiği Windows proxy ve DNS ayarları da eski hâline döndürülsün mü?",
+    "restoreProxy": "NSF Shield'in değiştirdiği Windows proxy ayarı da eski hâline döndürülsün mü?",
+    "restoreDns": "NSF Shield'in değiştirdiği DNS sunucuları da eski hâline döndürülsün mü?",
+    "bfeFailed": "BFE başlatılamadı: {0}"
+  },
+  "updateDialog": {
+    "whatsNew": "YENİLİKLER",
+    "info": "Güncelleme indirilir, doğrulanır ve uygulama yeni sürümle yeniden açılır. Ayarlarınız korunur; koruma birkaç saniye kesilir.",
+    "updateNow": "Şimdi güncelle",
+    "skip": "Bu sürümü atla",
+    "later": "Sonra",
+    "downloading": "İndiriliyor…",
+    "installing": "Doğrulandı (SHA-256). Kuruluyor… Uygulama birkaç saniye içinde yeniden açılacak.",
+    "cancelled": "İptal edildi.",
+    "checkFailed": "Güncelleme denetlenemedi.",
+    "upToDate": "NSF Shield güncel ({0}).",
+    "newVersion": "Yeni sürüm: {0}",
+    "released": "NSF Shield {0} yayımlandı. Ana sayfadaki 'Güncelle' düğmesiyle kurabilirsiniz.",
+    "title": "Güncelleme",
+    "heading": "Yeni sürüm: NSF Shield {0}",
+    "current": "Şu anki sürüm {0}",
+    "publishedOn": "Yayın:",
+    "verifiedSha": "SHA-256 ile doğrulanır",
+    "downloadingKb": "İndiriliyor… {0} / {1} KB",
+    "failed": "Güncelleme yapılamadı: {0}",
+    "needsSetup": "{0} sürümü yalnızca kurulum paketi olarak yayımlandı. Bu taşınabilir kopya onu kendisi kuramaz.\n\nŞimdi kurulumlu sürüme geçilsin mi? (Ayarlarınız taşınır; taşınabilir klasör silinmez.)",
+    "needsSetupShort": "{0} yalnızca kurulum paketiyle çıktı: \"Kurulu sürüme geç\" seçeneğini kullanın.",
+    "noPackage": "{0} sürümünde bu kopyanın kurabileceği (SHA-256 özeti yayımlanmış) bir paket yok."
+  },
+  "theme": {
+    "name": {
+      "light": "Açık (klasik)",
+      "emerald": "Zümrüt",
+      "ocean": "Okyanus",
+      "lavender": "Lavanta",
+      "solarizedLight": "Solarized Açık",
+      "githubLight": "GitHub Açık",
+      "dark": "Koyu",
+      "githubDark": "GitHub Koyu",
+      "solarizedDark": "Solarized Koyu",
+      "sunset": "Gün Batımı",
+      "contrast": "Yüksek Kontrast",
+      "system": "Sistem",
+      "systemHc": "Sistem (yüksek kontrast)",
+      "systemDark": "Sistem (koyu)",
+      "systemLight": "Sistem (açık)"
+    },
+    "color": {
+      "Accent": "Vurgu rengi (düğmeler, seçimler)",
+      "Bg": "Pencere arka planı",
+      "Card": "Kart / panel",
+      "Border": "Kenarlık",
+      "Text": "Metin",
+      "Muted": "İkincil metin",
+      "Sidebar": "Kenar çubuğu",
+      "SidebarText": "Kenar çubuğu metni",
+      "Green": "Başarı (yeşil)",
+      "Amber": "Uyarı (turuncu)",
+      "Red": "Hata (kırmızı)",
+      "LogBg": "Günlük (konsol) arka planı"
+    },
+    "customSuffix": "+ özel renkler"
+  },
+  "appearancePage": {
+    "title": "Görünüm",
+    "subtitle": "Hazır bir tema seçin ya da her rengi kendiniz belirleyin. 'Sistem' teması Windows renklerini kullanır.",
+    "uiLevel": "ARAYÜZ DÜZEYİ",
+    "appliedNow": "Değişiklik hemen uygulanır.",
+    "presets": "HAZIR TEMALAR",
+    "custom": "ÖZEL RENKLER",
+    "colorHint": "Renk kodu yazın (#2563EB, 2563EB, #FFF ya da 37,99,235) veya renk kutusuna tıklayıp seçin.",
+    "resetCustom": "Tema varsayılanına dön",
+    "copyCode": "Tema kodunu kopyala",
+    "codeCopied": "Tema kodu panoya kopyalandı. Arkadaşınız 'Tema kodunu yapıştır' ile aynı renkleri kullanabilir.",
+    "pasteCode": "Tema kodunu yapıştır",
+    "tip": "İpucu: Önce size en yakın hazır temayı seçin, sonra yalnızca değiştirmek istediğiniz renkleri düzenleyin. Okunaklılık için düğme ve rozet yazı renkleri otomatik ayarlanır.",
+    "level": {
+      "simple": "Basit: yalnızca gerekenler. Tek düğmeyle başlat, otomatik ayarla, sorun bul. Yeni başlayanlar için.",
+      "standard": "Orta: profiller, İnternet Kontrolü, DNS ayarları ve hedef siteler de görünür.",
+      "advanced": "Detaylı: her şey. Günlük, ağ bilgisi, komut satırları, betik dışa aktarma ve tüm gelişmiş ayarlar."
+    },
+    "keepCustom": "Özel renkleriniz yeni temanın üzerine uygulanmaya devam etsin mi?\n\n'Hayır' derseniz özel renkler silinir.",
+    "badCode": "Panoda geçerli bir tema kodu yok. Kod 'DKT1:' ile başlamalı.",
+    "followSection": "WINDOWS AÇIK / KOYU MOD",
+    "follow": "Windows açık/koyu modunu takip et",
+    "followInfo": "Windows şu an {0} kullanıyor. Windows değişince aşağıdaki tema da değişir.",
+    "modeDark": "koyu mod",
+    "modeLight": "açık mod",
+    "lightTheme": "Açık tema",
+    "darkTheme": "Koyu tema",
+    "featured": "ÖNERİLEN TEMALAR",
+    "apply": "Uygula",
+    "unapplied": "Henüz uygulanmadı",
+    "customInUse": "Özel renkler kullanılıyor",
+    "contrastOk": "Okunaklı: tüm yazı/arka plan çiftleri {0}:1 oranını karşılıyor (WCAG AA).",
+    "contrastLow": "Düşük kontrast: {0}. En az {1}:1 önerilir (WCAG AA); yine de uygulayabilirsiniz.",
+    "discardDraft": "Renkleri değiştirdiniz ama uygulamadınız.\n\nŞimdi uygulansın mı? 'Hayır' derseniz değişiklikler atılır.",
+    "pair": {
+      "textBg": "Arka plandaki yazı",
+      "textCard": "Karttaki yazı",
+      "mutedCard": "Karttaki ikincil yazı",
+      "button": "Düğme yazısı",
+      "sidebar": "Menü yazısı"
+    },
+    "preview": {
+      "title": "Önizleme",
+      "text": "İkincil yazı böyle görünür.",
+      "badge": "Etkin",
+      "button": "Başlat",
+      "secondary": "Test et"
+    }
+  },
+  "switch": {
+    "title": "Kurulu sürüme geçiş",
+    "subtitle": "Taşınabilir kopya yerine normal kurulum kullanılır. Hiçbir şey silinmez; bu klasörü sonra kaldırabilirsiniz.",
+    "stepsTitle": "NELER OLACAK",
+    "step1": "Son kurulum paketi indirilir ve doğrulanır (HTTPS, SHA-256, yayıncı, sürüm).",
+    "step2": "NSF Shield, Program Files'a kurulur (yönetici onayı istenebilir).",
+    "step3": "Profilleriniz, temanız, diliniz ve DNS ayarlarınız denetlenip taşınır.",
+    "step4": "Kurulu sürüm açılır, bu pencere kapanır. Ardından hizmeti ve Windows ile başlatmayı açabilirsiniz.",
+    "sourceGithub": "Kaynak: GitHub'daki son sürüm.",
+    "sourceLocal": "Kaynak (test): {0}",
+    "ready": "Hazır. Kurulum sırasında koruma kısa bir süre durur.",
+    "go": "Kur ve geç",
+    "previewOnly": "Önizleme sürümünde kullanılamaz.",
+    "checking": "Son sürüm aranıyor…",
+    "verifyingLocal": "Yerel kurulum paketi doğrulanıyor…",
+    "installing": "Kuruluyor… Yönetici onayı çıkarsa onaylayın.",
+    "transferring": "Ayarlarınız taşınıyor…",
+    "opening": "Tamamlandı. Kurulu sürüm açılıyor…",
+    "failed": "Geçiş tamamlanamadı: {0}",
+    "setupFailed": "Kurulum paketi {0} hata koduyla bitti.",
+    "setupTimeout": "Kurulum paketi 15 dakika içinde bitmedi.",
+    "noRelease": "Sürüm bilgisi bulunamadı.",
+    "olderRelease": "Yayımlanan sürüm ({0}) bu kopyadan ({1}) eski.",
+    "noSetup": "{0} sürümünün doğrulanmış kurulum paketi yok.",
+    "notSetup": "Dosya bir NSF Shield kurulum paketi değil ({0}).",
+    "localPath": "Kurulum paketi yolu, bir .exe dosyasının tam yerel yolu olmalıdır.",
+    "localMissing": "Kurulum paketi bulunamadı ya da boyutu geçersiz: {0}",
+    "localHash": "Yerel kurulum paketi için geçerli bir SHA-256 (64 onaltılık karakter) gerekir.",
+    "localHashMismatch": "Yerel kurulum paketinin SHA-256 değeri eşleşmiyor.",
+    "badTarget": "Kurulum klasörü geçerli değil: {0}",
+    "unprotectedTarget": "Kurulum klasörü yazmaya karşı korumalı değil; ayarlar oraya kopyalanmaz: {0}",
+    "doneTitle": "Kurulu sürüme hoş geldiniz",
+    "doneText": "Ayarlarınız taşındı. Artık korumanın Windows ile başlamasını ya da arka plan hizmeti olarak çalışmasını sağlayabilirsiniz.",
+    "startInfo": "Oturum açılınca simge durumunda açılır.",
+    "serviceInfo": "Pencere kapalıyken de koruma çalışır.",
+    "turnOn": "Aç",
+    "turningOn": "Açılıyor…",
+    "fileTooLarge": "{0} aktarılamayacak kadar büyük.",
+    "targetExists": "{0} kurulu klasörde zaten var; üzerine yazılmadı."
+  },
+  "engineEdit": {
+    "params": "{0} PARAMETRELERİ (her satıra bir kural veya grup)",
+    "helpSafety": "Güvenliğiniz için yalnızca tam seçenek adları kabul edilir; dosyaya yazan veya dosya yolu alan seçenekler reddedilir. Sahte paketler adıyla seçilir; Dahil et/Hariç tut listelerini uygulama ekler.",
+    "payloads": "SAHTE PAKETLER (bin\\zapret\\payloads)",
+    "options": "İZİN VERİLEN SEÇENEKLER",
+    "valid": "Parametreler geçerli.",
+    "help": {
+      "zapret": "winws (zapret) trafiği WinDivert sürücüsüyle yakalar. --wf-tcp ve --wf-udp yakalanan portları seçer. Her kural --filter-tcp, --filter-udp veya --filter-l7 ile başlar; --new bir sonraki kuralı başlatır. Sık kullanılan yöntemler: --dpi-desync-split-pos ve --dpi-desync-fooling=badseq,md5sig ile birlikte --dpi-desync=fake,multisplit ya da fake,multidisorder.",
+      "byedpi": "ByeDPI (ciadpi) yerel bir SOCKS proxy'sidir ve sürücü gerektirmez. Seçenekleri --ad değer biçiminde yazın. --split, --disorder, --fake, --oob ve --tlsrec 1+s gibi bir konum alır (SNI'dan itibaren). --auto=torst yalnızca bağlantı sıfırlanınca veya zaman aşımına uğrayınca denenen bir grup başlatır."
+    }
+  },
+  "engineHelp": {
+    "zapret": {
+      "capture": "Yakalanan trafik",
+      "captureText": "TCP portları {0} · UDP portları {1} (WinDivert filtresi).",
+      "rules": "{0} kural",
+      "rulesText": "Her kural trafiğin bir bölümünü (ör. QUIC, Discord sesi, HTTP, HTTPS) kendi yöntemiyle işler.",
+      "methods": "Yöntemler",
+      "voice": "Discord sesi (UDP)",
+      "voiceText": "Sesli ve görüntülü aramaların Discord IP keşfi ve STUN paketleri de işlenir (UDP 50000-50100).",
+      "quic": "QUIC / HTTP3",
+      "quicText": "UDP 443 (QUIC) bağlantılarına sahte ilk paket gönderilir; tarayıcılar yavaşça geri düşmez.",
+      "payloads": "Sahte paketler",
+      "driverText": "Kendi imzalı WinDivert 2.2.2 sürücüsünü kullanır (bin\\zapret); geçişte GoodbyeDPI sürücüsü boşaltılır."
+    },
+    "driver": "Sürücü",
+    "noDns": "DNS yönlendirmesi yok",
+    "noDnsText": "Bu motor sistem DNS'ini kullanır. İnternet sağlayıcınız sahte adres döndürüyorsa DNS Ayarları sayfasından şifreli DNS'i (DoH) açın.",
+    "byedpi": {
+      "proxy": "Yerel proxy",
+      "proxyText": "127.0.0.1:{0} üzerinde SOCKS5, 127.0.0.1:{1} üzerinde HTTP; yalnızca bu bilgisayar kullanabilir. Çalışırken Windows proxy'si buraya yönlendirilir (Ayarlar'dan kapatılabilir).",
+      "methods": "Yöntemler",
+      "auto": "Otomatik yedek",
+      "autoText": "--auto'dan sonraki yöntemler yalnızca bağlantı sıfırlanırsa veya zaman aşımına uğrarsa denenir.",
+      "noDriver": "Sürücü yok",
+      "noDriverText": "Çekirdek sürücüsü yüklemez: hile önleyicilerle (Vanguard, FACEIT…) çakışmaz ve taşınabilir sürümde de çalışır.",
+      "tcpOnly": "Yalnızca proxy kullanan programlar",
+      "tcpOnlyText": "Windows proxy'sini dikkate almayan programlar ve Discord sesi gibi UDP trafiği kapsanmaz."
+    }
+  },
+  "engines": {
+    "byedpi": {
+      "noListen": "ByeDPI 127.0.0.1:{0} portunu açmadı.",
+      "notLoopback": "ByeDPI 127.0.0.1 dışında bir adreste dinledi ({0}) ve durduruldu.",
+      "portBusy": "127.0.0.1:{0} portu başka bir program tarafından kullanılıyor; Ayarlar'dan başka bir ByeDPI portu seçin.",
+      "systemProxyBusy": "Windows proxy'si olarak kendi proxy'niz ({0}) ayarlı, bu yüzden değiştirilmedi. Programlar ByeDPI'ı yalnızca Proxy sayfası üzerinden kullanır.",
+      "systemProxyFailed": "Windows proxy'si ayarlanamadı: {0}",
+      "tip": "Sürücüsüz · 127.0.0.1 üzerinde yerel proxy · hile önleyici dostu",
+      "portTaken": "{0} numaralı portu başka bir süreç dinliyor ({1}); ByeDPI orada kullanılmadı.",
+      "backupNotSaved": "Önceki Windows proxy ayarı kaydedilemediği için Windows proxy'si değiştirilmedi.",
+      "recoveryMissing": "Oturum açılışı kurtarma yardımcısı eksik ya da değişmiş, bu yüzden Windows proxy'si değiştirilmedi (bir elektrik kesintisinden sonra geri alınamazdı): {0} NSF Shield'i yeniden kurun."
+    },
+    "hint": {
+      "generic": "Antivirüs {0} motorunu engelliyor olabilir ya da başka bir DPI aracı çalışıyor olabilir. 'Her şeyi sıfırla'yı deneyin."
+    },
+    "only64": "{0} yalnızca 64 bit Windows'ta çalışır.",
+    "wrongEngine": "Bu profil {0} motoruna ait değil.",
+    "zapret": {
+      "alreadyRunning": "Aynı filtreyle başka bir winws çalışıyor (ör. bir zapret betiği). 'Çakışmaları gider'i kullanın.",
+      "fileProblem": "winws bir sahte paket veya liste dosyasını okuyamadı. Dosya bütünlüğünü kontrol edin (Sorun Giderme → Tam kontrol).",
+      "tip": "WinDivert sürücüsü · TCP + UDP/QUIC (Discord sesi) · hizmet modu"
+    },
+    "goodbyedpi": {
+      "tip": "WinDivert sürücüsü · DNS yönlendirme · hizmet modu"
+    }
+  },
+  "lists": {
+    "badEntry": "'{0}' geçerli bir alan adı değil.",
+    "excludeUnsupported": "{0} hariç tutma listesini desteklemez; Hariç tut listesi Zapret ve ByeDPI ile uygulanır.",
+    "includeUnsupported": "{0} dahil etme listesini kullanamaz.",
+    "tooMany": "Bir liste en fazla {0} alan adı içerebilir.",
+    "template": {
+      "discordVoice": "Discord ve ses",
+      "roblox": "Roblox",
+      "wattpad": "Wattpad",
+      "banksGov": "Bankalar ve e-Devlet",
+      "antiCheat": "Oyunlar ve hile önleyiciler"
+    },
+    "writeFailedStop": "Açtığınız site listeleri yazılıp kilitlenemedi ({0}); koruma, seçtiğinizden fazla siteye uygulanmasın diye başlatılmadı.",
+    "changed": "Site listesi {0} kilitlenirken değişti; koruma başlatılmadı.",
+    "targetedRulesLeftOut": "Hedefli mod: bu profilin {0} kuralı hedef sitelerle sınırlanamıyor (ana makine adı yok, ör. Discord sesi) ve dışarıda bırakıldı.",
+    "targetedNothingLeft": "Hedefli mod: bu {0} profilinin hiçbir kuralı hedef sitelerle sınırlanamıyor, bu yüzden koruma başlatılmadı. Başka bir profil seçin ya da hedefli modu kapatın.",
+    "excludePartial": "Hariç tutma listesi ana makine adı olmayan {0} kurala ulaşamıyor (ör. Discord sesi); bu kurallar çalışmaya devam ediyor."
+  },
+  "setup": {
+    "serviceNotRestored": "Kurulum paketi dosyaları kurdu, ancak arka plan hizmeti (koruma) yeniden başlatılamadı. Korumayı yeniden başlatın."
+  }
+}

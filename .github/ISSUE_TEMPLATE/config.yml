@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Kullanım rehberi
+    url: https://github.com/Mr-Leywin/nsf-shield#readme
+    about: Kurulum, yöntemler, hata kodları ve çözümleri (pakette Guide.html olarak da var).
+  - name: Güvenlik açığı bildir (gizli)
+    url: https://github.com/Mr-Leywin/nsf-shield/security/advisories/new
+    about: Güvenlik sorunlarını herkese açık sorun kaydı yerine buradan gizlice bildirin.

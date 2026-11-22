@@ -1,0 +1,21 @@
+* text=auto
+*.cs text eol=crlf
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.manifest text eol=crlf
+*.iss text eol=crlf
+*.txt text eol=crlf
+# the package readme keeps LF (local and CI packages must be identical)
+README.txt text eol=lf
+# fixed line endings for every text file that goes into the package (local and CI packages must have the same content)
+LICENSE text eol=crlf
+THIRD_PARTY_NOTICES.md text eol=crlf
+docs/Guide.html text eol=crlf
+locales/*.json text eol=crlf
+*.exe binary
+*.dll binary
+*.sys binary
+# zapret fake payloads (some are plain text requests with CRLF; they must stay byte-exact)
+*.bin binary
+*.png binary
+*.ico binary
