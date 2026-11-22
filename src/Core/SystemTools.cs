@@ -61,15 +61,32 @@ namespace NSFShield
 
         public static string SystemExe(string name) => Path.Combine(Environment.SystemDirectory, name);
 
+        /// <summary>
+        /// explorer.exe passes at most this many characters of its argument on (MAX_PATH - 1): a longer address reaches the
+        /// browser cut off – in the middle of an escape sequence GitHub answers "400 Bad Request".
+        /// </summary>
+        public const int MaxShellArgument = 259;
+
         /// <summary>Opens a program from an elevated process with normal user rights (through explorer).</summary>
         public static bool OpenAsUser(string path)
         {
             try
             {
-                Process.Start(new ProcessStartInfo(Explorer, "\"" + path + "\"") { UseShellExecute = false });
+                Process.Start(new ProcessStartInfo(Explorer, ShellArgument(path)) { UseShellExecute = false });
                 return true;
             }
             catch { return false; }
+        }
+
+        /// <summary>The quoted explorer.exe argument; a longer one than explorer passes on is refused (never opened cut off).</summary>
+        static string ShellArgument(string path)
+        {
+            if ((path ?? "").Length > MaxShellArgument)
+            {
+                App.Log("Not opened: the address is longer than " + MaxShellArgument + " characters (explorer.exe would cut it).", LogLevel.Warn);
+                throw new ArgumentException("too long for explorer.exe", nameof(path));
+            }
+            return "\"" + path + "\"";
         }
 
         public static void OpenUri(string uri)

@@ -195,18 +195,41 @@ namespace NSFShield
             return new System.Xml.Linq.XDocument(root);
         }
 
-        /// <summary>Address of the pre-filled "new issue" page (the user sees and edits it before submitting).</summary>
+        /// <summary>
+        /// Address of the pre-filled "new issue" page (the user sees and edits it before submitting). The elevated app opens it
+        /// through explorer.exe (<see cref="Sys.OpenAsUser"/>), which passes at most <see cref="Sys.MaxShellArgument"/>
+        /// characters on: the address carries only the short fields (version, Windows build, error code, title); the system
+        /// summary goes to the clipboard instead (<see cref="SystemSummary"/>).
+        /// </summary>
         public static string IssueUrl()
         {
             var eng = App.Engine;
             var top = App.Problems.Top;
             string title = top != null ? top.Code + " – " + top.Info?.Title : eng.State == EngineState.Error ? Loc.T("support.protectionNotWorking") : "";
+            return IssueUrl(title, App.Version, SystemDns.WindowsBuild.ToString(), top?.Code ?? eng.LastErrorCode);
+        }
+
+        /// <summary>
+        /// The "new issue" address from its fields, never longer than <see cref="Sys.MaxShellArgument"/>: the title is shortened
+        /// (whole characters before escaping, so no escape sequence or surrogate pair is ever cut) and dropped last.
+        /// </summary>
+        public static string IssueUrl(string title, string version, string build, string code)
+        {
             string Q(string s) => Uri.EscapeDataString(s ?? "");
-            string body = SystemSummary();
-            if (body.Length > 1500) body = body.Substring(0, 1500);
-            return "https://github.com/" + Updater.Owner + "/" + Updater.Repo + "/issues/new?template=hata.yml" +
-                   "&title=" + Q(title) + "&surum=" + Q(App.Version) + "&windows=" + Q("Build " + SystemDns.WindowsBuild) +
-                   "&kod=" + Q(top?.Code ?? eng.LastErrorCode) + "&ozet=" + Q(body);
+            string head = "https://github.com/" + Updater.Owner + "/" + Updater.Repo + "/issues/new?template=hata.yml";
+            string tail = "&surum=" + Q(version) + "&windows=" + Q("Build " + build) + "&kod=" + Q(code);
+            string Make(string t) => head + (string.IsNullOrEmpty(t) ? "" : "&title=" + Q(t)) + tail;
+            if (head.Length + tail.Length > Sys.MaxShellArgument) tail = "";   // never: the fields are short
+            title = (title ?? "").Trim();
+            string url = Make(title);
+            if (url.Length <= Sys.MaxShellArgument) return url;
+            var si = new System.Globalization.StringInfo(title);
+            for (int n = si.LengthInTextElements - 1; n > 0; n--)
+            {
+                url = Make(si.SubstringByTextElements(0, n).TrimEnd() + "…");
+                if (url.Length <= Sys.MaxShellArgument) return url;
+            }
+            return Make("");
         }
     }
 }

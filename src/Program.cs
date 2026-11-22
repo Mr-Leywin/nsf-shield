@@ -20,9 +20,9 @@ using System.Windows.Forms;
 [assembly: AssemblyCopyright(NSFShield.App.Copyright)]                     // LegalCopyright
 [assembly: AssemblyTrademark("")]
 [assembly: System.Resources.NeutralResourcesLanguage("en")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0")]                          // ProductVersion
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
+[assembly: AssemblyInformationalVersion("1.0.1")]                          // ProductVersion
 [assembly: TargetFramework(".NETFramework,Version=v4.8", FrameworkDisplayName = ".NET Framework 4.8")]
 // every DLL called through P/Invoke (kernel32, user32, dnsapi, dwmapi, uxtheme, wininet) is loaded from System32 only
 [assembly: System.Runtime.InteropServices.DefaultDllImportSearchPaths(System.Runtime.InteropServices.DllImportSearchPath.System32)]
@@ -328,6 +328,31 @@ namespace NSFShield
             Check("redact: local IP, IPv6, e-mail", red.Contains("<local-ip>") && red.Contains("<ipv6>") && red.Contains("fe80::1") && red.Contains("<email>") && red.Contains("17:46:13"));
             string legacyUser = Support.Redact(@"C:\Kullan" + "\u0131c\u0131" + @"lar\testuser\Desktop");   // tr-literal: Turkish name of the Users folder
             Check("redact: user folder with the Turkish folder name", !legacyUser.Contains("testuser") && legacyUser.Contains("<user>"), legacyUser);
+
+            // "Report a problem": explorer.exe passes at most 259 characters on, so the issue address never gets longer; the
+            // title is shortened by whole characters (no cut escape sequence or surrogate pair), the summary is not in it
+            string shortIssue = Support.IssueUrl("NSF-601 – GoodbyeDPI closed", "1.0.1", "26300", "NSF-601");
+            Check("issue: short address with the repository, form and fields",
+                  shortIssue == "https://github.com/" + Updater.Owner + "/" + Updater.Repo + "/issues/new?template=hata.yml&title=NSF-601%20%E2%80%93%20GoodbyeDPI%20closed&surum=1.0.1&windows=Build%2026300&kod=NSF-601" &&
+                  !shortIssue.Contains("ozet="), shortIssue);
+            var longIssues = new[]
+            {
+                Support.IssueUrl("NSF-601 – " + string.Concat(Enumerable.Repeat("çığüşö ", 60)), "1.0.1", "26300", "NSF-601"),   // tr-literal: Turkish letters in a test title
+                Support.IssueUrl(string.Concat(Enumerable.Repeat("x\U0001F6E1", 200)), "1.0.1", "26300", "NSF-601"),
+                Support.IssueUrl(new string('a', 2000), "10.20.30", "26300", "NSF-999"),
+            };
+            bool EscapesWhole(string u)
+            {
+                for (int i = 0; i < u.Length; i++)
+                    if (u[i] == '%' && (i + 2 >= u.Length || !Uri.IsHexDigit(u[i + 1]) || !Uri.IsHexDigit(u[i + 2]))) return false;
+                try { Uri.UnescapeDataString(u); return true; } catch { return false; }
+            }
+            Check("issue: a long title is shortened; the address never exceeds the explorer limit and no escape sequence is cut",
+                  longIssues.All(u => u.Length <= Sys.MaxShellArgument && EscapesWhole(u) && u.Contains("&kod=NSF-") && u.Contains("&surum=")) &&
+                  longIssues[0].Contains("%E2%80%A6&surum") && !longIssues[1].Contains("%ED"),
+                  string.Join(" ", longIssues.Select(u => u.Length)));
+            Check("issue: the elevated opener refuses an address explorer.exe would cut",
+                  !Sys.OpenAsUser("https://example.invalid/" + new string('a', Sys.MaxShellArgument)), "");
 
             // update installation (file operations only; does not touch the service); the user's data folder is never touched
             {
@@ -1266,7 +1291,7 @@ namespace NSFShield
             var self = System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             Check("metadata: publisher, product, description, copyright", self.CompanyName == App.Publisher && self.ProductName == "NSF Shield" && self.FileDescription == "NSF Shield" &&
                   self.LegalCopyright == "Copyright (c) 2026 " + App.Publisher && App.Copyright == self.LegalCopyright, self.CompanyName + " | " + self.ProductName + " | " + self.FileDescription + " | " + self.LegalCopyright);
-            Check("metadata: versions consistent", self.FileVersion == ver4 && self.ProductVersion == ver && ver == "1.0.0", self.FileVersion + " / " + self.ProductVersion);
+            Check("metadata: versions consistent", self.FileVersion == ver4 && self.ProductVersion == ver && ver == "1.0.1", self.FileVersion + " / " + self.ProductVersion);
             string pkgExe = Path.Combine(App.BaseDir, @"package\NSF Shield\NSFShield.exe");
             if (File.Exists(pkgExe))
             {

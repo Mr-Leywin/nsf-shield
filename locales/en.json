@@ -2554,7 +2554,8 @@
     "issueTip": "Opens a new issue page on GitHub with the version, Windows and error code filled in; you can edit it before sending.",
     "zipFilter": "Zip file|*.zip",
     "packSaved": "The support package was saved. IP addresses, user name, e-mail and proxy details were hidden.\n\nYou can attach this file when you ask for help (e.g. to the issue on GitHub).",
-    "issueConfirm": "GitHub's new issue page will open in the browser. The version, Windows build, error code and a short summary (with IP addresses hidden) are filled in beforehand; you can see and edit them before sending. A GitHub account is needed to send it.\n\nContinue?",
+    "issueConfirm": "GitHub's new issue page will open in the browser with the version, Windows build and error code filled in. A short system summary (with IP addresses hidden) is copied to the clipboard: paste it into the form's app summary field (Ctrl+V). You can see and edit everything before sending. A GitHub account is needed to send it.\n\nContinue?",
+    "issueOpenFailed": "The issue page could not be opened. Open it yourself: {0}",
     "searchCue": "Search: code or word (e.g. NSF-204, antivirus)",
     "copyTip": "Copy the description (to share when asking for help)",
     "noProblem": "No problem detected right now",
@@ -2694,6 +2695,9 @@
     "mit": "MIT License",
     "whatsNew": "NEW IN {0}",
     "new": {
+      "101": {
+        "1": "Report a problem opens GitHub's issue form correctly again: the address stays short (the system summary is copied to the clipboard), so the browser no longer gets a cut-off address and an error page."
+      },
       "10": {
         "1": "Three engines: GoodbyeDPI, Zapret (winws; also Discord voice and QUIC over UDP) and ByeDPI (ciadpi; a local proxy without a driver), with {1} built-in profiles in Recommended and Specialized layers.",
         "2": "Smart scan: candidate methods are tried in isolation and compared with encrypted DNS; your previous state comes back when it ends. Automatic repair and a connection watchdog when the network changes.",

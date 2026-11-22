@@ -187,3 +187,6 @@ jobs:
           # read back: the new release must now be published exactly as checked above
           & ./.github/scripts/release-check.ps1 -Tag $env:GITHUB_REF_NAME -Dist dist
           if ($LASTEXITCODE -ne 10) { throw "The published release could not be verified (exit code $LASTEXITCODE)" }
+          # exit 10 of the read-back is the success: end the step with 0 (pwsh would otherwise report the script's exit code as a failure)
+          Write-Host 'The release is published and verified.'
+          exit 0

@@ -1,4 +1,4 @@
-NSF SHIELD 1.0.0
+NSF SHIELD 1.0.1
 ================
 NSF Shield — by Nightshift
 

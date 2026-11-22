@@ -75,8 +75,13 @@ namespace NSFShield
             bIssue.Click += (s, e) =>
             {
                 if (MessageBox.Show(FindForm(), Loc.T("troublePage.issueConfirm"), App.Name,
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    Sys.OpenAsUser(Support.IssueUrl());
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+                // the system summary is too long for the address (explorer.exe cuts it): it goes to the clipboard, the form
+                // asks for it in its "summary" field
+                try { Clipboard.SetText(Support.SystemSummary()); }
+                catch (Exception ex) { App.Ignored("The summary could not be copied", ex); }
+                if (!Sys.OpenAsUser(Support.IssueUrl()))
+                    MessageBox.Show(FindForm(), Loc.T("troublePage.issueOpenFailed", App.RepoUrl + "/issues"), App.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             };
             rowsArea = new ScrollArea { Bounds = R(18, 52, 790, 462) };
             pCheck.Controls.Add(rowsArea);

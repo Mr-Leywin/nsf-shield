@@ -2554,7 +2554,8 @@
     "issueTip": "GitHub'da sürüm, Windows ve hata kodu bilgileri doldurulmuş yeni bir sorun sayfası açar; göndermeden önce düzenleyebilirsiniz.",
     "zipFilter": "Zip dosyası|*.zip",
     "packSaved": "Destek paketi kaydedildi. IP adresleri, kullanıcı adı, e-posta ve proxy bilgileri gizlendi.\n\nYardım isterken bu dosyayı (ör. GitHub'daki sorun kaydına) ekleyebilirsiniz.",
-    "issueConfirm": "Tarayıcıda GitHub'ın yeni sorun sayfası açılacak. Sürüm, Windows derlemesi, hata kodu ve kısa bir özet (IP adresleri gizlenmiş) önceden doldurulur; göndermeden önce görüp düzenleyebilirsiniz. Göndermek için GitHub hesabı gerekir.\n\nDevam edilsin mi?",
+    "issueConfirm": "Tarayıcıda GitHub'ın yeni sorun sayfası sürüm, Windows derlemesi ve hata kodu doldurulmuş olarak açılacak. Kısa bir sistem özeti (IP adresleri gizlenmiş) panoya kopyalanır: \"Uygulamanın özeti\" alanına yapıştırın (Ctrl+V). Göndermeden önce her şeyi görüp düzenleyebilirsiniz. Göndermek için GitHub hesabı gerekir.\n\nDevam edilsin mi?",
+    "issueOpenFailed": "Sorun sayfası açılamadı. Kendiniz açın: {0}",
     "searchCue": "Ara: kod ya da kelime (ör. NSF-204, antivirüs)",
     "copyTip": "Açıklamayı kopyala (yardım isterken paylaşmak için)",
     "noProblem": "Şu an algılanmış bir sorun yok",
@@ -2694,6 +2695,9 @@
     "mit": "MIT Lisansı",
     "whatsNew": "{0} SÜRÜMÜNDE YENİ",
     "new": {
+      "101": {
+        "1": "Sorun bildir, GitHub'ın sorun formunu yeniden doğru açıyor: adres kısa tutulur (sistem özeti panoya kopyalanır), böylece tarayıcıya kesik bir adres ve hata sayfası gitmez."
+      },
       "10": {
         "1": "Üç motor: GoodbyeDPI, Zapret (winws; UDP üzerinden Discord sesi ve QUIC de) ve ByeDPI (ciadpi; sürücüsüz yerel proxy); Önerilen ve Özel katmanlarında {1} hazır profil.",
         "2": "Akıllı tarama: aday yöntemler yalıtılmış olarak denenir ve şifreli DNS ile karşılaştırılır; bitince önceki durumunuz geri gelir. Otomatik onarım ve ağ değişince bağlantı bekçisi.",

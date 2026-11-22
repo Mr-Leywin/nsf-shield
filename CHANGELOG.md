@@ -1,5 +1,15 @@
 # Değişiklik günlüğü / Changelog
 
+## [1.0.1] — Düzeltme (Fix)
+
+### Düzeltildi
+- **Sorun bildir** düğmesi GitHub'ın sorun formu yerine hata sayfası (HTTP 400) açabiliyordu. Yönetici olarak çalışan uygulama adresi normal kullanıcı yetkisiyle `explorer.exe` üzerinden açar ve explorer en fazla 259 karakter iletir; sistem özetiyle 1.000 karakteri aşan adres kesiliyor, bir kaçış dizisinin ortasından kesildiğinde GitHub isteği reddediyordu. Adres artık yalnızca sürüm, Windows derlemesi, hata kodu ve (gerekirse kısaltılmış) başlığı taşır ve hiçbir zaman 259 karakteri aşmaz; sistem özeti panoya kopyalanır ve formdaki "Uygulamanın özeti" alanına yapıştırılır.
+- GitHub Actions: yayın adımı, yayımlanan dosyaları doğruladıktan sonra hata koduyla bitmiyor (1.0.0'da yayın doğruydu, yalnızca iş başarısız görünüyordu).
+
+### English
+
+**Fixed:** *Report a problem* could open an error page (HTTP 400) instead of GitHub's issue form: the elevated app opens the address through `explorer.exe`, which passes at most 259 characters on, so the address with the system summary was cut off. The address now carries only the version, Windows build, error code and (shortened if needed) title and never exceeds 259 characters; the system summary is copied to the clipboard for the form's app summary field. CI: the publish step no longer fails after the published files are verified.
+
 ## [1.0.0] — İlk Sürüm (Initial Release)
 
 **NSF Shield — by Nightshift** ilk sürümü. Windows 10/11 için GoodbyeDPI, Zapret ve ByeDPI motorlarını tek, iki dilli (Türkçe / İngilizce) bir arayüzden yöneten internet erişim kalkanı.

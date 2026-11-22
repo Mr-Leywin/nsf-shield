@@ -610,7 +610,7 @@ namespace NSFShield
             var c2 = AddCard(28, 292, 764, 336);
             var r = c2.Add(new ReportBox { Bounds = R(20, 14, 724, 310) });
             r.BackColor = Theme.Card;
-            foreach (var (ver, n) in new[] { ("1.0", 6) })
+            foreach (var (ver, n) in new[] { ("1.0.1", 1), ("1.0", 6) })
             {
                 r.Out(Loc.T("aboutPage.whatsNew", ver), Muted, Theme.Caption);
                 for (int k = 1; k <= n; k++)

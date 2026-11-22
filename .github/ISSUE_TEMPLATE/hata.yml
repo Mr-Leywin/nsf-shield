@@ -11,7 +11,7 @@ body:
     id: surum
     attributes:
       label: NSF Shield sürümü
-      placeholder: "ör. 1.0.0 (Hakkında sayfasında yazar)"
+      placeholder: "ör. 1.0.1 (Hakkında sayfasında yazar)"
     validations:
       required: true
   - type: input
@@ -41,5 +41,5 @@ body:
     id: ozet
     attributes:
       label: Uygulamanın özeti
-      description: Uygulamadaki "Sorun bildir" düğmesi bu alanı doldurur (IP adresleri gizlenmiştir).
+      description: Uygulamadaki "Sorun bildir" düğmesi özeti panoya kopyalar; buraya yapıştırın (Ctrl+V). IP adresleri gizlenmiştir.
       render: text
